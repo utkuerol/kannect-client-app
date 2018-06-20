@@ -41,4 +41,6 @@ public class User extends BaseObservable {
                 Patterns.EMAIL_ADDRESS.matcher(getEmail()).matches() &&
                 getPassword().length() > 6 ;
     }
+
+
 }

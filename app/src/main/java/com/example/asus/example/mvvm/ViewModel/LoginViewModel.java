@@ -1,20 +1,27 @@
 package com.example.asus.example.mvvm.ViewModel;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 
-import com.example.asus.example.mvvm.Interface.LoginResultCallBacks;
 import com.example.asus.example.mvvm.Model.User;
 
 public class LoginViewModel extends ViewModel {
-    private User user;
-    private LoginResultCallBacks loginResultCallBacks;
+    private MutableLiveData<User> user;
 
-    public LoginViewModel(LoginResultCallBacks loginResultCallBacks) {
-        this.loginResultCallBacks = loginResultCallBacks;
-        this.user = new User();
+    public LoginViewModel(){
+        this.user = new MutableLiveData();
+        this.user.setValue(new User());
     }
+
+
+    public LiveData<User> getUser() {
+        return user;
+    }
+
+
     public TextWatcher getEmailTextWatcher() {
         return new TextWatcher() {
             @Override
@@ -29,7 +36,7 @@ public class LoginViewModel extends ViewModel {
 
             @Override
             public void afterTextChanged(Editable editable) {
-               user.setEmail(editable.toString());
+                user.getValue().setEmail(editable.toString());
             }
         };
 
@@ -51,14 +58,14 @@ public class LoginViewModel extends ViewModel {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                user.setPassword(editable.toString());
+                user.getValue().setPassword(editable.toString());
             }
         };
 
     }
+
     public void onLoginClicked(View view){
-        if (user.isValidData())
-            loginResultCallBacks.onSuccess("Success");
-        else loginResultCallBacks.onError("Failed");
+
+        user.postValue(new User(user.getValue().getEmail()+"3", getUser().getValue().getPassword()));
     }
 }
