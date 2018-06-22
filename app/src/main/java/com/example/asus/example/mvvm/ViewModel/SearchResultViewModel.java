@@ -11,7 +11,7 @@ import java.util.List;
 
 public class SearchResultViewModel extends ViewModel{
 
-    private MutableLiveData<List<User>> mUSers;
+    private MutableLiveData<List<User>> mUsers;
     private MutableLiveData<List<Event>> mEvents;
     private MutableLiveData<List<Group>> mGroups;
 
