@@ -16,6 +16,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".mvvm.View.GroupForm"
+            android:label="@string/title_activity_group_form"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".mvvm.View.GroupView"
+            android:label="@string/title_activity_group_view"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".mvvm.View.EventView"
+            android:label="@string/title_activity_event_view"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".mvvm.View.LoginView"
+            android:label="@string/title_activity_login_view"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".mvvm.View.EventForm"
+            android:label="@string/title_activity_event_form"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".mvvm.View.HomePage"
+            android:label="@string/title_activity_home_page"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

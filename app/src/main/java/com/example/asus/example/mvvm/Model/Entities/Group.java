@@ -17,6 +17,8 @@ public class Group {
     private String imageURl;
     private List<User> members;
 
+    public Group() {
+    }
 
     /**
      * Constructor with the id. Id is given by the Server-Site.
