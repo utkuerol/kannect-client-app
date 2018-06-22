@@ -7,6 +7,8 @@ import android.util.Patterns;
 
 import java.util.regex.Pattern;
 
+//Todo delte this class
+
 public class User extends BaseObservable {
     @NonNull
     private String email, password;
