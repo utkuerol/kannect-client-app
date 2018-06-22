@@ -22,6 +22,8 @@ public class Post {
     private List<Comment> comments;
     private long id;
 
+    public Post() {
+    }
 
     /**
      * Constructor with an given ID by the Server-Site.

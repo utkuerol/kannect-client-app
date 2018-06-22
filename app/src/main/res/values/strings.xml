@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">example</string>
     <string name="title_activity_binding">BindingActivity</string>
+    <string name="title_activity_group_form">GroupForm</string>
+    <string name="title_activity_group_view">GroupView</string>
+    <string name="title_activity_event_view">EventView</string>
+    <string name="title_activity_login_view">LoginView</string>
+    <string name="title_activity_event_form">EventForm</string>
+    <string name="title_activity_home_page">HomePage</string>
 </resources>
