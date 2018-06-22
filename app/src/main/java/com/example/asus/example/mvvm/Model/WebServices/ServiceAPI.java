@@ -2,6 +2,7 @@ package com.example.asus.example.mvvm.Model.WebServices;
 
 
 
+import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.Entities.Comment;
 import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.Group;
@@ -48,11 +49,10 @@ public interface ServiceAPI {
     /**
      * service to edit an existing event
      * @param editedEvent  edited Event
-     * @param eventToEdit Event which will be replaced by the edited Event
      * @return void, no response needed
      */
     @POST("/edit")
-    Call<Void> editEvent(@Body Event editedEvent, @Body Event eventToEdit);
+    Call<Void> editEvent(@Body Event editedEvent);
 
     /**
      * service to find Groups by given search suery
@@ -81,11 +81,10 @@ public interface ServiceAPI {
     /**
      * service to edit a Group
      * @param editedGroup the edited Group
-     * @param groupToEdit group which will be replaced by edited Group
      * @return void, no response needed
      */
     @POST("/editGroup")
-    Call<Void> editGroup(@Body Group editedGroup, @Body Group groupToEdit);
+    Call<Void> editGroup(@Body Group editedGroup);
 
     /**
      * service to get all received messages
@@ -154,11 +153,10 @@ public interface ServiceAPI {
     /**
      * service to edit an existing Post
      * @param editedPost Post with wanted changes
-     * @param postToEdit Post will be replaced by edited Post
      * @return void, no response needed
      */
     @POST("/editPost")
-    Call<Void>  editPost(@Body Post editedPost, @Body Post postToEdit);
+    Call<Void>  editPost(@Body Post editedPost);
 
     /**
      * service to like a Post
@@ -249,5 +247,15 @@ public interface ServiceAPI {
      */
     @POST("/leaveEvent")
     Call<Void> leaveEvent(@Body User user, @Body Event event);
+
+    /**
+     * service to get Categories by given search query
+     * @param searchQuery typed in by the user
+     * @return List of Categories which match the search query as a Call object
+     */
+    @GET("/categories")
+    Call<List<Category>> getCategories(String searchQuery);
+
+
 
 }
