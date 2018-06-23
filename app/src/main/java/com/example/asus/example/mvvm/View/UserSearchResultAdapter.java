@@ -3,7 +3,6 @@ package com.example.asus.example.mvvm.View;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.asus.example.R;
-import com.example.asus.example.mvvm.ViewModel.ItemUserViewModel;
 
 public class UserSearchResultAdapter {
 
