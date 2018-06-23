@@ -1,23 +1,15 @@
 package com.example.asus.example.mvvm.View;
 
 import android.support.v7.widget.RecyclerView;
-import android.view.ViewGroup;
+
 import com.example.asus.example.R;
 
-/**
- * Adapter class for the Recycler view. Class used to show all the  users, that match the typed in search query on the ui.
- *
- */
-public class UserSearchResultAdapter {
+public class UserSearchResultsAdapter extends RecyclerView.Adapter<UserSearchResultsAdapter.UserSearchResultAdapterViewHolder> {
 
     //List<user> users
 
 
-    /**
-     * Constructor.
-     * initializes the List of Users who matched the typed in search Query.
-     */
-    public UserSearchResultAdapter() {
+    public UserSearchResultsAdapter() {
         // create empty list
     }
 
@@ -40,6 +32,8 @@ public class UserSearchResultAdapter {
      * @param position of the item in the list.
      */
     @Override public void onBindViewHolder(PeopleAdapterViewHolder holder, int position) {
+        // binds user in the position with the nested class method
+        holder.bindPeople(peopleList.get(position));
     }
 
     /**
@@ -66,7 +60,7 @@ public class UserSearchResultAdapter {
 
         UserBinding UserBinding;
 
-        public ItemUserViewModel(UserBinding userBinding) {
+        public UserSearchResultAdapterViewHolder(UserBinding userBinding) {
 
         }
 

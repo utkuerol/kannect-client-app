@@ -20,4 +20,5 @@ public class MainFeedActivity  extends AppCompatActivity {
         // redirects from parameter context to this activity, takes user as parameter
         return null;
     }
+
 }

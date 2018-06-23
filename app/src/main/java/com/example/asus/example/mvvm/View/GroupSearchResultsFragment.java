@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
-public class EventSearchResultFragment extends Fragment {
+public class GroupSearchResultsFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -19,5 +19,4 @@ public class EventSearchResultFragment extends Fragment {
         //find view model
         //viewmodel.observe(this) --- sync with adapter
     }
-
 }

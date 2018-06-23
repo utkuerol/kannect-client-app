@@ -11,7 +11,6 @@ public class EventFeedActivity extends AppCompatActivity {
 
     //event from intent
 
-
     @Override protected void onCreate(Bundle savedInstanceState) {
         // set binding
         // get and set event from intent
