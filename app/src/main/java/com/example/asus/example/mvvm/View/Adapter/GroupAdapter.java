@@ -11,21 +11,21 @@ import com.example.asus.example.mvvm.Model.Entities.Group;
 import java.util.Collections;
 import java.util.List;
 
-public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupsAdapterViewHolder> {
+public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupAdapterViewHolder> {
     private List<Group> groupsList;
 
-    public GroupsAdapter() {
+    public GroupAdapter() {
         this.groupsList = Collections.emptyList();
     }
 
-    @Override public GroupsAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    @Override public GroupAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ItemGroupBinding itemGroupBinding =
                 DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_group,
                         parent, false);
-        return new GroupsAdapterViewHolder(itemGroupBinding);
+        return new GroupAdapterViewHolder(itemGroupBinding);
     }
 
-    @Override public void onBindViewHolder(GroupsAdapterViewHolder holder, int position) {
+    @Override public void onBindViewHolder(GroupAdapterViewHolder holder, int position) {
         holder.bindGroup(groupsList.get(position));
     }
 
@@ -37,10 +37,10 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupsAdap
         this.groupsList = GroupsList;
     }
 
-    public static class GroupsAdapterViewHolder extends RecyclerView.ViewHolder {
+    public static class GroupAdapterViewHolder extends RecyclerView.ViewHolder {
         ItemGroupBinding mItemGroupBinding;
 
-        public GroupsAdapterViewHolder(ItemGroupBinding itemGroupBinding) {
+        public GroupAdapterViewHolder(ItemGroupBinding itemGroupBinding) {
             super(itemGroupBinding.itemGroup);
             this.mItemGroupBinding = itemGroupBinding;
         }

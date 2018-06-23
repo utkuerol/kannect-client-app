@@ -11,21 +11,21 @@ import com.example.asus.example.mvvm.Model.Entities.Post;
 import java.util.Collections;
 import java.util.List;
 
-public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsAdapterViewHolder> {
+public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostAdapterViewHolder> {
     private List<Post> postsList;
 
-    public PostsAdapter() {
+    public PostAdapter() {
         this.postsList = Collections.emptyList();
     }
 
-    @Override public PostsAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    @Override public PostAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ItemPostBinding itemPostBinding =
                 DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_post,
                         parent, false);
-        return new PostsAdapterViewHolder(itemPostBinding);
+        return new PostAdapterViewHolder(itemPostBinding);
     }
 
-    @Override public void onBindViewHolder(PostsAdapterViewHolder holder, int position) {
+    @Override public void onBindViewHolder(PostAdapterViewHolder holder, int position) {
         holder.bindPost(postsList.get(position));
     }
 
@@ -37,10 +37,10 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsAdapter
         this.postsList = postsList;
     }
 
-    public static class PostsAdapterViewHolder extends RecyclerView.ViewHolder {
+    public static class PostAdapterViewHolder extends RecyclerView.ViewHolder {
         ItemPostBinding mItemPostBinding;
 
-        public PostsAdapterViewHolder(ItemPostBinding itemPostBinding) {
+        public PostAdapterViewHolder(ItemPostBinding itemPostBinding) {
             super(itemPostBinding.itemPost);
             this.mItemPostBinding = itemPostBinding;
         }
