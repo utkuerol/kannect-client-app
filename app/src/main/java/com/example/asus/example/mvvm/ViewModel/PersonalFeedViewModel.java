@@ -10,13 +10,14 @@ import com.example.asus.example.mvvm.Model.Repository.UserRepository;
 
 import java.util.List;
 
-public class MainFeedViewModel extends ViewModel {
+public class PersonalFeedViewModel extends ViewModel {
+
     private MutableLiveData<List<Post>> mFeed;
     private MutableLiveData<User> mUser;
 
     private FeedRepository feedRepository;
 
-    public MainFeedViewModel(MutableLiveData<User> user) {
+    public PersonalFeedViewModel(MutableLiveData<User> user) {
 
         this.feedRepository = new FeedRepository();
         mFeed = feedRepository.getPersonalFeed(user.getValue());
