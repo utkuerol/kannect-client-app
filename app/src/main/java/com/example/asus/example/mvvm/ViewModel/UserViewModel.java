@@ -21,12 +21,9 @@ public class UserViewModel extends ViewModel {
         this.context = context;
     }
 
-    /**
-     * Starts new activity with the context in User Profile Activity, passing the mUser information
-     * @param view
-     */
+
     public void onItemClick(View view) {
-        
+
         //context.startActivity(UserProfileActivity.launchDetail(view.getContext(), mUser));
     }
 }
