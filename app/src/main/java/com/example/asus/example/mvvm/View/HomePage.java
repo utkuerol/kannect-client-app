@@ -3,10 +3,10 @@ package com.example.asus.example.mvvm.View;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import com.example.asus.example.R;
-import com.example.asus.example.databinding.ActivityMainBinding;
+
 
 public class HomePage extends AppCompatActivity {
-    ActivityMainBinding homePageBinding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

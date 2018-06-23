@@ -8,10 +8,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.example.asus.example.R;
-import com.example.asus.example.databinding.ActivityMainBinding;
+//import com.example.asus.example.databinding.ActivityMainBinding;
 
 public class EventForm extends AppCompatActivity {
-    ActivityMainBinding eventFormBinding;
+    //ActivityMainBinding eventFormBinding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

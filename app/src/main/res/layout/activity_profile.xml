@@ -3,9 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <variable
-            name="profileVM"
-            type="com.example.asus.example.mvvm.ViewModel.ProfileViewModel"/>
+
 
     </data>
     <LinearLayout
@@ -15,7 +13,7 @@
         android:gravity="center"
         android:orientation="vertical"
         android:visibility="visible"
-        tools:context=".mvvm.View.ProfileActivity">
+        >
 
         <ImageView
             android:id="@+id/ProfilePic"
@@ -31,7 +29,7 @@
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/e-mail"
+            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView" />

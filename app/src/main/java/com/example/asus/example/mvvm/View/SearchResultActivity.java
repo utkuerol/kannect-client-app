@@ -21,5 +21,14 @@ public class SearchResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_result);
 
 
+        mSearchResultViewModel = ViewModelProviders.of(this).get(SearchResultViewModel.class);
+
+        final Observer<List<User>> mUserObserver = new Observer<List<User>>() {
+            @Override
+            public void onChanged(@Nullable List<User> users) {
+
+            }
+        };
+
     }
 }

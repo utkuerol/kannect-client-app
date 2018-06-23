@@ -5,11 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.asus.example.R;
-import com.example.asus.example.databinding.ActivityMainBinding;
+//import com.example.asus.example.databinding.ActivityMainBinding;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    ActivityMainBinding activityProfileBinding = DataBindingUtil.setContentView(this,R.layout.activity_profile);
+    //ActivityMainBinding activityProfileBinding = DataBindingUtil.setContentView(this,R.layout.activity_profile);
 
 
     @Override

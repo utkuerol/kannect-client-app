@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
    >
 <data>
-    <variable
-        name="viewModel"
-        type="com.example.asus.example.mvvm.ViewModel.LoginViewModel" />
+
 </data>
  <RelativeLayout
      android:layout_width="match_parent"
@@ -25,7 +23,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:padding="8dp"
-          app:addTextChangedListener="@{viewModel.getEmailTextWatcher}"/>
+          />
       <EditText
 
           android:id="@+id/edt_Password"
@@ -34,7 +32,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:padding="8dp"
-          app:addTextChangedListener="@{viewModel.getPasswordTextWatcher}"/>
+    />
 
    </LinearLayout>
 
@@ -44,7 +42,7 @@
        android:layout_alignParentBottom="true"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:onClick="@{viewModel::onLoginClicked}"/>
+      />
 
 
  </RelativeLayout>

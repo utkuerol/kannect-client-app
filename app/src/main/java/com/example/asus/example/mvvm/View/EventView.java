@@ -8,10 +8,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.example.asus.example.R;
-import com.example.asus.example.databinding.ActivityMainBinding;
+
 
 public class EventView extends AppCompatActivity {
-    ActivityMainBinding eventViewBinding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

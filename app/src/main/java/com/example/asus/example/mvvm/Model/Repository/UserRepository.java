@@ -4,13 +4,9 @@ import android.arch.lifecycle.MutableLiveData;
 
 import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.Group;
-import com.example.asus.example.mvvm.Model.User;
-import com.example.asus.example.mvvm.Model.WebServices.ServiceAPI;
-import com.example.asus.example.mvvm.Model.WebServices.ServiceGenerator;
+import com.example.asus.example.mvvm.Model.Entities.User;
 
 import java.util.List;
-
-import retrofit2.Call;
 
 /**
  * Repository which handles all the requests from the Viewmodel, User Message requests.
