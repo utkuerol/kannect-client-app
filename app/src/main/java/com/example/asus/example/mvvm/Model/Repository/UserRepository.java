@@ -1,5 +1,6 @@
 package com.example.asus.example.mvvm.Model.Repository;
 
+import android.accounts.Account;
 import android.arch.lifecycle.MutableLiveData;
 
 import com.example.asus.example.mvvm.Model.Entities.Event;
@@ -75,5 +76,11 @@ public class UserRepository {
      */
     public void leaveEvent(User user, Event event) {}
 
+    public User loginUser(GoogleSignInAccount account){
+
+        //parse
+        //connection with the server
+        return null;
+    }
 
 }
