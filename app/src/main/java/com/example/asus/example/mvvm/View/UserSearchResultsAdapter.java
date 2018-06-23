@@ -14,10 +14,10 @@ public class UserSearchResultsAdapter extends RecyclerView.Adapter<UserSearchRes
     }
 
     /**
-     * Method inflates the View, meaning it creates the layout for every list item, using DataBindingutil inflate method.
+     * Method inflates the View, meaning it creates the layout for every list item, using DataBindingUtil inflate method.
      * @param parent parent ViewGroup of the inflated view.
      * @param viewType indicates what type of view should be inflated.
-     * @return a new instance of the UserSearchResultAdapterViewHoler.
+     * @return a new instance of the UserSearchResultAdapterViewHolder.
      */
     @Override
     public UserSearchResultAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -54,7 +54,8 @@ public class UserSearchResultsAdapter extends RecyclerView.Adapter<UserSearchRes
 
 
     /**
-     * Binds every List item
+     * Nested Class.
+     *
      */
     public static class UserSearchResultAdapterViewHolder extends RecyclerView.ViewHolder {
 
