@@ -3,29 +3,27 @@ package com.example.asus.example.mvvm.ViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
-import android.content.Intent;
 
+import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.User;
-
-import java.util.List;
 
 import javax.swing.text.View;
 
-public class UserViewModel extends ViewModel {
+public class EventViewModel extends ViewModel {
 
     private MutableLiveData<User> mCurrentUser;
-    private MutableLiveData<User> mChosenUser;
+    private MutableLiveData<Event> mChosenEvent;
     private Context context;
 
-    public UserViewModel(MutableLiveData<User> mCurrentUser, MutableLiveData<User> mChosenUser, Context context) {
+    public EventViewModel(MutableLiveData<User> mCurrentUser, MutableLiveData<Event> mChosenEvent, Context context) {
         this.mCurrentUser = mCurrentUser;
-        this.mChosenUser = mChosenUser;
+        this.mChosenEvent = mChosenEvent;
         this.context = context;
     }
 
 
     public void onItemClick(View view) {
 
-        //context.startActivity(UserProfileActivity.launchWithDetails(view.getContext(), mUser));
+        //context.startActivity(EventFeedActivity.launchWithDetails(view.getContext(), mChosenEvent));
     }
 }

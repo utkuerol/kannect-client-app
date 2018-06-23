@@ -12,7 +12,7 @@ public class UserProfileActivity extends AppCompatActivity {
         // get and set user from intent
     }
 
-    public static Intent launchDetail(Context context, People people) {
+    public static Intent launchWithDetails(Context context, People people) {
         // redirects from parameter context to this activity, takes user as parameter
     }
 

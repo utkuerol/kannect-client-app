@@ -12,16 +12,28 @@ import com.example.asus.example.mvvm.Model.Repository.UserRepository;
 
 import java.util.List;
 
-public class UserSearchResultViewModel extends ViewModel {
+public class UsersViewModel extends ViewModel {
+
+    private MutableLiveData<User> currentUser;
 
     private MutableLiveData<List<User>> mUsers;
 
     private UserRepository userRepository;
 
-    public UserSearchResultViewModel(String searchQuery) {
+    public UsersViewModel(MutableLiveData<User> currentUser) {
+        this.currentUser = currentUser;
+    }
 
-        this.userRepository = new UserRepository();
-        mUsers = userRepository.getUser(searchQuery);
+    public void setUsersSearchResults(String query) {
+
+    }
+
+    public void setUsersSubscriptions() {
+
+    }
+
+    public void setUsersSubscribers() {
+
     }
 
 

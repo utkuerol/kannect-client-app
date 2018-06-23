@@ -40,9 +40,10 @@ public class UserSearchResultAdapter {
 
 
     public static class UserSearchResultAdapterViewHolder extends RecyclerView.ViewHolder {
-        ItemUserBinding itemUserBinding;
 
-        public ItemUserViewModel(ItemUserBinding itemUserBinding) {
+        UserBinding UserBinding;
+
+        public ItemUserViewModel(UserBinding userBinding) {
 
         }
 
