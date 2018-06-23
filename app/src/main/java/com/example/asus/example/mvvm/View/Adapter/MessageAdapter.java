@@ -38,6 +38,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageA
     }
 
     public static class MessageAdapterViewHolder extends RecyclerView.ViewHolder {
+
         ItemMessageBinding mItemMessageBinding;
 
         public MessageAdapterViewHolder(ItemMessageBinding itemMessageBinding) {

@@ -12,10 +12,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapterViewHolder> {
-    private List<Event> eventsList;
+
+    private List<Event> EventsList;
 
     public EventAdapter() {
-        this.eventsList = Collections.emptyList();
+        this.EventsList = Collections.emptyList();
     }
 
     @Override public EventAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -26,15 +27,15 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
     }
 
     @Override public void onBindViewHolder(EventAdapterViewHolder holder, int position) {
-        holder.bindEvent(eventsList.get(position));
+        holder.bindEvent(EventsList.get(position));
     }
 
     @Override public int getItemCount() {
-        return eventsList.size();
+        return EventsList.size();
     }
 
     public void setEventList(List<Event> EventsList) {
-        this.eventsList = EventsList;
+        this.EventsList = EventsList;
     }
 
     public static class EventAdapterViewHolder extends RecyclerView.ViewHolder {
