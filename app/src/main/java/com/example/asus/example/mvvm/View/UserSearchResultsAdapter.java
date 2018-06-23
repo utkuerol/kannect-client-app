@@ -4,12 +4,12 @@ import android.support.v7.widget.RecyclerView;
 
 import com.example.asus.example.R;
 
-public class UserSearchResultAdapter {
+public class UserSearchResultsAdapter extends RecyclerView.Adapter<UserSearchResultsAdapter.UserSearchResultAdapterViewHolder> {
 
     //List<user> users
 
 
-    public UserSearchResultAdapter() {
+    public UserSearchResultsAdapter() {
         // create empty list
     }
 
@@ -43,7 +43,7 @@ public class UserSearchResultAdapter {
 
         UserBinding UserBinding;
 
-        public ItemUserViewModel(UserBinding userBinding) {
+        public UserSearchResultAdapterViewHolder(UserBinding userBinding) {
 
         }
 

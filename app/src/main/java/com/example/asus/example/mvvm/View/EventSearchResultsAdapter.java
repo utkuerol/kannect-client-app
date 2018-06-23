@@ -3,22 +3,21 @@ package com.example.asus.example.mvvm.View;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
-import com.example.asus.example.R;
 import com.example.asus.example.mvvm.Model.Entities.Event;
 
 import java.util.List;
 
-public class EventSearchResultAdapter {
+public class EventSearchResultsAdapter {
 
     //List<event> events
 
 
-    public EventSearchResultAdapter() {
+    public EventSearchResultsAdapter() {
         // create empty list
     }
 
     @Override
-    public EventSearchResultAdapter.EventSearchResultAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public EventSearchResultsAdapter.EventSearchResultAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         // create layout for every event item inside a view holder...
 
@@ -37,10 +36,10 @@ public class EventSearchResultAdapter {
     }
 
 
-    public static class EventSearchResultAdapterViewHolder extends RecyclerView.ViewHolder {
+    public static class EventSearchResultsAdapterViewHolder extends RecyclerView.ViewHolder {
 
 
-        public EventViewModel(EventBinding eventBinding) {
+        public EventSearchResultsAdapterViewHolder(EventBinding eventBinding) {
 
         }
 

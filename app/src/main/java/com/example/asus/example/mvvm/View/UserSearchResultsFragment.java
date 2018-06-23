@@ -19,7 +19,7 @@ import com.example.asus.example.mvvm.ViewModel.SearchResultViewModel;
 
 import java.util.List;
 
-public class UserSearchResultFragment extends Fragment {
+public class UserSearchResultsFragment extends Fragment {
 
     //binding
     //view model
