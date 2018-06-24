@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     GoogleSignInClient mGoogleSignInClient;
     GoogleSignInAccount account;
 
+
     @Override protected void onCreate(Bundle savedInstanceState) {
         // set binding
         // get and set user from intent

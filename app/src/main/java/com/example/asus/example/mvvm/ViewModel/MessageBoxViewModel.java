@@ -60,13 +60,13 @@ public class MessageBoxViewModel extends ViewModel {
         this.repository = repository;
     }
 
-    public MutableLiveData<List<Message>> getmSentMessages() {
+    public List<Message> getmSentMessages() {
 
-        return mSentMessages;
+        return mSentMessages.getValue();
     }
 
-    public MutableLiveData<List<Message>> getmReceivedMessages() {
-        return mReceivedMessages;
+    public List<Message> getmReceivedMessages() {
+        return mReceivedMessages.getValue();
     }
 
     public MessageRepository getRepository() {
