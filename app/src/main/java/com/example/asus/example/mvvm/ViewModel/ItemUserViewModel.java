@@ -6,8 +6,8 @@ import android.content.Context;
 
 import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.Group;
+import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
-import com.example.asus.example.mvvm.Model.Repository.UserRepository;
 
 import java.util.List;
 
@@ -81,25 +81,29 @@ public class ItemUserViewModel extends ViewModel {
 
     }
 
-
-
-    /**
-     * method to get the List of Groups this User joined
-     * @return List of joined Groups
-     */
     public List<Group> getJoinedGroups() {
-
     }
 
-
-    /**
-     * method to get the List of Events this user wants to participate in
-     * @return List of Events the user wants to participate in
-     */
     public List<Event> getParticipatedEvents() {
-
     }
 
+    public List<Post> getUserProfile() {
+    }
+
+    public List<Post> getPersonalFeed() {
+    }
+
+    public boolean isCurrentUsersProfile() {
+    }
+
+    public void subscribeUser() {
+    }
+
+    public void unsubscribeUser() {
+    }
+
+    public void createPost(String text) {
+    }
 
 
 }

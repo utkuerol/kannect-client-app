@@ -7,7 +7,6 @@ import android.content.Context;
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.Subcategory;
-import com.example.asus.example.mvvm.Model.Entities.User;
 
 import java.util.List;
 
@@ -16,7 +15,6 @@ import javax.swing.text.View;
 public class EventViewModel extends ViewModel {
 
     private MutableLiveData<List<Event>> events;
-    private MutableLiveData<Event> mChosenEvent;
     private Context context;
 
     public EventViewModel(Context context) {
@@ -29,16 +27,14 @@ public class EventViewModel extends ViewModel {
     public void setEventsToParticipatingEvents() {}
 
 
-    public MutableLiveData<Event> getChosenEvent() {
-        return mChosenEvent;
+    public void onItemClick(View view) {
+
+        //context.startActivity(EventFeedActivity.launchWithDetails(view.getContext(), mChosenEvent));
     }
 
     public MutableLiveData<List<Event>> getEvents() {
         return events;
     }
 
-    public void onItemClick(View view) {
 
-        //context.startActivity(EventFeedActivity.launchWithDetails(view.getContext(), mChosenEvent));
-    }
 }
