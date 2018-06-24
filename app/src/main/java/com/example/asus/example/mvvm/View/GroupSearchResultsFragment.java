@@ -17,6 +17,7 @@ public class GroupSearchResultsFragment extends Fragment {
         //sets adapter
     }
 
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         //find view model

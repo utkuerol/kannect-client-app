@@ -12,11 +12,22 @@ import java.util.List;
 
 import javax.swing.text.View;
 
+/**
+ * ViewModel class for categories, that is responsible for preparing and managing the data for Views,
+ * which need a list of categories, by handling the communication of the View with the
+ * CategoryRepository class, which has the category business logic of the application.
+ * Objects received from repositories will be stored as MutableLiveData Objects.
+ */
 public class EventViewModel extends ViewModel {
 
     private MutableLiveData<List<Event>> events;
     private Context context;
 
+    /**
+     * Creates an instance with the given application context.
+     *
+     * @param context of the application.
+     */
     public EventViewModel(Context context) {
         this.context = context;
     }
@@ -34,6 +45,11 @@ public class EventViewModel extends ViewModel {
     }
 
 
+    /**
+     * method which will be invoked
+     *
+     * @param view the activity view
+     */
     public void onItemClick(View view) {
 
         //context.startActivity(EventFeedActivity.launchWithDetails(view.getContext(), mChosenEvent));

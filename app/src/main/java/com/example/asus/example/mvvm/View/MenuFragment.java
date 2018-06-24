@@ -17,7 +17,6 @@ public class MenuFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Menü bekannt geben, dadurch kann unser Fragment Menü-Events verarbeiten
         setHasOptionsMenu(true);
     }
 
@@ -26,11 +25,14 @@ public class MenuFragment extends Fragment {
         inflater.inflate(R.menu.menu_aktienlistefragment, menu);
     }
 
+    /*
+     * Wir prüfen, ob Menü-Element mit der ID "action_daten_aktualisieren"
+     * ausgewählt wurde und geben eine Meldung aus
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Wir prüfen, ob Menü-Element mit der ID "action_daten_aktualisieren"
-        // ausgewählt wurde und geben eine Meldung aus
+
         MenuViewModel menuViewModel = new MenuViewModel();
-        return super.onOptionsItemSelected(item) && menuViewModel.invoke(MenuItem);
+        return super.onOptionsItemSelected(item) && menuViewModel.invoke(item);
     }
 }

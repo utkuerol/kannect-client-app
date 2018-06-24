@@ -8,13 +8,21 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.ViewModel.UserViewModel;
 
-// this is for Profile / NO FEEEEEEEEEEEEEEEED ~mohamed
+/**
+ * User Profile Activity to show all Posts for this User
+ */
 public class UserProfileActivity extends AppCompatActivity {
 
-    //user from intent
+
     UserViewModel viewModel;
 
-
+    /**
+     * launch this Activity and send with it a user
+     *
+     * @param context Context of the application
+     * @param user    user to give for the next Activity
+     * @return Intent Object for the two activities
+     */
     public static Intent launchWithDetails(Context context, User user) {
         // redirects from parameter context to this activity, takes user as parameter
     }

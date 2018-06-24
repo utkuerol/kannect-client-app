@@ -1,10 +1,10 @@
 package com.example.asus.example.mvvm.ViewModel;
 
 import android.arch.lifecycle.ViewModel;
+import android.view.MenuItem;
 
 import com.example.asus.example.R;
 
-import java.awt.MenuItem;
 
 public class MenuViewModel extends ViewModel {
 

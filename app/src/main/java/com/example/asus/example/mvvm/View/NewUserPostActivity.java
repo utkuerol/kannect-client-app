@@ -8,6 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.ViewModel.ItemUserViewModel;
 
+/**
+ * activity for adding a new Post
+ */
 public class NewUserPostActivity extends AppCompatActivity {
 
     private ItemUserViewModel viewModel;
