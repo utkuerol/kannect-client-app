@@ -14,11 +14,21 @@ import java.util.List;
 
 import javax.swing.text.View;
 
+/**
+ * ViewModel class for itemGroup, that is responsible for preparing and managing the data for Views,
+ * which need a list of itemGroup, by handling the communication of the View with the
+ * Recyclerview element.
+ */
 public class ItemGroupViewModel extends ViewModel {
 
     private MutableLiveData<Group> chosenGroup;
     private Context context;
 
+    /**
+     * Creates an instance with the given application context.
+     *
+     * @param context of the application.
+     */
     public ItemGroupViewModel(Group chosenGroup, Context context) {
         MutableLiveData<Group> ch = new MutableLiveData<Group>();
         ch.setValue(chosenGroup);
@@ -26,6 +36,12 @@ public class ItemGroupViewModel extends ViewModel {
         this.context = context;
     }
 
+
+    /**
+     * method will be invoked by clicking on the item
+     *
+     * @param view the current View
+     */
     public void onItemClick(View view) {
         //context.startActivity(GroupFeedActivity.launchWithDetails(view.getContext(), mChosenEvent));
     }
@@ -36,7 +52,6 @@ public class ItemGroupViewModel extends ViewModel {
 
     public void setChosenGroup(Group group) {
     }
-
 
 
     public String getName() {

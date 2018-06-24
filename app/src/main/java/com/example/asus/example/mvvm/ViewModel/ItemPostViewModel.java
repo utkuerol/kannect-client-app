@@ -15,11 +15,21 @@ import java.util.List;
 import javax.naming.Context;
 import javax.swing.text.View;
 
+/**
+ * ViewModel class for itemPost, that is responsible for preparing and managing the data for Views,
+ * which need a list of itemPost, by handling the communication of the View with the
+ * Recyclerview element.
+ */
 public class ItemPostViewModel extends ViewModel {
 
     private MutableLiveData<Post> post;
     private Context context;
 
+    /**
+     * Creates an instance with the given application context.
+     *
+     * @param context of the application.
+     */
     public ItemPostViewModel(Post post, Context context) {
         MutableLiveData<Post> p = new MutableLiveData<Post>();
         p.setValue(post);
@@ -37,6 +47,11 @@ public class ItemPostViewModel extends ViewModel {
         this.post = p;
     }
 
+    /**
+     * method will be invoked by clicking on the item
+     *
+     * @param view the current View
+     */
     public void onItemClick(View view) {
         //context.startActivity(GroupFeedActivity.launchWithDetails(view.getContext(), mChosenEvent));
     }

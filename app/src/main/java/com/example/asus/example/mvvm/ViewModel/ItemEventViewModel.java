@@ -15,11 +15,21 @@ import java.util.List;
 
 import javax.swing.text.View;
 
+/**
+ * ViewModel class for itemEvents, that is responsible for preparing and managing the data for Views,
+ * which need a list of itemEvents, by handling the communication of the View with the
+ * Recyclerview element.
+ */
 public class ItemEventViewModel extends ViewModel {
 
     private MutableLiveData<Event> event;
     private Context context;
 
+    /**
+     * Creates an instance with the given application context.
+     *
+     * @param context of the application.
+     */
     public ItemEventViewModel(Event event, Context context) {
         this.context = context;
         MutableLiveData<Event> ev = new MutableLiveData<Event>();
@@ -36,6 +46,11 @@ public class ItemEventViewModel extends ViewModel {
         this.event = e;
     }
 
+    /**
+     * method will be invoked by clicking on the item
+     *
+     * @param view the current View
+     */
     public void onItemClick(View view) {
 
         //context.startActivity(EventFeedActivity.launchWithDetails(view.getContext(), mChosenEvent));

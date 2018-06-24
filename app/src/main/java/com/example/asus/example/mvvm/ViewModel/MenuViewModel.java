@@ -8,6 +8,12 @@ import com.example.asus.example.R;
 
 public class MenuViewModel extends ViewModel {
 
+    /**
+     * retrieve the item which was selectef by the user and invoke the showactions
+     *
+     * @param item
+     * @return
+     */
     public boolean invoke(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.personal_feed:
@@ -31,18 +37,33 @@ public class MenuViewModel extends ViewModel {
         }
     }
 
+    /**
+     * shows the subscriptions
+     */
     private void showSubscriptions() {
     }
 
+    /**
+     * shows the event feed
+     */
     private void showEvents() {
     }
 
+    /**
+     * shows the group feed
+     */
     private void showGroups() {
     }
 
+    /**
+     * shows the personal feed
+     */
     private void showPersonalFeed() {
     }
 
+    /**
+     * shows all messages
+     */
     private void showMessages() {
     }
 
