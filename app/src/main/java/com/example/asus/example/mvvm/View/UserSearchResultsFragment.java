@@ -19,6 +19,9 @@ import com.example.asus.example.mvvm.ViewModel.SearchResultViewModel;
 
 import java.util.List;
 
+/**
+ * Fragment for the view, to show all users which match the search query.
+ */
 public class UserSearchResultsFragment extends Fragment {
 
     //binding
@@ -28,8 +31,8 @@ public class UserSearchResultsFragment extends Fragment {
     /**
      * Method which will be called when the view is created.
      * Sets the Adapter for the recycler View.
-     * Sets the DataBinding to set/receive Data to the Layout.
-     * @param view returned by onCreateView(LayourtInflater, ViewGroup, Bundle)
+     * Sets the DataBinding to set/receive Data to/from the Layout.
+     * @param view returned by onCreateView(LayoutInflater, ViewGroup, Bundle).
      * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state as given here.
      */
     @Override
@@ -43,7 +46,6 @@ public class UserSearchResultsFragment extends Fragment {
      */
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-
     }
 
 

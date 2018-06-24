@@ -7,18 +7,14 @@ import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.asus.example.mvvm.Model.Entities.Category;
-
 /**
- * Activity class for the view regarding creating a new Group in a Category.
- * Uses the ItemCategoryViewModel as its ViewModel.
+ * Activity class for the view regarding showing events and categories.
  */
-public class NewGroupInCategoryActivity extends AppCompatActivity {
-
+public class EventMainPageActivity extends AppCompatActivity {
 
     /**
      * Method which is called, when the Activity is first created.
-     * Initializes the DataBinding and the category, which it got from the intent of the launchWithDetail method.
+     * Initializes the DataBinding.
      * @param savedInstanceState if the activity is being re-initialized after previously being shut down
      *                           then this Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle).
      * @param persistentState if the activity is being re-initialized after previously being shut down or powered off
@@ -30,13 +26,11 @@ public class NewGroupInCategoryActivity extends AppCompatActivity {
     }
 
     /**
-     * redirects to this activity using the current Context of the Application and
-     * the Category, which this view needs, being the category to which the user navigated.
+     * redirects to this activity using the current Context of the Application.
      * @param context needed Application Information to launch this Activity.
-     * @param category the user navigated to.
      * @return the Intent, which is used to redirect to this Activity.
      */
-    public static Intent launchWithDetails(Context context, Category category) {
+    public static Intent launchWithDetails(Context context) {
         return null;
     }
 }
