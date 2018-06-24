@@ -16,11 +16,22 @@ import java.util.List;
 
 import javax.swing.text.View;
 
+/**
+ * ViewModel class for Group, that is responsible for preparing and managing the data for Views,
+ * which need a list of Group, by handling the communication of the View with the
+ * GroupRepository class, which has the group business logic of the application.
+ * Objects received from repositories will be stored as MutableLiveData Objects.
+ */
 public class GroupViewModel extends ViewModel {
 
     private MutableLiveData<List<Group>> groups;
     private Context context;
 
+    /**
+     * Creates an instance with the given application context.
+     *
+     * @param context of the application.
+     */
     public GroupViewModel(Context context) {
         this.context = context;
     }
@@ -40,8 +51,6 @@ public class GroupViewModel extends ViewModel {
 
     public void setGroupsToJoinedGroups(User mCurrentUser) {
     }
-
-
 
 
 }
