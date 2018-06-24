@@ -8,6 +8,7 @@ import android.view.View;
 
 public class GroupSearchResultsFragment extends Fragment {
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         //set binding

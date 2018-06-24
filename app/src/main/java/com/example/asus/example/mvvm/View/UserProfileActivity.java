@@ -11,7 +11,9 @@ import com.example.asus.example.mvvm.Model.Entities.User;
 public class UserProfileActivity extends AppCompatActivity {
 
     //user from intent
+    UserProfileViewModel =new
 
+    UserProfileViewModel();
 
     public static Intent launchWithDetails(Context context, User user) {
         // redirects from parameter context to this activity, takes user as parameter
