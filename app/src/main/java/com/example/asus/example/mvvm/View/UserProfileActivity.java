@@ -15,6 +15,8 @@ public class UserProfileActivity extends AppCompatActivity {
 
     UserProfileViewModel();
 
+    UserProfileViewModel();
+
     public static Intent launchWithDetails(Context context, User user) {
         // redirects from parameter context to this activity, takes user as parameter
     }
