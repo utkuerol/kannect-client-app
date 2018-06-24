@@ -7,10 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 
 /**
- * Fragment for the view, to show all the groups which matched the search query.
+ * Fragment for the view, to show all the subcategories that exist for a event.
  */
-public class GroupSearchResultsFragment extends Fragment {
-
+public class SubcategoriesEventFragment extends Fragment {
 
     /**
      * Called immediately after onCreateView(LayoutInflater, ViewGroup, Bundle) has returned,
@@ -21,8 +20,7 @@ public class GroupSearchResultsFragment extends Fragment {
      */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        //set binding
-        //sets adapter
+        super.onViewCreated(view, savedInstanceState);
     }
 
     /**
@@ -32,7 +30,6 @@ public class GroupSearchResultsFragment extends Fragment {
      */
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        //find view model
-        //viewmodel.observe(this) --- sync with adapter
+        super.onActivityCreated(savedInstanceState);
     }
 }

@@ -10,11 +10,10 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.asus.example.mvvm.Model.Entities.Category;
 
 /**
- * Activity class for the view regarding creating a new Group in a Category.
+ * Activity class for the view regarding creating a new Event in a Category.
  * Uses the ItemCategoryViewModel as its ViewModel.
  */
-public class NewGroupInCategoryActivity extends AppCompatActivity {
-
+public class NewEventInCategoryActivity extends AppCompatActivity {
 
     /**
      * Method which is called, when the Activity is first created.
