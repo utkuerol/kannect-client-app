@@ -19,9 +19,13 @@ public class NewMessageViewModel extends ViewModel {
      * @param receiver user receiving the message
      * @param repository Repository to get informations from
      */
-    public NewMessageViewModel(MutableLiveData<Message> message, MutableLiveData<User> receiver, MessageRepository repository) {
-        this.message = message;
-        this.receiver = receiver;
+    public NewMessageViewModel(Message message, User receiver, MessageRepository repository) {
+        MutableLiveData<Message> m = new MutableLiveData<Message>();
+        m.setValue(message);
+        MutableLiveData<User> r = new MutableLiveData<User>();
+        r.setValue(receiver);
+        this.message = m;
+        this.receiver = r;
         this.repository = repository;
     }
 
@@ -30,7 +34,7 @@ public class NewMessageViewModel extends ViewModel {
      * @param receiver the user to which is the message going to be sent to
      * @param Message The message that is going to be sent
      */
-    public void sendMessage(MutableLiveData<User> receiver, MutableLiveData<Message> Message){
+    public void sendMessage(User receiver, Message Message) {
 
     }
 }

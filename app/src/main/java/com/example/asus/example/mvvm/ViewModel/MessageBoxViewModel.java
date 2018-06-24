@@ -25,11 +25,15 @@ public class MessageBoxViewModel extends ViewModel {
      * @param mReceivedMessages list containing all the messages received by the loged in user
      * @param repository allows getting information about the messages
      */
-    public MessageBoxViewModel(MutableLiveData<List<Message>> mSentMessages,
-                               MutableLiveData<List<Message>> mReceivedMessages,
+    public MessageBoxViewModel(List<Message> mSentMessages,
+                               List<Message> mReceivedMessages,
                                MessageRepository repository) {
-        this.mSentMessages = mSentMessages;
-        this.mReceivedMessages = mReceivedMessages;
+        MutableLiveData<List<Message>> mSent = new MutableLiveData<List<Message>>();
+        mSent.setValue(mSentMessages);
+        this.mSentMessages = mSent;
+        MutableLiveData<List<Message>> mReceived = new MutableLiveData<List<Message>>();
+        mReceived.setValue(mReceivedMessages);
+        this.mReceivedMessages = mReceived;
         this.repository = repository;
     }
 
@@ -40,25 +44,29 @@ public class MessageBoxViewModel extends ViewModel {
 
     }
 
-    public void setmSentMessages(MutableLiveData<List<Message>> mSentMessages) {
-        this.mSentMessages = mSentMessages;
+    public void setmSentMessages(List<Message> mSentMessages) {
+        MutableLiveData<List<Message>> mSent = new MutableLiveData<List<Message>>();
+        mSent.setValue(mSentMessages);
+        this.mSentMessages = mSent;
     }
 
-    public void setmReceivedMessages(MutableLiveData<List<Message>> mReceivedMessages) {
-        this.mReceivedMessages = mReceivedMessages;
+    public void setmReceivedMessages(List<Message> mReceivedMessages) {
+        MutableLiveData<List<Message>> mReceived = new MutableLiveData<List<Message>>();
+        mReceived.setValue(mReceivedMessages);
+        this.mReceivedMessages = mReceived;
     }
 
     public void setRepository(MessageRepository repository) {
         this.repository = repository;
     }
 
-    public MutableLiveData<List<Message>> getmSentMessages() {
+    public List<Message> getmSentMessages() {
 
-        return mSentMessages;
+        return mSentMessages.getValue();
     }
 
-    public MutableLiveData<List<Message>> getmReceivedMessages() {
-        return mReceivedMessages;
+    public List<Message> getmReceivedMessages() {
+        return mReceivedMessages.getValue();
     }
 
     public MessageRepository getRepository() {

@@ -1,10 +1,11 @@
-package com.example.asus.example.mvvm.ViewModel;
+package com.example.asus.example.mvvm.View;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.asus.example.mvvm.Model.Entities.Group;
+import com.example.asus.example.mvvm.ViewModel.GroupViewModel;
 
 
 public class EditGroupActivity extends AppCompatActivity {

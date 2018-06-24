@@ -6,11 +6,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.asus.example.mvvm.Model.Entities.Event;
+import com.example.asus.example.mvvm.ViewModel.PostViewModel;
 
 //this is the FEED where the signed user has all Posts from the subscribed Entities // NO Profile ~mohamed
 public class PersonalFeedActivity extends AppCompatActivity {
 
-    PersonalFeedViewModel viewModel = new PersonalFeedViewModel();
+    PostViewModel viewModel = new PostViewModel();
     //event from intent
 
     public static Intent launchWithDetails(Context context, Event event) {

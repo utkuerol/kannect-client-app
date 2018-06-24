@@ -8,10 +8,11 @@ import android.os.Bundle;
 
 import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.Group;
+import com.example.asus.example.mvvm.ViewModel.GroupViewModel;
 
 public class GroupFeedActivity extends AppCompatActivity {
 
-    GroupFeedViewModel viewModel = new GroupFeedViewModel();
+    GroupViewModel viewModel = new GroupViewModel(this);
     //group from intent
 
     @Override protected void onCreate(Bundle savedInstanceState) {

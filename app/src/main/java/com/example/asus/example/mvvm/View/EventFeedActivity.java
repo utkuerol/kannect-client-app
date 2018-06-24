@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.asus.example.mvvm.Model.Entities.Event;
+import com.example.asus.example.mvvm.ViewModel.EventViewModel;
 
 /**
  * The Activity displayed when accessing an event. It shows informations about the event and all the posts
@@ -13,7 +14,7 @@ import com.example.asus.example.mvvm.Model.Entities.Event;
  */
 public class EventFeedActivity extends AppCompatActivity {
 
-    private EventFeedViewModel viewModel = new EventFeedViewModel();
+    EventViewModel viewModel = new EventViewModel(this);
     //event from intent
 
     /**
