@@ -7,7 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.ViewModel.GroupViewModel;
 
-
+/**
+ * The activity displayed allowing the user to edit the informations concerning a group.
+ *
+ */
 public class EditGroupActivity extends AppCompatActivity {
 
     GroupViewModel viewModel;
