@@ -28,10 +28,6 @@ public class EventViewModel extends ViewModel {
     public void setEventsFilteredBySubcategory(MutableLiveData<Subcategory> subcategory) {}
     public void setEventsToParticipatingEvents() {}
 
-    public void onItemClick(View view) {
-
-        //context.startActivity(EventFeedActivity.launchWithDetails(view.getContext(), mChosenEvent));
-    }
 
     public MutableLiveData<Event> getChosenEvent() {
         return mChosenEvent;
@@ -39,5 +35,10 @@ public class EventViewModel extends ViewModel {
 
     public MutableLiveData<List<Event>> getEvents() {
         return events;
+    }
+
+    public void onItemClick(View view) {
+
+        //context.startActivity(EventFeedActivity.launchWithDetails(view.getContext(), mChosenEvent));
     }
 }

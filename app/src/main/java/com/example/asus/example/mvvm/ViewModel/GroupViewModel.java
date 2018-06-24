@@ -19,19 +19,10 @@ import javax.swing.text.View;
 public class GroupViewModel extends ViewModel {
 
     private MutableLiveData<List<Group>> groups;
-    private MutableLiveData<Group> chosenGroup;
     private Context context;
 
     public GroupViewModel(Context context) {
         this.context = context;
-    }
-
-    public void onItemClick(View view) {
-        //context.startActivity(GroupFeedActivity.launchWithDetails(view.getContext(), mChosenEvent));
-    }
-
-    public MutableLiveData<Group> getChosenGroup() {
-        return chosenGroup;
     }
 
     public MutableLiveData<List<Group>> getGroups() {
@@ -42,7 +33,6 @@ public class GroupViewModel extends ViewModel {
     public void setGroupsFilteredByCategory(MutableLiveData<Category> category) {}
     public void setGroupsFilteredBySubcategory(MutableLiveData<Subcategory> subcategory) {}
     public void setGroupsToJoinedGroups(MutableLiveData<User> mCurrentUser) { }
-    public void setChosenGroup(MutableLiveData<Group> group) {}
 
 
 
