@@ -56,21 +56,27 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    //redirect to this Activity
+    /**
+     * redirects to this activity
+     * @param context needed Application Information to launch this Activity.
+     * @return the Intent, which is used to redirect to this Activity.
+     */
     public static Intent launchDetail(Context context, User user) {
         // redirects from parameter context to this activity, takes user as parameter
         return null;
     }
 
 
-    //die wird durch onClick invoked
+    /**
+     * Method allowing the user to signin
+     */
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
     /**
-     * handels the Task becomen from the GoogleSignInAccount
+     * handles the Task from the GoogleSignInAccount
      *
      * @param completedTask Google Task API
      */

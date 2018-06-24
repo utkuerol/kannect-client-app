@@ -7,6 +7,8 @@ import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.asus.example.mvvm.Model.Entities.Event;
+
 /**
  * Activity class for the view regarding showing events and categories.
  */

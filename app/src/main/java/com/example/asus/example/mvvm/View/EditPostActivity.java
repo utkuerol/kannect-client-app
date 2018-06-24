@@ -1,7 +1,10 @@
 package com.example.asus.example.mvvm.View;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.asus.example.mvvm.Model.Entities.Post;
@@ -18,7 +21,7 @@ public class EditPostActivity extends AppCompatActivity {
 
     /**
      * creates a EditPostActivity
-     * @param viewModel addes the needed changes in the model and in the view
+     * @param viewModel adds the needed changes in the model and in the view
      */
     public EditPostActivity(PostViewModel viewModel) { //add the binding to the constructor manually :binding not possible without xml
         this.viewModel = viewModel;
@@ -29,17 +32,20 @@ public class EditPostActivity extends AppCompatActivity {
      * Initializes the DataBinding.
      * @param savedInstanceState if the activity is being re-initialized after previously being shut down
      *                           then this Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle).
-                            then this Bundle contains the data it most recently supplied to outPersistentState in onSaveInstanceState(Bundle).
+     * @param persistentState if the activity is being re-initialized after previously being shut down or powered off
+     *                        then this Bundle contains the data it most recently supplied to outPersistentState in onSaveInstanceState(Bundle).
      */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
+        super.onCreate(savedInstanceState, persistentState);
     }
-
     /**
-     * Is the method allowing to reach the activity
+     * redirects to this activity
+     * @param context needed Application Information to launch this Activity.
+     * @param post the post navigated to.
+     * @return the Intent, which is used to redirect to this Activity.
      */
-    public void launchWithDetails(Context context, Post post){ }
+    public Intent launchWithDetails(Context context, Post post){ return new Intent(); }
 
     public PostViewModel getViewModel() {
         return viewModel;

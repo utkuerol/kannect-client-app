@@ -29,10 +29,10 @@ public class UserSearchResultsFragment extends Fragment {
 
 
     /**
-     * Method which will be called when the view is created.
-     * Sets the Adapter for the recycler View.
-     * Sets the DataBinding to set/receive Data to/from the Layout.
-     * @param view returned by onCreateView(LayoutInflater, ViewGroup, Bundle).
+     * Called immediately after onCreateView(LayoutInflater, ViewGroup, Bundle) has returned,
+     * but before any saved state has been restored in to the view.
+     * Initializes the Data binding and sets the adapter for the recylcer view.
+     * @param view The View returned by onCreateView(LayoutInflater, ViewGroup, Bundle).
      * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state as given here.
      */
     @Override

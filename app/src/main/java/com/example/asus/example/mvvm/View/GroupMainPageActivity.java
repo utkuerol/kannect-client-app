@@ -34,5 +34,4 @@ public class GroupMainPageActivity extends AppCompatActivity{
     public static Intent launchWithDetails(Context context) {
         return  null;
     }
-
 }

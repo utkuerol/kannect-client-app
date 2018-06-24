@@ -25,10 +25,7 @@ public class MenuFragment extends Fragment {
         inflater.inflate(R.menu.menu_aktienlistefragment, menu);
     }
 
-    /*
-     * Wir prüfen, ob Menü-Element mit der ID "action_daten_aktualisieren"
-     * ausgewählt wurde und geben eine Meldung aus
-     */
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
