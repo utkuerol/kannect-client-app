@@ -11,7 +11,7 @@ import com.example.asus.example.mvvm.Model.Entities.Group;
 
 public class GroupFeedActivity extends AppCompatActivity {
 
-    GroupFeedViewModel viewModel = new GRoupFeedViewModel();
+    GroupFeedViewModel viewModel = new GroupFeedViewModel();
     //group from intent
 
     @Override protected void onCreate(Bundle savedInstanceState) {
