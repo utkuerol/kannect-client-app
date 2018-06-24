@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.ViewModel.PostViewModel;
 
+/**
+ * The Activity displayed to allow the user to edit a post that can be in a group, an activity or someone's profile.
+ */
 public class EditPostActivity extends AppCompatActivity {
 
     PostViewModel viewModel;
@@ -21,6 +24,13 @@ public class EditPostActivity extends AppCompatActivity {
         this.viewModel = viewModel;
     }
 
+    /**
+     * Method which is called, when the Activity is first created.
+     * Initializes the DataBinding.
+     * @param savedInstanceState if the activity is being re-initialized after previously being shut down
+     *                           then this Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle).
+                            then this Bundle contains the data it most recently supplied to outPersistentState in onSaveInstanceState(Bundle).
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
