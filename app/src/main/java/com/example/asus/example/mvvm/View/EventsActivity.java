@@ -7,19 +7,20 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.asus.example.mvvm.Model.Entities.Event;
 
-public class EventFeedActivity extends AppCompatActivity {
+public class EventsActivity extends AppCompatActivity {
 
-    private EventFeedViewModel viewModel = new EventFeedViewModel();
+    EventsViewModel viewModel = new EventsViewModel();
     //event from intent
-
-    @Override protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // set binding
-        // get and set event from intent
-    }
 
     public static Intent launchWithDetails(Context context, Event event) {
         // redirects from parameter context to this activity, takes user as parameter
         return null;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // set binding
+        // get and set event from intent
     }
 }

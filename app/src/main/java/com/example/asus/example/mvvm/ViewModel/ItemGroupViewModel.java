@@ -6,6 +6,7 @@ import android.content.Context;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.Entities.Group;
+import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.Subcategory;
 import com.example.asus.example.mvvm.Model.Entities.User;
 
@@ -16,7 +17,7 @@ import javax.swing.text.View;
 public class ItemGroupViewModel extends ViewModel {
 
     private MutableLiveData<Group> chosenGroup;
-    Context context;
+    private Context context;
 
     public ItemGroupViewModel(MutableLiveData<Group> chosenGroup, Context context) {
         this.chosenGroup = chosenGroup;
@@ -59,4 +60,34 @@ public class ItemGroupViewModel extends ViewModel {
 
     public List<User> getMembers() {
     }
+
+    public List<Post> getGroupFeed() {
+    }
+
+    public boolean isCreator() {
+    }
+
+    public boolean joinedThisGroup() {
+    }
+
+
+    public void joinGroup() {
+    }
+
+
+    public void leaveGroup() {
+    }
+
+    public void editGroup(String newName, String newDescription) {
+    }
+
+    public void deleteGroup() {
+    }
+
+    public void createPost(String text) {
+    }
+
+
+
+
 }

@@ -55,6 +55,24 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    //redirect to this Activity
+    public static Intent launchDetail(Context context, User user) {
+        // redirects from parameter context to this activity, takes user as parameter
+        return null;
+    }
+
+
+    //die wird durch onClick invoked
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    /**
+     * handels the Task becomen from the GoogleSignInAccount
+     *
+     * @param completedTask Google Task API
+     */
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             account  = completedTask.getResult(ApiException.class);
@@ -66,25 +84,8 @@ public class LoginActivity extends AppCompatActivity {
             viewModel.invoke(account);
 
 
-
-
         } catch (ApiException e) {
 
         }
-    }
-
-
-    //die wird durch onClick invoked
-    private void signIn() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
-
-
-
-
-    public static Intent launchDetail(Context context, User user) {
-        // redirects from parameter context to this activity, takes user as parameter
-        return null;
     }
 }

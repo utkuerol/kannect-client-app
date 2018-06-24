@@ -6,6 +6,7 @@ import android.content.Context;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.Entities.Event;
+import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.Subcategory;
 import com.example.asus.example.mvvm.Model.Entities.User;
 
@@ -36,8 +37,6 @@ public class ItemEventViewModel extends ViewModel {
     }
 
 
-
-
     public String getName() {
     }
 
@@ -65,4 +64,34 @@ public class ItemEventViewModel extends ViewModel {
 
     public List<User> getParticipants() {
     }
+
+    public List<Post> getEventFeed() {
+    }
+
+    public boolean isCreator() {
+    }
+
+    public boolean participatingThisEvent() {
+    }
+
+
+    public void participateEvent(User user, Event event) {
+    }
+
+
+    public void leaveEvent(User user, Event event) {
+    }
+
+    public void editEvent(String newName, String newDescription) {
+    }
+
+    public void deleteEvent() {
+    }
+
+    public void createPost(Post post) {
+    }
+
+
+
+
 }

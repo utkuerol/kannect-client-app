@@ -8,8 +8,6 @@ import com.example.asus.example.mvvm.Model.Entities.Category;
 
 import java.util.List;
 
-import javax.swing.text.View;
-
 public class CategoryViewModel extends ViewModel {
 
     private MutableLiveData<List<Category>> categories;
@@ -25,7 +23,4 @@ public class CategoryViewModel extends ViewModel {
 
     public void setCategoriesToAllCategories() {}
 
-    public void onItemClick(View view) {
-
-    }
 }

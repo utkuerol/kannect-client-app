@@ -7,19 +7,20 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.asus.example.mvvm.Model.Entities.Event;
 
-public class EventFeedActivity extends AppCompatActivity {
+public class GroupsActivity extends AppCompatActivity {
 
-    private EventFeedViewModel viewModel = new EventFeedViewModel();
-    //event from intent
-
-    @Override protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // set binding
-        // get and set event from intent
-    }
+    GroupsViewModel viewModel = new GroupsViewModel();
+    //Group from intent
 
     public static Intent launchWithDetails(Context context, Event event) {
         // redirects from parameter context to this activity, takes user as parameter
         return null;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // set binding
+        // get and set event from intent
     }
 }

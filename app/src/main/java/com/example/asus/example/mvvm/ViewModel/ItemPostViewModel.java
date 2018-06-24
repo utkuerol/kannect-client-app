@@ -68,4 +68,22 @@ public class ItemPostViewModel extends ViewModel {
     public List<Comment> getComments() {
     }
 
+    public boolean isLiked() {
+    }
+
+    public void like() {
+    }
+
+    public void unlike() {
+    }
+
+    public void deletePost() {
+    }
+
+    public void editPost(String text) {
+    }
+
+    public void comment(String text) {
+    }
+
 }

@@ -7,19 +7,21 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.asus.example.mvvm.Model.Entities.Event;
 
-public class EventFeedActivity extends AppCompatActivity {
+//this is the FEED where the signed user has all Posts from the subscribed Entities // NO Profile ~mohamed
+public class PersonalFeedActivity extends AppCompatActivity {
 
-    private EventFeedViewModel viewModel = new EventFeedViewModel();
+    PersonalFeedViewModel viewModel = new PersonalFeedViewModel();
     //event from intent
-
-    @Override protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // set binding
-        // get and set event from intent
-    }
 
     public static Intent launchWithDetails(Context context, Event event) {
         // redirects from parameter context to this activity, takes user as parameter
         return null;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // set binding
+        // get and set event from intent
     }
 }
