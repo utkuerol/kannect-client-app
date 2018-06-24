@@ -6,16 +6,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.asus.example.mvvm.Model.Entities.User;
+import com.example.asus.example.mvvm.ViewModel.UserViewModel;
 
 // this is for Profile / NO FEEEEEEEEEEEEEEEED ~mohamed
 public class UserProfileActivity extends AppCompatActivity {
 
     //user from intent
-    UserProfileViewModel =new
+    UserViewModel viewModel;
 
-    UserProfileViewModel();
-
-    UserProfileViewModel();
 
     public static Intent launchWithDetails(Context context, User user) {
         // redirects from parameter context to this activity, takes user as parameter

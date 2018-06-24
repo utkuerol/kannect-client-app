@@ -6,10 +6,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.asus.example.mvvm.Model.Entities.Event;
+import com.example.asus.example.mvvm.ViewModel.EventViewModel;
 
 public class EventsActivity extends AppCompatActivity {
 
-    EventsViewModel viewModel = new EventsViewModel();
+    EventViewModel viewModel = new EventViewModel(this);
     //event from intent
 
     public static Intent launchWithDetails(Context context, Event event) {

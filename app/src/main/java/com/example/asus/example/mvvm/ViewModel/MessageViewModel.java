@@ -19,18 +19,22 @@ public class MessageViewModel extends ViewModel {
      * @param message is any message involving the logedin user (sent by or to him)
      * @param repository gives information about message
      */
-    public MessageViewModel(MutableLiveData<Message> message, MessageRepository repository) {
-        this.message = message;
+    public MessageViewModel(Message message, MessageRepository repository) {
+        MutableLiveData<Message> m = new MutableLiveData<Message>();
+        m.setValue(message);
+        this.message = m;
         this.repository = repository;
     }
 
 
-    public MutableLiveData<Message> getMessage() {
-        return message;
+    public Message getMessage() {
+        return message.getValue();
     }
 
-    public void setMessage(MutableLiveData<Message> message) {
-        this.message = message;
+    public void setMessage(Message message) {
+        MutableLiveData<Message> m = new MutableLiveData<Message>();
+        m.setValue(message);
+        this.message = m;
     }
 
     public MessageRepository getRepository() {

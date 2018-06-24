@@ -1,4 +1,4 @@
-package com.example.asus.example.mvvm.ViewModel;
+package com.example.asus.example.mvvm.View;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.Post;
+import com.example.asus.example.mvvm.ViewModel.EventViewModel;
 
 public class EditEventActivity extends AppCompatActivity {
 

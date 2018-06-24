@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
+import com.example.asus.example.mvvm.ViewModel.GroupViewModel;
 
 /**
  * Activity class for the view regarding creating a new Group in a Category.
@@ -15,7 +16,7 @@ import com.example.asus.example.mvvm.Model.Entities.Category;
  */
 public class NewGroupInCategoryActivity extends AppCompatActivity {
 
-
+    GroupViewModel viewModel;
     /**
      * Method which is called, when the Activity is first created.
      * Initializes the DataBinding and the category, which it got from the intent of the launchWithDetail method.

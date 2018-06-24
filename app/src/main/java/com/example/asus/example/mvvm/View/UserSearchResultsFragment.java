@@ -16,6 +16,7 @@ import com.example.asus.example.R;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.View.SearchResultFragments.UserSearchResultFragment;
 import com.example.asus.example.mvvm.ViewModel.SearchResultViewModel;
+import com.example.asus.example.mvvm.ViewModel.UserViewModel;
 
 import java.util.List;
 
@@ -24,8 +25,7 @@ import java.util.List;
  */
 public class UserSearchResultsFragment extends Fragment {
 
-    //binding
-    //view model
+    UserViewModel viewModel;
 
 
     /**
