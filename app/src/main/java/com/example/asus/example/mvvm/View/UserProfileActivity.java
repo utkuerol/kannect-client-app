@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.asus.example.mvvm.Model.Entities.User;
 
+// this is for Profile / NO FEEEEEEEEEEEEEEEED ~mohamed
 public class UserProfileActivity extends AppCompatActivity {
 
     //user from intent
