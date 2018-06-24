@@ -12,11 +12,13 @@ public class EventFeedActivity extends AppCompatActivity {
     //event from intent
 
     @Override protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         // set binding
         // get and set event from intent
     }
 
     public static Intent launchWithDetails(Context context, Event event) {
         // redirects from parameter context to this activity, takes user as parameter
+        return null;
     }
 }

@@ -11,14 +11,30 @@ import com.example.asus.example.mvvm.Model.Entities.Category;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Adapter class for Recycler View.
+ * Handles the items which will be shown in the Recycler View.
+ */
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryAdapterViewHolder> {
 
-    private List<Category> CategorysList;
 
+    private List<Category> categoryList;
+
+    /**
+     * Constructor.
+     * Initializes the private categoryList attribute.
+     */
     public CategoryAdapter() {
-        this.CategorysList = Collections.emptyList();
+        this.categoryList = Collections.emptyList();
     }
 
+
+    /**
+     * Method inflates the View, meaning it creates the layout for every list item, using DataBindingUtil inflate method.
+     * @param parent parent ViewGroup of the inflated view.
+     * @param viewType indicates what type of view should be inflated.
+     * @return a new instance of the CategoryAdapterViewHolder with the created Binding object.
+     */
     @Override public CategoryAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ItemCategoryBinding itemCategoryBinding =
                 DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_Category,
@@ -26,32 +42,58 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         return new CategoryAdapterViewHolder(itemCategoryBinding);
     }
 
+    /**
+     * Method which binds a ViewHolder to a position in the Recycler View, using the bindUser method.
+     * @param holder ViewHolder which will be shown.
+     * @param position of the item in the list.
+     */
     @Override public void onBindViewHolder(CategoryAdapterViewHolder holder, int position) {
-        holder.bindCategory(CategorysList.get(position));
+        holder.bindCategory(categoryList.get(position));
     }
 
+    /**
+     * method to get the size of the List of items that will be shown in the ui.
+     * @return size of the list
+     */
     @Override public int getItemCount() {
-        return CategorysList.size();
+        return categoryList.size();
     }
 
+    /**
+     * sets the list of groups which will be shown in the ui.
+     * @param categoryList list of Categories
+     */
     public void setCategoryList(List<Category> CategorysList) {
-        this.CategorysList = CategorysList;
+        this.categoryList = CategorysList;
     }
 
+    /**
+     * Nested Class.
+     * Builds for every item in the Recycler View its View Model.
+     */
     public static class CategoryAdapterViewHolder extends RecyclerView.ViewHolder {
         ItemCategoryBinding mItemCategoryBinding;
 
+        /**
+         * Constructor.
+         * Creates an UserAdapterViewHolder object.
+         * @param itemCategoryBinding the Binding object of the new CategoryAdapterViewHolder.
+         */
         public CategoryAdapterViewHolder(ItemCategoryBinding itemCategoryBinding) {
             super(itemCategoryBinding.itemCategory);
             this.mItemCategoryBinding = itemCategoryBinding;
         }
 
-        void bindCategory(Category Category) {
+        /**
+         * Method which binds an item of the recycler view to its View Model if that wasn´t already done.
+         * @param category which will be bound.
+         */
+        void bindCategory(Category category) {
             if (mItemCategoryBinding.getCategoryViewModel() == null) {
                 mItemCategoryBinding.setCategoryViewModel(
-                        new ItemCategoryViewModel(Category, itemView.getContext()));
+                        new ItemCategoryViewModel(category, itemView.getContext()));
             } else {
-                mItemCategoryBinding.getCategoryViewModel().setCategory(Category);
+                mItemCategoryBinding.getCategoryViewModel().setCategory(category);
             }
         }
     }

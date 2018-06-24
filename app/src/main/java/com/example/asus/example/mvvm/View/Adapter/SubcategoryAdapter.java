@@ -11,13 +11,27 @@ import com.example.asus.example.mvvm.Model.Entities.Subcategory;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Adapter class for Recycler View.
+ * Handles the items which will be shown in the Recycler View.
+ */
 public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.SubcategoryAdapterViewHolder> {
-    private List<Subcategory> SubcategorysList;
+    private List<Subcategory> subcategoryList;
 
+    /**
+     * Constructor.
+     * Initializes the private subCategoryList attribute.
+     */
     public SubcategoryAdapter() {
-        this.SubcategorysList = Collections.emptyList();
+        this.subcategoryList = Collections.emptyList();
     }
 
+    /**
+     * Method inflates the View, meaning it creates the layout for every list item, using DataBindingUtil inflate method.
+     * @param parent parent ViewGroup of the inflated view.
+     * @param viewType indicates what type of view should be inflated.
+     * @return a new instance of the SubCategoryAdapterViewHolder with the created Binding object.
+     */
     @Override public SubcategoryAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ItemSubcategoryBinding itemSubcategoryBinding =
                 DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_Subcategory,
@@ -25,32 +39,59 @@ public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.
         return new SubcategoryAdapterViewHolder(itemSubcategoryBinding);
     }
 
+    /**
+     * Method which binds a ViewHolder to a position in the Recycler View, using the bindUser method.
+     * @param holder ViewHolder which will be shown.
+     * @param position of the item in the list.
+     */
     @Override public void onBindViewHolder(SubcategoryAdapterViewHolder holder, int position) {
-        holder.bindSubcategory(SubcategorysList.get(position));
+        holder.bindSubcategory(subcategoryList.get(position));
     }
 
+    /**
+     * method to get the size of the List of items that will be shown in the ui.
+     * @return size of the list
+     */
     @Override public int getItemCount() {
-        return SubcategorysList.size();
+        return subcategoryList.size();
     }
 
-    public void setSubcategoryList(List<Subcategory> SubcategorysList) {
-        this.SubcategorysList = SubcategorysList;
+    /**
+     * sets the list of groups which will be shown in the ui.
+     * @param subCategoryList list of messages
+     */
+    public void setSubcategoryList(List<Subcategory> subcategoryList) {
+        this.subcategoryList = subcategoryList;
     }
 
+    /**
+     * Nested Class.
+     * Builds for every item in the Recycler View its View Model.
+     */
     public static class SubcategoryAdapterViewHolder extends RecyclerView.ViewHolder {
         ItemSubcategoryBinding mItemSubcategoryBinding;
 
+        /**
+         * Constructor.
+         * Creates a SubcategoryAdapterViewHolder object.
+         * @param ItemSubCategoryBinding the Binding object of the new SubcategoryAdapterViewHolder.
+         */
         public SubcategoryAdapterViewHolder(ItemSubcategoryBinding itemSubcategoryBinding) {
             super(itemSubcategoryBinding.itemSubcategory);
             this.mItemSubcategoryBinding = itemSubcategoryBinding;
         }
 
-        void bindSubcategory(Subcategory Subcategory) {
+
+        /**
+         * Method which binds an item of the recycler view to its View Model if that wasn´t already done.
+         * @param subcategory which will be bound.
+         */
+        void bindSubcategory(Subcategory subcategory) {
             if (mItemSubcategoryBinding.getSubcategoryViewModel() == null) {
                 mItemSubcategoryBinding.setSubcategoryViewModel(
-                        new ItemSubcategoryViewModel(Subcategory, itemView.getContext()));
+                        new ItemSubcategoryViewModel(subcategory, itemView.getContext()));
             } else {
-                mItemSubcategoryBinding.getSubcategoryViewModel().setSubcategory(Subcategory);
+                mItemSubcategoryBinding.getSubcategoryViewModel().setSubcategory(subcategory);
             }
         }
     }
