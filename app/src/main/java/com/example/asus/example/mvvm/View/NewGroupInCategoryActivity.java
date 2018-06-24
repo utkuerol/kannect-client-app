@@ -11,6 +11,7 @@ import com.example.asus.example.mvvm.Model.Entities.Category;
 
 /**
  * Activity class for the view of creating a new Group in a Category.
+ * Uses the ItemCategoryViewModel as its ViewModel.
  */
 public class NewGroupInCategoryActivity extends AppCompatActivity {
 
