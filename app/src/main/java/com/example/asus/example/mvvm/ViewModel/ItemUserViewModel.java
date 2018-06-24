@@ -13,11 +13,21 @@ import java.util.List;
 
 import javax.swing.text.View;
 
+/**
+ * ViewModel class for itemUser, that is responsible for preparing and managing the data for Views,
+ * which need a list of itemUser, by handling the communication of the View with the
+ * Recyclerview element.
+ */
 public class ItemUserViewModel extends ViewModel {
 
     private MutableLiveData<User> chosenUser;
     private Context context;
 
+    /**
+     * Creates an instance with the given application context.
+     *
+     * @param context of the application.
+     */
     public ItemUserViewModel(User user, Context context) {
         MutableLiveData<User> p = new MutableLiveData<User>();
         p.setValue(user);
@@ -32,6 +42,11 @@ public class ItemUserViewModel extends ViewModel {
     public void setChosenUser(User user) {
     }
 
+    /**
+     * method will be invoked by clicking on the user item
+     *
+     * @param view
+     */
     public void onItemClick(View view) {
 
         //context.startActivity(UserProfileActivity.launchWithDetails(view.getContext(), mUser));
