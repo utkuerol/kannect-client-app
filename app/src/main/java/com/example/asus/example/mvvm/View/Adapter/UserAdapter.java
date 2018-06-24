@@ -18,6 +18,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserAdapterVie
         this.usersList = Collections.emptyList();
     }
 
+
     @Override public UserAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ItemUserBinding itemUserBinding =
                 DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_user,

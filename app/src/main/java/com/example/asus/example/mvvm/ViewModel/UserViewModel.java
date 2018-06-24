@@ -15,30 +15,22 @@ import javax.swing.text.View;
 
 public class UserViewModel extends ViewModel {
 
-    private MutableLiveData<List<User>> mUsers;
-    private MutableLiveData<User> mChosenUser;
+    private MutableLiveData<List<User>> users;
     private UserRepository userRepository;
     private Context context;
 
-    public UserViewModel(MutableLiveData<User> mChosenUser, Context context) {
-        this.mChosenUser = mChosenUser;
+    public UserViewModel(Context context) {
         this.context = context;
     }
 
     public void setUsersToSearchResults(String query) {
 
     }
-
     public void setUsersToSubscriptions() {
 
     }
-
     public void setUsersToSubscribers() {
 
     }
 
-    public void onItemClick(View view) {
-
-        //context.startActivity(UserProfileActivity.launchWithDetails(view.getContext(), mUser));
-    }
 }
