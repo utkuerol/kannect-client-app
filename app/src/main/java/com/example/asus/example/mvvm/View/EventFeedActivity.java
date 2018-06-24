@@ -9,7 +9,7 @@ import com.example.asus.example.mvvm.Model.Entities.Event;
 
 public class EventFeedActivity extends AppCompatActivity {
 
-    EventFeedViewModel viewModel = new EventFeedViewModel();
+    private EventFeedViewModel viewModel = new EventFeedViewModel();
     //event from intent
 
     @Override protected void onCreate(Bundle savedInstanceState) {
