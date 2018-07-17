@@ -19,6 +19,7 @@ public class UserViewModel extends ViewModel {
 
 
     private MutableLiveData<List<User>> users;
+    private User currentUser; //TODO
     private UserRepository userRepository;
     private Context context;
 
@@ -29,6 +30,7 @@ public class UserViewModel extends ViewModel {
      */
     public UserViewModel(Context context) {
         this.context = context;
+        users = new MutableLiveData<>();
     }
 
     /**
@@ -45,21 +47,21 @@ public class UserViewModel extends ViewModel {
      * @param query to search for users.
      */
     public void setUsersToSearchResults(String query) {
-
+        users = userRepository.getUsers(query);
     }
 
     /**
      * Sets the list of users to subscriptions of the current user.
      */
     public void setUsersToSubscriptions() {
-
+        users.setValue(currentUser.getSubscriptions());
     }
 
     /**
      * Sets the list of users to subscribers of the current user.
      */
     public void setUsersToSubscribers() {
-
+        users.setValue(currentUser.getSubscribers());
     }
 
 }

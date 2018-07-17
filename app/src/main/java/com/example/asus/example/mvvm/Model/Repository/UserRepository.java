@@ -26,7 +26,7 @@ public class UserRepository {
      * @param searchQuery typed in by User.
      * @return List of Users, which match the Search Query, as a MutableLiveData object.
      */
-    public MutableLiveData<List<User>> getUser(String searchQuery) {return null;}
+    public MutableLiveData<List<User>> getUsers(String searchQuery) {return null;}
 
     /**
      * Method to indicate to the server, that a User subscribed to another User. Sends two User objects to the server.

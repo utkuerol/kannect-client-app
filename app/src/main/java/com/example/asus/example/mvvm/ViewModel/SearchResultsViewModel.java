@@ -1,9 +1,11 @@
 package com.example.asus.example.mvvm.ViewModel;
 
 import android.arch.lifecycle.ViewModel;
+import android.content.Context;
+import android.view.View;
 
-import javax.naming.Context;
-import javax.swing.text.View;
+import com.example.asus.example.mvvm.View.SearchResultActivity;
+
 
 /**
  * ViewModel class for search functions, responsible for passing the given search query from View
@@ -22,6 +24,7 @@ public class SearchResultsViewModel extends ViewModel {
      */
     public SearchResultsViewModel(String query, Context context) {
         this.query = query;
+        this.context = context;
     }
 
     /**
@@ -30,6 +33,6 @@ public class SearchResultsViewModel extends ViewModel {
      * @param view
      */
     public void onSearchClick(View view) {
-
+        context.startActivity(SearchResultActivity.launchWithDetails(view.getContext(), query));
     }
 }
