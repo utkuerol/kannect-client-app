@@ -5,100 +5,67 @@ import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
+import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.Subcategory;
-import com.example.asus.example.mvvm.Model.Repository.CategoryRepository;
+import com.example.asus.example.mvvm.Model.Repository.EventRepository;
 
 import java.util.List;
 
-import javax.swing.text.View;
-
 /**
- * ViewModel class for one specific category, and is responsible for preparing and managing the data for Views,
- * which need the information of this particular category, by handling the communication of the View with the
- * CategoryRepository class, which has the category business logic of the application.
+ * ViewModel class for events, that is responsible for preparing and managing the data for Views,
+ * which need a list of events, by handling the communication of the View with the
+ * EventRepository class, which has the group business logic of the application.
  * Objects received from repositories will be stored as MutableLiveData Objects.
  */
-public class ItemCategoryViewModel extends ViewModel {
+public class EventViewModel extends ViewModel {
 
-    private MutableLiveData<Category> chosenCategory;
+    private MutableLiveData<List<Event>> events;
     private Context context;
-    private CategoryRepository categoryRepository:
+    private EventRepository eventRepository;
 
     /**
-     * Creates an instance with the chosenCategory and the application context.
+     * Creates an instance with the given application context.
      *
-     * @param chosenCategory to set
-     * @param context        of the application.
+     * @param context of the application.
      */
-    public ItemCategoryViewModel(MutableLiveData<Category> chosenCategory, Context context) {
-        this.chosenCategory = chosenCategory;
+    public EventViewModel(Context context) {
         this.context = context;
     }
 
     /**
-     * Starts the CategoryEventPageActivity with the chosen subcategory.
-     *
-     * @param view
+     * Sets the events to search results of the given query.
+     * @param query to search.
      */
-    public void onItemClickEvent(View view) {
-
+    public void setEventsToSearchResults(String query) {
     }
 
     /**
-     * Starts the CategoryGroupPageActivity with the chosen subcategory.
-     *
-     * @param view
+     * Sets the events with all groups of the given category.
+     * @param category to filter
      */
-    public void onItemClickGroup(View view) {
-
+    public void setEventsFilteredByCategory(MutableLiveData<Category> category) {
     }
 
     /**
-     * Gets the chosen category.
-     * @return observable category.
+     * Sets the events with all groups of the given subcategory.
+     * @param subcategory to filter.
      */
-    public MutableLiveData<Category> getChosenCategory() {
-        return chosenCategory;
+    public void setEventsFilteredBySubcategory(MutableLiveData<Subcategory> subcategory) {
     }
 
     /**
-     * Sets the chosen category.
-     * @param chosenCategory to set.
+     * Sets the events to current user's list of participating events.
      */
-    public void setChosenCategory(MutableLiveData<Category> chosenCategory) {
-        this.chosenCategory = chosenCategory;
+    public void setEventsToParticipatingEvents() {
     }
 
-    /**
-     * Gets list of subcategories of the category.
-     * @return list of subcategories.
-     */
-    public List<Subcategory> getSubcategories() {
-    }
 
     /**
-     * Gets the name of the category
-     * @return name of the category
+     * Gets the list of groups.
+     * @return observable list of groups.
      */
-    public String getName() {
-    }
-
-    /**
-     * Creates a new group in the chosen category.
-     * @param name of the group to be created
-     * @param description of the group to be created
-     * @param imageUrl of the group to be created
-     */
-    public void createGroup(String name, String description, String imageUrl) {
-    }
-
-    /**
-     * Creates a new event in the chosen category.
-     * @param name of the event to be created
-     * @param description of the event to be created
-     * @param imageUrl of the event to be created
-     */
-    public void createEvent(String name, String description, String imageUrl) {
+    public MutableLiveData<List<Event>> getEvents() {
+        return events;
     }
 
 
