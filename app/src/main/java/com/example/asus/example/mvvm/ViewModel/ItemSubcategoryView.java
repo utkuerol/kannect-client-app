@@ -2,12 +2,12 @@ package com.example.asus.example.mvvm.ViewModel;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.content.Context;
+import android.view.View;
 
 import com.example.asus.example.mvvm.Model.Entities.Subcategory;
 import com.example.asus.example.mvvm.Model.Repository.CategoryRepository;
 
-import javax.naming.Context;
-import javax.swing.text.View;
 
 /**
  * ViewModel class for one specific subcategory, and is responsible for preparing and managing the data for Views,
@@ -52,7 +52,7 @@ public class ItemSubcategoryView extends ViewModel {
      * Gets the name of the subcategory.
      * @return
      */
-    public String getName() {
+    public String getName() {return null;
     }
 
     /**
@@ -70,7 +70,7 @@ public class ItemSubcategoryView extends ViewModel {
      * @param name of the event to be created.
      * @param description of the event to be created.
      * @param imageUrl of the event to be created.
-     *//
+     */
 
     public void createEvent(String name, String description, String imageUrl) {
     }

@@ -5,7 +5,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.asus.example.R;
 import com.example.asus.example.mvvm.Model.Entities.User;
@@ -17,31 +24,127 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.sun.xml.internal.ws.api.databinding.Databinding;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 
 public class LoginActivity extends AppCompatActivity {
 
     LoginViewModel viewModel = new LoginViewModel();
-    Databinding binding = DataBindingUtil.setContentView(this,R.layout.activity_login);
+    ActivityLoginBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_login);
+
+    //Google sign in api Client
     GoogleSignInClient mGoogleSignInClient;
-    GoogleSignInAccount account;
 
+    //Define Request code for Sign In
+    private int RC_SIGN_IN = 6;
 
-    @Override protected void onCreate(Bundle savedInstanceState) {
-        // set binding
-        // get and set user from intent
+    TextView textViewEmail;
+    TextView textViewPersonName;
+    ImageView imageViewProfilePic;
+    LinearLayout llProfileLayout;
 
+    //Logout Button declaration
+    Button buttonLogout;
+
+    //Sign in button Declaration
+    SignInButton signInButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        viewModel.invoke(binding.Email,binding.pass);
+        setContentView(R.layout.act1);
+
+        //Bind views
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        textViewEmail = findViewById(R.id.textViewEmail);
+        textViewPersonName = findViewById(R.id.textViewPersonName);
+        imageViewProfilePic = findViewById(R.id.imageViewProfilePic);
+        llProfileLayout = findViewById(R.id.llProfileLayout);
+        signInButton = findViewById(R.id.sign_in_button);
+        buttonLogout = findViewById(R.id.buttonLogout);
+
+        setSupportActionBar(toolbar);
+        //Build Google Sign in options
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
-        mGoogleSignInClient= GoogleSignIn.getClient(this, gso);
+        //get Sign in client
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        //get currently signed in user returns null if there is no logged in user
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        //update ui
+        updateUI(account);
+
 
     }
 
+    //Method to signIn
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    //method to sign out
+    private void signOut() {
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            updateUI(null);
+                        }
+                    }
+                });
+    }
+
+    //Handle sign in results
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+
+            // Signed in successfully, show authenticated UI.
+            updateUI(account);
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+
+            updateUI(null);
+        }
+    }
+
+    private void updateUI(GoogleSignInAccount account) {
+        //Account is not null then user is logged in
+        if (account != null) {
+            buttonLogout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    signOut();
+                }
+            });
+            signInButton.setVisibility(View.GONE);
+            buttonLogout.setVisibility(View.VISIBLE);
+            textViewEmail.setText(account.getEmail()+"|"+account.getFamilyName() + "|"+account.getGivenName());
+            textViewPersonName.setText(account.getDisplayName());
+        } else {
+            //user is not logged in
+            // Set the dimensions of the sign-in button.
+            signInButton.setSize(SignInButton.SIZE_WIDE);
+            signInButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    signIn();
+                }
+            });
+            signInButton.setVisibility(View.VISIBLE);
+            buttonLogout.setVisibility(View.GONE);
+            llProfileLayout.setVisibility(View.GONE);
+        }
+
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -53,46 +156,6 @@ public class LoginActivity extends AppCompatActivity {
             // a listener.
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
-        }
-    }
-
-    /**
-     * redirects to this activity
-     * @param context needed Application Information to launch this Activity.
-     * @return the Intent, which is used to redirect to this Activity.
-     */
-    public static Intent launchDetail(Context context, User user) {
-        // redirects from parameter context to this activity, takes user as parameter
-        return null;
-    }
-
-
-    /**
-     * Method allowing the user to signin
-     */
-    private void signIn() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
-
-    /**
-     * handles the Task from the GoogleSignInAccount
-     *
-     * @param completedTask Google Task API
-     */
-    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
-        try {
-            account  = completedTask.getResult(ApiException.class);
-
-            // Signed in successfully, show authenticated UI.
-
-
-            //invoke the VM
-            viewModel.invoke(account);
-
-
-        } catch (ApiException e) {
-
         }
     }
 }

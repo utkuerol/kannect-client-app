@@ -3,14 +3,13 @@ package com.example.asus.example.mvvm.ViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
+import android.view.View;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.Entities.Subcategory;
 import com.example.asus.example.mvvm.Model.Repository.CategoryRepository;
 
 import java.util.List;
-
-import javax.swing.text.View;
 
 /**
  * ViewModel class for one specific category, and is responsible for preparing and managing the data for Views,
@@ -22,7 +21,7 @@ public class ItemCategoryViewModel extends ViewModel {
 
     private MutableLiveData<Category> chosenCategory;
     private Context context;
-    private CategoryRepository categoryRepository:
+    private CategoryRepository categoryRepository;
 
     /**
      * Creates an instance with the chosenCategory and the application context.
@@ -73,14 +72,14 @@ public class ItemCategoryViewModel extends ViewModel {
      * Gets list of subcategories of the category.
      * @return list of subcategories.
      */
-    public List<Subcategory> getSubcategories() {
+    public List<Subcategory> getSubcategories() { return null;
     }
 
     /**
      * Gets the name of the category
      * @return name of the category
      */
-    public String getName() {
+    public String getName() { return null;
     }
 
     /**
