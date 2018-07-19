@@ -8,10 +8,10 @@
 
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/myEventsRV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/myGroupsRV"
-        tools:listitem="@layout/item_group">
+        tools:listitem="@layout/item_event">
 
     </android.support.v7.widget.RecyclerView>
 

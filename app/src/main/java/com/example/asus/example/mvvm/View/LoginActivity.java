@@ -1,8 +1,6 @@
 package com.example.asus.example.mvvm.View;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,10 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.asus.example.R;
-import com.example.asus.example.mvvm.Model.Entities.User;
-
-
-import com.example.asus.example.mvvm.Model.Repository.AccountRepository;
 import com.example.asus.example.mvvm.ViewModel.LoginViewModel;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -128,6 +122,7 @@ public class LoginActivity extends AppCompatActivity {
             signInButton.setVisibility(View.GONE);
             buttonLogout.setVisibility(View.VISIBLE);
             textViewEmail.setText(account.getEmail()+"|"+account.getFamilyName() + "|"+account.getGivenName());
+
             textViewPersonName.setText(account.getDisplayName());
         } else {
             //user is not logged in

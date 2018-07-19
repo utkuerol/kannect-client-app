@@ -2,7 +2,6 @@ package com.example.asus.example.mvvm.Model.Repository;
 
 import android.arch.lifecycle.MutableLiveData;
 
-
 import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.WebServices.ServiceAPI;
 import com.example.asus.example.mvvm.Model.WebServices.ServiceGenerator;
@@ -41,6 +40,7 @@ public class EventRepository {
             @Override
             public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
                 result.setValue(response.body());
+
             }
 
             @Override
