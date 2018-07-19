@@ -10,7 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.ViewModel.ItemGroupViewModel;
 
-public class NewGroupePostActivity extends AppCompatActivity {
+public class NewGroupPostActivity extends AppCompatActivity {
 
     private ItemGroupViewModel viewModel;
     //binding
@@ -20,7 +20,7 @@ public class NewGroupePostActivity extends AppCompatActivity {
      * creates a newPostActivity
      * @param viewModel addes the needed changes in the model and in the view
      */
-    public NewGroupePostActivity(ItemGroupViewModel viewModel) { //add the binding to the constructor manually :binding not possible without xml
+    public NewGroupPostActivity(ItemGroupViewModel viewModel) { //add the binding to the constructor manually :binding not possible without xml
         this.viewModel = viewModel;
     }
 

@@ -26,4 +26,6 @@
     <string name="search">Suche</string>
     <string name="kannect">KAnnect</string>
     <string name="entdecken">Entecken</string>
+    <string name="editGroup">Gruppe bearbeiten</string>
+    <string name="deleteGroup">Gruppe löschen</string>
 </resources>

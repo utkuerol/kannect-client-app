@@ -43,11 +43,11 @@ public interface ServiceAPI {
 
     /**
      * service to delete a given event
-     * @param event event to be deleted
+     * @param eventID event to be deleted
      * @return void, no response needed
      */
     @DELETE("/delete")
-    Call<Event> deleteEvent(@Body Event event);
+    Call<Event> deleteEvent(long eventID);
 
     /**
      * service to edit an existing event
@@ -75,11 +75,11 @@ public interface ServiceAPI {
 
     /**
      * service to delete a Group
-     * @param group to be deleted
+     * @param groupID group to be deleted
      * @return void, no response needed
      */
     @DELETE("/deleteGroup")
-    Call<Group> deleteGroup(@Body Group group);
+    Call<Group> deleteGroup(long groupID);
 
     /**
      * service to edit a Group
@@ -91,19 +91,19 @@ public interface ServiceAPI {
 
     /**
      * service to get all received messages
-     * @param user of which all received message are asked for
+     * @param userID user of which all received message are asked for
      * @return List of all received Messages as a Response Object
      */
     @GET("/receivedMessages")
-    Call<List<Message>> getReceivedMessages(@Body User user);
+    Call<List<Message>> getReceivedMessages(long userID);
 
     /**
      * service to to get all sent Messages by a user
-     * @param user of which all sent Messages are asked for
+     * @param userID user of which all sent Messages are asked for
      * @return List of all sent Messages as a Repsonse Object
      */
     @GET("/sentMessages")
-    Call<List<Message>> getSentMessages(@Body User user);
+    Call<List<Message>> getSentMessages(long userID);
 
     /**
      * service to send  a message
@@ -115,27 +115,27 @@ public interface ServiceAPI {
 
     /**
      * service to get all Posts for a Users feed
-     * @param user which Feed is asked for
+     * @param userID user which Feed is asked for
      * @return List of all Posts for the Users feed as a Response object
      */
     @GET("/personalFeed")
-    Call<List<Post>> getPersonalFeed(@Body User user);
+    Call<List<Post>> getPersonalFeed(long userID);
 
     /**
      * service to get all Posts for a Groups feed
-     * @param group which Feed is asked for
+     * @param groupID group which Feed is asked for
      * @return List of all Posts for the Groups feed as a Response Object
      */
     @GET("/groupFeed")
-    Call<List<Post>> getGroupFeed(@Body Group group);
+    Call<List<Post>> getGroupFeed(long groupID);
 
     /**
      * service to get all Posts for a Events feed
-     * @param event which feed is asked for
+     * @param eventID event which feed is asked for
      * @return List of all Posts for the Groups as a Response Object
      */
     @GET("/eventFeed")
-    Call<List<Post>>  getEventFeed(@Body Event event);
+    Call<List<Post>>  getEventFeed(long eventID);
 
     /**
      * service to save a new Post in the server
@@ -147,11 +147,11 @@ public interface ServiceAPI {
 
     /**
      * service to delete an existing Post
-     * @param post to be deleted
+     * @param postID post to be deleted
      * @return void, no response needed
      */
     @DELETE("/deletePost")
-    Call<Post> deletePost(@Body Post post);
+    Call<Post> deletePost(long postID);
 
     /**
      * service to edit an existing Post

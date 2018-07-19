@@ -3,6 +3,7 @@ package com.example.asus.example.mvvm.ViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
+import android.view.View;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.Entities.Group;
@@ -12,7 +13,6 @@ import com.example.asus.example.mvvm.Model.Repository.GroupRepository;
 
 import java.util.List;
 
-import javax.swing.text.View;
 
 /**
  * ViewModel class for one specific group, and is responsible for preparing and managing the data for Views,

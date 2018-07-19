@@ -52,7 +52,7 @@ public class ItemSubcategoryView extends ViewModel {
      * Gets the name of the subcategory.
      * @return
      */
-    public String getName() {return null;
+    public String getName() {
     }
 
     /**
@@ -70,7 +70,7 @@ public class ItemSubcategoryView extends ViewModel {
      * @param name of the event to be created.
      * @param description of the event to be created.
      * @param imageUrl of the event to be created.
-     */
+     *//
 
     public void createEvent(String name, String description, String imageUrl) {
     }

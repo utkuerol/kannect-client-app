@@ -6,6 +6,9 @@ android {
         enabled = true
     }
     defaultConfig {
+        vectorDrawables.useSupportLibrary = true
+    }
+    defaultConfig {
         applicationId "com.example.asus.example"
         minSdkVersion 15
         targetSdkVersion 28
