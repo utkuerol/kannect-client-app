@@ -1,17 +1,14 @@
 package com.example.asus.example.mvvm.Model.WebServices;
 
 
-
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.Entities.Comment;
 import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.Group;
-import com.example.asus.example.mvvm.Model.Entities.Message;
 import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
 
 import java.util.List;
-
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -49,13 +46,6 @@ public interface ServiceAPI {
     @DELETE("/delete")
     Call<Event> deleteEvent(long eventID);
 
-    /**
-     * service to edit an existing event
-     * @param editedEvent  edited Event
-     * @return void, no response needed
-     */
-    @POST("/edit")
-    Call<Event> editEvent(@Body Event editedEvent);
 
     /**
      * service to find Groups by given search suery
@@ -81,37 +71,6 @@ public interface ServiceAPI {
     @DELETE("/deleteGroup")
     Call<Group> deleteGroup(long groupID);
 
-    /**
-     * service to edit a Group
-     * @param editedGroup the edited Group
-     * @return void, no response needed
-     */
-    @POST("/editGroup")
-    Call<Group> editGroup(@Body Group editedGroup);
-
-    /**
-     * service to get all received messages
-     * @param userID user of which all received message are asked for
-     * @return List of all received Messages as a Response Object
-     */
-    @GET("/receivedMessages")
-    Call<List<Message>> getReceivedMessages(long userID);
-
-    /**
-     * service to to get all sent Messages by a user
-     * @param userID user of which all sent Messages are asked for
-     * @return List of all sent Messages as a Repsonse Object
-     */
-    @GET("/sentMessages")
-    Call<List<Message>> getSentMessages(long userID);
-
-    /**
-     * service to send  a message
-     * @param message Message which will be send
-     * @return void, no response needed
-     */
-    @POST("/sendMessage")
-    Call<Message> sendMessage(@Body Message message);
 
     /**
      * service to get all Posts for a Users feed
@@ -153,13 +112,6 @@ public interface ServiceAPI {
     @DELETE("/deletePost")
     Call<Post> deletePost(long postID);
 
-    /**
-     * service to edit an existing Post
-     * @param editedPost Post with wanted changes
-     * @return void, no response needed
-     */
-    @POST("/editPost")
-    Call<Post>  editPost(@Body Post editedPost);
 
     /**
      * service to like a Post
@@ -183,14 +135,12 @@ public interface ServiceAPI {
 
     /**
      * service to comment a Post
-     * @param post which was commented by user
-     * @param user user which commented a post
      * @param comment by the user
      * @return void, no response needed
      */
-    @Multipart
+
     @POST("/commentPost")
-    Call<ResponseBody> commentPost(@Part Post post, @Part User user, @Part Comment comment);
+    Call<Comment> commentPost(@Body Comment comment);
 
     /**
      * service to get Users by a given Search Query of a User

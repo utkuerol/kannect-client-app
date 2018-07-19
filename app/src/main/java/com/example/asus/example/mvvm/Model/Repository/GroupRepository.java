@@ -54,6 +54,19 @@ public class GroupRepository {
      * @param group created Group
      */
     public void createGroup(Group group) {
+        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        Call<Group> call = client.createGroup(group);
+        call.enqueue(new Callback<Group>() {
+            @Override
+            public void onResponse(Call<Group> call, Response<Group> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Group> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
 
     }
 
@@ -61,21 +74,26 @@ public class GroupRepository {
     /**
      * Method to notify Server that an existing Group was deleted. This Method transfers the Group object to the server.
      * It uses the ServiceGenerator class to create a service via Retrofit2 with the help of the ServiceAPI.
-     * @param group which will be deleted
+     * @param groupID which will be deleted
      */
-    public void deleteGroup(Group group) {
+    public void deleteGroup(long groupID) {
+        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        Call<Group> call = client.deleteGroup(groupID);
+        call.enqueue(new Callback<Group>() {
+            @Override
+            public void onResponse(Call<Group> call, Response<Group> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Group> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
 
     }
 
 
-    /**
-     * Method to notify Server that an existing Group was edited. This Method transfers the edited Group to the server.
-     * It uses the ServiceGenerator class to create a service via Retrofit2 with the help of the ServiceAPI.
-     * @param group edited Group
-     */
-    public void editGroup(Group group) {
-
-    }
 
 
 

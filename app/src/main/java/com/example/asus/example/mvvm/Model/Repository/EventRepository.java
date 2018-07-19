@@ -59,7 +59,6 @@ public class EventRepository {
      */
     public void createEvent(Event event) {
 
-        //Todo
         ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
         Call<Event> call = client.createEvent(event);
         call.enqueue(new Callback<Event>() {
@@ -78,21 +77,25 @@ public class EventRepository {
     /**
      * Method to notify Server that an existing Event was deleted. This Method transfers the Event object to the server.
      * It uses the ServiceGenerator class to create a service via Retrofit2 with the help of the ServiceAPI.
-     * @param event which will be deleted
+     * @param eventID which will be deleted
      */
-    public void deleteEvent(Event event) {
+    public void deleteEvent(long eventID) {
+
+        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        Call<Event> call = client.deleteEvent(eventID);
+        call.enqueue(new Callback<Event>() {
+            @Override
+            public void onResponse(Call<Event> call, Response<Event> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Event> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
 
     }
-
-    /**
-     * Method to notify Server that an existing Event was edited. This Method transfers the edited Event to the server.
-     * It uses the ServiceGenerator class to create a service via Retrofit2 with the help of the ServiceAPI.
-     * @param event edited Event
-     */
-    public void editEvent(Event event) {
-
-    }
-
 
 
 }

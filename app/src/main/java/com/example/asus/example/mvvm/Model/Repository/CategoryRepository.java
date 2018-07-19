@@ -3,7 +3,6 @@ package com.example.asus.example.mvvm.Model.Repository;
 
 import android.arch.lifecycle.MutableLiveData;
 
-
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.WebServices.ServiceAPI;
 import com.example.asus.example.mvvm.Model.WebServices.ServiceGenerator;
@@ -53,8 +52,7 @@ public class CategoryRepository {
 
         @Override
         public void onFailure(Call<List<Category>> call, Throwable t) {
-            //Todo
-            //error codes mit if testen und dann sagen was gemacht werden soll
+            t.printStackTrace();
         }
     });
 
