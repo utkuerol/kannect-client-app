@@ -3,6 +3,7 @@ package com.example.asus.example.mvvm.ViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
+import android.view.View;
 
 import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.Group;
@@ -11,7 +12,6 @@ import com.example.asus.example.mvvm.Model.Entities.User;
 
 import java.util.List;
 
-import javax.swing.text.View;
 
 /**
  * ViewModel class for one specific user, and is responsible for preparing and managing the data for Views,
@@ -30,7 +30,7 @@ public class ItemUserViewModel extends ViewModel {
      * @param user    needed to be shown.
      * @param context of the application.
      */
-    public ItemUserViewModel(User user, Context context) {
+    public ItemUserViewModel(MutableLiveData<User> user, Context context) {
         this.chosenUser = user;
         this.context = context;
     }
@@ -65,8 +65,8 @@ public class ItemUserViewModel extends ViewModel {
      * @return the name of the User
      */
     public String getName() {
-
-    }
+        return null;
+        }
 
 
     /**
@@ -74,7 +74,7 @@ public class ItemUserViewModel extends ViewModel {
      * @return the Email of the User.
      */
     public String getEmail() {
-
+        return null;
     }
 
 
@@ -83,7 +83,7 @@ public class ItemUserViewModel extends ViewModel {
      * @return the imageUrl
      */
     public String getImageUrl() {
-
+        return null;
     }
 
 
@@ -92,7 +92,7 @@ public class ItemUserViewModel extends ViewModel {
      * @return List of Subscriptions
      */
     public List<User> getSubscriptions() {
-
+        return null;
     }
 
 
@@ -101,7 +101,7 @@ public class ItemUserViewModel extends ViewModel {
      * @return List of Subscribers
      */
     public List<User> getSubscribers() {
-
+        return null;
     }
 
     /**
@@ -109,6 +109,8 @@ public class ItemUserViewModel extends ViewModel {
      * @return list of groups
      */
     public List<Group> getJoinedGroups() {
+        return null;
+
     }
 
     /**
@@ -116,6 +118,7 @@ public class ItemUserViewModel extends ViewModel {
      * @return list of events
      */
     public List<Event> getParticipatedEvents() {
+        return null;
     }
 
     /**
@@ -123,6 +126,7 @@ public class ItemUserViewModel extends ViewModel {
      * @return
      */
     public List<Post> getUserProfile() {
+        return null;
     }
 
     /**
@@ -131,6 +135,8 @@ public class ItemUserViewModel extends ViewModel {
      * @return list of posts.
      */
     public List<Post> getPersonalFeed() {
+        return null;
+
     }
 
     /**
@@ -138,6 +144,7 @@ public class ItemUserViewModel extends ViewModel {
      * @return boolean result
      */
     public boolean isCurrentUsersProfile() {
+        return false;
     }
 
     /**
@@ -150,6 +157,7 @@ public class ItemUserViewModel extends ViewModel {
      * Unsubscribes the chosenUser by the current user.
      */
     public void unsubscribeUser() {
+
     }
 
     /**

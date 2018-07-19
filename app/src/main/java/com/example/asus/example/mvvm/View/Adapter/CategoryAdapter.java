@@ -61,7 +61,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     /**
      * sets the list of groups which will be shown in the ui.
-     * @param categoryList list of Categories
+     * @param CategorysList list of Categories
      */
     public void setCategoryList(List<Category> CategorysList) {
         this.categoryList = CategorysList;
