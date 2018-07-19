@@ -1,7 +1,10 @@
 package com.example.asus.example.mvvm.View;
 
+import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
@@ -9,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.User;
+import com.example.asus.example.mvvm.View.Adapter.PostAdapter;
 import com.example.asus.example.mvvm.ViewModel.PostViewModel;
 
 /**
@@ -16,13 +20,12 @@ import com.example.asus.example.mvvm.ViewModel.PostViewModel;
  */
 public class PersonalFeedActivity extends AppCompatActivity {
 
-    PostViewModel viewModel;
-
+    private PostViewModel viewModel;
+    private PostAdapter adapter;
 
     /**
      * redirects to this activity
      * @param context needed Application Information to launch this Activity.
-
      * @return the Intent, which is used to redirect to this Activity.
      */
     public static Intent launchWithDetails(Context context) {
@@ -41,5 +44,6 @@ public class PersonalFeedActivity extends AppCompatActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
+        viewModel = ViewModelProviders.of(this).get(PostViewModel.class);
     }
 }

@@ -9,6 +9,8 @@ import com.example.asus.example.mvvm.Model.WebServices.ServiceGenerator;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Repository which handles all the requests from the Viewmodel, regarding Group requests.
@@ -27,7 +29,21 @@ public class GroupRepository {
      * @return List of all the Groups which match the search query as a MutableLiveData object
      */
     public MutableLiveData<List<Group>> getGroups(String searchQuery) {
-        return null;
+        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        Call<List<Group>> call = client.getSearchGroups(searchQuery);
+        final MutableLiveData<List<Group>> result = new MutableLiveData<>();
+
+        call.enqueue(new Callback<List<Group>>() {
+            @Override
+            public void onResponse(Call<List<Group>> call, Response<List<Group>> response) {
+                result.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Group>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
 

@@ -1,5 +1,7 @@
 package com.example.asus.example.mvvm.Model.Entities;
 
+import com.example.asus.example.mvvm.Model.Entities.User;
+
 import java.util.Date;
 
 /**

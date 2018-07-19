@@ -45,7 +45,7 @@ public class EventRepository {
 
             @Override
             public void onFailure(Call<List<Event>> call, Throwable t) {
-                //Todo
+                t.printStackTrace();
             }
         });
         return result;
@@ -58,8 +58,21 @@ public class EventRepository {
      * @param event created Event
      */
     public void createEvent(Event event) {
+
         //Todo
-        // Wie greift man auf eingeloggten User zu??
+        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        Call<Event> call = client.createEvent(event);
+        call.enqueue(new Callback<Event>() {
+            @Override
+            public void onResponse(Call<Event> call, Response<Event> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Event> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
     /**

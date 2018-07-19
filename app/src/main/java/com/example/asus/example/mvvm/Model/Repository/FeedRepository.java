@@ -12,6 +12,8 @@ import com.example.asus.example.mvvm.Model.WebServices.ServiceGenerator;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Repository which handles all the Request from the ViewModel, regarding Feed requests.
@@ -32,6 +34,23 @@ public class FeedRepository {
      * @return List of all the Posts, which belong to the Users feed as a MutableLiveData object
      */
     public MutableLiveData<List<Post>> getPersonalFeed(User user) {
+        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        Call<List<Post>> call = client.getPersonalFeed(user);
+        final MutableLiveData<List<Post>> result = new MutableLiveData<>();
+
+        call.enqueue(new Callback<List<Post>>() {
+            @Override
+            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+                result.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Post>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
+
         return null;
     }
 
@@ -42,7 +61,23 @@ public class FeedRepository {
      * @return List of all the Posts, which belong to the Groups feed as a MutableLiveData object
      */
     public MutableLiveData<List<Post>> getGroupFeed(Group group) {
-        return null;
+        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        Call<List<Post>> call = client.getGroupFeed(group);
+        final MutableLiveData<List<Post>> result = new MutableLiveData<>();
+
+        call.enqueue(new Callback<List<Post>>() {
+            @Override
+            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+                result.setValue(response.body());
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Post>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+        return result;
     }
 
     /**

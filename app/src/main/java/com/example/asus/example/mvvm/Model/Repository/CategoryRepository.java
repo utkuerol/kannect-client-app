@@ -54,6 +54,7 @@ public class CategoryRepository {
         @Override
         public void onFailure(Call<List<Category>> call, Throwable t) {
             //Todo
+            //error codes mit if testen und dann sagen was gemacht werden soll
         }
     });
 

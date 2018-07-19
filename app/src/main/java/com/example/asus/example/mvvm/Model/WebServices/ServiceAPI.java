@@ -13,11 +13,14 @@ import com.example.asus.example.mvvm.Model.Entities.User;
 import java.util.List;
 
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 public interface ServiceAPI {
 
@@ -36,7 +39,7 @@ public interface ServiceAPI {
      * @return void, no response needed
      */
     @POST("/create")
-    Call<Void> createEvent(@Body Event event);
+    Call<Event> createEvent(@Body Event event);
 
     /**
      * service to delete a given event
@@ -44,7 +47,7 @@ public interface ServiceAPI {
      * @return void, no response needed
      */
     @DELETE("/delete")
-    Call<Void> deleteEvent(@Body Event event);
+    Call<Event> deleteEvent(@Body Event event);
 
     /**
      * service to edit an existing event
@@ -52,7 +55,7 @@ public interface ServiceAPI {
      * @return void, no response needed
      */
     @POST("/edit")
-    Call<Void> editEvent(@Body Event editedEvent);
+    Call<Event> editEvent(@Body Event editedEvent);
 
     /**
      * service to find Groups by given search suery
@@ -68,7 +71,7 @@ public interface ServiceAPI {
      * @return void, no response needed
      */
     @POST("/createGroup")
-    Call<Void> createGroup(@Body Group group);
+    Call<Group> createGroup(@Body Group group);
 
     /**
      * service to delete a Group
@@ -76,7 +79,7 @@ public interface ServiceAPI {
      * @return void, no response needed
      */
     @DELETE("/deleteGroup")
-    Call<Void> deleteGroup(@Body Group group);
+    Call<Group> deleteGroup(@Body Group group);
 
     /**
      * service to edit a Group
@@ -84,7 +87,7 @@ public interface ServiceAPI {
      * @return void, no response needed
      */
     @POST("/editGroup")
-    Call<Void> editGroup(@Body Group editedGroup);
+    Call<Group> editGroup(@Body Group editedGroup);
 
     /**
      * service to get all received messages
@@ -108,7 +111,7 @@ public interface ServiceAPI {
      * @return void, no response needed
      */
     @POST("/sendMessage")
-    Call<Void> sendMessage(@Body Message message);
+    Call<Message> sendMessage(@Body Message message);
 
     /**
      * service to get all Posts for a Users feed
@@ -140,7 +143,7 @@ public interface ServiceAPI {
      * @return void, no response needed
      */
     @POST("/post")
-    Call<Void> createPost(@Body Post post);
+    Call<Post> createPost(@Body Post post);
 
     /**
      * service to delete an existing Post
@@ -148,7 +151,7 @@ public interface ServiceAPI {
      * @return void, no response needed
      */
     @DELETE("/deletePost")
-    Call<Void> deletePost(@Body Post post);
+    Call<Post> deletePost(@Body Post post);
 
     /**
      * service to edit an existing Post
@@ -156,7 +159,7 @@ public interface ServiceAPI {
      * @return void, no response needed
      */
     @POST("/editPost")
-    Call<Void>  editPost(@Body Post editedPost);
+    Call<Post>  editPost(@Body Post editedPost);
 
     /**
      * service to like a Post
@@ -164,17 +167,19 @@ public interface ServiceAPI {
      * @param user which liked the Post
      * @return void, no response needed
      */
+    @Multipart
     @POST("/likePost")
-    Call<Void> likePost(@Body Post post, @Body User user);
+    Call<ResponseBody> likePost(@Part Post post, @Part User user);
 
     /**
-     * service to indicate that Userr unliked a Post
+     * service to indicate that User unliked a Post
      * @param post which was unliked
      * @param user which unliked a Post
      * @return void, no response needed
      */
+    @Multipart
     @POST("/unlikePost")
-    Call<Void> unlikePost(@Body Post post, @Body User user);
+    Call<ResponseBody> unlikePost(@Part Post post, @Part User user);
 
     /**
      * service to comment a Post
@@ -183,8 +188,9 @@ public interface ServiceAPI {
      * @param comment by the user
      * @return void, no response needed
      */
+    @Multipart
     @POST("/commentPost")
-    Call<Void> commentPost(@Body Post post, @Body User user, @Body Comment comment);
+    Call<ResponseBody> commentPost(@Part Post post, @Part User user, @Part Comment comment);
 
     /**
      * service to get Users by a given Search Query of a User
@@ -200,8 +206,9 @@ public interface ServiceAPI {
      * @param subscribed User who was subscribed
      * @return void, no response needed
      */
+    @Multipart
     @POST("/subscribe")
-    Call<Void> subscribeUser(@Body User subscriber, @Body User subscribed);
+    Call<ResponseBody> subscribeUser(@Part User subscriber, @Part User subscribed);
 
     /**
      * service to indicate to the server that a user unsubscribed to another user
@@ -209,8 +216,9 @@ public interface ServiceAPI {
      * @param subscribed User who was unsubscribed
      * @return void, no response needed
      */
+    @Multipart
     @POST("/unsubscribe")
-    Call<Void> unsubscribeUser(@Body User subscriber, @Body User subscribed);
+    Call<ResponseBody> unsubscribeUser(@Part User subscriber, @Part User subscribed);
 
     /**
      * service to indicate to the server that a user joint a group
@@ -218,8 +226,9 @@ public interface ServiceAPI {
      * @param group which was joined by the user
      * @return void, no response needed
      */
+    @Multipart
     @POST("/joinGroup")
-    Call<Void> joinGroup(@Body User user, @Body Group group);
+    Call<ResponseBody> joinGroup(@Part User user, @Part Group group);
 
     /**
      * service to indicate to the server that a user left a group
@@ -227,8 +236,9 @@ public interface ServiceAPI {
      * @param group which was left by the user
      * @return void, no response needed
      */
+    @Multipart
     @POST("/leaveGroup")
-    Call<Void> leaveGroup(@Body User user, @Body Group group);
+    Call<ResponseBody> leaveGroup(@Part User user, @Part Group group);
 
     /**
      * service to indicate to the server that a user wants to participate in an Event
@@ -236,8 +246,9 @@ public interface ServiceAPI {
      * @param event which the user wants to participate in
      * @return void, no response needed
      */
+    @Multipart
     @POST("/participateInEvent")
-    Call<Void> participateInEvent(@Body User user, @Body Event event);
+    Call<ResponseBody> participateInEvent(@Part User user, @Part Event event);
 
     /**
      * service to indicate to the server that a user wants to leave an Event
@@ -245,8 +256,9 @@ public interface ServiceAPI {
      * @param event which the user wants to leave
      * @return void, no response needed
      */
+    @Multipart
     @POST("/leaveEvent")
-    Call<Void> leaveEvent(@Body User user, @Body Event event);
+    Call<ResponseBody> leaveEvent(@Part User user, @Part Event event);
 
     /**
      * service to get Categories by given search query

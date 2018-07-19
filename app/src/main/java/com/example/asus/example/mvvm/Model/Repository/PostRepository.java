@@ -2,6 +2,7 @@ package com.example.asus.example.mvvm.Model.Repository;
 
 import com.example.asus.example.mvvm.Model.Entities.Comment;
 import com.example.asus.example.mvvm.Model.Entities.Post;
+import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.WebServices.ServiceAPI;
 import com.example.asus.example.mvvm.Model.WebServices.ServiceGenerator;
 
@@ -47,7 +48,9 @@ public class PostRepository {
      * It uses the ServiceGenerator class to create a service via Retrofit2 with the help of the ServiceAPI.
      * @param post which was liked.
      */
-    public void likePost(Post post) {}
+    public void likePost(Post post, User user) {
+
+    }
 
     /**
      * Method to indicate to the server, that a Post was unliked by an User. Sends Post Object to the server.

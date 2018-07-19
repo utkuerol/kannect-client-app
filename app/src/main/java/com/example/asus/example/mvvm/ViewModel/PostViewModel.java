@@ -4,8 +4,9 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 
+
 import com.example.asus.example.mvvm.Model.Entities.Post;
-import com.example.asus.example.mvvm.Model.Repository.FeedRepository;
+import com.example.asus.example.mvvm.Model.Entities.User;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class PostViewModel extends ViewModel {
 
     private MutableLiveData<List<Post>> personalFeed;
     private Context context;
-
+    private User loggedInUser;
     private FeedRepository feedRepository;
 
     public PostViewModel(Context context) {
@@ -24,5 +25,11 @@ public class PostViewModel extends ViewModel {
         MutableLiveData<List<Post>> pF = new MutableLiveData<List<Post>>();
         this.personalFeed = pF;
     }
+
+ public void getPersonalFeed() {
+        personalFeed = feedRepository.getPersonalFeed(loggedInUser);
+
+
+ }
 
 }
