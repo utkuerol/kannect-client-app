@@ -34,7 +34,7 @@ public class UserRepository {
      * @return List of Users, which match the Search Query, as a MutableLiveData object.
      */
     public MutableLiveData<List<User>> getUsers(String searchQuery) {
-        MutableLiveData<List<User>> result = new MutableLiveData<>();
+        final MutableLiveData<List<User>> result = new MutableLiveData<>();
         ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
         Call<List<User>> call = client.getSearchUsers(searchQuery);
         call.enqueue(new Callback<List<User>>() {
@@ -48,6 +48,7 @@ public class UserRepository {
                 t.printStackTrace();
             }
         });
+        return result;
     }
 
     /**

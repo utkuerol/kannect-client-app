@@ -44,6 +44,7 @@ public class GroupRepository {
                 t.printStackTrace();
             }
         });
+        return result;
     }
 
 

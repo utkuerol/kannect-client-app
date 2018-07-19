@@ -99,5 +99,6 @@ public class FeedRepository {
                 t.printStackTrace();
             }
         });
+        return result;
     }
 }
