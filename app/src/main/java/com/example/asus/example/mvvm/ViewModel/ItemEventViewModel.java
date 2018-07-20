@@ -3,6 +3,7 @@ package com.example.asus.example.mvvm.ViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
+import android.view.View;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.Entities.Event;
@@ -10,11 +11,12 @@ import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.Subcategory;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.Repository.EventRepository;
+import com.example.asus.example.mvvm.Model.Repository.FeedRepository;
+import com.example.asus.example.mvvm.View.EventFeedActivity;
 
 import java.util.Date;
 import java.util.List;
 
-import javax.swing.text.View;
 
 /**
  * ViewModel class for one specific event, and is responsible for preparing and managing the data for Views,
@@ -26,7 +28,9 @@ public class ItemEventViewModel extends ViewModel {
 
     private MutableLiveData<Event> event;
     private Context context;
+    private User currentUser;
     private EventRepository eventRepository;
+    private FeedRepository feedRepository;
 
     /**
      * creates an instance with the chosen event and application context.
@@ -60,7 +64,7 @@ public class ItemEventViewModel extends ViewModel {
      */
     public void onItemClick(View view) {
 
-        //context.startActivity(EventFeedActivity.launchWithDetails(view.getContext(), mChosenEvent));
+        context.startActivity(EventFeedActivity.launchWithDetails(view.getContext(), event.getValue()));
     }
 
     /**
@@ -68,7 +72,7 @@ public class ItemEventViewModel extends ViewModel {
      * @return name of the Event.
      */
     public String getName() {
-        return name;
+        return event.getValue().getName();
     }
 
 
@@ -77,7 +81,14 @@ public class ItemEventViewModel extends ViewModel {
      * @return the Date on which the Event will take place.
      */
     public Date getDate() {
-        return date;
+        return event.getValue().getDate();
+    }
+
+    /**
+     * @return date as string
+     */
+    public String getDateAsString() {
+        return event.getValue().getDate().toString();
     }
 
 
@@ -86,7 +97,7 @@ public class ItemEventViewModel extends ViewModel {
      * @return description of the Event.
      */
     public String getDescription() {
-        return description;
+        return event.getValue().getDescription();
     }
 
     /**
@@ -94,7 +105,7 @@ public class ItemEventViewModel extends ViewModel {
      * @return the Creator of the Event.
      */
     public User getCreator() {
-        return creator;
+        return event.getValue().getCreator();
     }
 
 
@@ -103,7 +114,7 @@ public class ItemEventViewModel extends ViewModel {
      * @return the Category this Events belongs to.
      */
     public Category getCategory() {
-        return category;
+        return event.getValue().getCategory();
     }
 
     /**
@@ -111,7 +122,7 @@ public class ItemEventViewModel extends ViewModel {
      * @return the Subcategory this Event belongs to.
      */
     public Subcategory getSubcategory() {
-        return subcategory;
+        return event.getValue().getSubcategory();
     }
 
 
@@ -120,7 +131,7 @@ public class ItemEventViewModel extends ViewModel {
      * @return the imageUrl of the profile picture.
      */
     public String getImageUrl() {
-        return imageUrl;
+        return event.getValue().getImageUrl();
     }
 
 
@@ -129,7 +140,7 @@ public class ItemEventViewModel extends ViewModel {
      * @return List of Participants
      */
     public List<User> getParticipants() {
-        return participants;
+        return event.getValue().getParticipants();
     }
 
     /**
@@ -137,6 +148,7 @@ public class ItemEventViewModel extends ViewModel {
      * @return list of posts.
      */
     public List<Post> getEventFeed() {
+        return feedRepository.getEventFeed(event.getValue()).getValue();
     }
 
     /**
@@ -144,6 +156,7 @@ public class ItemEventViewModel extends ViewModel {
      * @return boolean result
      */
     public boolean isCreator() {
+        return event.getValue().getCreator().getId() == currentUser.getId();
     }
 
     /**
@@ -151,6 +164,7 @@ public class ItemEventViewModel extends ViewModel {
      * @return boolean result
      */
     public boolean participatingThisEvent() {
+        return event.getValue().getParticipants().contains(currentUser);
     }
 
 
@@ -158,26 +172,22 @@ public class ItemEventViewModel extends ViewModel {
      * Participates in the event.
      */
     public void participateEvent() {
+        eventRepository.participateEvent(currentUser, event.getValue());
     }
 
     /**
      * Leaves the event
      */
     public void leaveEvent() {
+        eventRepository.leaveEvent(currentUser, event.getValue());
     }
 
-    /**
-     * Edits the event with the given parameters.
-     * @param newName to bet set.
-     * @param newDescription to be set.
-     */
-    public void editEvent(String newName, String newDescription) {
-    }
 
     /**
      * Deletes the event.
      */
     public void deleteEvent() {
+        eventRepository.deleteEvent(event.getValue());
     }
 
     /**
@@ -186,6 +196,7 @@ public class ItemEventViewModel extends ViewModel {
      * @param text for the post.
      */
     public void createPost(String text) {
+
     }
 
 

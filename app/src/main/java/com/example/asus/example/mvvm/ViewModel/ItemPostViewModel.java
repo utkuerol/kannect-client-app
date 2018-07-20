@@ -187,7 +187,7 @@ public class ItemPostViewModel extends ViewModel {
      * Deletes the post.
      */
     public void deletePost() {
-        postRepository.deletePost(post);
+        postRepository.deletePost(post.getValue());
     }
 
 

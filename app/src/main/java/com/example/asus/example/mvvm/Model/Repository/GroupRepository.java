@@ -3,11 +3,13 @@ package com.example.asus.example.mvvm.Model.Repository;
 import android.arch.lifecycle.MutableLiveData;
 
 import com.example.asus.example.mvvm.Model.Entities.Group;
+import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.WebServices.ServiceAPI;
 import com.example.asus.example.mvvm.Model.WebServices.ServiceGenerator;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -95,7 +97,51 @@ public class GroupRepository {
     }
 
 
+    /**
+     * Method to indicate to the server, that the User joined a Group. Sends a User and a Group object to the server.
+     * It uses the ServiceGenerator class to create a service via Retrofit2 with the help of the ServiceAPI.
+     *
+     * @param user  which joined a Group.
+     * @param group which the User left.
+     */
+    public void joinGroup(User user, Group group) {
+        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        Call<ResponseBody> call = client.joinGroup(user, group);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    /**
+     * Method to indicate to the server, that the User left a Group. Sends a user and a Group object to the server.
+     * It uses the ServiceGenerator class to create a service via Retrofit2 with the help of the ServiceAPI.
+     *
+     * @param user  who left a group.
+     * @param group which the User left.
+     */
+    public void leaveGroup(User user, Group group) {
+        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        Call<ResponseBody> call = client.leaveGroup(user, group);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
 
 
 

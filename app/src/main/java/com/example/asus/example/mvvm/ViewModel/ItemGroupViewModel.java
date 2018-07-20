@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.Entities.Group;
+import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.Subcategory;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.Repository.GroupRepository;
@@ -137,6 +138,10 @@ public class ItemGroupViewModel extends ViewModel {
      * @return boolean result
      */
     public boolean joinedThisGroup() {
+    }
+
+    public List<Post> getGroupFeed() {
+
     }
 
     /**

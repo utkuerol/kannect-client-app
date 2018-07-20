@@ -3,11 +3,13 @@ package com.example.asus.example.mvvm.Model.Repository;
 import android.arch.lifecycle.MutableLiveData;
 
 import com.example.asus.example.mvvm.Model.Entities.Event;
+import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.WebServices.ServiceAPI;
 import com.example.asus.example.mvvm.Model.WebServices.ServiceGenerator;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -95,6 +97,53 @@ public class EventRepository {
             }
         });
 
+    }
+
+
+    /**
+     * Method to indicate to the Server, that a User wants to participate in an Event. Sends a User and a Event object to the server.
+     * It uses the ServiceGenerator class to create a service via Retrofit2 with the help of the ServiceAPI.
+     *
+     * @param user  who wants to participate in an Event.
+     * @param event in which the User wants to participate in.
+     */
+    public void participateEvent(User user, Event event) {
+        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        Call<ResponseBody> call = client.participateInEvent(user, event);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    /**
+     * Method to indicate to the Server, that a User doesn´t want to participate in an Event anymore. Sends a User and an Event Object to the server.
+     * It uses the ServiceGenerator class to create a service via Retrofit2 with the help of the ServiceAPI.
+     *
+     * @param user  who wants to leave an Event
+     * @param event which the User wants to leave.
+     */
+    public void leaveEvent(User user, Event event) {
+        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        Call<ResponseBody> call = client.leaveEvent(user, event);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
 
