@@ -11,8 +11,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.asus.example.R;
+import com.example.asus.example.databinding.ActivityLoginBinding;
 import com.example.asus.example.mvvm.ViewModel.LoginViewModel;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -35,32 +37,17 @@ public class LoginActivity extends AppCompatActivity {
     //Define Request code for Sign In
     private int RC_SIGN_IN = 6;
 
-    TextView textViewEmail;
-    TextView textViewPersonName;
-    ImageView imageViewProfilePic;
-    LinearLayout llProfileLayout;
-
-    //Logout Button declaration
-    Button buttonLogout;
 
     //Sign in button Declaration
-    SignInButton signInButton;
+    SignInButton signInButton = binding.signInButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act1);
+        setContentView(R.layout.activity_login);
 
         //Bind views
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        textViewEmail = findViewById(R.id.textViewEmail);
-        textViewPersonName = findViewById(R.id.textViewPersonName);
-        imageViewProfilePic = findViewById(R.id.imageViewProfilePic);
-        llProfileLayout = findViewById(R.id.llProfileLayout);
-        signInButton = findViewById(R.id.sign_in_button);
-        buttonLogout = findViewById(R.id.buttonLogout);
 
-        setSupportActionBar(toolbar);
         //Build Google Sign in options
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -113,30 +100,11 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUI(GoogleSignInAccount account) {
         //Account is not null then user is logged in
         if (account != null) {
-            buttonLogout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    signOut();
-                }
-            });
-            signInButton.setVisibility(View.GONE);
-            buttonLogout.setVisibility(View.VISIBLE);
-            textViewEmail.setText(account.getEmail()+"|"+account.getFamilyName() + "|"+account.getGivenName());
-
-            textViewPersonName.setText(account.getDisplayName());
+            viewModel.invoke(account);
+            Intent i = new Intent(getApplicationContext(), PersonalFeedActivity.class);
+            startActivity(i);
         } else {
-            //user is not logged in
-            // Set the dimensions of the sign-in button.
-            signInButton.setSize(SignInButton.SIZE_WIDE);
-            signInButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    signIn();
-                }
-            });
-            signInButton.setVisibility(View.VISIBLE);
-            buttonLogout.setVisibility(View.GONE);
-            llProfileLayout.setVisibility(View.GONE);
+            Toast.makeText(getApplicationContext(), "Login Fehlgeschlagen", Toast.LENGTH_LONG).show();
         }
 
     }

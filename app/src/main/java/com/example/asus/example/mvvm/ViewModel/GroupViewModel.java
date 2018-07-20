@@ -14,7 +14,6 @@ import com.example.asus.example.mvvm.Model.Entities.User;
 
 import java.util.List;
 
-import javax.swing.text.View;
 
 /**
  * ViewModel class for Group, that is responsible for preparing and managing the data for Views,

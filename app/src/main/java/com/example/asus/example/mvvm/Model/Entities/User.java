@@ -22,7 +22,8 @@ public class User {
     private List<Event> createdEvents;
     private List<Comment> createdComments;
 
-
+    public User() {
+    }
 
     /**
      * Constructor with an id. The id is given by the Server-Site;
@@ -38,7 +39,6 @@ public class User {
      * @param createdGroups all the Groups, the User created.
      * @param createdEvents all the Events, the User created.
      * @param createdComments all the Comments, the User created.
-
      */
     public User(long id, String name, String email, String imageUrl, List<User> subscriptions, List<User> subscribers, List<Group> joinedGroups, List<Event> participatedEvents, List<Post> createdPosts, List<Group> createdGroups, List<Event> createdEvents, List<Comment> createdComments) {
         this.id = id;

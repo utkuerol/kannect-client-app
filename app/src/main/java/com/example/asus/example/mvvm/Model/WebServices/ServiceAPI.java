@@ -219,5 +219,14 @@ public interface ServiceAPI {
     Call<List<Category>> getCategories(String searchQuery);
 
 
+    /**
+     * service to get a user by mail
+     *
+     * @param userMail
+     * @return User By Mail
+     */
+    @GET("/getUserByMail")
+    Call<User> getLoginUser(String userName, String userMail, String userPicture, String userID);
+
 
 }

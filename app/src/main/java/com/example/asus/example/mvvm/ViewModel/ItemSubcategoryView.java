@@ -53,7 +53,7 @@ public class ItemSubcategoryView extends ViewModel {
      * @return
      */
     public String getName() {
-
+        return null;
     }
 
     /**
