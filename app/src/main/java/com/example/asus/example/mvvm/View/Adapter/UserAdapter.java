@@ -1,12 +1,15 @@
 package com.example.asus.example.mvvm.View.Adapter;
 
+import android.arch.lifecycle.MutableLiveData;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.example.asus.example.R;
+import com.example.asus.example.databinding.ItemUserBinding;
 import com.example.asus.example.mvvm.Model.Entities.User;
+import com.example.asus.example.mvvm.ViewModel.ItemUserViewModel;
 
 import java.util.Collections;
 import java.util.List;
@@ -87,11 +90,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserAdapterVie
          * @param user which will be bound.
          */
         void bindUser(User user) {
+            MutableLiveData<User> u = new MutableLiveData<User>();
+            u.setValue(user);
             if (mItemUserBinding.getUserViewModel() == null) {
                 mItemUserBinding.setUserViewModel(
-                        new ItemUserViewModel(user, itemView.getContext()));
+                        new ItemUserViewModel(u, itemView.getContext()));
             } else {
-                mItemUserBinding.getUserViewModel().setUser(user);
+                mItemUserBinding.getUserViewModel().setChosenUser(u);
             }
         }
     }

@@ -1,12 +1,15 @@
 package com.example.asus.example.mvvm.View.Adapter;
 
+import android.arch.lifecycle.MutableLiveData;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.example.asus.example.R;
+import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.Post;
+import com.example.asus.example.mvvm.ViewModel.ItemPostViewModel;
 
 import java.util.Collections;
 import java.util.List;
@@ -58,7 +61,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostAdapterVie
 
     /**
      * sets the list of groups which will be shown in the ui.
-     * @param postList list of posts
+     * @param postsList list of posts
      */
     public void setPostList(List<Post> postsList) {
         this.postsList = postsList;
@@ -86,9 +89,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostAdapterVie
          * @param post which will be bound.
          */
         void bindPost(Post post) {
+            MutableLiveData<Post> p = new MutableLiveData<>();
+            p.setValue(post);
             if (mItemPostBinding.getPostViewModel() == null) {
                 mItemPostBinding.setPostViewModel(
-                        new ItemPostViewModel(post, itemView.getContext()));
+                        new ItemPostViewModel(p, itemView.getContext()));
             } else {
                 mItemPostBinding.getPostViewModel().setPost(post);
             }

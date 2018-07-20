@@ -1,5 +1,6 @@
 package com.example.asus.example.mvvm.View.Adapter;
 
+import android.arch.lifecycle.MutableLiveData;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.ItemGroupBinding;
 import com.example.asus.example.mvvm.Model.Entities.Group;
+import com.example.asus.example.mvvm.ViewModel.ItemGroupViewModel;
 
 import java.util.Collections;
 import java.util.List;
@@ -60,7 +62,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupAdapter
 
     /**
      * sets the list of groups which will be shown in the ui.
-     * @param users list of groups
+     * @param GroupsList list of groups
      */
     public void setGroupList(List<Group> GroupsList) {
         this.groupsList = GroupsList;
@@ -76,7 +78,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupAdapter
         /**
          * Constructor.
          * Creates an GroupAdapterViewHolder object.
-         * @param itemGroupBinding the Binding object of the new GroupAdapterViewHolder.
+         * @param mItemGroupBinding the Binding object of the new GroupAdapterViewHolder.
          */
         public GroupAdapterViewHolder(ItemGroupBinding mItemGroupBinding) {
             super(mItemGroupBinding.itemGroup);
@@ -88,9 +90,11 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupAdapter
          * @param group which will be bound.
          */
         void bindGroup(Group group) {
+            MutableLiveData<Group> g = new MutableLiveData<>();
+            g.setValue(group);
             if (mItemGroupBinding.getGroupViewModel() == null) {
                 mItemGroupBinding.setGroupViewModel(
-                        new ItemGroupViewModel(group, itemView.getContext()));
+                        new ItemGroupViewModel(g, itemView.getContext()));
             } else {
                 mItemGroupBinding.getGroupViewModel().setGroup(group);
             }

@@ -68,6 +68,7 @@ public class ItemGroupViewModel extends ViewModel {
      * @return name
      */
     public String getName() {
+        return null;
     }
 
     /**
@@ -75,6 +76,7 @@ public class ItemGroupViewModel extends ViewModel {
      * @return description
      */
     public String getDescription() {
+        return null;
     }
 
     /**
@@ -82,7 +84,7 @@ public class ItemGroupViewModel extends ViewModel {
      * @return Creator of the Group.
      */
     public User getCreator() {
-        return creator;
+        return null;
     }
 
     /**
@@ -90,7 +92,7 @@ public class ItemGroupViewModel extends ViewModel {
      * @return Category this Group belongs to.
      */
     public Category getCategory() {
-        return category;
+        return null;
     }
 
     /**
@@ -98,7 +100,7 @@ public class ItemGroupViewModel extends ViewModel {
      * @return Subcategory this Group belongs to.
      */
     public Subcategory getSubcategory() {
-        return subcategory;
+        return null;
     }
 
     /**
@@ -106,7 +108,7 @@ public class ItemGroupViewModel extends ViewModel {
      * @return the imageUrl of this Group
      */
     public String getImageURl() {
-        return imageURl;
+        return null;
     }
 
     /**
@@ -114,7 +116,7 @@ public class ItemGroupViewModel extends ViewModel {
      * @return List of Members
      */
     public List<User> getMembers() {
-        return members;
+        return null;
     }
 
     /**
@@ -122,6 +124,7 @@ public class ItemGroupViewModel extends ViewModel {
      * @return boolean result
      */
     public boolean isCreator() {
+        return false;
     }
 
     /**
@@ -130,7 +133,7 @@ public class ItemGroupViewModel extends ViewModel {
      * @param creator Creator of the Group.
      */
     public void setCreator(User creator) {
-        this.creator = creator;
+        this.chosenGroup.getValue().setCreator(creator);
     }
 
     /**
@@ -138,10 +141,11 @@ public class ItemGroupViewModel extends ViewModel {
      * @return boolean result
      */
     public boolean joinedThisGroup() {
+        return false;
     }
 
     public List<Post> getGroupFeed() {
-
+        return null;
     }
 
     /**

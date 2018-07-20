@@ -32,6 +32,14 @@ public class ItemSubcategoryView extends ViewModel {
         this.context = context;
     }
 
+    public void setSubcategory(Subcategory sub) {
+        MutableLiveData<Subcategory> s = new MutableLiveData<Subcategory>();
+        s.setValue(sub);
+        this.subcategory = s;
+    }
+
+
+
     /**
      * Starts the SubcategoryEventPageActivity with the chosen subcategory.
      * @param view

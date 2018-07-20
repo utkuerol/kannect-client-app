@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.example.asus.example.R;
+import com.example.asus.example.databinding.ItemSubcategoryBinding;
 import com.example.asus.example.mvvm.Model.Entities.Subcategory;
+import com.example.asus.example.mvvm.ViewModel.ItemSubcategoryView;
 
 import java.util.Collections;
 import java.util.List;
@@ -34,7 +36,7 @@ public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.
      */
     @Override public SubcategoryAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ItemSubcategoryBinding itemSubcategoryBinding =
-                DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_Subcategory,
+                DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_subcategory,
                         parent, false);
         return new SubcategoryAdapterViewHolder(itemSubcategoryBinding);
     }
@@ -58,7 +60,7 @@ public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.
 
     /**
      * sets the list of groups which will be shown in the ui.
-     * @param subCategoryList list of messages
+     * @param subcategoryList list of messages
      */
     public void setSubcategoryList(List<Subcategory> subcategoryList) {
         this.subcategoryList = subcategoryList;
@@ -74,7 +76,7 @@ public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.
         /**
          * Constructor.
          * Creates a SubcategoryAdapterViewHolder object.
-         * @param ItemSubCategoryBinding the Binding object of the new SubcategoryAdapterViewHolder.
+         * @param itemSubcategoryBinding the Binding object of the new SubcategoryAdapterViewHolder.
          */
         public SubcategoryAdapterViewHolder(ItemSubcategoryBinding itemSubcategoryBinding) {
             super(itemSubcategoryBinding.itemSubcategory);
@@ -89,7 +91,7 @@ public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.
         void bindSubcategory(Subcategory subcategory) {
             if (mItemSubcategoryBinding.getSubcategoryViewModel() == null) {
                 mItemSubcategoryBinding.setSubcategoryViewModel(
-                        new ItemSubcategoryViewModel(subcategory, itemView.getContext()));
+                        new ItemSubcategoryView(subcategory, itemView.getContext()));
             } else {
                 mItemSubcategoryBinding.getSubcategoryViewModel().setSubcategory(subcategory);
             }

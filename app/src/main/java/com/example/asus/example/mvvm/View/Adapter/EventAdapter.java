@@ -1,5 +1,6 @@
 package com.example.asus.example.mvvm.View.Adapter;
 
+import android.arch.lifecycle.MutableLiveData;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +9,8 @@ import android.view.ViewGroup;
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.ItemEventBinding;
 import com.example.asus.example.mvvm.Model.Entities.Event;
+import com.example.asus.example.mvvm.Model.Entities.Group;
+import com.example.asus.example.mvvm.ViewModel.ItemEventViewModel;
 
 import java.util.Collections;
 import java.util.List;
@@ -36,7 +39,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
      */
     @Override public EventAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ItemEventBinding itemEventBinding =
-                DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_Event,
+                DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_event,
                         parent, false);
         return new EventAdapterViewHolder(itemEventBinding);
     }
@@ -60,10 +63,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
 
     /**
      * sets the list of events which will be shown in the ui.
-     * @param users list of events
+     * @param eventsList list of events
      */
     public void setEventList(List<Event> eventsList) {
-        this.eventsList = eventsList;
+        this.EventsList = eventsList;
     }
 
     /**
@@ -88,9 +91,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
          * @param event which will be bound.
          */
         void bindEvent(Event event) {
+            MutableLiveData<Event> e = new MutableLiveData<>();
+            e.setValue(event);
             if (mItemEventBinding.getEventViewModel() == null) {
                 mItemEventBinding.setEventViewModel(
-                        new ItemEventViewModel(event, itemView.getContext()));
+                        new ItemEventViewModel(e, itemView.getContext()));
             } else {
                 mItemEventBinding.getEventViewModel().setEvent(event);
             }

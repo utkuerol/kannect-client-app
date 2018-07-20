@@ -124,6 +124,10 @@ public class ItemPostViewModel extends ViewModel {
         return post.getValue().getDate();
     }
 
+    public void setDate(Date d) {
+        post.getValue().setDate(d);
+    }
+
     /**
      * gets the date of creation of the post as string.
      * @return date of creation as string
@@ -180,7 +184,7 @@ public class ItemPostViewModel extends ViewModel {
     }
 
     /**
-     * Unlikes the post.
+     *
      */
     public void unlike() {
         postRepository.unlikePost(post.getValue(), currentUser);

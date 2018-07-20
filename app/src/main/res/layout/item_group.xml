@@ -8,7 +8,14 @@
         android:id="@+id/item_group"
         android:layout_height="@dimen/itemRVHeight">
 
-    <TextView
+        <data>
+
+            <variable
+                name="groupViewModel"
+                type="com.example.asus.example.mvvm.ViewModel.ItemGroupViewModel" />
+        </data>
+
+        <TextView
         android:id="@+id/groupNameTV"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/pictureRVSize"

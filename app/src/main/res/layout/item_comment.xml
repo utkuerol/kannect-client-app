@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+
+        <variable
+            name="categoryViewModel"
+            type="com.example.asus.example.mvvm.ViewModel.ItemCommentViewModel" />
+    </data>
+
+
     <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:orientation="horizontal"
     android:background="@drawable/gradient_background">
 
-    <data>
 
-    </data>
 
 
     <LinearLayout

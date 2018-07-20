@@ -1,5 +1,6 @@
 package com.example.asus.example.mvvm.View.Adapter;
 
+import android.arch.lifecycle.MutableLiveData;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.ItemCategoryBinding;
 import com.example.asus.example.mvvm.Model.Entities.Category;
+import com.example.asus.example.mvvm.ViewModel.ItemCategoryViewModel;
 
 import java.util.Collections;
 import java.util.List;
@@ -81,7 +83,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
          * @param itemCategoryBinding the Binding object of the new CategoryAdapterViewHolder.
          */
         public CategoryAdapterViewHolder(ItemCategoryBinding itemCategoryBinding) {
-            super(itemCategoryBinding.itemcategory);
+            super(itemCategoryBinding.itemCategory);
             this.mItemCategoryBinding = itemCategoryBinding;
         }
 
@@ -90,11 +92,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
          * @param category which will be bound.
          */
         void bindCategory(Category category) {
+            MutableLiveData<Category> cat = new MutableLiveData<Category>();
+            cat.setValue(category);
             if (mItemCategoryBinding.getCategoryViewModel() == null) {
                 mItemCategoryBinding.setCategoryViewModel(
-                        new ItemCategoryViewModel(category, itemView.getContext()));
+                        new ItemCategoryViewModel(cat, itemView.getContext()));
             } else {
-                mItemCategoryBinding.getCategoryViewModel().setCategory(category);
+                mItemCategoryBinding.getCategoryViewModel().setChosenCategory(cat);
             }
         }
     }

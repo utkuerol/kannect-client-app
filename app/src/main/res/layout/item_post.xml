@@ -30,7 +30,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pictureOfUserWhoPostedIV"
         app:layout_constraintVertical_bias="0.909"
-        android:onClick="@{itemPostViewMode::unlike}"
         app:srcCompat="@drawable/ic_thumb_down_icon" />
 
     <ImageView
@@ -41,7 +40,6 @@
         android:layout_marginLeft="68dp"
         android:layout_marginStart="68dp"
         android:layout_marginTop="44dp"
-        android:onClick="@{itemPostViewModel::like}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pictureOfUserWhoPostedIV"
@@ -55,7 +53,6 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@{itemPostViewModel.date}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -71,7 +68,6 @@
         android:layout_marginLeft="12dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="8dp"
-        android:text="@{itemPostViewModel.numberOfLikes}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/nameOfUserWhoPostedTV"
         app:layout_constraintTop_toBottomOf="@+id/postTV"
@@ -84,7 +80,6 @@
         android:layout_marginLeft="28dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="8dp"
-        android:text="@{itemPostViewModel.numberOfLikes}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/thumbsUp"
         app:layout_constraintTop_toBottomOf="@+id/postTV"
@@ -97,7 +92,6 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="@{itemPostViewModel.post}"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.608"
         app:layout_constraintTop_toTopOf="parent" />
@@ -113,7 +107,6 @@
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toStartOf="@+id/postTV"
         app:layout_constraintStart_toStartOf="parent"
-        app:imageUrl="@{itemPostViewModel.imageUrl}"
         app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

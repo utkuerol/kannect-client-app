@@ -3,6 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
+    <data>
+
+        <variable
+            name="categoryViewModel"
+            type="com.example.asus.example.mvvm.ViewModel.ItemCategoryViewModel" />
+    </data>
+
+
     <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
         android:id="@+id/item_category"
