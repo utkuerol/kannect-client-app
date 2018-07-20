@@ -1,6 +1,8 @@
 package com.example.asus.example.mvvm.Model.WebServices;
 
 
+import android.arch.lifecycle.MutableLiveData;
+
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.Entities.Comment;
 import com.example.asus.example.mvvm.Model.Entities.Event;
@@ -225,8 +227,14 @@ public interface ServiceAPI {
      * @param userMail
      * @return User By Mail
      */
-    @GET("/getUserByMail")
-    Call<User> getLoginUser(String userName, String userMail, String userPicture, String userID);
+    @GET("/userByMail")
+    Call<User> getUserByMail(String userMail);
 
 
+    /**
+     * @param user
+     * @return
+     */
+    @POST("/createUser")
+    Call<ResponseBody> createUser(@Body User user);
 }

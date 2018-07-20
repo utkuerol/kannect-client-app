@@ -94,13 +94,13 @@ public class UserRepository {
     }
 
 
-    public MutableLiveData<User> loginUser(GoogleSignInAccount account) {
-        final MutableLiveData<User> result = new MutableLiveData<>();
+    public MutableLiveData<User> findByEmail(String accountEmail) {
 
+        final MutableLiveData<User> result = new MutableLiveData<>();
 
         ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
 
-        Call<User> call = client.getLoginUser(account.getDisplayName(), account.getEmail(), account.getPhotoUrl().toString(), account.getId());
+        Call<User> call = client.getUserByMail(accountEmail);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -117,4 +117,19 @@ public class UserRepository {
         return result;
     }
 
+    public void createUser(MutableLiveData<User> user) {
+        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        Call<ResponseBody> call = client.createUser(user.getValue());
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
 }

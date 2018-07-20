@@ -26,8 +26,18 @@ public class LoginViewModel extends ViewModel {
      * @param account google sign in account.
      */
     public MutableLiveData<User> invoke(GoogleSignInAccount account) {
-        user = userRepository.loginUser(account);
-        return user;
+        MutableLiveData<User> user = userRepository.findByEmail(account.getEmail());
+        if (user != null) {
+            return user;
+        } else {
+            User u = new User();
+            u.setEmail(account.getEmail());
+            u.setImageUrl(account.getPhotoUrl().toString());
+            u.setName(account.getDisplayName());
+            user.setValue(u);
+            userRepository.createUser(user);
+            return userRepository.findByEmail(account.getEmail());
+        }
     }
 
     /**
