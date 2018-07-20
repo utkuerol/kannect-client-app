@@ -1,6 +1,8 @@
 package com.example.asus.example.mvvm.View;
 
+import android.arch.lifecycle.MutableLiveData;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.ActivityLoginBinding;
+import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.ViewModel.LoginViewModel;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -100,7 +103,15 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUI(GoogleSignInAccount account) {
         //Account is not null then user is logged in
         if (account != null) {
-            viewModel.invoke(account);
+            MutableLiveData<User> user = viewModel.invoke(account);
+            SharedPreferences myPrefs = getSharedPreferences("CurrentUser", MODE_WORLD_READABLE);
+            SharedPreferences.Editor prefsEditor;
+            prefsEditor = myPrefs.edit();
+            prefsEditor.putLong("CurrentUserId", user.getValue().getId());
+            prefsEditor.commit();
+
+
+
             Intent i = new Intent(getApplicationContext(), PersonalFeedActivity.class);
             startActivity(i);
         } else {
