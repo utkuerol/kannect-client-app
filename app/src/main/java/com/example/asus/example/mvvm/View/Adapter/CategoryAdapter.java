@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.example.asus.example.R;
+import com.example.asus.example.databinding.ItemCategoryBinding;
 import com.example.asus.example.mvvm.Model.Entities.Category;
 
 import java.util.Collections;
@@ -37,7 +38,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
      */
     @Override public CategoryAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ItemCategoryBinding itemCategoryBinding =
-                DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_Category,
+                DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_category,
                         parent, false);
         return new CategoryAdapterViewHolder(itemCategoryBinding);
     }
@@ -80,7 +81,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
          * @param itemCategoryBinding the Binding object of the new CategoryAdapterViewHolder.
          */
         public CategoryAdapterViewHolder(ItemCategoryBinding itemCategoryBinding) {
-            super(itemCategoryBinding.itemCategory);
+            super(itemCategoryBinding.itemcategory);
             this.mItemCategoryBinding = itemCategoryBinding;
         }
 

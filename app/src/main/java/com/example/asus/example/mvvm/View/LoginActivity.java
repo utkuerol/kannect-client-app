@@ -104,6 +104,7 @@ public class LoginActivity extends AppCompatActivity {
         //Account is not null then user is logged in
         if (account != null) {
             MutableLiveData<User> user = viewModel.invoke(account);
+
             SharedPreferences myPrefs = getSharedPreferences("CurrentUser", MODE_WORLD_READABLE);
             SharedPreferences.Editor prefsEditor;
             prefsEditor = myPrefs.edit();

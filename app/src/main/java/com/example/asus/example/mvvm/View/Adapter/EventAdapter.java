@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.example.asus.example.R;
+import com.example.asus.example.databinding.ItemEventBinding;
 import com.example.asus.example.mvvm.Model.Entities.Event;
 
 import java.util.Collections;

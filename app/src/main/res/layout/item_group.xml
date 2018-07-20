@@ -5,7 +5,8 @@
 
     <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="@dimen/itemRVHeight">
+        android:id="@+id/item_group"
+        android:layout_height="@dimen/itemRVHeight">
 
     <TextView
         android:id="@+id/groupNameTV"

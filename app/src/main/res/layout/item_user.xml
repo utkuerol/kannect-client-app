@@ -2,10 +2,18 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="userViewModel"
+            type="com.example.jhordan.people_mvvm.viewmodel.ItemPeopleViewModel" />
+    </data>
+
 
     <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="@dimen/itemRVHeight">
+        android:id="@+id/item_user"
+        android:layout_height="@dimen/itemRVHeight">
 
     <ImageView
         android:id="@+id/userSearchPictureIV"
