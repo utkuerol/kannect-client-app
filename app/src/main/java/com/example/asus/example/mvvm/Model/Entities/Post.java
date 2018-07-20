@@ -186,6 +186,8 @@ public class Post {
         this.belongsToUser = belongsToUser;
     }
 
-
+    public long getId() {
+        return id;
+    }
 }
 
