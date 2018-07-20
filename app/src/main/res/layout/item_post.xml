@@ -5,7 +5,6 @@
         <variable
             name="itemPostViewModel"
             type="com.example.asus.example.mvvm.ViewModel.ItemPostViewModel"/>
-
     </data>
 <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
