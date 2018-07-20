@@ -4,21 +4,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
     <include
         layout="@layout/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <fragment
-        android:id="@+id/fragmentEventSubcategories"
-        android:name="com.example.asus.example.mvvm.View.SubcategoriesEventFragment"
+        android:id="@+id/fragmentGroupCategories"
+        android:name="com.example.asus.example.mvvm.View.CategoriesGroupFragment"
         android:layout_width="match_parent"
         android:layout_height="@dimen/twoFragmentHeight" />
 
     <fragment
-        android:id="@+id/fragmentEventsInCategory"
-        android:name="com.example.asus.example.mvvm.View.EventsInCategoryFragment"
+        android:id="@+id/fragmentMyGroups"
+        android:name="com.example.asus.example.mvvm.View.MyGroupsFragment"
         android:layout_width="match_parent"
         android:layout_height="@dimen/twoFragmentHeight" />
-
 </LinearLayout>

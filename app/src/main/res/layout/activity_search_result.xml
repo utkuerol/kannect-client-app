@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+
+    <include
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <fragment
+        android:id="@+id/fragmentUserSearchResult"
+        android:name="com.example.asus.example.mvvm.View.UserSearchResultsFragment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fragmentRVHeight" />
+
+    <fragment
+        android:id="@+id/fragmentEventSearchResult"
+        android:name="com.example.asus.example.mvvm.View.EventSearchResultsFragment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fragmentRVHeight" />
+
+    <fragment
+        android:id="@+id/fragmentGroupSearchResult"
+        android:name="com.example.asus.example.mvvm.View.GroupSearchResultsFragment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fragmentRVHeight" />
+
+</LinearLayout>

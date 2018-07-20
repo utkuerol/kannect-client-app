@@ -21,8 +21,7 @@ public class User {
     private List<Group> createdGroups;
     private List<Event> createdEvents;
     private List<Comment> createdComments;
-    private List<Message> receivedMessages;
-    private List<Message> sentMessages;
+
 
 
     /**
@@ -39,10 +38,9 @@ public class User {
      * @param createdGroups all the Groups, the User created.
      * @param createdEvents all the Events, the User created.
      * @param createdComments all the Comments, the User created.
-     * @param receivedMessages all the Messages, the User received.
-     * @param sentMessages all the Messages, the User sent.
+
      */
-    public User(long id, String name, String email, String imageUrl, List<User> subscriptions, List<User> subscribers, List<Group> joinedGroups, List<Event> participatedEvents, List<Post> createdPosts, List<Group> createdGroups, List<Event> createdEvents, List<Comment> createdComments, List<Message> receivedMessages, List<Message> sentMessages) {
+    public User(long id, String name, String email, String imageUrl, List<User> subscriptions, List<User> subscribers, List<Group> joinedGroups, List<Event> participatedEvents, List<Post> createdPosts, List<Group> createdGroups, List<Event> createdEvents, List<Comment> createdComments) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -55,8 +53,7 @@ public class User {
         this.createdGroups = createdGroups;
         this.createdEvents = createdEvents;
         this.createdComments = createdComments;
-        this.receivedMessages = receivedMessages;
-        this.sentMessages = sentMessages;
+
     }
 
     /**
@@ -72,10 +69,9 @@ public class User {
      * @param createdGroups all the Groups, the User created.
      * @param createdEvents all the Events, the User created.
      * @param createdComments all the Comments, the User created.
-     * @param receivedMessages all the Messages, the User received.
-     * @param sentMessages all the Messages, the User sent.
+
      */
-    public User(String name, String email, String imageUrl, List<User> subscriptions, List<User> subscribers, List<Group> joinedGroups, List<Event> participatedEvents, List<Post> createdPosts, List<Group> createdGroups, List<Event> createdEvents, List<Comment> createdComments, List<Message> receivedMessages, List<Message> sentMessages) {
+    public User(String name, String email, String imageUrl, List<User> subscriptions, List<User> subscribers, List<Group> joinedGroups, List<Event> participatedEvents, List<Post> createdPosts, List<Group> createdGroups, List<Event> createdEvents, List<Comment> createdComments) {
         this.name = name;
         this.email = email;
         this.imageUrl = imageUrl;
@@ -87,8 +83,7 @@ public class User {
         this.createdGroups = createdGroups;
         this.createdEvents = createdEvents;
         this.createdComments = createdComments;
-        this.receivedMessages = receivedMessages;
-        this.sentMessages = sentMessages;
+
     }
 
     /**

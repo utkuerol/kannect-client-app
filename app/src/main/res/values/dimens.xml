@@ -7,4 +7,6 @@
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="pictureRVSize">50dp</dimen>
     <dimen name="itemRVHeight">150dp</dimen>
+    <dimen name="fragmentRVHeight">175dp</dimen>
+    <dimen name="twoFragmentHeight">255dp</dimen>
 </resources>
