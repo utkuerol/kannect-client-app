@@ -3,12 +3,15 @@ package com.example.asus.example.mvvm.ViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
+import android.databinding.BindingAdapter;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -22,6 +25,7 @@ import java.util.List;
 public class ItemUserViewModel extends ViewModel {
 
     private MutableLiveData<User> chosenUser;
+    private String profilePictureUrl;
     private Context context;
 
     /**
@@ -33,6 +37,7 @@ public class ItemUserViewModel extends ViewModel {
     public ItemUserViewModel(MutableLiveData<User> user, Context context) {
         this.chosenUser = user;
         this.context = context;
+        profilePictureUrl = this.getImageUrl();
     }
 
     /**
@@ -86,6 +91,13 @@ public class ItemUserViewModel extends ViewModel {
         return null;
     }
 
+
+    @BindingAdapter({"bind:profilePictureUrl"})
+    public static void loadImage(ImageView view, String imageUrl) {
+        Picasso.get().load(imageUrl)
+                // .placeholder(R.drawable.placeholder)
+                .into(view);
+    }
 
     /**
      * method to get the a List of the Users, this User subscribes to

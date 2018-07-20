@@ -15,7 +15,7 @@
         android:layout_marginTop="79dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
-        app:srcCompat="@drawable/KAnnectLogo" />
+        app:srcCompat="@drawable/kannectlogo" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"

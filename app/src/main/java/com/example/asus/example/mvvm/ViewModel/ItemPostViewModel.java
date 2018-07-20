@@ -3,7 +3,9 @@ package com.example.asus.example.mvvm.ViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
+import android.databinding.BindingAdapter;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.example.asus.example.mvvm.Model.Entities.Comment;
 import com.example.asus.example.mvvm.Model.Entities.Event;
@@ -12,6 +14,7 @@ import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.Repository.PostRepository;
 import com.example.asus.example.mvvm.View.ShowPostActivity;
+import com.squareup.picasso.Picasso;
 
 import java.util.Date;
 import java.util.List;
@@ -25,6 +28,7 @@ import java.util.List;
 public class ItemPostViewModel extends ViewModel {
 
     private MutableLiveData<Post> post;
+    private String creatorProfilePictureUrl;
     private Context context;
     private User currentUser;
     private PostRepository postRepository;
@@ -38,6 +42,14 @@ public class ItemPostViewModel extends ViewModel {
     public ItemPostViewModel(MutableLiveData<Post> post, Context context) {
         this.post = post;
         this.context = context;
+        creatorProfilePictureUrl = this.getCreator().getImageUrl();
+    }
+
+    @BindingAdapter({"bind:creatorProfilePictureUrl"})
+    public static void loadImage(ImageView view, String imageUrl) {
+        Picasso.get().load(imageUrl)
+                // .placeholder(R.drawable.placeholder)
+                .into(view);
     }
 
     /**
