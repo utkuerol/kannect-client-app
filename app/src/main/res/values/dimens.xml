@@ -9,4 +9,5 @@
     <dimen name="itemRVHeight">150dp</dimen>
     <dimen name="fragmentRVHeight">175dp</dimen>
     <dimen name="twoFragmentHeight">255dp</dimen>
+    <dimen name="logoLoginScreenSize">200dp</dimen>
 </resources>

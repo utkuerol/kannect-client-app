@@ -159,24 +159,6 @@ public class Post {
     }
 
     /**
-     * method to return the id of the post
-     * @return id of the post
-     */
-    public long getId() {
-        return id;
-    }
-
-    /**
-     * sets the id of the post
-     *
-     * @param id of the post
-     */
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    /**
-
      * sets the List of Comments, which belong to the Post
      * @param comments List of Comments of the Post
      */
