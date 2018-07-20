@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModel;
 
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.Repository.UserRepository;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 /**
  * ViewModel class for login, that is responsible for preparing and managing the data for Views

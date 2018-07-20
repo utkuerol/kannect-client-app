@@ -94,11 +94,27 @@ public class UserRepository {
     }
 
 
-    public User loginUser(GoogleSignInAccount account){
+    public MutableLiveData<User> loginUser(GoogleSignInAccount account) {
+        final MutableLiveData<User> result = new MutableLiveData<>();
 
-        //parse
-        //connection with the server
-        return null;
+
+        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+
+        Call<User> call = client.getLoginUser(account.getDisplayName(), account.getEmail(), account.getPhotoUrl().toString(), account.getId());
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                result.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
+
+        return result;
     }
 
 }
