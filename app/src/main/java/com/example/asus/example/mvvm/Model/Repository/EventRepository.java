@@ -77,12 +77,12 @@ public class EventRepository {
     /**
      * Method to notify Server that an existing Event was deleted. This Method transfers the Event object to the server.
      * It uses the ServiceGenerator class to create a service via Retrofit2 with the help of the ServiceAPI.
-     * @param eventID which will be deleted
+     * @param event which will be deleted
      */
-    public void deleteEvent(long eventID) {
+    public void deleteEvent(Event event) {
 
         ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
-        Call<Event> call = client.deleteEvent(eventID);
+        Call<Event> call = client.deleteEvent(event.getId());
         call.enqueue(new Callback<Event>() {
             @Override
             public void onResponse(Call<Event> call, Response<Event> response) {

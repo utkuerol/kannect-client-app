@@ -49,11 +49,11 @@ public class PostRepository {
     /**
      * Method to indicate to the server, that a Post was deleted. Sends a Post Object to the server
      * It uses the ServiceGenerator class to create a service via Retrofit2 with the help of the ServiceAPI.
-     * @param postID which was deleted.
+     * @param post which was deleted.
      */
-    public void deletePost(long postID) {
+    public void deletePost(Post post) {
         ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
-        Call<Post> call = client.deletePost(postID);
+        Call<Post> call = client.deletePost(post.getId());
         call.enqueue(new Callback<Post>() {
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {
