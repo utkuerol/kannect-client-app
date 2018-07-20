@@ -7,7 +7,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/logoLoginScreenIV"
         android:layout_width="@dimen/logoLoginScreenSize"
         android:layout_height="@dimen/logoLoginScreenSize"
         android:layout_alignParentTop="true"
@@ -15,7 +15,7 @@
         android:layout_marginTop="79dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
-        app:srcCompat="@drawable/kannectlogo" />
+        app:srcCompat="@drawable/kannect" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
