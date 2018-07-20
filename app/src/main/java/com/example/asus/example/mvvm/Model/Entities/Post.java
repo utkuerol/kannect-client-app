@@ -14,7 +14,7 @@ public class Post {
 
     private String text;
     private User creator;
-    private List<User> likedUser;
+    private List<User> likedUsers;
     private Date date;
     private Event belongsToEvent;
     private Group belongsToGroup;
@@ -30,7 +30,7 @@ public class Post {
      * A Post can only belong to either an Event, Group or an User.
      * @param text User-created text to be displayed in the post.
      * @param creator User, which created this post.
-     * @param likedUser List of User who liked the Post.
+     * @param likedUsers List of User who liked the Post.
      * @param date Creation date of this post.
      * @param belongstoGroup Post belongs to this Group.
      * @param belongsToUser Post belongs to this User.
@@ -38,10 +38,10 @@ public class Post {
      * @param comments Comments which belong to the Post.
      * @param id unique identifier of the Object.
      */
-    public Post(String text, User creator, List<User> likedUser, Date date, Event belongsToEvent, Group belongstoGroup, User belongsToUser, List<Comment> comments, long id) {
+    public Post(String text, User creator, List<User> likedUsers, Date date, Event belongsToEvent, Group belongstoGroup, User belongsToUser, List<Comment> comments, long id) {
         this.text = text;
         this.creator = creator;
-        this.likedUser = likedUser;
+        this.likedUsers = likedUsers;
         this.date = date;
         this.belongsToEvent = belongsToEvent;
         this.belongsToGroup = belongstoGroup;
@@ -55,17 +55,17 @@ public class Post {
      * A Post can only belong to either an Event, Group or an User.
      * @param text User-created text to be displayed in the post.
      * @param creator User, which created this post.
-     * @param likedUser List of User, who liked the Post
+     * @param likedUsers List of User, who liked the Post
      * @param date Creation date of this post.
      * @param belongsToGroup Post belongs to this Group
      * @param belongsToUser Post belongs to this User
      * @param belongsToEvent Post belongs to this Event
      * @param comments Comments which belong to the Post
      */
-    public Post(String text, User creator, List<User> likedUser, Date date, Event belongsToEvent, Group belongsToGroup, User belongsToUser, List<Comment> comments) {
+    public Post(String text, User creator, List<User> likedUsers, Date date, Event belongsToEvent, Group belongsToGroup, User belongsToUser, List<Comment> comments) {
         this.text = text;
         this.creator = creator;
-        this.likedUser = likedUser;
+        this.likedUsers = likedUsers;
         this.date = date;
         this.belongsToEvent = belongsToEvent;
         this.belongsToGroup = belongsToGroup;
@@ -164,6 +164,34 @@ public class Post {
      */
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public List<User> getLikedUsers() {
+        return likedUsers;
+    }
+
+    public void setLikedUsers(List<User> likedUsers) {
+        this.likedUsers = likedUsers;
+    }
+
+    public void setBelongsToEvent(Event belongsToEvent) {
+        this.belongsToEvent = belongsToEvent;
+    }
+
+    public void setBelongsToGroup(Group belongsToGroup) {
+        this.belongsToGroup = belongsToGroup;
+    }
+
+    public void setBelongsToUser(User belongsToUser) {
+        this.belongsToUser = belongsToUser;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }
 

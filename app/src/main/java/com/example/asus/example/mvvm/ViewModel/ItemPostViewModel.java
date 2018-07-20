@@ -11,12 +11,10 @@ import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.Repository.PostRepository;
+import com.example.asus.example.mvvm.View.ShowPostActivity;
 
 import java.util.Date;
 import java.util.List;
-
-import javax.naming.Context;
-import javax.swing.text.View;
 
 /**
  * ViewModel class for one specific post, and is responsible for preparing and managing the data for Views,
@@ -28,6 +26,7 @@ public class ItemPostViewModel extends ViewModel {
 
     private MutableLiveData<Post> post;
     private Context context;
+    private User currentUser;
     private PostRepository postRepository;
 
     /**
@@ -62,7 +61,7 @@ public class ItemPostViewModel extends ViewModel {
      * @param view
      */
     public void onItemClick(View view) {
-        //context.startActivity(GroupFeedActivity.launchWithDetails(view.getContext(), mChosenEvent));
+        context.startActivity(ShowPostActivity.launchWithDetails(view.getContext(), post.getValue()));
     }
 
     /**
@@ -70,6 +69,7 @@ public class ItemPostViewModel extends ViewModel {
      * @return
      */
     public String getText() {
+        return post.getValue().getText();
     }
 
     /**
@@ -77,6 +77,7 @@ public class ItemPostViewModel extends ViewModel {
      * @return user
      */
     public User getCreator() {
+        return post.getValue().getCreator();
     }
 
     /**
@@ -84,13 +85,15 @@ public class ItemPostViewModel extends ViewModel {
      * @return user's name
      */
     public String getCreatorName() {
+        return post.getValue().getCreator().getName();
     }
 
     /**
      * Gets the list of liked users of the post.
      * @return list of users
      */
-    public List<User> getLikedUser() {
+    public List<User> getLikedUsers() {
+        return post.getValue().getLikedUsers();
     }
 
     /**
@@ -98,6 +101,7 @@ public class ItemPostViewModel extends ViewModel {
      * @return number of likes
      */
     public int getNumberOfLikes () {
+        return post.getValue().getLikedUsers().size();
     }
 
     /**
@@ -105,6 +109,7 @@ public class ItemPostViewModel extends ViewModel {
      * @return date of creation
      */
     public Date getDate() {
+        return post.getValue().getDate();
     }
 
     /**
@@ -112,6 +117,7 @@ public class ItemPostViewModel extends ViewModel {
      * @return date of creation as string
      */
     public String getDateAsString() {
+        return post.getValue().getDate().toString();
     }
 
     /**
@@ -119,6 +125,7 @@ public class ItemPostViewModel extends ViewModel {
      * @return event
      */
     public Event getBelongsToEvent() {
+        return post.getValue().getBelongsToEvent();
     }
 
     /**
@@ -126,6 +133,7 @@ public class ItemPostViewModel extends ViewModel {
      * @return group
      */
     public Group getBelongsToGroup() {
+        return post.getValue().getBelongsToGroup();
     }
 
     /**
@@ -133,6 +141,7 @@ public class ItemPostViewModel extends ViewModel {
      * @return user
      */
     public User getBelongsToUser() {
+        return post.getValue().getBelongsToUser();
     }
 
     /**
@@ -140,6 +149,7 @@ public class ItemPostViewModel extends ViewModel {
      * @return list of comments
      */
     public List<Comment> getComments() {
+        return post.getValue().getComments();
     }
 
     /**
@@ -147,18 +157,21 @@ public class ItemPostViewModel extends ViewModel {
      * @return
      */
     public boolean isLiked() {
+        return post.getValue().getLikedUsers().contains(currentUser);
     }
 
     /**
      * Likes the post.
      */
     public void like() {
+        postRepository.likePost(post.getValue(), currentUser);
     }
 
     /**
      * Unlikes the post.
      */
     public void unlike() {
+        postRepository.unlikePost(post.getValue(), currentUser);
     }
 
     /**
@@ -167,26 +180,24 @@ public class ItemPostViewModel extends ViewModel {
      * @return boolean
      */
     public boolean isCreator() {
+        return post.getValue().getCreator().getId() == currentUser.getId();
     }
 
     /**
      * Deletes the post.
      */
     public void deletePost() {
+        postRepository.deletePost(post);
     }
 
-    /**
-     * Edits the post with the given text.
-     * @param text to edit.
-     */
-    public void editPost(String text) {
-    }
 
     /**
      * Creates a new comment for the post with the given text.
      * @param text for the comment to be created.
      */
     public void comment(String text) {
+        Comment comment = new Comment(text, post.getValue(), new Date(), currentUser);
+        postRepository.commentPost(comment);
     }
 
 }
