@@ -2,7 +2,10 @@ package com.example.asus.example.mvvm.Model.Repository;
 
 import android.arch.lifecycle.MutableLiveData;
 
+import com.example.asus.example.mvvm.Model.Entities.Event;
+import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.Model.Entities.Post;
+import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.WebServices.ServiceAPI;
 import com.example.asus.example.mvvm.Model.WebServices.ServiceGenerator;
 
@@ -27,12 +30,12 @@ public class FeedRepository {
     /**
      * Method to get all the Post that belong on an Users feed.
      * It uses the ServiceGenerator class to create a service via Retrofit2 with the help of the ServiceAPI.
-     * @param userID which feed will be generated
+     * @param user which feed will be generated
      * @return List of all the Posts, which belong to the Users feed as a MutableLiveData object
      */
-    public MutableLiveData<List<Post>> getPersonalFeed(long userID) {
+    public MutableLiveData<List<Post>> getPersonalFeed(User user) {
         ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
-        Call<List<Post>> call = client.getPersonalFeed(userID);
+        Call<List<Post>> call = client.getPersonalFeed(user.getId());
         final MutableLiveData<List<Post>> result = new MutableLiveData<>();
 
         call.enqueue(new Callback<List<Post>>() {
@@ -54,12 +57,12 @@ public class FeedRepository {
     /**
      * Method to get all the Post that belong on a Groups feed.
      * It uses the ServiceGenerator class to create a service via Retrofit2 with the help of the ServiceAPI.
-     * @param groupID group which feed will be generated
+     * @param group group which feed will be generated
      * @return List of all the Posts, which belong to the Groups feed as a MutableLiveData object
      */
-    public MutableLiveData<List<Post>> getGroupFeed(long groupID) {
+    public MutableLiveData<List<Post>> getGroupFeed(Group group) {
         ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
-        Call<List<Post>> call = client.getGroupFeed(groupID);
+        Call<List<Post>> call = client.getGroupFeed(group.getId());
         final MutableLiveData<List<Post>> result = new MutableLiveData<>();
 
         call.enqueue(new Callback<List<Post>>() {
@@ -80,12 +83,12 @@ public class FeedRepository {
     /**
      * Method to get all the Post that belong on a Groups feed.
      * It uses the ServiceGenerator class to create a service via Retrofit2 with the help of the ServiceAPI.
-     * @param eventID which feed will be generated
+     * @param event which feed will be generated
      * @return List of all the Posts, which belong to the Groups feed as a MutableLiveData object
      */
-    public MutableLiveData<List<Post>> getEventFeed(long eventID) {
+    public MutableLiveData<List<Post>> getEventFeed(Event event) {
         ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
-        Call<List<Post>> call = client.getEventFeed(eventID);
+        Call<List<Post>> call = client.getEventFeed(event.getId());
         final MutableLiveData<List<Post>> result = new MutableLiveData<>();
 
         call.enqueue(new Callback<List<Post>>() {

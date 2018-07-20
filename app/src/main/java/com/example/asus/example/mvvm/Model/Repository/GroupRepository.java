@@ -75,11 +75,11 @@ public class GroupRepository {
     /**
      * Method to notify Server that an existing Group was deleted. This Method transfers the Group object to the server.
      * It uses the ServiceGenerator class to create a service via Retrofit2 with the help of the ServiceAPI.
-     * @param groupID which will be deleted
+     * @param group which will be deleted
      */
-    public void deleteGroup(long groupID) {
+    public void deleteGroup(Group group) {
         ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
-        Call<Group> call = client.deleteGroup(groupID);
+        Call<Group> call = client.deleteGroup(group.getId());
         call.enqueue(new Callback<Group>() {
             @Override
             public void onResponse(Call<Group> call, Response<Group> response) {
