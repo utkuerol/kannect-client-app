@@ -1,61 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <data>
-
-        <variable
-            name="categoryViewModel"
-            type="com.example.asus.example.mvvm.ViewModel.ItemCommentViewModel" />
-    </data>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:orientation="horizontal"
-    android:background="@drawable/gradient_background">
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/itemRVHeight">
 
 
-
-
-    <LinearLayout
-        android:layout_width="100dp"
-        android:layout_height="80dp"
-        android:layout_margin="10dp"
-        android:background="@color/graylight"
-        android:gravity="center"
-        android:id="@+id/item_comment"
-        android:orientation="vertical">
-
+        <TextView
+            android:id="@+id/commentDateTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="116dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="116dp"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.29"
+            app:layout_constraintStart_toEndOf="@+id/commentatorNameTV"
+            app:layout_constraintTop_toBottomOf="@+id/commentTextTV"
+            app:layout_constraintVertical_bias="0.192" />
 
         <ImageView
-            android:id="@+id/commetatorPictureIV"
+            android:id="@+id/commentatorPictureIV"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:contentDescription="@string/profile_picture_commentator" />
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/profile_picture_commentator"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/commentatorNameTV"
-            android:layout_width="wrap_content"
+            android:layout_width="102dp"
             android:layout_height="30dp"
+            android:layout_marginBottom="8dp"
             android:gravity="center"
             android:text="ExchangethiswithvarliableViewmodel"
             android:textAlignment="center"
             android:textColor="#000"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/commentatorPictureIV"
+            app:layout_constraintVertical_bias="0.239" />
 
 
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/commentTextTV"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:text="csfsdfsdfsdfsfdfOHFHFSDVHDFINDDQojnsvuvosuhvsuvbnsvödbnsvsvbdsvisbuvd"
-        android:textColor="#fff"
-        android:textSize="14sp"
-        android:layout_margin="10dp"
-        android:gravity="center"/>
-
-</LinearLayout>
+        <TextView
+            android:id="@+id/commentTextTV"
+            android:layout_width="270dp"
+            android:layout_height="56dp"
+            android:layout_margin="10dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="csfsdfsdfsdfsfdfOHFHFSDVHDFINDDQojnsvuvosuhvsuvbnsvödbnsvsvbdsvisbuvd"
+            android:textColor="#fff"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.357"
+            app:layout_constraintStart_toEndOf="@+id/commentatorPictureIV"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
 </layout>
