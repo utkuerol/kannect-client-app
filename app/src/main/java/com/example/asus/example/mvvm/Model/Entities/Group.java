@@ -1,12 +1,13 @@
 package com.example.asus.example.mvvm.Model.Entities;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Represents an group, providing access to the group's unique id, name, description, category, subcategory,
  * creator, profile picture url and members.
  */
-public class Group {
+public class Group implements Serializable {
 
     private long id;
     private String name;

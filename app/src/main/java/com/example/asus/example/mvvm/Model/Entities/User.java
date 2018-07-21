@@ -1,5 +1,6 @@
 package com.example.asus.example.mvvm.Model.Entities;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * subscriptions, subscribers, joined and created groups, participated and created events, created posts and comments,
  * received and sent messages
  */
-public class User {
+public class User implements Serializable {
 
     private long id;
     private String name;

@@ -1,12 +1,13 @@
 package com.example.asus.example.mvvm.Model.Entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Represents a comment, providing access to the comment's unique id, text, creator, belonging post and
  * date of creation
  */
-public class Comment {
+public class Comment implements Serializable {
 
 
     private String text;

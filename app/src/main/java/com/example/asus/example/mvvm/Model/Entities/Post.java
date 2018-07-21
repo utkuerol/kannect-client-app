@@ -1,6 +1,7 @@
 package com.example.asus.example.mvvm.Model.Entities;
 
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * number of likes, date of creation, comments and the information on whether
  * it is owned by a user, a group or an event.
  */
-public class Post {
+public class Post implements Serializable {
 
 
     private String text;

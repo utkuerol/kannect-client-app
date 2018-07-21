@@ -1,6 +1,7 @@
 package com.example.asus.example.mvvm.Model.Entities;
 
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
  * Represents an event, providing access to the event's unique id, name, description, category, subcategory,
  * creator, profile picture url and participants.
  */
-public class Event {
+public class Event implements Serializable {
 
     private long id;
     private String name;

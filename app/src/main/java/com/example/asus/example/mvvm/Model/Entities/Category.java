@@ -1,12 +1,13 @@
 package com.example.asus.example.mvvm.Model.Entities;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Represents a category, providing access to the category's unique id, name, subcategories,
  * groups and events.
  */
-public class Category {
+public class Category implements Serializable{
 
     private String name;
     private List<Subcategory> subcategories;
