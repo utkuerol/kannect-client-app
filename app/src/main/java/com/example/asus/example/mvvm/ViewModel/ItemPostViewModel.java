@@ -48,7 +48,7 @@ public class ItemPostViewModel extends ViewModel {
     @BindingAdapter({"bind:creatorProfilePictureUrl"})
     public static void loadImage(ImageView view, String imageUrl) {
         Picasso.get().load(imageUrl)
-                //  .placeholder(R.drawable.placeholder)
+                // .placeholder(R.drawable.placeholder)
                 .into(view);
     }
 
@@ -64,8 +64,8 @@ public class ItemPostViewModel extends ViewModel {
      * Sets the post.
      * @param post to be set.
      */
-    public void setPost(MutableLiveData<Post> post) {
-        this.post = post;
+    public void setPost(Post post) {
+        this.post.setValue(post);
     }
 
     /**
@@ -124,10 +124,6 @@ public class ItemPostViewModel extends ViewModel {
         return post.getValue().getDate();
     }
 
-    public void setDate(Date d) {
-        post.getValue().setDate(d);
-    }
-
     /**
      * gets the date of creation of the post as string.
      * @return date of creation as string
@@ -179,12 +175,12 @@ public class ItemPostViewModel extends ViewModel {
     /**
      * Likes the post.
      */
-    public void like() {
+    public void onLikeClick() {
         postRepository.likePost(post.getValue(), currentUser);
     }
 
     /**
-     *
+     * Unlikes the post.
      */
     public void unlike() {
         postRepository.unlikePost(post.getValue(), currentUser);
@@ -217,3 +213,4 @@ public class ItemPostViewModel extends ViewModel {
     }
 
 }
+

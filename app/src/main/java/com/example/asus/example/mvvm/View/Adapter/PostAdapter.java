@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.example.asus.example.R;
-import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.ViewModel.ItemPostViewModel;
 
@@ -19,6 +18,7 @@ import java.util.List;
  * Handles the items which will be shown in the Recycler View.
  */
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostAdapterViewHolder> {
+
     private List<Post> postsList;
 
     /**

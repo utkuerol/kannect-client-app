@@ -11,7 +11,6 @@ import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
-import com.example.asus.example.mvvm.View.UserProfileActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -62,7 +61,7 @@ public class ItemUserViewModel extends ViewModel {
      */
     public void onItemClick(View view) {
 
-        context.startActivity(UserProfileActivity.launchWithDetails(view.getContext(), chosenUser.getValue()));
+        //context.startActivity(UserProfileActivity.launchWithDetails(view.getContext(), mUser));
     }
 
 
@@ -72,7 +71,7 @@ public class ItemUserViewModel extends ViewModel {
      */
     public String getName() {
         return null;
-        }
+    }
 
 
     /**
@@ -183,3 +182,4 @@ public class ItemUserViewModel extends ViewModel {
 
 
 }
+

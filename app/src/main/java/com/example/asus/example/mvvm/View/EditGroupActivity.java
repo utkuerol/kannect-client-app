@@ -17,6 +17,7 @@ import com.example.asus.example.mvvm.ViewModel.GroupViewModel;
 public class EditGroupActivity extends AppCompatActivity {
 
     GroupViewModel viewModel;
+    private static String GROUP;
     //bin (can only be done with xml)
 
 
@@ -46,7 +47,9 @@ public class EditGroupActivity extends AppCompatActivity {
      * @param group the group navigated to.
      * @return the Intent, which is used to redirect to this Activity.
      */
-    public Intent launchWithDetails(Context context, Group group){ return null;}
+    public Intent launchWithDetails(Context context, Group group) {
+        return null;
+    }
 
     public GroupViewModel getViewModel() {
         return viewModel;
@@ -55,4 +58,5 @@ public class EditGroupActivity extends AppCompatActivity {
     public void setViewModel(GroupViewModel viewModel) {
         this.viewModel = viewModel;
     }
+
 }
