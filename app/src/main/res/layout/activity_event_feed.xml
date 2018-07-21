@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="itemEventViewModel"
+            type="com.example.asus.example.mvvm.ViewModel.ItemEventViewModel" />
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,7 +39,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
                 android:gravity="center"
-                android:text="participants"
+                android:text="@{itemEventViewModel.participants}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/participateBt"
                 app:layout_constraintHorizontal_bias="0.505"
