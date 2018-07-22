@@ -239,11 +239,11 @@ public interface ServiceAPI {
     /**
      * service to get a User by his id
      *
-     * @param id of the user
+     * @param userId of the user
      * @return user which matched the id
      */
-    @GET
-    Call<User> getUserByID(long id);
+    @GET("/userById")
+    Call<User> getUserByID(long userId);
 
     /**
      * service to get the feed of a user by his id
@@ -251,7 +251,7 @@ public interface ServiceAPI {
      * @param userID id of user whose feed will be generated
      * @return list of posts for the feed of the user
      */
-    @GET
+    @GET("/userProfile")
     Call<List<Post>> getUserProfile(long userID);
 
 }
