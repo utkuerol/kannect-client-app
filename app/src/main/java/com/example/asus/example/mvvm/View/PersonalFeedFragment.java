@@ -22,7 +22,7 @@ public class PersonalFeedFragment extends Fragment {
 
     private PostViewModel postViewModel;
 
-    FragmentPersonalFeedBinding fragmentPersonalFeedBinding;
+    private FragmentPersonalFeedBinding fragmentPersonalFeedBinding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {

@@ -47,6 +47,7 @@ public class ItemPostViewModel extends ViewModel {
         currentUser = userRepository.getUserByID(myPrefs.getLong("CurrentUserId", 0)).getValue();
     }
 
+
     @BindingAdapter({"bind:creatorProfilePictureUrl"})
     public static void loadImage(ImageView view, String imageUrl) {
         Picasso.get().load(imageUrl)

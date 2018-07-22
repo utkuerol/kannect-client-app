@@ -13,8 +13,8 @@ import com.example.asus.example.mvvm.ViewModel.EventViewModel;
  */
 public class EventSearchResultsFragment extends Fragment {
     EventViewModel viewModel;
-    @Override
 
+    @Override
     /**
      * Called immediately after onCreateView(LayoutInflater, ViewGroup, Bundle) has returned,
      * but before any saved state has been restored in to the view.
@@ -23,19 +23,8 @@ public class EventSearchResultsFragment extends Fragment {
      * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state as given here.
      */
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        //set binding
-        //sets adapter
+        super.onViewCreated(view, null);
     }
 
-    /**
-     * Called when the Fragments activity has been created and this fragments view hierarchy instantiated.
-     * finds the correct View Model and makes it observe this Fragment, to sync with adapter.
-     * @param savedInstanceState If the fragment is being re-created from a previous saved state, this is the state.
-     */
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        //find view model
-        //viewmodel.observe(this) --- sync with adapter
-    }
 
 }

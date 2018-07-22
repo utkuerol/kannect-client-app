@@ -25,14 +25,4 @@ public class GroupSearchResultsFragment extends Fragment {
     }
 
 
-    /**
-     * Called when the Fragments activity has been create and this fragments view hierarchy instantiated.
-     * finds the correct View Model and makes it observe this Fragment, to sync with adapter.
-     * @param savedInstanceState If the fragment is being re-created from a previous saved state, this is the state.
-     */
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        //find view model
-        //viewmodel.observe(this) --- sync with adapter
-    }
 }
