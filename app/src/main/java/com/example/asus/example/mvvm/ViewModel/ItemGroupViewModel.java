@@ -196,7 +196,8 @@ public class ItemGroupViewModel extends ViewModel {
         post.setDate(new Date());
         post.setText(text);
         post.setCreator(currentUser);
-        post.setOwnedBy(chosenGroup);
+        post.setOwnedBy(chosenGroup.getValue().getId());
+        post.setOwnerGroup(chosenGroup.getValue());
         postRepository.createPost(post);
     }
 

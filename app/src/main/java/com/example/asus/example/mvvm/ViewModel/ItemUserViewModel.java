@@ -183,7 +183,7 @@ public class ItemUserViewModel extends ViewModel {
         postToCreate.setText(text);
         postToCreate.setCreator(currentUser);
         postToCreate.setDate(new Date());
-        postToCreate.setBelongsToUser(currentUser);
+        postToCreate.setOwnerUser(currentUser);
         postToCreate.setOwnedBy(currentUser.getId());
         postRepository.createPost(postToCreate);
     }

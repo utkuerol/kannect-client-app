@@ -21,51 +21,6 @@ public class Event implements Serializable {
     private String imageUrl;
     private List<User> participants;
 
-    /**
-     * Constructor with an id. Id is given by the Server-Site.
-     * @param id unique identifier of the Event object.
-     * @param name Name of the event.
-     * @param date Date of the event.
-     * @param description Description of the event, containing extra information intended to be given from the user.
-     * @param creator User, which created this event.
-     * @param category Category, into which this event falls.
-     * @param subcategory Subcategory, into which this event falls.
-     * @param imageUrl Url of the profile picture.
-     * @param participants Users, which participate in this event.
-     */
-    public Event(long id, String name, Date date, String description, User creator, Category category, Subcategory subcategory, String imageUrl, List<User> participants) {
-        this.id = id;
-        this.name = name;
-        this.date = date;
-        this.description = description;
-        this.creator = creator;
-        this.category = category;
-        this.subcategory = subcategory;
-        this.imageUrl = imageUrl;
-        this.participants = participants;
-    }
-
-    /**
-     * Constructor without an id. Id is given by the Server-Site.
-     * @param name Name of the event.
-     * @param date Date of the event.
-     * @param description Description of the event, containing extra information intended to be given from the user.
-     * @param creator User, which created this event.
-     * @param category Category, into which this event falls.
-     * @param subcategory Subcategory, into which this event falls.
-     * @param imageUrl Url of the profile picture.
-     * @param participants Users, which participate in this event.
-     */
-    public Event(String name, Date date, String description, User creator, Category category, Subcategory subcategory, String imageUrl, List<User> participants) {
-        this.name = name;
-        this.date = date;
-        this.description = description;
-        this.creator = creator;
-        this.category = category;
-        this.subcategory = subcategory;
-        this.imageUrl = imageUrl;
-        this.participants = participants;
-    }
 
     /**
      * method to get the id of the Event.

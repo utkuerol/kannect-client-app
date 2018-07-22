@@ -36,7 +36,7 @@ public class ItemSubcategoryView extends ViewModel {
     /**
      * Creates an instance with the given chosenSubcategory and application context.
      *
-     * @param chosenSubcategory subcategory
+     * @param subcategory subcategory
      * @param context           of the application.
      */
     public ItemSubcategoryView(Subcategory subcategory, Context context) {

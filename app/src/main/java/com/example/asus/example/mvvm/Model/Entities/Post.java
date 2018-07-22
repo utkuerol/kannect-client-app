@@ -18,6 +18,9 @@ public class Post implements Serializable {
     private List<User> likedUsers;
     private Date date;
     private long ownedBy;
+    private User ownerUser;
+    private Group ownerGroup;
+    private Event ownerEvent;
     private List<Comment> comments;
     private long id;
 
@@ -169,6 +172,30 @@ public class Post implements Serializable {
      */
     public void setOwnedBy(long ownedBy) {
         this.ownedBy = ownedBy;
+    }
+
+    public User getOwnerUser() {
+        return ownerUser;
+    }
+
+    public void setOwnerUser(User ownerUser) {
+        this.ownerUser = ownerUser;
+    }
+
+    public Group getOwnerGroup() {
+        return ownerGroup;
+    }
+
+    public void setOwnerGroup(Group ownerGroup) {
+        this.ownerGroup = ownerGroup;
+    }
+
+    public Event getOwnerEvent() {
+        return ownerEvent;
+    }
+
+    public void setOwnerEvent(Event ownerEvent) {
+        this.ownerEvent = ownerEvent;
     }
 }
 

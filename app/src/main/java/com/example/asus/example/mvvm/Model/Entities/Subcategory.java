@@ -1,7 +1,7 @@
 package com.example.asus.example.mvvm.Model.Entities;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Represents a subcategory, providing access to the subcategory's unique id, name, parent category,
@@ -12,8 +12,8 @@ public class Subcategory implements Serializable {
 
     private String name;
     private Category category;
-    private Set<Event> events;
-    private Set<Group> groups;
+    private List<Event> events;
+    private List<Group> groups;
     private long id;
 
     /**
@@ -23,7 +23,7 @@ public class Subcategory implements Serializable {
      * @param events Events, which fall into this subcategory
      * @param groups Groups, which fall into this subcategory
      */
-    public Subcategory(String name, Category category, Set<Event> events, Set<Group> groups) {
+    public Subcategory(String name, Category category, List<Event> events, List<Group> groups) {
         this.name = name;
         this.category = category;
         this.events = events;
@@ -39,7 +39,7 @@ public class Subcategory implements Serializable {
      * @param groups Groups, which fall into this subcategory
      * @param id unique identifier of the Subcategory
      */
-    public Subcategory(String name, Category category, Set<Event> events, Set<Group> groups, long id) {
+    public Subcategory(String name, Category category, List<Event> events, List<Group> groups, long id) {
         this.name = name;
         this.category = category;
         this.events = events;
@@ -83,7 +83,7 @@ public class Subcategory implements Serializable {
      * method to get the Set of Events which belong to the Subcategory
      * @return the Events of this Subcategory
      */
-    public Set<Event> getEvents() {
+    public List<Event> getEvents() {
         return events;
     }
 
@@ -91,7 +91,7 @@ public class Subcategory implements Serializable {
      * sets the Set Events which belong to this Subcategory
      * @param events Events which belong to this Subcategory
      */
-    public void setEvents(Set<Event> events) {
+    public void setEvents(List<Event> events) {
         this.events = events;
     }
 
@@ -99,7 +99,7 @@ public class Subcategory implements Serializable {
      * method to get the Set of Groups which belong to this Subcategory
      * @return Set of groups which belong to this Subcategory
      */
-    public Set<Group> getGroups() {
+    public List<Group> getGroups() {
         return groups;
     }
 
@@ -107,7 +107,7 @@ public class Subcategory implements Serializable {
      * sets the Set of Groups which belong to this Subcategory
      * @param groups which belong to this Subcategory
      */
-    public void setGroups(Set<Group> groups) {
+    public void setGroups(List<Group> groups) {
         this.groups = groups;
     }
 

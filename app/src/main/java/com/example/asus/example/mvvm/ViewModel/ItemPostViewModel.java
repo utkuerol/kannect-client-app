@@ -149,7 +149,7 @@ public class ItemPostViewModel extends ViewModel {
      * @return event
      */
     public Event getOwnerEvent() {
-        return post.getValue().getBelongsToEvent();
+        return post.getValue().getOwnerEvent();
     }
 
     /**
@@ -157,7 +157,7 @@ public class ItemPostViewModel extends ViewModel {
      * @return group
      */
     public Group getOwnerGroup() {
-        return post.getValue().getBelongsToGroup();
+        return post.getValue().getOwnerGroup();
     }
 
     /**
@@ -165,7 +165,7 @@ public class ItemPostViewModel extends ViewModel {
      * @return user
      */
     public User getOwnerUser() {
-        return post.getValue().getBelongsToUser();
+        return post.getValue().getOwnerUser();
     }
 
     /**

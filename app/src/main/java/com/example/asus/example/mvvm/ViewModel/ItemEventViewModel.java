@@ -218,6 +218,7 @@ public class ItemEventViewModel extends ViewModel {
         post.setCreator(currentUser);
         post.setText(text);
         post.setOwnedBy(event.getValue().getId());
+        post.setOwnerEvent(event.getValue());
         post.setDate(new Date());
         postRepository.createPost(post);
     }
