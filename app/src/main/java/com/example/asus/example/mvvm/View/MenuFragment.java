@@ -22,7 +22,7 @@ public class MenuFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_aktienlistefragment, menu);
+        inflater.inflate(R.menu.activity_navigation__drawer_drawer, menu);
     }
 
 
