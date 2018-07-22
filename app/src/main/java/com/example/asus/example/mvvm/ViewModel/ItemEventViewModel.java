@@ -68,6 +68,8 @@ public class ItemEventViewModel extends ViewModel {
      * @param event to set to.
      */
     public void setEvent(MutableLiveData<Event> event) {
+
+        this.event = event;
     }
 
 
