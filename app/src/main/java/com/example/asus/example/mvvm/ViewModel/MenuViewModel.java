@@ -3,8 +3,6 @@ package com.example.asus.example.mvvm.ViewModel;
 import android.arch.lifecycle.ViewModel;
 import android.view.MenuItem;
 
-import com.example.asus.example.R;
-
 
 public class MenuViewModel extends ViewModel {
 
@@ -15,12 +13,9 @@ public class MenuViewModel extends ViewModel {
      * @return
      */
     public boolean invoke(MenuItem item) {
-        switch (item.getItemId()) {
+        /*switch (item.getItemId()) {
             case R.id.personal_feed:
                 showPersonalFeed();
-                return true;
-            case R.id.messages:
-                showMessages();
                 return true;
             case R.id.groups:
                 showGroups();
@@ -31,11 +26,11 @@ public class MenuViewModel extends ViewModel {
             case R.id.subscriptions:
                 showSubscriptions();
                 return true;
-            default:
+            default:*/
                 return false;
 
         }
-    }
+
 
     /**
      * shows the subscriptions

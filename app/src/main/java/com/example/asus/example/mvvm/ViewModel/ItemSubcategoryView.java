@@ -10,9 +10,9 @@ import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.Model.Entities.Subcategory;
 import com.example.asus.example.mvvm.Model.Entities.User;
-import com.example.asus.example.mvvm.Model.Repository.CategoryRepository;
 import com.example.asus.example.mvvm.Model.Repository.EventRepository;
 import com.example.asus.example.mvvm.Model.Repository.GroupRepository;
+import com.example.asus.example.mvvm.Model.Repository.UserRepository;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -29,7 +29,6 @@ public class ItemSubcategoryView extends ViewModel {
     private MutableLiveData<Subcategory> subcategory;
     private User currentUser;
     private Context context;
-    private CategoryRepository categoryRepository;
     private GroupRepository groupRepository;
     private EventRepository eventRepository;
 
@@ -43,12 +42,12 @@ public class ItemSubcategoryView extends ViewModel {
         this.subcategory.setValue(subcategory);
         this.context = context;
 
-        categoryRepository = new CategoryRepository();
         groupRepository = new GroupRepository();
         eventRepository = new EventRepository();
 
+        UserRepository userRepository = new UserRepository();
         SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
-        currentUser = userRepository.findUserById(myPrefs.getLong("CurrentUserId", 0));
+        currentUser = userRepository.getUserByID(myPrefs.getLong("CurrentUserId", 0)).getValue();
     }
 
     public void setSubcategory(Subcategory subcategory) {

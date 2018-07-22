@@ -26,7 +26,6 @@ public class EventViewModel extends ViewModel {
     private User currentUser;
     private Context context;
     private EventRepository eventRepository;
-    private UserRepository userRepository;
 
     /**
      * Creates an instance with the given application context.
@@ -35,9 +34,11 @@ public class EventViewModel extends ViewModel {
      */
     public EventViewModel(Context context) {
         this.context = context;
+        eventRepository = new EventRepository();
 
+        UserRepository userRepository = new UserRepository();
         SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
-        currentUser = userRepository.findUserById(myPrefs.getLong("CurrentUserId", 0));
+        currentUser = userRepository.getUserByID(myPrefs.getLong("CurrentUserId", 0)).getValue();
     }
 
     /**

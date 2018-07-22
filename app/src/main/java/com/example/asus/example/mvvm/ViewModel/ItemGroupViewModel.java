@@ -35,7 +35,6 @@ public class ItemGroupViewModel extends ViewModel {
     private User currentUser;
     private Context context;
     private GroupRepository groupRepository;
-    private UserRepository userRepository;
     private FeedRepository feedRepository;
     private PostRepository postRepository;
 
@@ -48,9 +47,13 @@ public class ItemGroupViewModel extends ViewModel {
     public ItemGroupViewModel(MutableLiveData<Group> chosenGroup, Context context) {
         this.chosenGroup = chosenGroup;
         this.context = context;
+        postRepository = new PostRepository();
+        UserRepository userRepository = new UserRepository();
+        feedRepository = new FeedRepository();
+        groupRepository = new GroupRepository();
 
         SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
-        currentUser = userRepository.findUserById(myPrefs.getLong("CurrentUserId", 0));
+        currentUser = userRepository.getUserByID(myPrefs.getLong("CurrentUserId", 0)).getValue();
     }
 
 

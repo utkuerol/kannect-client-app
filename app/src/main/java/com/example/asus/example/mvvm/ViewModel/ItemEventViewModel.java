@@ -37,7 +37,6 @@ public class ItemEventViewModel extends ViewModel {
     private User currentUser;
     private EventRepository eventRepository;
     private FeedRepository feedRepository;
-    private UserRepository userRepository;
     private PostRepository postRepository;
 
     /**
@@ -49,9 +48,13 @@ public class ItemEventViewModel extends ViewModel {
     public ItemEventViewModel(MutableLiveData<Event> event, Context context) {
         this.context = context;
         this.event = event;
+        postRepository = new PostRepository();
+        UserRepository userRepository = new UserRepository();
+        feedRepository = new FeedRepository();
+        eventRepository = new EventRepository();
 
         SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
-        currentUser = userRepository.findUserById(myPrefs.getLong("CurrentUserId", 0));
+        currentUser = userRepository.getUserByID(myPrefs.getLong("CurrentUserId", 0)).getValue();
     }
 
     /**

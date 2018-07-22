@@ -35,7 +35,7 @@ public class UserViewModel extends ViewModel {
         userRepository = new UserRepository();
 
         SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
-        currentUser = userRepository.findUserById(myPrefs.getLong("CurrentUserId", 0));
+        currentUser = userRepository.getUserByID(myPrefs.getLong("CurrentUserId", 0)).getValue();
     }
 
     /**

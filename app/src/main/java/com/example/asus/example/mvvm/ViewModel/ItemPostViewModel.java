@@ -13,8 +13,6 @@ import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
-import com.example.asus.example.mvvm.Model.Repository.EventRepository;
-import com.example.asus.example.mvvm.Model.Repository.GroupRepository;
 import com.example.asus.example.mvvm.Model.Repository.PostRepository;
 import com.example.asus.example.mvvm.Model.Repository.UserRepository;
 import com.example.asus.example.mvvm.View.ShowPostActivity;
@@ -33,13 +31,9 @@ import java.util.List;
 public class ItemPostViewModel extends ViewModel {
 
     private MutableLiveData<Post> post;
-    private String creatorProfilePictureUrl;
     private Context context;
     private User currentUser;
     private PostRepository postRepository;
-    private UserRepository userRepository;
-    private GroupRepository groupRepository;
-    private EventRepository eventRepository;
 
     /**
      * Creates an instance with the given post and application context.
@@ -50,10 +44,11 @@ public class ItemPostViewModel extends ViewModel {
     public ItemPostViewModel(MutableLiveData<Post> post, Context context) {
         this.post = post;
         this.context = context;
-        creatorProfilePictureUrl = getCreator().getImageUrl();
+        postRepository = new PostRepository();
+        UserRepository userRepository = new UserRepository();
 
         SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
-        currentUser = userRepository.findUserById(myPrefs.getLong("CurrentUserId", 0));
+        currentUser = userRepository.getUserByID(myPrefs.getLong("CurrentUserId", 0)).getValue();
     }
 
     @BindingAdapter({"bind:creatorProfilePictureUrl"})

@@ -18,15 +18,14 @@ public class PostViewModel extends ViewModel {
     private Context context;
     private User currentUser;
     private FeedRepository feedRepository;
-    private UserRepository userRepository:
 
     public PostViewModel(Context context) {
         this.context = context;
         feedRepository = new FeedRepository();
-        userRepository = new UserRepository();
 
+        UserRepository userRepository = new UserRepository();
         SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
-        currentUser = userRepository.findUserById(myPrefs.getLong("CurrentUserId", 0));
+        currentUser = userRepository.getUserByID(myPrefs.getLong("CurrentUserId", 0)).getValue();
     }
 
     public void setPostsToPersonalFeed() {

@@ -48,7 +48,7 @@ public class ItemUserViewModel extends ViewModel {
 
 
         SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
-        currentUser = userRepository.findUserById(myPrefs.getLong("CurrentUserId", 0));
+        currentUser = userRepository.getUserByID(myPrefs.getLong("CurrentUserId", 0)).getValue();
     }
 
     /**
@@ -147,7 +147,7 @@ public class ItemUserViewModel extends ViewModel {
      * @return
      */
     public List<Post> getUserProfile() {
-        return userRepository.getUserProfile(currentUser);
+        return userRepository.getUserProfile(currentUser).getValue();
     }
 
 

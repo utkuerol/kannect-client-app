@@ -11,7 +11,6 @@ import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.Model.Entities.Subcategory;
 import com.example.asus.example.mvvm.Model.Entities.User;
-import com.example.asus.example.mvvm.Model.Repository.CategoryRepository;
 import com.example.asus.example.mvvm.Model.Repository.EventRepository;
 import com.example.asus.example.mvvm.Model.Repository.GroupRepository;
 import com.example.asus.example.mvvm.Model.Repository.UserRepository;
@@ -32,8 +31,6 @@ public class ItemCategoryViewModel extends ViewModel {
     private User currentUser;
     private Context context;
 
-    private CategoryRepository categoryRepository;
-    private UserRepository userRepository;
     private GroupRepository groupRepository;
     private EventRepository eventRepository;
 
@@ -46,9 +43,12 @@ public class ItemCategoryViewModel extends ViewModel {
     public ItemCategoryViewModel(MutableLiveData<Category> chosenCategory, Context context) {
         this.chosenCategory = chosenCategory;
         this.context = context;
+        UserRepository userRepository = new UserRepository();
+        groupRepository = new GroupRepository();
+        eventRepository = new EventRepository();
 
         SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
-        currentUser = userRepository.findUserById(myPrefs.getLong("CurrentUserId", 0));
+        currentUser = userRepository.getUserByID(myPrefs.getLong("CurrentUserId", 0)).getValue();
     }
 
     /**

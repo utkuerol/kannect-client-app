@@ -26,7 +26,6 @@ public class GroupViewModel extends ViewModel {
     private MutableLiveData<List<Group>> groups;
     private User currentUser;
     private Context context;
-    private UserRepository userRepository;
     private GroupRepository groupRepository;
 
 
@@ -37,8 +36,10 @@ public class GroupViewModel extends ViewModel {
      */
     public GroupViewModel(Context context) {
         this.context = context;
+        UserRepository userRepository = new UserRepository();
+        groupRepository = new GroupRepository();
         SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
-        currentUser = userRepository.findUserById(myPrefs.getLong("CurrentUserId", 0));
+        currentUser = userRepository.getUserByID(myPrefs.getLong("CurrentUserId", 0)).getValue();
     }
 
     public MutableLiveData<List<Group>> getGroups() {
