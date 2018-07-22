@@ -5,16 +5,16 @@
 
     <group>
         <item
-            android:id="@+id/settings"
+            android:id="@+id/nav_settings"
             android:title="@string/settings"
             android:icon="@drawable/ic_setting_icon"/>
 
         <item
-            android:id="@+id/feed"
+            android:id="@+id/nav_feed"
             android:title="@string/feed"
             android:icon="@drawable/ic_feed_icon"/>
         <item
-            android:id="@+id/profile"
+            android:id="@+id/nav_profile"
             android:title="@string/profile"
             android:icon="@drawable/ic_profile_icon"/>
 
@@ -24,15 +24,15 @@
     <item android:title="@string/entdecken">
         <menu>
             <item
-                android:id="@+id/groups"
+                android:id="@+id/nav_groups"
                 android:title="@string/groups"
                 android:icon="@drawable/ic_group_icon"/>
             <item
-                android:id="@+id/events"
+                android:id="@+id/nav_events"
                 android:title="@string/events"
                 android:icon="@drawable/ic_event_icon"/>
             <item
-                android:id="@+id/search"
+                android:id="@+id/nav_search"
                 android:title="@string/search"
                 android:icon="@drawable/ic_search_icon"/>
         </menu>

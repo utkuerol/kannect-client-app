@@ -3,6 +3,7 @@ package com.example.asus.example.mvvm.Model.Entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -21,6 +22,13 @@ public class Event implements Serializable {
     private String imageUrl;
     private List<User> participants;
 
+    /**
+     * Overwrites Default Constructor and
+     * initializes all lists
+     */
+    public Event() {
+        this.participants = new LinkedList<>();
+    }
 
     /**
      * method to get the id of the Event.

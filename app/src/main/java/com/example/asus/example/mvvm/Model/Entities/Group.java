@@ -1,6 +1,7 @@
 package com.example.asus.example.mvvm.Model.Entities;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -18,7 +19,11 @@ public class Group implements Serializable {
     private String imageURl;
     private List<User> members;
 
+    /**
+     *
+     */
     public Group() {
+        this.members = new LinkedList<>();
     }
 
     /**

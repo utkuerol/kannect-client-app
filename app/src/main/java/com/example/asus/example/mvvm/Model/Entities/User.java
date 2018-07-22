@@ -1,6 +1,7 @@
 package com.example.asus.example.mvvm.Model.Entities;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -23,7 +24,19 @@ public class User implements Serializable {
     private List<Event> createdEvents;
     private List<Comment> createdComments;
 
+    /**
+     * Overwrites Default Constructor and
+     * initializes all lists
+     */
     public User() {
+        this.subscribers = new LinkedList<>();
+        this.subscriptions = new LinkedList<>();
+        this.joinedGroups = new LinkedList<>();
+        this.participatedEvents = new LinkedList<>();
+        this.createdPosts = new LinkedList<>();
+        this.createdGroups = new LinkedList<>();
+        this.createdEvents = new LinkedList<>();
+        this.createdComments = new LinkedList<>();
     }
 
     /**

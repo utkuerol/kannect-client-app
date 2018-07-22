@@ -3,6 +3,7 @@ package com.example.asus.example.mvvm.Model.Entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -24,7 +25,12 @@ public class Post implements Serializable {
     private List<Comment> comments;
     private long id;
 
+    /*
+
+     */
     public Post() {
+        this.likedUsers = new LinkedList<>();
+        this.comments = new LinkedList<>();
     }
 
     /**

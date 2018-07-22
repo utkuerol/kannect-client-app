@@ -1,6 +1,7 @@
 package com.example.asus.example.mvvm.Model.Entities;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -16,6 +17,14 @@ public class Subcategory implements Serializable {
     private List<Group> groups;
     private long id;
 
+    /**
+     * Overwrites Default Constructor and
+     * initializes all lists
+     */
+    public Subcategory() {
+        this.events = new LinkedList<>();
+        this.groups = new LinkedList<>();
+    }
     /**
      * Constructor without an ID. ID will be given by Server-Site
      * @param name Name of the subcategory

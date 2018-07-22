@@ -20,6 +20,7 @@ public class Comment implements Serializable {
 
     private long id;
 
+
     /**
      *
      * @param text User-created text to be displayed in the comment
