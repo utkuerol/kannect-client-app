@@ -3,12 +3,21 @@ package com.example.asus.example.mvvm.ViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.View;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
+import com.example.asus.example.mvvm.Model.Entities.Event;
+import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.Model.Entities.Subcategory;
+import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.Repository.CategoryRepository;
+import com.example.asus.example.mvvm.Model.Repository.EventRepository;
+import com.example.asus.example.mvvm.Model.Repository.GroupRepository;
+import com.example.asus.example.mvvm.Model.Repository.UserRepository;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,8 +29,13 @@ import java.util.List;
 public class ItemCategoryViewModel extends ViewModel {
 
     private MutableLiveData<Category> chosenCategory;
+    private User currentUser;
     private Context context;
+
     private CategoryRepository categoryRepository;
+    private UserRepository userRepository;
+    private GroupRepository groupRepository;
+    private EventRepository eventRepository;
 
     /**
      * Creates an instance with the chosenCategory and the application context.
@@ -32,6 +46,9 @@ public class ItemCategoryViewModel extends ViewModel {
     public ItemCategoryViewModel(MutableLiveData<Category> chosenCategory, Context context) {
         this.chosenCategory = chosenCategory;
         this.context = context;
+
+        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
+        currentUser = userRepository.findUserById(myPrefs.getLong("CurrentUserId", 0));
     }
 
     /**
@@ -72,14 +89,16 @@ public class ItemCategoryViewModel extends ViewModel {
      * Gets list of subcategories of the category.
      * @return list of subcategories.
      */
-    public List<Subcategory> getSubcategories() { return null;
+    public List<Subcategory> getSubcategories() {
+        return chosenCategory.getValue().getSubcategories();
     }
 
     /**
      * Gets the name of the category
      * @return name of the category
      */
-    public String getName() { return null;
+    public String getName() {
+        return chosenCategory.getValue().getName();
     }
 
     /**
@@ -89,6 +108,13 @@ public class ItemCategoryViewModel extends ViewModel {
      * @param imageUrl of the group to be created
      */
     public void createGroup(String name, String description, String imageUrl) {
+        Group group = new Group();
+        group.setCategory(chosenCategory.getValue());
+        group.setCreator(currentUser);
+        group.setDescription(description);
+        group.setImageURl(imageUrl);
+        group.setName(name);
+        groupRepository.createGroup(group);
     }
 
     /**
@@ -97,7 +123,17 @@ public class ItemCategoryViewModel extends ViewModel {
      * @param description of the event to be created
      * @param imageUrl of the event to be created
      */
-    public void createEvent(String name, String description, String imageUrl) {
+    public void createEvent(String name, String description, String imageUrl, String givenDate)
+            throws Exception {
+        Event event = new Event();
+        Date date = new SimpleDateFormat("dd.mm.yyyy").parse(givenDate);
+        event.setCategory(chosenCategory.getValue());
+        event.setCreator(currentUser);
+        event.setDate(date);
+        event.setDescription(description);
+        event.setName(name);
+        event.setImageUrl(imageUrl);
+        eventRepository.createEvent(event);
     }
 
 

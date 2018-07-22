@@ -1,16 +1,16 @@
 package com.example.asus.example.mvvm.ViewModel;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
-import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.Model.Entities.Subcategory;
 import com.example.asus.example.mvvm.Model.Entities.User;
+import com.example.asus.example.mvvm.Model.Repository.GroupRepository;
+import com.example.asus.example.mvvm.Model.Repository.UserRepository;
 
 import java.util.List;
 
@@ -24,7 +24,11 @@ import java.util.List;
 public class GroupViewModel extends ViewModel {
 
     private MutableLiveData<List<Group>> groups;
+    private User currentUser;
     private Context context;
+    private UserRepository userRepository;
+    private GroupRepository groupRepository;
+
 
     /**
      * Creates an instance with the given application context.
@@ -33,6 +37,8 @@ public class GroupViewModel extends ViewModel {
      */
     public GroupViewModel(Context context) {
         this.context = context;
+        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
+        currentUser = userRepository.findUserById(myPrefs.getLong("CurrentUserId", 0));
     }
 
     public MutableLiveData<List<Group>> getGroups() {
@@ -40,15 +46,19 @@ public class GroupViewModel extends ViewModel {
     }
 
     public void setGroupsToSearchResults(String query) {
+        groups = groupRepository.getGroups(query);
     }
 
     public void setGroupsFilteredByCategory(Category category) {
+        groups.setValue(category.getGroups());
     }
 
     public void setGroupsFilteredBySubcategory(Subcategory subcategory) {
+        groups.setValue(subcategory.getGroups());
     }
 
-    public void setGroupsToJoinedGroups(User mCurrentUser) {
+    public void setGroupsToJoinedGroups(User currentUser) {
+        groups.setValue(currentUser.getJoinedGroups());
     }
 
 

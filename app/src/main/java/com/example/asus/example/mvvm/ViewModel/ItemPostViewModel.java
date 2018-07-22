@@ -3,6 +3,7 @@ package com.example.asus.example.mvvm.ViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.databinding.BindingAdapter;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,12 +13,16 @@ import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
+import com.example.asus.example.mvvm.Model.Repository.EventRepository;
+import com.example.asus.example.mvvm.Model.Repository.GroupRepository;
 import com.example.asus.example.mvvm.Model.Repository.PostRepository;
+import com.example.asus.example.mvvm.Model.Repository.UserRepository;
 import com.example.asus.example.mvvm.View.ShowPostActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.Date;
 import java.util.List;
+
 
 /**
  * ViewModel class for one specific post, and is responsible for preparing and managing the data for Views,
@@ -32,6 +37,9 @@ public class ItemPostViewModel extends ViewModel {
     private Context context;
     private User currentUser;
     private PostRepository postRepository;
+    private UserRepository userRepository;
+    private GroupRepository groupRepository;
+    private EventRepository eventRepository;
 
     /**
      * Creates an instance with the given post and application context.
@@ -42,13 +50,16 @@ public class ItemPostViewModel extends ViewModel {
     public ItemPostViewModel(MutableLiveData<Post> post, Context context) {
         this.post = post;
         this.context = context;
-        creatorProfilePictureUrl = this.getCreator().getImageUrl();
+        creatorProfilePictureUrl = getCreator().getImageUrl();
+
+        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
+        currentUser = userRepository.findUserById(myPrefs.getLong("CurrentUserId", 0));
     }
 
     @BindingAdapter({"bind:creatorProfilePictureUrl"})
     public static void loadImage(ImageView view, String imageUrl) {
         Picasso.get().load(imageUrl)
-                // .placeholder(R.drawable.placeholder)
+                //.placeholder(R.drawable.placeholder)
                 .into(view);
     }
 
@@ -132,11 +143,12 @@ public class ItemPostViewModel extends ViewModel {
         return post.getValue().getDate().toString();
     }
 
+
     /**
      * Gets the event to which the post belongs.
      * @return event
      */
-    public Event getBelongsToEvent() {
+    public Event getOwnerEvent() {
         return post.getValue().getBelongsToEvent();
     }
 
@@ -144,7 +156,7 @@ public class ItemPostViewModel extends ViewModel {
      * Gets the group to which the post belongs.
      * @return group
      */
-    public Group getBelongsToGroup() {
+    public Group getOwnerGroup() {
         return post.getValue().getBelongsToGroup();
     }
 
@@ -152,7 +164,7 @@ public class ItemPostViewModel extends ViewModel {
      * Gets the user to which the post belongs.
      * @return user
      */
-    public User getBelongsToUser() {
+    public User getOwnerUser() {
         return post.getValue().getBelongsToUser();
     }
 
@@ -175,7 +187,7 @@ public class ItemPostViewModel extends ViewModel {
     /**
      * Likes the post.
      */
-    public void onLikeClick() {
+    public void like() {
         postRepository.likePost(post.getValue(), currentUser);
     }
 

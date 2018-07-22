@@ -7,12 +7,6 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.asus.example.R;
@@ -105,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
         if (account != null) {
             MutableLiveData<User> user = viewModel.invoke(account);
 
-            SharedPreferences myPrefs = getSharedPreferences("CurrentUser", MODE_WORLD_READABLE);
+            SharedPreferences myPrefs = getSharedPreferences("CurrentUser", 0);
             SharedPreferences.Editor prefsEditor;
             prefsEditor = myPrefs.edit();
             prefsEditor.putLong("CurrentUserId", user.getValue().getId());

@@ -3,6 +3,7 @@ package com.example.asus.example.mvvm.ViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.Repository.UserRepository;
@@ -19,7 +20,7 @@ public class UserViewModel extends ViewModel {
 
 
     private MutableLiveData<List<User>> users;
-    private User currentUser; //TODO
+    private User currentUser;
     private UserRepository userRepository;
     private Context context;
 
@@ -31,6 +32,10 @@ public class UserViewModel extends ViewModel {
     public UserViewModel(Context context) {
         this.context = context;
         users = new MutableLiveData<>();
+        userRepository = new UserRepository();
+
+        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
+        currentUser = userRepository.findUserById(myPrefs.getLong("CurrentUserId", 0));
     }
 
     /**
@@ -40,6 +45,10 @@ public class UserViewModel extends ViewModel {
      */
     public MutableLiveData<List<User>> getUsers() {
         return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users.setValue(users);
     }
 
     /**

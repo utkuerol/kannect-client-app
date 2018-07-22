@@ -3,10 +3,19 @@ package com.example.asus.example.mvvm.ViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.View;
 
+import com.example.asus.example.mvvm.Model.Entities.Event;
+import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.Model.Entities.Subcategory;
+import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.Repository.CategoryRepository;
+import com.example.asus.example.mvvm.Model.Repository.EventRepository;
+import com.example.asus.example.mvvm.Model.Repository.GroupRepository;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 /**
@@ -18,8 +27,11 @@ import com.example.asus.example.mvvm.Model.Repository.CategoryRepository;
 public class ItemSubcategoryView extends ViewModel {
 
     private MutableLiveData<Subcategory> subcategory;
+    private User currentUser;
     private Context context;
     private CategoryRepository categoryRepository;
+    private GroupRepository groupRepository;
+    private EventRepository eventRepository;
 
     /**
      * Creates an instance with the given chosenSubcategory and application context.
@@ -27,21 +39,26 @@ public class ItemSubcategoryView extends ViewModel {
      * @param chosenSubcategory subcategory
      * @param context           of the application.
      */
-    public ItemSubcategoryView(Subcategory chosenSubcategory, Context context) {
-        this.subcategory = subcategory;
+    public ItemSubcategoryView(Subcategory subcategory, Context context) {
+        this.subcategory.setValue(subcategory);
         this.context = context;
+
+        categoryRepository = new CategoryRepository();
+        groupRepository = new GroupRepository();
+        eventRepository = new EventRepository();
+
+        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
+        currentUser = userRepository.findUserById(myPrefs.getLong("CurrentUserId", 0));
     }
 
-    public void setSubcategory(Subcategory sub) {
-        MutableLiveData<Subcategory> s = new MutableLiveData<Subcategory>();
-        s.setValue(sub);
-        this.subcategory = s;
+    public void setSubcategory(Subcategory subcategory) {
+        this.subcategory.setValue(subcategory);
     }
-
 
 
     /**
      * Starts the SubcategoryEventPageActivity with the chosen subcategory.
+     *
      * @param view
      */
     public void onItemClickEvent(View view) {
@@ -50,6 +67,7 @@ public class ItemSubcategoryView extends ViewModel {
 
     /**
      * Starts the SubcategoryGroupPageActivity with the chosen subcategory.
+     *
      * @param view
      */
     public void onItemClickGroup(View view) {
@@ -58,30 +76,53 @@ public class ItemSubcategoryView extends ViewModel {
 
     /**
      * Gets the name of the subcategory.
+     *
      * @return
      */
     public String getName() {
-        return null;
+        return subcategory.getValue().getName();
     }
 
     /**
      * Creates a new group in the chosen subcategory with the user-given parameters.
-     * @param name of the group to be created.
+     *
+     * @param name        of the group to be created.
      * @param description of the group to be created.
-     * @param imageUrl of the group to be created.
+     * @param imageUrl    of the group to be created.
      */
     public void createGroup(String name, String description, String imageUrl) {
+        Group group = new Group();
+        group.setName(name);
+        group.setImageURl(imageUrl);
+        group.setDescription(description);
+        group.setCategory(subcategory.getValue().getCategory());
+        group.setCreator(currentUser);
+        group.setSubcategory(subcategory.getValue());
+        groupRepository.createGroup(group);
     }
 
 
     /**
      * Creates a new event in the chosen subcategory with the user-given parameters.
-     * @param name of the event to be created.
+     *
+     * @param name        of the event to be created.
      * @param description of the event to be created.
-     * @param imageUrl of the event to be created.
+     * @param imageUrl    of the event to be created.
      */
 
-    public void createEvent(String name, String description, String imageUrl) {
+    public void createEvent(String name, String description, String imageUrl, String givenDate)
+            throws Exception {
+
+        Event event = new Event();
+        Date date = new SimpleDateFormat("dd.mm.yyyy").parse(givenDate);
+        event.setCategory(subcategory.getValue().getCategory());
+        event.setSubcategory(subcategory.getValue());
+        event.setCreator(currentUser);
+        event.setDate(date);
+        event.setDescription(description);
+        event.setName(name);
+        event.setImageUrl(imageUrl);
+        eventRepository.createEvent(event);
     }
 
 }

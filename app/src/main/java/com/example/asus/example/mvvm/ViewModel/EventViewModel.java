@@ -3,11 +3,14 @@ package com.example.asus.example.mvvm.ViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.Subcategory;
+import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.Repository.EventRepository;
+import com.example.asus.example.mvvm.Model.Repository.UserRepository;
 
 import java.util.List;
 
@@ -20,8 +23,10 @@ import java.util.List;
 public class EventViewModel extends ViewModel {
 
     private MutableLiveData<List<Event>> events;
+    private User currentUser;
     private Context context;
     private EventRepository eventRepository;
+    private UserRepository userRepository;
 
     /**
      * Creates an instance with the given application context.
@@ -30,6 +35,9 @@ public class EventViewModel extends ViewModel {
      */
     public EventViewModel(Context context) {
         this.context = context;
+
+        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
+        currentUser = userRepository.findUserById(myPrefs.getLong("CurrentUserId", 0));
     }
 
     /**
@@ -37,6 +45,7 @@ public class EventViewModel extends ViewModel {
      * @param query to search.
      */
     public void setEventsToSearchResults(String query) {
+        events = eventRepository.getEvents(query);
     }
 
     /**
@@ -44,6 +53,7 @@ public class EventViewModel extends ViewModel {
      * @param category to filter
      */
     public void setEventsFilteredByCategory(MutableLiveData<Category> category) {
+        events.setValue(category.getValue().getEvents());
     }
 
     /**
@@ -51,12 +61,14 @@ public class EventViewModel extends ViewModel {
      * @param subcategory to filter.
      */
     public void setEventsFilteredBySubcategory(MutableLiveData<Subcategory> subcategory) {
+        events.setValue(subcategory.getValue().getEvents());
     }
 
     /**
      * Sets the events to current user's list of participating events.
      */
     public void setEventsToParticipatingEvents() {
+        events.setValue(currentUser.getParticipatedEvents());
     }
 
 

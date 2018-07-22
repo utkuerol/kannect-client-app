@@ -3,7 +3,10 @@ package com.example.asus.example.mvvm.ViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.databinding.BindingAdapter;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.Entities.Event;
@@ -12,7 +15,10 @@ import com.example.asus.example.mvvm.Model.Entities.Subcategory;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.Repository.EventRepository;
 import com.example.asus.example.mvvm.Model.Repository.FeedRepository;
+import com.example.asus.example.mvvm.Model.Repository.PostRepository;
+import com.example.asus.example.mvvm.Model.Repository.UserRepository;
 import com.example.asus.example.mvvm.View.EventFeedActivity;
+import com.squareup.picasso.Picasso;
 
 import java.util.Date;
 import java.util.List;
@@ -31,6 +37,8 @@ public class ItemEventViewModel extends ViewModel {
     private User currentUser;
     private EventRepository eventRepository;
     private FeedRepository feedRepository;
+    private UserRepository userRepository;
+    private PostRepository postRepository;
 
     /**
      * creates an instance with the chosen event and application context.
@@ -41,6 +49,9 @@ public class ItemEventViewModel extends ViewModel {
     public ItemEventViewModel(MutableLiveData<Event> event, Context context) {
         this.context = context;
         this.event = event;
+
+        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
+        currentUser = userRepository.findUserById(myPrefs.getLong("CurrentUserId", 0));
     }
 
     /**
@@ -135,6 +146,13 @@ public class ItemEventViewModel extends ViewModel {
     }
 
 
+    @BindingAdapter({"bind:imageUrl"})
+    public static void loadImage(ImageView view, String imageUrl) {
+        Picasso.get().load(imageUrl)
+                // .placeholder(R.drawable.placeholder)
+                .into(view);
+    }
+
     /**
      * method to get the List of User who want to participate in this Event.
      * @return List of Participants
@@ -196,7 +214,12 @@ public class ItemEventViewModel extends ViewModel {
      * @param text for the post.
      */
     public void createPost(String text) {
-
+        Post post = new Post();
+        post.setCreator(currentUser);
+        post.setText(text);
+        post.setOwnedBy(event.getValue().getId());
+        post.setDate(new Date());
+        postRepository.createPost(post);
     }
 
 

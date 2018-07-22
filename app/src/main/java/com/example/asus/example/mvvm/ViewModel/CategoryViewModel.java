@@ -29,6 +29,7 @@ public class CategoryViewModel extends ViewModel {
      */
     public CategoryViewModel(Context context) {
         this.context = context;
+        this.categoryRepository = new CategoryRepository();
     }
 
     /**
@@ -42,6 +43,8 @@ public class CategoryViewModel extends ViewModel {
     /**
      * Sets categories to all categories.
      */
-    public void setCategoriesToAllCategories() {}
+    public void setCategoriesToAllCategories() {
+        categories = categoryRepository.getCategories("");
+    }
 
 }

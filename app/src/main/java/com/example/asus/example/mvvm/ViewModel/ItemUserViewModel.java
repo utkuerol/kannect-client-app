@@ -3,6 +3,7 @@ package com.example.asus.example.mvvm.ViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.databinding.BindingAdapter;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,8 +12,11 @@ import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
+import com.example.asus.example.mvvm.Model.Repository.PostRepository;
+import com.example.asus.example.mvvm.Model.Repository.UserRepository;
 import com.squareup.picasso.Picasso;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -25,8 +29,10 @@ import java.util.List;
 public class ItemUserViewModel extends ViewModel {
 
     private MutableLiveData<User> chosenUser;
-    private String profilePictureUrl;
+    private User currentUser;
     private Context context;
+    private UserRepository userRepository;
+    private PostRepository postRepository;
 
     /**
      * Creates an instance with the chosen/given user and the application context.
@@ -37,7 +43,12 @@ public class ItemUserViewModel extends ViewModel {
     public ItemUserViewModel(MutableLiveData<User> user, Context context) {
         this.chosenUser = user;
         this.context = context;
-        profilePictureUrl = this.getImageUrl();
+        userRepository = new UserRepository();
+        postRepository = new PostRepository();
+
+
+        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
+        currentUser = userRepository.findUserById(myPrefs.getLong("CurrentUserId", 0));
     }
 
     /**
@@ -48,11 +59,11 @@ public class ItemUserViewModel extends ViewModel {
         return chosenUser;
     }
 
-    /**
-     * Sets the chosen user.
-     * @param user to set.
-     */
-    public void setChosenUser(MutableLiveData<User> user) {
+    @BindingAdapter({"bind:imageUrl"})
+    public static void loadImage(ImageView view, String imageUrl) {
+        Picasso.get().load(imageUrl)
+                // .placeholder(R.drawable.placeholder)
+                .into(view);
     }
 
     /**
@@ -64,39 +75,37 @@ public class ItemUserViewModel extends ViewModel {
         //context.startActivity(UserProfileActivity.launchWithDetails(view.getContext(), mUser));
     }
 
+    /**
+     * Sets the chosen user.
+     *
+     * @param user to set.
+     */
+    public void setChosenUser(MutableLiveData<User> user) {
+        this.chosenUser = user;
+    }
 
     /**
      * method to get the name of the User
      * @return the name of the User
      */
     public String getName() {
-        return null;
+        return chosenUser.getValue().getName();
     }
-
 
     /**
      * method to get the Email of the User.
      * @return the Email of the User.
      */
     public String getEmail() {
-        return null;
+        return chosenUser.getValue().getEmail();
     }
-
 
     /**
      * method to get the imageURl of the Users profile picture
      * @return the imageUrl
      */
     public String getImageUrl() {
-        return null;
-    }
-
-
-    @BindingAdapter({"bind:profilePictureUrl"})
-    public static void loadImage(ImageView view, String imageUrl) {
-        Picasso.get().load(imageUrl)
-                // .placeholder(R.drawable.placeholder)
-                .into(view);
+        return chosenUser.getValue().getImageUrl();
     }
 
     /**
@@ -104,7 +113,7 @@ public class ItemUserViewModel extends ViewModel {
      * @return List of Subscriptions
      */
     public List<User> getSubscriptions() {
-        return null;
+        return this.chosenUser.getValue().getSubscriptions();
     }
 
 
@@ -113,7 +122,7 @@ public class ItemUserViewModel extends ViewModel {
      * @return List of Subscribers
      */
     public List<User> getSubscribers() {
-        return null;
+        return this.chosenUser.getValue().getSubscribers();
     }
 
     /**
@@ -121,7 +130,7 @@ public class ItemUserViewModel extends ViewModel {
      * @return list of groups
      */
     public List<Group> getJoinedGroups() {
-        return null;
+        return this.chosenUser.getValue().getJoinedGroups();
 
     }
 
@@ -130,7 +139,7 @@ public class ItemUserViewModel extends ViewModel {
      * @return list of events
      */
     public List<Event> getParticipatedEvents() {
-        return null;
+        return this.chosenUser.getValue().getParticipatedEvents();
     }
 
     /**
@@ -138,38 +147,30 @@ public class ItemUserViewModel extends ViewModel {
      * @return
      */
     public List<Post> getUserProfile() {
-        return null;
+        return userRepository.getUserProfile(currentUser);
     }
 
-    /**
-     * Gets the personal feed of the current user, which includes the posts owned by
-     * the users joined groups, participating events and subscribed users.
-     * @return list of posts.
-     */
-    public List<Post> getPersonalFeed() {
-        return null;
-
-    }
 
     /**
      * Checks if the current profile is the profile of the current users own profile.
      * @return boolean result
      */
     public boolean isCurrentUsersProfile() {
-        return false;
+        return chosenUser.getValue().getId() == currentUser.getId();
     }
 
     /**
      * Subscribes the chosenUser by the current user.
      */
     public void subscribeUser() {
+        userRepository.subscribeUser(currentUser, chosenUser.getValue());
     }
 
     /**
      * Unsubscribes the chosenUser by the current user.
      */
     public void unsubscribeUser() {
-
+        userRepository.unsubscribeUser(currentUser, chosenUser.getValue());
     }
 
     /**
@@ -178,6 +179,13 @@ public class ItemUserViewModel extends ViewModel {
      * @param text for the post to be created.
      */
     public void createPost(String text) {
+        Post postToCreate = new Post();
+        postToCreate.setText(text);
+        postToCreate.setCreator(currentUser);
+        postToCreate.setDate(new Date());
+        postToCreate.setBelongsToUser(currentUser);
+        postToCreate.setOwnedBy(currentUser.getId());
+        postRepository.createPost(postToCreate);
     }
 
 

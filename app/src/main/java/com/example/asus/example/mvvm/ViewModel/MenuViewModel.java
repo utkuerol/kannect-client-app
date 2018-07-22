@@ -9,7 +9,7 @@ import com.example.asus.example.R;
 public class MenuViewModel extends ViewModel {
 
     /**
-     * retrieve the item which was selectef by the user and invoke the showactions
+     * retrieve the item which was selected by the user and invoke the show actions
      *
      * @param item
      * @return

@@ -3,15 +3,23 @@ package com.example.asus.example.mvvm.ViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.databinding.BindingAdapter;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.Subcategory;
 import com.example.asus.example.mvvm.Model.Entities.User;
+import com.example.asus.example.mvvm.Model.Repository.FeedRepository;
 import com.example.asus.example.mvvm.Model.Repository.GroupRepository;
+import com.example.asus.example.mvvm.Model.Repository.PostRepository;
+import com.example.asus.example.mvvm.Model.Repository.UserRepository;
+import com.squareup.picasso.Picasso;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -24,8 +32,12 @@ import java.util.List;
 public class ItemGroupViewModel extends ViewModel {
 
     private MutableLiveData<Group> chosenGroup;
+    private User currentUser;
     private Context context;
     private GroupRepository groupRepository;
+    private UserRepository userRepository;
+    private FeedRepository feedRepository;
+    private PostRepository postRepository;
 
     /**
      * Creates an instance with the chosenGroup and application context.
@@ -36,6 +48,9 @@ public class ItemGroupViewModel extends ViewModel {
     public ItemGroupViewModel(MutableLiveData<Group> chosenGroup, Context context) {
         this.chosenGroup = chosenGroup;
         this.context = context;
+
+        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
+        currentUser = userRepository.findUserById(myPrefs.getLong("CurrentUserId", 0));
     }
 
 
@@ -55,20 +70,28 @@ public class ItemGroupViewModel extends ViewModel {
         return chosenGroup;
     }
 
+    @BindingAdapter({"bind:imageUrl"})
+    public static void loadImage(ImageView view, String imageUrl) {
+        Picasso.get().load(imageUrl)
+                // .placeholder(R.drawable.placeholder)
+                .into(view);
+    }
+
     /**
      * Sets the chosenGroup.
      * @param group to set.
      */
-    public void setChosenGroup(MutableLiveData<Group> group) {
+    public void setChosenGroup(Group group) {
+        this.chosenGroup.setValue(group);
     }
-
 
     /**
      * Gets the name of the group.
      * @return name
      */
     public String getName() {
-        return null;
+
+        return chosenGroup.getValue().getName();
     }
 
     /**
@@ -76,7 +99,8 @@ public class ItemGroupViewModel extends ViewModel {
      * @return description
      */
     public String getDescription() {
-        return null;
+
+        return chosenGroup.getValue().getDescription();
     }
 
     /**
@@ -84,7 +108,7 @@ public class ItemGroupViewModel extends ViewModel {
      * @return Creator of the Group.
      */
     public User getCreator() {
-        return null;
+        return chosenGroup.getValue().getCreator();
     }
 
     /**
@@ -92,7 +116,7 @@ public class ItemGroupViewModel extends ViewModel {
      * @return Category this Group belongs to.
      */
     public Category getCategory() {
-        return null;
+        return chosenGroup.getValue().getCategory();
     }
 
     /**
@@ -100,7 +124,7 @@ public class ItemGroupViewModel extends ViewModel {
      * @return Subcategory this Group belongs to.
      */
     public Subcategory getSubcategory() {
-        return null;
+        return chosenGroup.getValue().getSubcategory();
     }
 
     /**
@@ -108,7 +132,7 @@ public class ItemGroupViewModel extends ViewModel {
      * @return the imageUrl of this Group
      */
     public String getImageURl() {
-        return null;
+        return chosenGroup.getValue().getImageURl();
     }
 
     /**
@@ -116,7 +140,7 @@ public class ItemGroupViewModel extends ViewModel {
      * @return List of Members
      */
     public List<User> getMembers() {
-        return null;
+        return chosenGroup.getValue().getMembers();
     }
 
     /**
@@ -124,54 +148,43 @@ public class ItemGroupViewModel extends ViewModel {
      * @return boolean result
      */
     public boolean isCreator() {
-        return false;
+        return chosenGroup.getValue().getCreator().getId() == currentUser.getId();
     }
 
-    /**
-     * sets the User who created the Group.
-     *
-     * @param creator Creator of the Group.
-     */
-    public void setCreator(User creator) {
-        this.chosenGroup.getValue().setCreator(creator);
-    }
 
     /**
      * Checks if the current user has joined the group
      * @return boolean result
      */
     public boolean joinedThisGroup() {
-        return false;
+        return chosenGroup.getValue().getMembers().contains(currentUser);
     }
 
     public List<Post> getGroupFeed() {
-        return null;
+
+        return feedRepository.getGroupFeed(chosenGroup.getValue()).getValue();
     }
 
     /**
      * Joins the group.
      */
     public void joinGroup() {
+        groupRepository.joinGroup(currentUser, chosenGroup.getValue());
     }
 
     /**
      * Leaves the group
      */
     public void leaveGroup() {
+        groupRepository.leaveGroup(currentUser, chosenGroup.getValue());
     }
 
-    /**
-     * Edits the group with given parameters.
-     * @param newName to set.
-     * @param newDescription to set.
-     */
-    public void editGroup(String newName, String newDescription) {
-    }
 
     /**
      * Deletes the group
      */
     public void deleteGroup() {
+        groupRepository.deleteGroup(chosenGroup.getValue());
     }
 
     /**
@@ -179,6 +192,12 @@ public class ItemGroupViewModel extends ViewModel {
      * @param text for the post.
      */
     public void createPost(String text) {
+        Post post = new Post();
+        post.setDate(new Date());
+        post.setText(text);
+        post.setCreator(currentUser);
+        post.setOwnedBy(chosenGroup);
+        postRepository.createPost(post);
     }
 
 
