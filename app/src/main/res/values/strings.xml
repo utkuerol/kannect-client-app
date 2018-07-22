@@ -28,4 +28,13 @@
     <string name="entdecken">Entecken</string>
     <string name="editGroup">Gruppe bearbeiten</string>
     <string name="deleteGroup">Gruppe löschen</string>
+    <string name="subscribers">Abonnenten</string>
+    <string name="subscriptions">Abonnements</string>
+    <string name="userSearch">Suchbegriff eingeben:</string>
+    <string name="groupDescription">Beschreibung:</string>
+    <string name="groupImageUrl">Bild Url</string>
+    <string name="groupName">Gruppenname</string>
+    <string name="eventDescription">Beschreibung</string>
+    <string name="eventImageUrl">Bild Url</string>
+    <string name="eventName">Name</string>
 </resources>

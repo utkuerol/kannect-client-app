@@ -10,4 +10,5 @@
     <dimen name="fragmentRVHeight">175dp</dimen>
     <dimen name="twoFragmentHeight">255dp</dimen>
     <dimen name="logoLoginScreenSize">200dp</dimen>
+    <dimen name="searchInputEditText">50dp</dimen>
 </resources>
