@@ -7,11 +7,12 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Toast;
+
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.ActivityLoginBinding;
-import com.example.asus.example.databinding.FragmentPersonalFeedBinding;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.ViewModel.LoginViewModel;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -26,22 +27,22 @@ import com.google.android.gms.tasks.Task;
 
 public class LoginActivity extends AppCompatActivity {
 
-    LoginViewModel viewModel = new LoginViewModel();
-    ActivityLoginBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_login);
+    //LoginViewModel viewModel = new LoginViewModel();
+
 
     //Google sign in api Client
     GoogleSignInClient mGoogleSignInClient;
-    FragmentPersonalFeedBinding p = DataBindingUtil.setContentView(this, R.layout.fragment_personal_feed);
 
     //Define Request code for Sign In
     private int RC_SIGN_IN = 6;
     //Sign in button Declaration
-    SignInButton signInButton = binding.signInButton;
+    SignInButton signInButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        signInButton = findViewById(R.id.sign_in_button);
 
         //Bind views
 
@@ -97,20 +98,25 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUI(GoogleSignInAccount account) {
         //Account is not null then user is logged in
         if (account != null) {
-            MutableLiveData<User> user = viewModel.invoke(account);
-
+            /*MutableLiveData<User> user = viewModel.invoke(account);
 
             SharedPreferences myPrefs = getSharedPreferences("CurrentUser", 0);
             SharedPreferences.Editor prefsEditor;
             prefsEditor = myPrefs.edit();
             prefsEditor.putLong("CurrentUserId", user.getValue().getId());
-            prefsEditor.commit();
+            prefsEditor.commit();*/
 
 
-            Intent i = new Intent(getApplicationContext(), PersonalFeedFragment.class);
+            Intent i = new Intent(getApplicationContext(), Navigation_Drawer_Activity.class);
             startActivity(i);
         } else {
-            Toast.makeText(getApplicationContext(), "Login Fehlgeschlagen", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "no Login", Toast.LENGTH_LONG).show();
+            signInButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    signIn();
+                }
+            });
         }
 
     }
