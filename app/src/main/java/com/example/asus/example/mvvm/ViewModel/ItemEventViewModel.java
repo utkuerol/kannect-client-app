@@ -17,7 +17,7 @@ import com.example.asus.example.mvvm.Model.Repository.EventRepository;
 import com.example.asus.example.mvvm.Model.Repository.FeedRepository;
 import com.example.asus.example.mvvm.Model.Repository.PostRepository;
 import com.example.asus.example.mvvm.Model.Repository.UserRepository;
-import com.example.asus.example.mvvm.View.EventFeedActivity;
+import com.example.asus.example.mvvm.View.EventFeedFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.Date;
@@ -73,12 +73,12 @@ public class ItemEventViewModel extends ViewModel {
     }
 
     /**
-     * Starts EventFeedActivity with the event.
+     * Starts EventFeedFragment with the event.
      * @param view
      */
     public void onItemClick(View view) {
 
-        context.startActivity(EventFeedActivity.launchWithDetails(view.getContext(), event.getValue()));
+        context.startActivity(EventFeedFragment.launchWithDetails(view.getContext(), event.getValue()));
     }
 
     /**

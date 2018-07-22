@@ -67,12 +67,12 @@ public class ItemUserViewModel extends ViewModel {
     }
 
     /**
-     * Starts UserProfileActivity with the chosen user.
+     * Starts UserProfileFragment with the chosen user.
      * @param view
      */
     public void onItemClick(View view) {
 
-        //context.startActivity(UserProfileActivity.launchWithDetails(view.getContext(), mUser));
+        //context.startActivity(UserProfileFragment.launchWithDetails(view.getContext(), mUser));
     }
 
     /**

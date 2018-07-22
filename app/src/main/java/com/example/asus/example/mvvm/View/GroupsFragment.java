@@ -7,17 +7,29 @@ import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.asus.example.mvvm.Model.Entities.Post;
+import com.example.asus.example.mvvm.ViewModel.GroupViewModel;
 
 /**
- * Activity class for the view regarding showing a Post and its comments.
- * Uses the ItemPostViewModel as its ViewModel.
+ * Activity diplaying all groups
  */
-public class ShowPostActivity extends AppCompatActivity{
+public class GroupsFragment extends AppCompatActivity {
+
+    GroupViewModel viewModel = new GroupViewModel(this);
+    //Group from intent
+
+    /**
+     * redirects to this activity
+     * @param context needed Application Information to launch this Activity
+     * @return the Intent, which is used to redirect to this Activity.
+     */
+    public static Intent launchWithDetails(Context context) {
+        // redirects from parameter context to this activity, takes user as parameter
+        return null;
+    }
 
     /**
      * Method which is called, when the Activity is first created.
-     * Initializes the DataBinding and the post, which it got from the intent of the launchWithDetail method.
+     * Initializes the DataBinding.
      * @param savedInstanceState if the activity is being re-initialized after previously being shut down
      *                           then this Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle).
      * @param persistentState if the activity is being re-initialized after previously being shut down or powered off
@@ -26,16 +38,5 @@ public class ShowPostActivity extends AppCompatActivity{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
-    }
-
-    /**
-     * redirects to this activity using the current Context of the Application and
-     * the Post, which this view needs, being the Post to which the user navigated.
-     * @param context needed Application Information to launch this Activity.
-     * @param post the user navigated to.
-     * @return the Intent, which is used to redirect to this Activity.
-     */
-    public static Intent launchWithDetails(Context context, Post post) {
-        return null;
     }
 }

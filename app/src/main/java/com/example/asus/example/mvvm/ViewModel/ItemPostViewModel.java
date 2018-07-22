@@ -15,7 +15,7 @@ import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.Repository.PostRepository;
 import com.example.asus.example.mvvm.Model.Repository.UserRepository;
-import com.example.asus.example.mvvm.View.ShowPostActivity;
+import com.example.asus.example.mvvm.View.ShowPostFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.Date;
@@ -79,7 +79,7 @@ public class ItemPostViewModel extends ViewModel {
      * @param view
      */
     public void onItemClick(View view) {
-        context.startActivity(ShowPostActivity.launchWithDetails(view.getContext(), post.getValue()));
+        context.startActivity(ShowPostFragment.launchWithDetails(view.getContext(), post.getValue()));
     }
 
     /**

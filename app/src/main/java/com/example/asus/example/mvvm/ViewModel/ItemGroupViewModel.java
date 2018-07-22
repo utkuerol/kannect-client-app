@@ -58,11 +58,11 @@ public class ItemGroupViewModel extends ViewModel {
 
 
     /**
-     * Starts the GroupFeedActivity with the chosenGroup.
+     * Starts the GroupFeedFragment with the chosenGroup.
      * @param view
      */
     public void onItemClick(View view) {
-        //context.startActivity(GroupFeedActivity.launchWithDetails(view.getContext(), mChosenEvent));
+        //context.startActivity(GroupFeedFragment.launchWithDetails(view.getContext(), mChosenEvent));
     }
 
     /**

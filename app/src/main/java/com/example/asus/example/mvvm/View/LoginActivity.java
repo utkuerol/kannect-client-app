@@ -106,8 +106,7 @@ public class LoginActivity extends AppCompatActivity {
             prefsEditor.commit();
 
 
-
-            Intent i = new Intent(getApplicationContext(), PersonalFeedActivity.class);
+            Intent i = new Intent(getApplicationContext(), PersonalFeedFragment.class);
             startActivity(i);
         } else {
             Toast.makeText(getApplicationContext(), "Login Fehlgeschlagen", Toast.LENGTH_LONG).show();
