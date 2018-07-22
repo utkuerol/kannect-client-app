@@ -7,13 +7,11 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
-
-import com.example.asus.example.databinding.FragmentPersonalFeedBinding;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.ActivityLoginBinding;
+import com.example.asus.example.databinding.FragmentPersonalFeedBinding;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.ViewModel.LoginViewModel;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -100,6 +98,7 @@ public class LoginActivity extends AppCompatActivity {
         //Account is not null then user is logged in
         if (account != null) {
             MutableLiveData<User> user = viewModel.invoke(account);
+
 
             SharedPreferences myPrefs = getSharedPreferences("CurrentUser", 0);
             SharedPreferences.Editor prefsEditor;

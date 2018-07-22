@@ -7,8 +7,6 @@ import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.Repository.UserRepository;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
-import java.security.AccessController;
-
 /**
  * ViewModel class for login, that is responsible for preparing and managing the data for Views
  * regarding login functions, by handling the communication of the View with the
@@ -35,7 +33,7 @@ public class LoginViewModel extends ViewModel {
             u.setImageUrl(account.getPhotoUrl().toString());
             u.setName(account.getDisplayName());
             user.setValue(u);
-            userRepository.createUser(user);
+            //userRepository.createUser(user);
             return userRepository.findByEmail(account.getEmail());
         }
     }
