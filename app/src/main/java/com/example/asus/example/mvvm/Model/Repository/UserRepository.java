@@ -2,10 +2,10 @@ package com.example.asus.example.mvvm.Model.Repository;
 
 import android.arch.lifecycle.MutableLiveData;
 
+import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.WebServices.ServiceAPI;
 import com.example.asus.example.mvvm.Model.WebServices.ServiceGenerator;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 import java.util.List;
 
@@ -131,5 +131,42 @@ public class UserRepository {
                 t.printStackTrace();
             }
         });
+    }
+
+    public MutableLiveData<User> getUserByID(long userID) {
+        final MutableLiveData<User> result = new MutableLiveData<>();
+        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        Call<User> call = client.getUserByID(userID);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                result.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+        return result;
+    }
+
+
+    public MutableLiveData<List<Post>> getUserProfile(User user) {
+        final MutableLiveData<List<Post>> result = new MutableLiveData<>();
+        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        Call<List<Post>> call = client.getUserProfile(user.getId());
+        call.enqueue(new Callback<List<Post>>() {
+            @Override
+            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+                result.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Post>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+        return result;
     }
 }

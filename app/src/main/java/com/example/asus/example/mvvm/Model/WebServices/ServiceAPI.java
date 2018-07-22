@@ -1,8 +1,6 @@
 package com.example.asus.example.mvvm.Model.WebServices;
 
 
-import android.arch.lifecycle.MutableLiveData;
-
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.Entities.Comment;
 import com.example.asus.example.mvvm.Model.Entities.Event;
@@ -238,5 +236,22 @@ public interface ServiceAPI {
     @POST("/createUser")
     Call<ResponseBody> createUser(@Body User user);
 
+    /**
+     * service to get a User by his id
+     *
+     * @param id of the user
+     * @return user which matched the id
+     */
+    @GET
+    Call<User> getUserByID(long id);
+
+    /**
+     * service to get the feed of a user by his id
+     *
+     * @param userID id of user whose feed will be generated
+     * @return list of posts for the feed of the user
+     */
+    @GET
+    Call<List<Post>> getUserProfile(long userID);
 
 }

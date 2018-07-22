@@ -17,9 +17,7 @@ public class Post implements Serializable {
     private User creator;
     private List<User> likedUsers;
     private Date date;
-    private Event belongsToEvent;
-    private Group belongsToGroup;
-    private User belongsToUser;
+    private long ownedBy;
     private List<Comment> comments;
     private long id;
 
@@ -33,22 +31,18 @@ public class Post implements Serializable {
      * @param creator User, which created this post.
      * @param likedUsers List of User who liked the Post.
      * @param date Creation date of this post.
-     * @param belongstoGroup Post belongs to this Group.
-     * @param belongsToUser Post belongs to this User.
-     * @param belongsToEvent Post belongs to this Event.
      * @param comments Comments which belong to the Post.
      * @param id unique identifier of the Object.
+     * @param ownedBy id of the entity, which this posts belongs to
      */
-    public Post(String text, User creator, List<User> likedUsers, Date date, Event belongsToEvent, Group belongstoGroup, User belongsToUser, List<Comment> comments, long id) {
+    public Post(String text, User creator, List<User> likedUsers, Date date, List<Comment> comments, long id, long ownedBy) {
         this.text = text;
         this.creator = creator;
         this.likedUsers = likedUsers;
         this.date = date;
-        this.belongsToEvent = belongsToEvent;
-        this.belongsToGroup = belongstoGroup;
-        this.belongsToUser = belongsToUser;
         this.comments = comments;
         this.id = id;
+        this.ownedBy = ownedBy;
     }
 
     /**
@@ -58,20 +52,16 @@ public class Post implements Serializable {
      * @param creator User, which created this post.
      * @param likedUsers List of User, who liked the Post
      * @param date Creation date of this post.
-     * @param belongsToGroup Post belongs to this Group
-     * @param belongsToUser Post belongs to this User
-     * @param belongsToEvent Post belongs to this Event
      * @param comments Comments which belong to the Post
+     * @param ownedBy id of the entity, which this posts belongs to
      */
-    public Post(String text, User creator, List<User> likedUsers, Date date, Event belongsToEvent, Group belongsToGroup, User belongsToUser, List<Comment> comments) {
+    public Post(String text, User creator, List<User> likedUsers, Date date, List<Comment> comments, long ownedBy) {
         this.text = text;
         this.creator = creator;
         this.likedUsers = likedUsers;
         this.date = date;
-        this.belongsToEvent = belongsToEvent;
-        this.belongsToGroup = belongsToGroup;
-        this.belongsToUser = belongsToUser;
         this.comments = comments;
+        this.ownedBy = ownedBy;
     }
 
     /**
@@ -123,36 +113,7 @@ public class Post implements Serializable {
     }
 
     /**
-     *  method returns an Event, to which the Post belongs to.
-     *  If the Post doesn´t belong to an Event, it returns null.
-     * @return the Event the Post belongs to.
-     */
-    public Event getBelongsToEvent() {
-        return belongsToEvent;
-    }
-
-
-    /**
-     * method returns a Group, to which the Post belongs to.
-     * If the Post doesn´t belong to a Group, it returns null;
-     * @return the Group the Post belongs to.
-     */
-    public Group getBelongsToGroup() {
-        return belongsToGroup;
-    }
-
-
-    /**
-     * method returns a User, to which the Post belongs to.
-     * If the Post doesn´t belong to a User, it returns null.
-     * @return User to which Post belongs to
-     */
-    public User getBelongsToUser() {
-        return belongsToUser;
-    }
-
-    /**
-     * method to return the List of Comments, which belong to the Post
+     * method to get the List of Comments, which belong to the Post
      * @return the List of Comments of the Post
      */
     public List<Comment> getComments() {
@@ -167,28 +128,47 @@ public class Post implements Serializable {
         this.comments = comments;
     }
 
+    /**
+     * method to get the list of users who liked the post
+     *
+     * @return list of user who like the post
+     */
     public List<User> getLikedUsers() {
         return likedUsers;
     }
 
+    /**
+     * sets the list of users who liked the post
+     * @param likedUsers new list of users who liked the post
+     */
     public void setLikedUsers(List<User> likedUsers) {
         this.likedUsers = likedUsers;
     }
 
-    public void setBelongsToEvent(Event belongsToEvent) {
-        this.belongsToEvent = belongsToEvent;
-    }
-
-    public void setBelongsToGroup(Group belongsToGroup) {
-        this.belongsToGroup = belongsToGroup;
-    }
-
-    public void setBelongsToUser(User belongsToUser) {
-        this.belongsToUser = belongsToUser;
-    }
-
+    /**
+     * method to get the id of the post
+     * @return id of the post
+     */
     public long getId() {
         return id;
+    }
+
+    /**
+     * method to get the id of the entity which this posts belongs to
+     *
+     * @return id of the entity
+     */
+    public long getOwnedBy() {
+        return ownedBy;
+    }
+
+    /**
+     * sets the id of the entity this post belongs to
+     *
+     * @param ownedBy id of the entity
+     */
+    public void setOwnedBy(long ownedBy) {
+        this.ownedBy = ownedBy;
     }
 }
 
