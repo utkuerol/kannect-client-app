@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.BindingAdapter;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
@@ -17,7 +16,6 @@ import com.example.asus.example.mvvm.Model.Repository.EventRepository;
 import com.example.asus.example.mvvm.Model.Repository.FeedRepository;
 import com.example.asus.example.mvvm.Model.Repository.PostRepository;
 import com.example.asus.example.mvvm.Model.Repository.UserRepository;
-import com.example.asus.example.mvvm.View.EventFeedFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.Date;
@@ -72,14 +70,6 @@ public class ItemEventViewModel extends ViewModel {
     public void setEvent(MutableLiveData<Event> event) {
     }
 
-    /**
-     * Starts EventFeedFragment with the event.
-     * @param view
-     */
-    public void onItemClick(View view) {
-
-        context.startActivity(EventFeedFragment.launchWithDetails(view.getContext(), event.getValue()));
-    }
 
     /**
      * method to get the Name of the Event.
@@ -162,6 +152,10 @@ public class ItemEventViewModel extends ViewModel {
      */
     public List<User> getParticipants() {
         return event.getValue().getParticipants();
+    }
+
+    public int getNumberOfParticipants() {
+        return getParticipants().size();
     }
 
     /**

@@ -5,17 +5,13 @@ import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.BindingAdapter;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.example.asus.example.mvvm.Model.Entities.Comment;
-import com.example.asus.example.mvvm.Model.Entities.Event;
-import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.Repository.PostRepository;
 import com.example.asus.example.mvvm.Model.Repository.UserRepository;
-import com.example.asus.example.mvvm.View.ShowPostFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.Date;
@@ -74,13 +70,7 @@ public class ItemPostViewModel extends ViewModel {
         this.post.setValue(post);
     }
 
-    /**
-     * Starts CommentsActivity with this post.
-     * @param view
-     */
-    public void onItemClick(View view) {
-        context.startActivity(ShowPostFragment.launchWithDetails(view.getContext(), post.getValue()));
-    }
+
 
     /**
      * Gets text of the post.
@@ -139,29 +129,19 @@ public class ItemPostViewModel extends ViewModel {
     }
 
 
-    /**
-     * Gets the event to which the post belongs.
-     * @return event
-     */
-    public Event getOwnerEvent() {
-        return post.getValue().getOwnerEvent();
+    public String getOwnerName() {
+
+        if (post.getValue().getOwnerEvent() != null) {
+            return post.getValue().getOwnerEvent().getName();
+        } else if (post.getValue().getOwnerGroup() != null) {
+            return post.getValue().getOwnerGroup().getName();
+        } else if (post.getValue().getOwnerUser() != null) {
+            return post.getValue().getOwnerUser().getName();
+        }
+
+        return null;
     }
 
-    /**
-     * Gets the group to which the post belongs.
-     * @return group
-     */
-    public Group getOwnerGroup() {
-        return post.getValue().getOwnerGroup();
-    }
-
-    /**
-     * Gets the user to which the post belongs.
-     * @return user
-     */
-    public User getOwnerUser() {
-        return post.getValue().getOwnerUser();
-    }
 
     /**
      * Gets the comments belonging to the post.

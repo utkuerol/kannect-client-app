@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.example.asus.example.R;
+import com.example.asus.example.databinding.ItemPostBinding;
 import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.ViewModel.ItemPostViewModel;
 
@@ -91,11 +92,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostAdapterVie
         void bindPost(Post post) {
             MutableLiveData<Post> p = new MutableLiveData<>();
             p.setValue(post);
-            if (mItemPostBinding.getPostViewModel() == null) {
-                mItemPostBinding.setPostViewModel(
+            if (mItemPostBinding.getItemPostViewModel() == null) {
+                mItemPostBinding.setItemPostViewModel(
                         new ItemPostViewModel(p, itemView.getContext()));
             } else {
-                mItemPostBinding.getPostViewModel().setPost(post);
+                mItemPostBinding.getItemPostViewModel().setPost(post);
             }
         }
     }

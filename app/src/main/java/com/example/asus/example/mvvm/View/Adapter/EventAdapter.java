@@ -1,5 +1,6 @@
 package com.example.asus.example.mvvm.View.Adapter;
 
+import android.arch.lifecycle.MutableLiveData;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.ItemEventBinding;
 import com.example.asus.example.mvvm.Model.Entities.Event;
+import com.example.asus.example.mvvm.ViewModel.ItemEventViewModel;
 
 import java.util.Collections;
 import java.util.List;
@@ -18,14 +20,14 @@ import java.util.List;
  */
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapterViewHolder> {
 
-    private List<Event> EventsList;
+    private List<Event> eventsList;
 
     /**
      * Constructor.
      * Initializes the private EventList attribute.
      */
     public EventAdapter() {
-        this.EventsList = Collections.emptyList();
+        this.eventsList = Collections.emptyList();
     }
 
     /**
@@ -47,7 +49,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
      * @param position of the item in the list.
      */
     @Override public void onBindViewHolder(EventAdapterViewHolder holder, int position) {
-        holder.bindEvent(EventsList.get(position));
+        holder.bindEvent(eventsList.get(position));
     }
 
     /**
@@ -55,12 +57,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
      * @return size of the list
      */
     @Override public int getItemCount() {
-        return EventsList.size();
+        return eventsList.size();
     }
 
     /**
      * sets the list of events which will be shown in the ui.
-     * @param users list of events
+     * @param eventsList list of events
      */
     public void setEventList(List<Event> eventsList) {
         this.eventsList = eventsList;
@@ -88,11 +90,13 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
          * @param event which will be bound.
          */
         void bindEvent(Event event) {
-            if (mItemEventBinding.getEventViewModel() == null) {
-                mItemEventBinding.setEventViewModel(
-                        new ItemEventViewModel(event, itemView.getContext()));
+            MutableLiveData<Event> eventMutableLiveData = new MutableLiveData<>();
+            eventMutableLiveData.setValue(event);
+            if (mItemEventBinding.getItemEventViewModel() == null) {
+                mItemEventBinding.setItemEventViewModel(
+                        new ItemEventViewModel(eventMutableLiveData, itemView.getContext()));
             } else {
-                mItemEventBinding.getEventViewModel().setEvent(event);
+                mItemEventBinding.getItemEventViewModel().setEvent(eventMutableLiveData);
             }
         }
     }

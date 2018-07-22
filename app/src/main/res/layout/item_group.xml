@@ -11,7 +11,7 @@
         <data>
 
             <variable
-                name="groupViewModel"
+                name="itemGroupViewModel"
                 type="com.example.asus.example.mvvm.ViewModel.ItemGroupViewModel" />
         </data>
 

@@ -4,7 +4,6 @@ import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 import android.view.View;
 
-import com.example.asus.example.mvvm.View.SearchResultActivity;
 
 
 /**
@@ -33,6 +32,6 @@ public class SearchResultsViewModel extends ViewModel {
      * @param view
      */
     public void onSearchClick(View view) {
-        context.startActivity(SearchResultActivity.launchWithDetails(view.getContext(), query));
+        //context.startActivity(SearchResultActivity.launchWithDetails(view.getContext(), query));
     }
 }

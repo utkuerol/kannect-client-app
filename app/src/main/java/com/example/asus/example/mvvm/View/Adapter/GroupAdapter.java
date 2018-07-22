@@ -92,11 +92,11 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupAdapter
         void bindGroup(Group group) {
             MutableLiveData<Group> g = new MutableLiveData<>();
             g.setValue(group);
-            if (mItemGroupBinding.getGroupViewModel() == null) {
-                mItemGroupBinding.setGroupViewModel(
+            if (mItemGroupBinding.getItemGroupViewModel() == null) {
+                mItemGroupBinding.setItemGroupViewModel(
                         new ItemGroupViewModel(g, itemView.getContext()));
             } else {
-                mItemGroupBinding.getGroupViewModel().setGroup(group);
+                mItemGroupBinding.getItemGroupViewModel().setGroup(group);
             }
         }
     }

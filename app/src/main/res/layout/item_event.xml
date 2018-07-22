@@ -5,7 +5,7 @@
     <data>
 
         <variable
-            name="categoryViewModel"
+            name="itemEventViewModel"
             type="com.example.asus.example.mvvm.ViewModel.ItemEventViewModel" />
     </data>
 
