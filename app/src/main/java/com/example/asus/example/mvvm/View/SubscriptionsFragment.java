@@ -6,15 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
-import com.example.asus.example.mvvm.ViewModel.UserViewModel;
-
-/**
- * Fragment for the view, to show all users which match the search query.
- */
-public class UserSearchResultsFragment extends Fragment {
-
-    UserViewModel viewModel;
-
+public class SubscriptionsFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

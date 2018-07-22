@@ -7,11 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 
 /**
- * Activity started from the mainmenu and displaying all in app registered events
+ * Activity class for the view regarding showing subcategories and the groups which belong to the parent category.
  */
-public class EventsFragment extends Fragment {
-
-    //event from intent
+public class GroupsInSubcategoryFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
