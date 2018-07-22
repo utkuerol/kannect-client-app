@@ -7,7 +7,10 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
+
+import com.example.asus.example.databinding.FragmentPersonalFeedBinding;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.ActivityLoginBinding;
@@ -30,11 +33,10 @@ public class LoginActivity extends AppCompatActivity {
 
     //Google sign in api Client
     GoogleSignInClient mGoogleSignInClient;
+    FragmentPersonalFeedBinding p = DataBindingUtil.setContentView(this, R.layout.fragment_personal_feed);
 
     //Define Request code for Sign In
     private int RC_SIGN_IN = 6;
-
-
     //Sign in button Declaration
     SignInButton signInButton = binding.signInButton;
 

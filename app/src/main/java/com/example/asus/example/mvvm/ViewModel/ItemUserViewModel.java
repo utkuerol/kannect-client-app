@@ -116,7 +116,23 @@ public class ItemUserViewModel extends ViewModel {
         return this.chosenUser.getValue().getSubscriptions();
     }
 
+    /**
+     * method to get the number of users who subscribe to the chosen user
+     *
+     * @return size of the list of subscribers
+     */
+    public int getNumberOfSubscribers() {
+        return chosenUser.getValue().getSubscribers().size();
+    }
 
+    /**
+     * method to get the number of users who the chosen user is subscribed to
+     *
+     * @return size of list of subscriptions of the user
+     */
+    public int getNumberOfSubscriptions() {
+        return chosenUser.getValue().getSubscriptions().size();
+    }
     /**
      * method to get the List of Users, who subscribe to this User
      * @return List of Subscribers
