@@ -3,16 +3,13 @@ package com.example.asus.example.mvvm.View;
 import android.arch.lifecycle.MutableLiveData;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
-
 import com.example.asus.example.R;
-import com.example.asus.example.databinding.ActivityLoginBinding;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.ViewModel.LoginViewModel;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -27,7 +24,7 @@ import com.google.android.gms.tasks.Task;
 
 public class LoginActivity extends AppCompatActivity {
 
-    //LoginViewModel viewModel = new LoginViewModel();
+    LoginViewModel viewModel = new LoginViewModel();
 
 
     //Google sign in api Client
@@ -57,7 +54,6 @@ public class LoginActivity extends AppCompatActivity {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         //update ui
         updateUI(account);
-
 
     }
 
@@ -98,13 +94,13 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUI(GoogleSignInAccount account) {
         //Account is not null then user is logged in
         if (account != null) {
-            /*MutableLiveData<User> user = viewModel.invoke(account);
+            MutableLiveData<User> user = viewModel.invoke(account);
 
             SharedPreferences myPrefs = getSharedPreferences("CurrentUser", 0);
             SharedPreferences.Editor prefsEditor;
             prefsEditor = myPrefs.edit();
             prefsEditor.putLong("CurrentUserId", user.getValue().getId());
-            prefsEditor.commit();*/
+            prefsEditor.commit();
 
 
             Intent i = new Intent(getApplicationContext(), Navigation_Drawer_Activity.class);

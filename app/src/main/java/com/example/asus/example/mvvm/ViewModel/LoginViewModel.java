@@ -33,7 +33,7 @@ public class LoginViewModel extends ViewModel {
             u.setImageUrl(account.getPhotoUrl().toString());
             u.setName(account.getDisplayName());
             user.setValue(u);
-            //userRepository.createUser(user);
+            userRepository.createUser(user);
             return userRepository.findByEmail(account.getEmail());
         }
     }

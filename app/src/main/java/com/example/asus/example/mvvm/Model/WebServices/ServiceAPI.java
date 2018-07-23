@@ -18,6 +18,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 public interface ServiceAPI {
 
@@ -226,8 +227,7 @@ public interface ServiceAPI {
      * @return User By Mail
      */
     @GET("/userByMail")
-    Call<User> getUserByMail(String userMail);
-
+    Call<User> getUserByMail(@Query("userMail") String userMail);
 
     /**
      * @param user

@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ServiceGenerator {
 
     // better to store in Gradle String files
-    private static final String BASE_URL = "";
+    private static final String BASE_URL = "http://172.23.214.255:8080";
 
 
     private static Retrofit.Builder builder = new Retrofit.Builder()
