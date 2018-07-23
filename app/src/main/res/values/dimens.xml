@@ -11,4 +11,5 @@
     <dimen name="twoFragmentHeight">255dp</dimen>
     <dimen name="logoLoginScreenSize">200dp</dimen>
     <dimen name="searchInputEditText">50dp</dimen>
+    <dimen name="userProfilePostRV">450dp</dimen>
 </resources>
