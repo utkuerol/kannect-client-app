@@ -28,15 +28,8 @@ public class EventFeedFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        // Defines the xml file for the fragment
-        return inflater.inflate(R.layout.fragment_event_feed, parent, false);
-    }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-        super.onViewCreated(view, savedInstanceState);
-
+        fragmentEventFeedBinding = FragmentEventFeedBinding.inflate(inflater, parent, false);
         //set viewmodel
         eventViewModel = ViewModelProviders.of(this).get(EventViewModel.class);
         eventViewModel.setEventsToParticipatingEvents();
@@ -46,10 +39,10 @@ public class EventFeedFragment extends Fragment {
         eventAdapter.setEventList(eventViewModel.getEvents().getValue());
         fragmentEventFeedBinding.eventFeedRV.setAdapter(eventAdapter);
         fragmentEventFeedBinding.eventFeedRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
-
-        //TODO: observe livedata somehow
-
+        // Defines the xml file for the fragment
+        return fragmentEventFeedBinding.getRoot();
     }
+
 
 
 }

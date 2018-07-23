@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.asus.example.databinding.FragmentUserSearchInputBinding;
 
@@ -18,7 +19,7 @@ public class SearchInputFragment extends Fragment {
         FragmentUserSearchInputBinding fragmentUserSearchInputBinding = FragmentUserSearchInputBinding.inflate(inflater, parent, false);
 
         //TODO: observe livedata somehow
-
+        Toast.makeText(getContext(), "In Event Fragment", Toast.LENGTH_LONG).show();
         return fragmentUserSearchInputBinding.getRoot();
 
     }

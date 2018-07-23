@@ -25,15 +25,7 @@ public class CategoriesGroupFragment extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        // Defines the xml file for the fragment
-        return inflater.inflate(R.layout.fragment_categories_group, parent, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-        super.onViewCreated(view, savedInstanceState);
-
+        fragmentCategoriesGroupBinding = FragmentCategoriesGroupBinding.inflate(inflater, parent, false);
         //set viewmodel
         categoryViewModel = ViewModelProviders.of(this).get(CategoryViewModel.class);
         categoryViewModel.setCategoriesToAllCategories();
@@ -43,8 +35,7 @@ public class CategoriesGroupFragment extends Fragment{
         categoryAdapter.setCategoryList(categoryViewModel.getCategories().getValue());
         fragmentCategoriesGroupBinding.categoriesGroupCategoryRV.setAdapter(categoryAdapter);
         fragmentCategoriesGroupBinding.categoriesGroupCategoryRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
-
-        //TODO: observe livedata somehow
-
+        return fragmentCategoriesGroupBinding.getRoot();
     }
+
 }

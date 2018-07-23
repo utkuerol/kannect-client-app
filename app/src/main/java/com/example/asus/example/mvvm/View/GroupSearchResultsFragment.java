@@ -22,27 +22,20 @@ public class GroupSearchResultsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        // Defines the xml file for the fragment
-        return inflater.inflate(R.layout.fragment_group_search_result, parent, false);
-    }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-        super.onViewCreated(view, savedInstanceState);
-
-        //set viewmodel
+        String query = getArguments().getString("query");
+        fragmentGroupSearchResultBinding = FragmentGroupSearchResultBinding.inflate(inflater, parent, false);
         groupViewModel = ViewModelProviders.of(this).get(GroupViewModel.class);
         /*keine Ahnung welche Query*/
-        groupViewModel.setGroupsToSearchResults(null);
+        groupViewModel.setGroupsToSearchResults(query);
 
         //set adapter
         GroupAdapter groupAdapter = new GroupAdapter();
         groupAdapter.setGroupList(groupViewModel.getGroups().getValue());
         fragmentGroupSearchResultBinding.groupSearchResultGroupRV.setAdapter(groupAdapter);
         fragmentGroupSearchResultBinding.groupSearchResultGroupRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
-
-        //TODO: observe livedata somehow
-
+        // Defines the xml file for the fragment
+        return fragmentGroupSearchResultBinding.getRoot();
     }
+
 }

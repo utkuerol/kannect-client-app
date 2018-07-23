@@ -26,8 +26,22 @@ public class EventSearchResultsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+        //get extra arguments from the initiating activity
+        String query = getArguments().getString("query");
+        fragmentEventSearchResultBinding = FragmentEventSearchResultBinding.inflate(inflater, parent, false);
+
+        //set viewmodel
+        eventViewModel = ViewModelProviders.of(this).get(EventViewModel.class);
+        /*keine Ahnung welche Query*/
+        eventViewModel.setEventsToSearchResults(query);
+
+        //set adapter
+        EventAdapter eventAdapter = new EventAdapter();
+        eventAdapter.setEventList(eventViewModel.getEvents().getValue());
+        fragmentEventSearchResultBinding.eventSearchResultEventRV.setAdapter(eventAdapter);
+        fragmentEventSearchResultBinding.eventSearchResultEventRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
         // Defines the xml file for the fragment
-        return inflater.inflate(R.layout.fragment_event_search_result, parent, false);
+        return fragmentEventSearchResultBinding.getRoot();
     }
 
     @Override
@@ -35,16 +49,6 @@ public class EventSearchResultsFragment extends Fragment {
 
         super.onViewCreated(view, savedInstanceState);
 
-        //set viewmodel
-        eventViewModel = ViewModelProviders.of(this).get(EventViewModel.class);
-        /*keine Ahnung welche Query*/
-        eventViewModel.setEventsToSearchResults(null);
-
-        //set adapter
-        EventAdapter eventAdapter = new EventAdapter();
-        eventAdapter.setEventList(eventViewModel.getEvents().getValue());
-        fragmentEventSearchResultBinding.eventSearchResultEventRV.setAdapter(eventAdapter);
-        fragmentEventSearchResultBinding.eventSearchResultEventRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         //TODO: observe livedata somehow
 

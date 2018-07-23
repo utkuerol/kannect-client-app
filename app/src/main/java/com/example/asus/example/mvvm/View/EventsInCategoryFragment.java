@@ -1,5 +1,6 @@
 package com.example.asus.example.mvvm.View;
 
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,8 +13,11 @@ import android.view.ViewGroup;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentEventsInCategoryBinding;
+import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.View.Adapter.EventAdapter;
 import com.example.asus.example.mvvm.ViewModel.EventViewModel;
+
+import java.net.MalformedURLException;
 
 /**
  * Fragment for the view, to show all events that exist in the chosen Category.
@@ -25,27 +29,27 @@ public class EventsInCategoryFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        // Defines the xml file for the fragment
-        return inflater.inflate(R.layout.fragment_events_in_category, parent, false);
-    }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        //get extra arguments from the initiating activity
+        Category category = (Category) getArguments().getSerializable("category");
+        MutableLiveData<Category> c = new MutableLiveData<>();
+        c.setValue(category);
 
-        super.onViewCreated(view, savedInstanceState);
-
+        fragmentEventsInCategoryBinding = FragmentEventsInCategoryBinding.inflate(inflater, parent, false);
         //set viewmodel
         eventViewModel = ViewModelProviders.of(this).get(EventViewModel.class);
         /*keine Ahnung welche Query*/
-        eventViewModel.setEventsFilteredByCategory(null);
+        eventViewModel.setEventsFilteredByCategory(c);
 
         //set adapter
         EventAdapter eventAdapter = new EventAdapter();
         eventAdapter.setEventList(eventViewModel.getEvents().getValue());
         fragmentEventsInCategoryBinding.eventsInCategoryEventRV.setAdapter(eventAdapter);
         fragmentEventsInCategoryBinding.eventsInCategoryEventRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        // Defines the xml file for the fragment
 
-        //TODO: observe livedata somehow
-
+        return fragmentEventsInCategoryBinding.getRoot();
     }
+
+
 }

@@ -23,8 +23,11 @@ public class NewEventPostFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+        fragmentNewEventBinding = FragmentNewEventBinding.inflate(inflater, parent, false);
+        //set viewmodel
+        eventViewModel = ViewModelProviders.of(this).get(EventViewModel.class);
         // Defines the xml file for the fragment
-        return inflater.inflate(R.layout.fragment_new_event, parent, false);
+        return fragmentNewEventBinding.getRoot();
     }
 
     @Override
@@ -32,8 +35,7 @@ public class NewEventPostFragment extends Fragment {
 
         super.onViewCreated(view, savedInstanceState);
 
-        //set viewmodel
-        eventViewModel = ViewModelProviders.of(this).get(EventViewModel.class);
+
         /*keine Ahnung welche Query*/
         //eventViewModel.add(null);
 
