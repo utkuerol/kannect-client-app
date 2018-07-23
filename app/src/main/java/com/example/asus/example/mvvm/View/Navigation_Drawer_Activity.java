@@ -78,6 +78,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
 
         } else if (id == R.id.nav_profile) {
             launchUserProfileFragment();
+            //TODO methode muss noch geändert werden so dass alle Posts of user angezeigt werden
         } else if (id == R.id.nav_groups) {
             launchGroupFragments();
         } else if (id == R.id.nav_events) {
@@ -129,12 +130,12 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
     }
 
     public void launchSearchFragments() {
-        UserSearchInputFragment userSearchInputFragment = new UserSearchInputFragment();
+        SearchInputFragment searchInputFragment = new SearchInputFragment();
         UserSearchResultsFragment userSearchResultsFragment = new UserSearchResultsFragment();
         EventSearchResultsFragment eventSearchResultsFragment = new EventSearchResultsFragment();
         GroupSearchResultsFragment groupSearchResultsFragment = new GroupSearchResultsFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container_layout, userSearchInputFragment);
+        transaction.replace(R.id.container_layout, searchInputFragment);
         transaction.add(R.id.container_layout, userSearchResultsFragment);
         transaction.add(R.id.container_layout, eventSearchResultsFragment);
         transaction.add(R.id.container_layout, groupSearchResultsFragment);

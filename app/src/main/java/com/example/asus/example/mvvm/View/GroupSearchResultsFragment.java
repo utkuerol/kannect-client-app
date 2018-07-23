@@ -39,8 +39,8 @@ public class GroupSearchResultsFragment extends Fragment {
         //set adapter
         GroupAdapter groupAdapter = new GroupAdapter();
         groupAdapter.setGroupList(groupViewModel.getGroups().getValue());
-        fragmentGroupSearchResultBinding.groupSearchResultRV.setAdapter(groupAdapter);
-        fragmentGroupSearchResultBinding.groupSearchResultRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        fragmentGroupSearchResultBinding.groupSearchResultGroupRV.setAdapter(groupAdapter);
+        fragmentGroupSearchResultBinding.groupSearchResultGroupRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         //TODO: observe livedata somehow
 

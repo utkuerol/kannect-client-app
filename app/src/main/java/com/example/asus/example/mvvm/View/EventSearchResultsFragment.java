@@ -11,9 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.asus.example.R;
+import com.example.asus.example.databinding.FragmentEventSearchResultBinding;
 import com.example.asus.example.mvvm.View.Adapter.EventAdapter;
 import com.example.asus.example.mvvm.ViewModel.EventViewModel;
-import com.example.asus.example.databinding.FragmentEventSearchResultBinding;
 
 /**
  * This fragment displays events related to the searched terms.
@@ -43,8 +43,8 @@ public class EventSearchResultsFragment extends Fragment {
         //set adapter
         EventAdapter eventAdapter = new EventAdapter();
         eventAdapter.setEventList(eventViewModel.getEvents().getValue());
-        fragmentEventSearchResultBinding.eventSearchResultRV.setAdapter(eventAdapter);
-        fragmentEventSearchResultBinding.eventSearchResultRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        fragmentEventSearchResultBinding.eventSearchResultEventRV.setAdapter(eventAdapter);
+        fragmentEventSearchResultBinding.eventSearchResultEventRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         //TODO: observe livedata somehow
 

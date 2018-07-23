@@ -12,7 +12,7 @@ import com.example.asus.example.databinding.FragmentPersonalFeedBinding;
 import com.example.asus.example.mvvm.View.Adapter.PostAdapter;
 import com.example.asus.example.mvvm.ViewModel.PostViewModel;
 
-public class UserSearchInputFragment extends Fragment {
+public class SearchInputFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {

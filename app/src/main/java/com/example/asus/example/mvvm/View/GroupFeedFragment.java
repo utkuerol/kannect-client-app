@@ -12,9 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentGroupFeedBinding;
-import com.example.asus.example.mvvm.View.Adapter.EventAdapter;
 import com.example.asus.example.mvvm.View.Adapter.GroupAdapter;
-import com.example.asus.example.mvvm.ViewModel.EventViewModel;
 import com.example.asus.example.mvvm.ViewModel.GroupViewModel;
 
 /**
@@ -43,8 +41,8 @@ public class GroupFeedFragment extends Fragment {
         //set adapter
         GroupAdapter groupAdapter = new GroupAdapter();
         groupAdapter.setGroupList(groupViewModel.getGroups().getValue());
-        fragmentGroupFeedBinding.groupFeedRV.setAdapter(groupAdapter);
-        fragmentGroupFeedBinding.groupFeedRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        fragmentGroupFeedBinding.groupFeedPostRV.setAdapter(groupAdapter);
+        fragmentGroupFeedBinding.groupFeedPostRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         //TODO: observe livedata somehow
 

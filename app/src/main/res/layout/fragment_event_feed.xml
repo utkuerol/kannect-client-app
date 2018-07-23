@@ -15,14 +15,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@drawable/gradient_background"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
-
-        </android.support.v7.widget.Toolbar>
-
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
