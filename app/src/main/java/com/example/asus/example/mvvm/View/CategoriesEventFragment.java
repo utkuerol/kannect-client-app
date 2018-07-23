@@ -41,8 +41,8 @@ public class CategoriesEventFragment extends Fragment {
         //set adapter
         CategoryAdapter categoryAdapter = new CategoryAdapter();
         categoryAdapter.setCategoryList(categoryViewModel.getCategories().getValue());
-        fragmentCategoriesEventBinding.groupFeedRV.setAdapter(categoryAdapter);
-        fragmentCategoriesEventBinding.groupFeedRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        fragmentCategoriesEventBinding.categoriesEventCategoryRV.setAdapter(categoryAdapter);
+        fragmentCategoriesEventBinding.categoriesEventCategoryRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         //TODO: observe livedata somehow
 

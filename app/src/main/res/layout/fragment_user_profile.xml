@@ -98,7 +98,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/userPostRV"
+            android:id="@+id/userProfilePostRV"
             android:layout_width="match_parent"
             android:layout_height="@dimen/userProfilePostRV"
             android:layout_marginEnd="8dp"

@@ -13,9 +13,7 @@ import android.view.ViewGroup;
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentMyEventsBinding;
 import com.example.asus.example.mvvm.View.Adapter.EventAdapter;
-import com.example.asus.example.mvvm.View.Adapter.GroupAdapter;
 import com.example.asus.example.mvvm.ViewModel.EventViewModel;
-import com.example.asus.example.mvvm.ViewModel.GroupViewModel;
 
 /**
  * Fragment for the view, to show all events in which the user is a member of.
@@ -44,8 +42,8 @@ public class MyEventsFragment extends Fragment {
         //set adapter
         EventAdapter eventAdapter = new EventAdapter();
         eventAdapter.setEventList(eventViewModel.getEvents().getValue());
-        fragmentMyEventsBinding.myEventsRV.setAdapter(eventAdapter);
-        fragmentMyEventsBinding.myEventsRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        fragmentMyEventsBinding.myEventsEventRV.setAdapter(eventAdapter);
+        fragmentMyEventsBinding.myEventsEventRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         //TODO: observe livedata somehow
 

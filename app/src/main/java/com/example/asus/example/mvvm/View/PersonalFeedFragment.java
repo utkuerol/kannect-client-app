@@ -42,8 +42,8 @@ public class PersonalFeedFragment extends Fragment {
         //set adapter
         PostAdapter postAdapter = new PostAdapter();
         postAdapter.setPostList(postViewModel.getPosts().getValue());
-        fragmentPersonalFeedBinding.personalFeedRV.setAdapter(postAdapter);
-        fragmentPersonalFeedBinding.personalFeedRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        fragmentPersonalFeedBinding.personalFeedPostRV.setAdapter(postAdapter);
+        fragmentPersonalFeedBinding.personalFeedPostRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         //TODO: observe livedata somehow
 

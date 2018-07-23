@@ -42,8 +42,8 @@ public class EventsInSubcategoryFragment extends Fragment {
         //set adapter
         EventAdapter eventAdapter = new EventAdapter();
         eventAdapter.setEventList(eventViewModel.getEvents().getValue());
-        fragmentEventsInSubcategoryBinding.eventsInSubcategoryRV.setAdapter(eventAdapter);
-        fragmentEventsInSubcategoryBinding.eventsInSubcategoryRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        fragmentEventsInSubcategoryBinding.eventsInSubcategoryEventRV.setAdapter(eventAdapter);
+        fragmentEventsInSubcategoryBinding.eventsInSubcategoryEventRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         //TODO: observe livedata somehow
 
