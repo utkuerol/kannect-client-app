@@ -4,7 +4,6 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.view.View;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.Entities.Event;
@@ -51,23 +50,6 @@ public class ItemCategoryViewModel extends ViewModel {
         currentUser = userRepository.getUserByID(myPrefs.getLong("CurrentUserId", 0)).getValue();
     }
 
-    /**
-     * Starts the CategoryEventPageActivity with the chosen subcategory.
-     *
-     * @param view
-     */
-    public void onItemClickEvent(View view) {
-
-    }
-
-    /**
-     * Starts the CategoryGroupPageActivity with the chosen subcategory.
-     *
-     * @param view
-     */
-    public void onItemClickGroup(View view) {
-
-    }
 
     /**
      * Gets the chosen category.
@@ -81,8 +63,8 @@ public class ItemCategoryViewModel extends ViewModel {
      * Sets the chosen category.
      * @param chosenCategory to set.
      */
-    public void setChosenCategory(MutableLiveData<Category> chosenCategory) {
-        this.chosenCategory = chosenCategory;
+    public void setChosenCategory(Category chosenCategory) {
+        this.chosenCategory.setValue(chosenCategory);
     }
 
     /**

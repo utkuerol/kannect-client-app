@@ -1,10 +1,11 @@
 package com.example.asus.example.mvvm.View;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.asus.example.mvvm.ViewModel.ItemUserViewModel;
 
@@ -13,20 +14,17 @@ import com.example.asus.example.mvvm.ViewModel.ItemUserViewModel;
  */
 public class NewUserPostFragment extends Fragment {
 
-    private ItemUserViewModel viewModel;
-    //binding
-
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+
+        //set viewmodel
+        ItemUserViewModel itemUserViewModel = ViewModelProviders.of(this).get(ItemUserViewModel.class);
+
+        //TODO: missing layouts cant implement further
+        //set databinding
+
+        return getView();
     }
 
-    public ItemUserViewModel getViewModel() {
-        return viewModel;
-    }
-
-    public void setViewModel(ItemUserViewModel viewModel) {
-        this.viewModel = viewModel;
-    }
 }

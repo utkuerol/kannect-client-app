@@ -1,26 +1,46 @@
 package com.example.asus.example.mvvm.View;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+
+import com.example.asus.example.databinding.FragmentSubcategoriesGroupBinding;
+import com.example.asus.example.mvvm.Model.Entities.Category;
+import com.example.asus.example.mvvm.View.Adapter.SubcategoryAdapter;
+import com.example.asus.example.mvvm.ViewModel.ItemCategoryViewModel;
 
 /**
  * Fragment for the view, to show all the subcategories that exist for a event.
  */
 public class SubcategoriesEventFragment extends Fragment {
 
-    /**
-     * Called immediately after onCreateView(LayoutInflater, ViewGroup, Bundle) has returned,
-     * but before any saved state has been restored in to the view.
-     * Initializes the Data binding and sets the adapter for the recylcer view.
-     * @param view The View returned by onCreateView(LayoutInflater, ViewGroup, Bundle).
-     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state as given here.
-     */
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+
+        //get extra arguments from the initiating activity
+        Category category = (Category) getArguments().getSerializable("category");
+
+        //set viewmodel
+        ItemCategoryViewModel itemCategoryViewModel = ViewModelProviders.of(this).get(ItemCategoryViewModel.class);
+        itemCategoryViewModel.setChosenCategory(category);
+
+        //set adapter
+        SubcategoryAdapter subcategoryAdapter = new SubcategoryAdapter();
+        subcategoryAdapter.setSubcategoryList(itemCategoryViewModel.getSubcategories());
+
+        //set databinding
+        com.example.asus.example.databinding.FragmentSubcategoriesEventBinding fragmentSubcategoriesEventBinding = FragmentSubcategoriesGroupBinding.inflate(inflater, parent, false);
+        fragmentSubcategoriesEventBinding.subcategoriesRV.setAdapter(subcategoryAdapter);
+        fragmentSubcategoriesEventBinding.subcategoriesRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
+        //TODO: observe livedata somehow
+
+        return fragmentSubcategoriesEventBinding.getRoot();
+
     }
 
 

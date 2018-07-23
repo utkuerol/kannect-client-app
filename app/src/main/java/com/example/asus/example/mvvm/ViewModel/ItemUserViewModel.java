@@ -80,8 +80,8 @@ public class ItemUserViewModel extends ViewModel {
      *
      * @param user to set.
      */
-    public void setChosenUser(MutableLiveData<User> user) {
-        this.chosenUser = user;
+    public void setChosenUser(User user) {
+        this.chosenUser.setValue(user);
     }
 
     /**

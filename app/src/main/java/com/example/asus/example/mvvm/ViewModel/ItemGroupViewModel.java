@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.BindingAdapter;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
@@ -57,13 +56,6 @@ public class ItemGroupViewModel extends ViewModel {
     }
 
 
-    /**
-     * Starts the GroupFeedFragment with the chosenGroup.
-     * @param view
-     */
-    public void onItemClick(View view) {
-        //context.startActivity(GroupFeedFragment.launchWithDetails(view.getContext(), mChosenEvent));
-    }
 
     /**
      * Gets chosenGroup.
