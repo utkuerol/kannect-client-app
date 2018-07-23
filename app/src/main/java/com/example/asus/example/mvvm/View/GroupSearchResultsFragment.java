@@ -38,4 +38,9 @@ public class GroupSearchResultsFragment extends Fragment {
         return fragmentGroupSearchResultBinding.getRoot();
     }
 
+    public void launchFragment() {
+        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+        navigation_drawer_activity.launchGroupSearchResultsFragment();
+    }
+
 }

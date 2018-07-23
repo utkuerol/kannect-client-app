@@ -27,4 +27,9 @@ public class NewUserPostFragment extends Fragment {
         return getView();
     }
 
+    public void launchFragment() {
+        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+        navigation_drawer_activity.launchNewUserPostFragment();
+    }
+
 }

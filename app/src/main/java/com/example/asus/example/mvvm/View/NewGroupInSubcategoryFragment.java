@@ -30,4 +30,9 @@ public class NewGroupInSubcategoryFragment extends Fragment {
         // Defines the xml file for the fragment
         return fragmentNewGroupBinding.getRoot();
     }
+
+    public void launchFragment() {
+        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+        navigation_drawer_activity.launchNewGroupInSubcategoryFragment();
+    }
 }

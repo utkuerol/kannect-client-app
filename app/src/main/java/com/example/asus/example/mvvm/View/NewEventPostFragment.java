@@ -30,17 +30,8 @@ public class NewEventPostFragment extends Fragment {
         return fragmentNewEventBinding.getRoot();
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-        super.onViewCreated(view, savedInstanceState);
-
-
-        /*keine Ahnung welche Query*/
-        //eventViewModel.add(null);
-
-
-        //TODO: observe livedata somehow
-
+    public void launchFragment() {
+        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+        navigation_drawer_activity.launchNewEventPostFragment();
     }
 }

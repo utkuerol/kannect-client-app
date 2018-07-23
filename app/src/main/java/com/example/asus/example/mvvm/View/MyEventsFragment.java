@@ -42,5 +42,8 @@ public class MyEventsFragment extends Fragment {
         return fragmentMyEventsBinding.getRoot();
     }
 
-
+    public void launchFragment() {
+        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+        navigation_drawer_activity.launchMyEventsFragment();
+    }
 }

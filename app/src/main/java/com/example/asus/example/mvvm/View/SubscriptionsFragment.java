@@ -37,5 +37,8 @@ public class SubscriptionsFragment extends Fragment {
         return fragmentSubscriptionsBinding.getRoot();
     }
 
-
+    public void launchFragment() {
+        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+        navigation_drawer_activity.launchSubscriptionsFragment();
+    }
 }

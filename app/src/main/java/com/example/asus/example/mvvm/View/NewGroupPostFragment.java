@@ -26,4 +26,9 @@ public class NewGroupPostFragment extends Fragment {
     public void setViewModel(ItemGroupViewModel viewModel) {
         this.viewModel = viewModel;
     }
+
+    public void launchFragment() {
+        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+        navigation_drawer_activity.launchGroupPostFragment();
+    }
 }

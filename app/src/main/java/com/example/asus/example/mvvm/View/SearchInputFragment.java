@@ -13,15 +13,17 @@ public class SearchInputFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-
-
         //set databinding
         FragmentUserSearchInputBinding fragmentUserSearchInputBinding = FragmentUserSearchInputBinding.inflate(inflater, parent, false);
 
         //TODO: observe livedata somehow
         Toast.makeText(getContext(), "In Event Fragment", Toast.LENGTH_LONG).show();
         return fragmentUserSearchInputBinding.getRoot();
+    }
 
+    public void launchFragment() {
+        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+        navigation_drawer_activity.launchSearchInputFragment();
     }
 
 }

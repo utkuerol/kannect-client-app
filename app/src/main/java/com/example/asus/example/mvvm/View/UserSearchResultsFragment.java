@@ -43,4 +43,9 @@ public class UserSearchResultsFragment extends Fragment {
     }
 
 
+    public void launchFragment() {
+        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+        navigation_drawer_activity.launchUserSearchResultsFragment();
+    }
+
 }

@@ -146,6 +146,84 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
 
     }
 
+    public void launchCategoriesEventFragment() {
+        CategoriesEventFragment categoriesEventFragment = new CategoriesEventFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, categoriesEventFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 
 
+    public void launchCategoriesGroupFragment() {
+    }
+
+    public void launchEventFeedFragment() {
+    }
+
+    public void launchEventSearchResultsInFragment() {
+    }
+
+    public void launchEventInCategoryFragment() {
+    }
+
+    public void launchEventsInSubcategoryFragment() {
+    }
+
+    public void launchGroupFeedFragment() {
+    }
+
+    public void launchGroupSearchResultsFragment() {
+    }
+
+    public void launchGroupsInCategoryFragment() {
+    }
+
+    public void launchGroupsInSubcategoryFragment() {
+    }
+
+    public void launchMyEventsFragment() {
+    }
+
+    public void launchMyGroupsFragment() {
+    }
+
+    public void launchNewEventInCategoryFragment() {
+    }
+
+    public void launchNewEventInSubategoryFragment() {
+    }
+
+    public void launchNewEventPostFragment() {
+    }
+
+    public void launchNewGroupInCategoryFragment() {
+    }
+
+    public void launchNewGroupInSubcategoryFragment() {
+    }
+
+    public void launchGroupPostFragment() {
+    }
+
+    public void launchNewUserPostFragment() {
+    }
+
+    public void launchSearchInputFragment() {
+    }
+
+    public void launchShowPostFragment() {
+    }
+
+    public void launchSubcategoriesEventFragment() {
+    }
+
+    public void launchSubcategoriesGroupFragment() {
+    }
+
+    public void launchSubscriptionsFragment() {
+    }
+
+    public void launchUserSearchResultsFragment() {
+    }
 }

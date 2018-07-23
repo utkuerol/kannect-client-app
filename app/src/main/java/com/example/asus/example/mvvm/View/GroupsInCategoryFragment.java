@@ -45,4 +45,8 @@ public class GroupsInCategoryFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_groups_in_category, parent, false);
     }
 
+    public void launchFragment() {
+        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+        navigation_drawer_activity.launchGroupsInCategoryFragment();
+    }
 }
