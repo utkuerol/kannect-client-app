@@ -1,35 +1,27 @@
 {
   "project_info": {
-    "project_number": "530180641987",
-    "firebase_url": "https://kannect-15b5a.firebaseio.com",
-    "project_id": "kannect-15b5a",
-    "storage_bucket": "kannect-15b5a.appspot.com"
+    "project_number": "963952173312",
+    "firebase_url": "https://kannect-client-app.firebaseio.com",
+    "project_id": "kannect-client-app",
+    "storage_bucket": "kannect-client-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:530180641987:android:61b6817e3558dbff",
+        "mobilesdk_app_id": "1:963952173312:android:61b6817e3558dbff",
         "android_client_info": {
           "package_name": "com.example.asus.example"
         }
       },
       "oauth_client": [
         {
-          "client_id": "530180641987-9unvpa2rfqm8d34imd7bt3ubmjaurfq6.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.asus.example",
-            "certificate_hash": "97e1ea778f2b341ad2e0650c9c2ee7a11704afb6"
-          }
-        },
-        {
-          "client_id": "530180641987-pqanqll8802r70amgo5casr1p2ah9r70.apps.googleusercontent.com",
+          "client_id": "963952173312-rpfvhcumlsplr2cjfej2nhn8a8lpn688.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBMgYahRv0VHbMS_y8cJbNQFkEUoWLsbRI"
+          "current_key": "AIzaSyC4Jt9j9CJ3f01iPUOiGmjRnFKOYHl1AuQ"
         }
       ],
       "services": {
@@ -37,13 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "530180641987-pqanqll8802r70amgo5casr1p2ah9r70.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2

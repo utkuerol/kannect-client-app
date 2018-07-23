@@ -96,7 +96,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
 
         PersonalFeedFragment personalFeedFragment = new PersonalFeedFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container_layout, personalFeedFragment);
+        transaction.replace(R.id.content_frame, personalFeedFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -104,7 +104,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
     public void launchUserProfileFragment() {
         UserProfileFragment userProfileFragment = new UserProfileFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container_layout, userProfileFragment);
+        transaction.replace(R.id.content_frame, userProfileFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -113,8 +113,8 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         CategoriesGroupFragment categoriesGroupFragment = new CategoriesGroupFragment();
         MyGroupsFragment myGroupsFragment = new MyGroupsFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container_layout, categoriesGroupFragment);
-        transaction.add(R.id.container_layout, myGroupsFragment);
+        transaction.replace(R.id.content_frame, categoriesGroupFragment);
+        transaction.add(R.id.content_frame, myGroupsFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -123,8 +123,8 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         CategoriesEventFragment categoriesEventFragment = new CategoriesEventFragment();
         MyEventsFragment myEventsFragment = new MyEventsFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container_layout, categoriesEventFragment);
-        transaction.add(R.id.container_layout, myEventsFragment);
+        transaction.replace(R.id.content_frame, categoriesEventFragment);
+        transaction.add(R.id.content_frame, myEventsFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -132,13 +132,13 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
     public void launchSearchFragments() {
         SearchInputFragment searchInputFragment = new SearchInputFragment();
         UserSearchResultsFragment userSearchResultsFragment = new UserSearchResultsFragment();
-        //EventSearchResultsFragment eventSearchResultsFragment = new EventSearchResultsFragment();
-        //GroupSearchResultsFragment groupSearchResultsFragment = new GroupSearchResultsFragment();
+        EventSearchResultsFragment eventSearchResultsFragment = new EventSearchResultsFragment();
+        GroupSearchResultsFragment groupSearchResultsFragment = new GroupSearchResultsFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container_layout, searchInputFragment);
-        transaction.add(R.id.container_layout, userSearchResultsFragment);
-        //transaction.add(R.id.container_layout, eventSearchResultsFragment);
-        //transaction.add(R.id.container_layout, groupSearchResultsFragment);
+        transaction.replace(R.id.content_frame, searchInputFragment);
+        transaction.add(R.id.content_frame, userSearchResultsFragment);
+        transaction.add(R.id.content_frame, eventSearchResultsFragment);
+        transaction.add(R.id.content_frame, groupSearchResultsFragment);
         transaction.addToBackStack(null);
         transaction.commit();
 
