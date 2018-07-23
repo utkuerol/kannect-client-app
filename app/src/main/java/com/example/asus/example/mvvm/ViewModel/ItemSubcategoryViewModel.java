@@ -24,7 +24,7 @@ import java.util.Date;
  * CategoryRepository class, which has the category and subcategory business logic of the application.
  * Objects received from repositories will be stored as MutableLiveData Objects.
  */
-public class ItemSubcategoryView extends ViewModel {
+public class ItemSubcategoryViewModel extends ViewModel {
 
     private MutableLiveData<Subcategory> subcategory;
     private User currentUser;

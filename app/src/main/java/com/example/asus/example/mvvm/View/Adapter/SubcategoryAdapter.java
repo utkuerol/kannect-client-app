@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.ItemSubcategoryBinding;
 import com.example.asus.example.mvvm.Model.Entities.Subcategory;
-import com.example.asus.example.mvvm.ViewModel.ItemSubcategoryView;
+import com.example.asus.example.mvvm.ViewModel.ItemSubcategoryViewModel;
 
 import java.util.Collections;
 import java.util.List;
@@ -89,11 +89,12 @@ public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.
          * @param subcategory which will be bound.
          */
         void bindSubcategory(Subcategory subcategory) {
-            if (mItemSubcategoryBinding.getSubcategoryViewModel() == null) {
-                mItemSubcategoryBinding.setSubcategoryViewModel(
-                        new ItemSubcategoryView(subcategory, itemView.getContext()));
+            if (mItemSubcategoryBinding.getItemSubcategoryViewModel() == null) {
+                ItemSubcategoryViewModel itemSubcategoryViewModel = new ItemSubcategoryViewModel();
+                itemSubcategoryViewModel.init(subcategory);
+                mItemSubcategoryBinding.setItemSubcategoryViewModel(itemSubcategoryViewModel);
             } else {
-                mItemSubcategoryBinding.getSubcategoryViewModel().setSubcategory(subcategory);
+                mItemSubcategoryBinding.getItemSubcategoryViewModel().init(subcategory);
             }
         }
     }

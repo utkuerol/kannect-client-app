@@ -1,6 +1,5 @@
 package com.example.asus.example.mvvm.View.Adapter;
 
-import android.arch.lifecycle.MutableLiveData;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -90,11 +89,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostAdapterVie
          * @param post which will be bound.
          */
         void bindPost(Post post) {
-            MutableLiveData<Post> p = new MutableLiveData<>();
-            p.setValue(post);
+
             if (mItemPostBinding.getItemPostViewModel() == null) {
-                mItemPostBinding.setItemPostViewModel(
-                        new ItemPostViewModel(p, itemView.getContext()));
+                ItemPostViewModel itemPostViewModel = new ItemPostViewModel();
+                itemPostViewModel.init(post);
+                mItemPostBinding.setItemPostViewModel(itemPostViewModel);
             } else {
                 mItemPostBinding.getItemPostViewModel().setPost(post);
             }

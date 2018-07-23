@@ -1,6 +1,5 @@
 package com.example.asus.example.mvvm.View.Adapter;
 
-import android.arch.lifecycle.MutableLiveData;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -64,10 +63,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     /**
      * sets the list of groups which will be shown in the ui.
-     * @param CategorysList list of Categories
+     * @param categoryList list of Categories
      */
-    public void setCategoryList(List<Category> CategorysList) {
-        this.categoryList = CategorysList;
+    public void setCategoryList(List<Category> categoryList) {
+        this.categoryList = categoryList;
     }
 
     /**
@@ -92,13 +91,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
          * @param category which will be bound.
          */
         void bindCategory(Category category) {
-            MutableLiveData<Category> cat = new MutableLiveData<Category>();
-            cat.setValue(category);
             if (mItemCategoryBinding.getCategoryViewModel() == null) {
-                mItemCategoryBinding.setCategoryViewModel(
-                        new ItemCategoryViewModel(cat, itemView.getContext()));
+                ItemCategoryViewModel itemCategoryViewModel = new ItemCategoryViewModel();
+                itemCategoryViewModel.init(category);
+                mItemCategoryBinding.setCategoryViewModel(itemCategoryViewModel);
             } else {
-                mItemCategoryBinding.getCategoryViewModel().setChosenCategory(cat.getValue());
+                mItemCategoryBinding.getCategoryViewModel().init(category);
             }
         }
     }

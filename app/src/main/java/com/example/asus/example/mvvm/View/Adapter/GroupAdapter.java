@@ -93,8 +93,9 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupAdapter
             MutableLiveData<Group> g = new MutableLiveData<>();
             g.setValue(group);
             if (mItemGroupBinding.getItemGroupViewModel() == null) {
-                mItemGroupBinding.setItemGroupViewModel(
-                        new ItemGroupViewModel(g, itemView.getContext()));
+                ItemGroupViewModel itemGroupViewModel = new ItemGroupViewModel();
+                itemGroupViewModel.init(group);
+                mItemGroupBinding.setItemGroupViewModel(itemGroupViewModel);
             } else {
                 mItemGroupBinding.getItemGroupViewModel().setChosenGroup(group);
             }

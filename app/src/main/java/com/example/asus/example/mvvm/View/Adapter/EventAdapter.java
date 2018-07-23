@@ -1,6 +1,5 @@
 package com.example.asus.example.mvvm.View.Adapter;
 
-import android.arch.lifecycle.MutableLiveData;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -90,13 +89,13 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
          * @param event which will be bound.
          */
         void bindEvent(Event event) {
-            MutableLiveData<Event> eventMutableLiveData = new MutableLiveData<>();
-            eventMutableLiveData.setValue(event);
+
             if (mItemEventBinding.getItemEventViewModel() == null) {
-                mItemEventBinding.setItemEventViewModel(
-                        new ItemEventViewModel(eventMutableLiveData, itemView.getContext()));
+                ItemEventViewModel itemEventViewModel = new ItemEventViewModel();
+                itemEventViewModel.init(event);
+                mItemEventBinding.setItemEventViewModel(itemEventViewModel);
             } else {
-                mItemEventBinding.getItemEventViewModel().setEvent(eventMutableLiveData);
+                mItemEventBinding.getItemEventViewModel().init(event);
             }
         }
     }
