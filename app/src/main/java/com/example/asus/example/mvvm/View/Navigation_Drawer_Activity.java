@@ -132,13 +132,13 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
     public void launchSearchFragments() {
         SearchInputFragment searchInputFragment = new SearchInputFragment();
         UserSearchResultsFragment userSearchResultsFragment = new UserSearchResultsFragment();
-        EventSearchResultsFragment eventSearchResultsFragment = new EventSearchResultsFragment();
-        GroupSearchResultsFragment groupSearchResultsFragment = new GroupSearchResultsFragment();
+        //EventSearchResultsFragment eventSearchResultsFragment = new EventSearchResultsFragment();
+        //GroupSearchResultsFragment groupSearchResultsFragment = new GroupSearchResultsFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container_layout, searchInputFragment);
         transaction.add(R.id.container_layout, userSearchResultsFragment);
-        transaction.add(R.id.container_layout, eventSearchResultsFragment);
-        transaction.add(R.id.container_layout, groupSearchResultsFragment);
+        //transaction.add(R.id.container_layout, eventSearchResultsFragment);
+        //transaction.add(R.id.container_layout, groupSearchResultsFragment);
         transaction.addToBackStack(null);
         transaction.commit();
 
