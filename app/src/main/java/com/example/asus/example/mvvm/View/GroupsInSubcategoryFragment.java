@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.asus.example.R;
-import com.example.asus.example.databinding.FragmentGroupsInSubacategoryBinding;
+import com.example.asus.example.databinding.FragmentGroupsInSubcategoryBinding;
 import com.example.asus.example.mvvm.View.Adapter.GroupAdapter;
 import com.example.asus.example.mvvm.ViewModel.GroupViewModel;
 
@@ -21,12 +21,12 @@ import com.example.asus.example.mvvm.ViewModel.GroupViewModel;
 public class GroupsInSubcategoryFragment extends Fragment {
 
     private GroupViewModel groupViewModel;
-    private FragmentGroupsInSubacategoryBinding fragmentGroupsInSubcategory;
+    private FragmentGroupsInSubcategoryBinding fragmentGroupsInSubcategory;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         // Defines the xml file for the fragment
-        return inflater.inflate(R.layout.fragment_groups_in_subacategory, parent, false);
+        return inflater.inflate(R.layout.fragment_groups_in_subcategory, parent, false);
     }
 
     @Override
