@@ -15,15 +15,13 @@ public class SearchResultsViewModel extends ViewModel {
     private String query;
     private Context context;
 
-    /**
-     * Creates an instance with the given query and application context.
-     *
-     * @param query   given.
-     * @param context of the application.
-     */
-    public SearchResultsViewModel(String query, Context context) {
+
+    public SearchResultsViewModel() {
+
+    }
+
+    public void init(String query) {
         this.query = query;
-        this.context = context;
     }
 
     /**

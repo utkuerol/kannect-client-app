@@ -29,13 +29,7 @@ public class GroupViewModel extends ViewModel {
     private GroupRepository groupRepository;
 
 
-    /**
-     * Creates an instance with the given application context.
-     *
-     * @param context of the application.
-     */
-    public GroupViewModel(Context context) {
-        this.context = context;
+    public void init() {
         UserRepository userRepository = new UserRepository();
         groupRepository = new GroupRepository();
         SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);

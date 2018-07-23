@@ -25,6 +25,7 @@ public class UserSearchResultsFragment extends Fragment {
 
         //set viewmodel
         UserViewModel userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+        userViewModel.init();
         userViewModel.setUsersToSearchResults(query);
 
         //set adapter

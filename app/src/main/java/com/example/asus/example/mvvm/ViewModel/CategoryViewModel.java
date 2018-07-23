@@ -22,13 +22,8 @@ public class CategoryViewModel extends ViewModel {
     private Context context;
     private CategoryRepository categoryRepository;
 
-    /**
-     * Creates an instance with the given application context.
-     *
-     * @param context of the application.
-     */
-    public CategoryViewModel(Context context) {
-        this.context = context;
+
+    public void init() {
         this.categoryRepository = new CategoryRepository();
     }
 

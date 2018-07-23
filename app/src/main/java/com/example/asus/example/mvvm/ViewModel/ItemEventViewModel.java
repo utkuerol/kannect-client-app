@@ -37,15 +37,9 @@ public class ItemEventViewModel extends ViewModel {
     private FeedRepository feedRepository;
     private PostRepository postRepository;
 
-    /**
-     * creates an instance with the chosen event and application context.
-     *
-     * @param event   to set
-     * @param context of the application
-     */
-    public ItemEventViewModel(MutableLiveData<Event> event, Context context) {
-        this.context = context;
-        this.event = event;
+
+    public void init(Event event) {
+        this.event.setValue(event);
         postRepository = new PostRepository();
         UserRepository userRepository = new UserRepository();
         feedRepository = new FeedRepository();

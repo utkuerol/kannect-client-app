@@ -24,13 +24,12 @@ public class UserViewModel extends ViewModel {
     private UserRepository userRepository;
     private Context context;
 
-    /**
-     * Constructor to create a new instance with the given application context.
-     *
-     * @param context
-     */
-    public UserViewModel(Context context) {
-        this.context = context;
+
+    public UserViewModel() {
+
+    }
+
+    public void init() {
         users = new MutableLiveData<>();
         userRepository = new UserRepository();
 

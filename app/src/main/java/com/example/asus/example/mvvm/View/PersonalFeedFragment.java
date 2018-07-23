@@ -23,6 +23,7 @@ public class PersonalFeedFragment extends Fragment {
 
         //set viewmodel
         PostViewModel postViewModel = ViewModelProviders.of(this).get(PostViewModel.class);
+        postViewModel.init();
         postViewModel.setPostsToPersonalFeed();
 
         //set adapter

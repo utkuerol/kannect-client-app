@@ -32,15 +32,9 @@ public class ItemSubcategoryView extends ViewModel {
     private GroupRepository groupRepository;
     private EventRepository eventRepository;
 
-    /**
-     * Creates an instance with the given chosenSubcategory and application context.
-     *
-     * @param subcategory subcategory
-     * @param context           of the application.
-     */
-    public ItemSubcategoryView(Subcategory subcategory, Context context) {
+
+    public void init(Subcategory subcategory) {
         this.subcategory.setValue(subcategory);
-        this.context = context;
 
         groupRepository = new GroupRepository();
         eventRepository = new EventRepository();

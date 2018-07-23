@@ -37,15 +37,9 @@ public class ItemGroupViewModel extends ViewModel {
     private FeedRepository feedRepository;
     private PostRepository postRepository;
 
-    /**
-     * Creates an instance with the chosenGroup and application context.
-     *
-     * @param chosenGroup
-     * @param context     of the application
-     */
-    public ItemGroupViewModel(MutableLiveData<Group> chosenGroup, Context context) {
-        this.chosenGroup = chosenGroup;
-        this.context = context;
+
+    public void init(Group chosenGroup) {
+        this.chosenGroup.setValue(chosenGroup);
         postRepository = new PostRepository();
         UserRepository userRepository = new UserRepository();
         feedRepository = new FeedRepository();

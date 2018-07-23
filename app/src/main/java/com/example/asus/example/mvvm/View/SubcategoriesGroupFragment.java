@@ -26,7 +26,7 @@ public class SubcategoriesGroupFragment extends Fragment {
 
         //set viewmodel
         ItemCategoryViewModel itemCategoryViewModel = ViewModelProviders.of(this).get(ItemCategoryViewModel.class);
-        itemCategoryViewModel.setChosenCategory(category);
+        itemCategoryViewModel.init(category);
 
         //set adapter
         SubcategoryAdapter subcategoryAdapter = new SubcategoryAdapter();

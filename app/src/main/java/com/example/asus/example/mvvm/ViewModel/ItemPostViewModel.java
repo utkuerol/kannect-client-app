@@ -31,15 +31,9 @@ public class ItemPostViewModel extends ViewModel {
     private User currentUser;
     private PostRepository postRepository;
 
-    /**
-     * Creates an instance with the given post and application context.
-     *
-     * @param post    to be displayed.
-     * @param context of the application.
-     */
-    public ItemPostViewModel(MutableLiveData<Post> post, Context context) {
-        this.post = post;
-        this.context = context;
+
+    public void init(Post post) {
+        this.post.setValue(post);
         postRepository = new PostRepository();
         UserRepository userRepository = new UserRepository();
 

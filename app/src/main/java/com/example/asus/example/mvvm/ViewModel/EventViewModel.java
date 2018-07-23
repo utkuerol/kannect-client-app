@@ -27,12 +27,8 @@ public class EventViewModel extends ViewModel {
     private Context context;
     private EventRepository eventRepository;
 
-    /**
-     * Creates an instance with the given application context.
-     *
-     * @param context of the application.
-     */
-    public EventViewModel(Context context) {
+
+    public void init() {
         this.context = context;
         eventRepository = new EventRepository();
 

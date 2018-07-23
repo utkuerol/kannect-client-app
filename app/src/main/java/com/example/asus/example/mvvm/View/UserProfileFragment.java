@@ -25,7 +25,7 @@ public class UserProfileFragment extends Fragment {
 
         //set viewmodel
         ItemUserViewModel itemUserViewModel = ViewModelProviders.of(this).get(ItemUserViewModel.class);
-        itemUserViewModel.setChosenUser(user);
+        itemUserViewModel.init(user);
 
         //set adapter
         PostAdapter postAdapter = new PostAdapter();

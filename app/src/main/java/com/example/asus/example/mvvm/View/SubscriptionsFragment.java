@@ -20,6 +20,7 @@ public class SubscriptionsFragment extends Fragment {
 
         //set viewmodel
         UserViewModel userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+        userViewModel.init();
         userViewModel.setUsersToSubscriptions();
 
         //set adapter

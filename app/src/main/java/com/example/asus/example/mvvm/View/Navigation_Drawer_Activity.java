@@ -32,6 +32,8 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        launchPersonalFeedFragment();
     }
 
     @Override

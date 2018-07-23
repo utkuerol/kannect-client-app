@@ -34,18 +34,15 @@ public class ItemUserViewModel extends ViewModel {
     private UserRepository userRepository;
     private PostRepository postRepository;
 
-    /**
-     * Creates an instance with the chosen/given user and the application context.
-     *
-     * @param user    needed to be shown.
-     * @param context of the application.
-     */
-    public ItemUserViewModel(MutableLiveData<User> user, Context context) {
-        this.chosenUser = user;
-        this.context = context;
+
+    public ItemUserViewModel() {
+    }
+
+    public void init(User user) {
+        this.chosenUser.setValue(user);
+        ;
         userRepository = new UserRepository();
         postRepository = new PostRepository();
-
 
         SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
         currentUser = userRepository.getUserByID(myPrefs.getLong("CurrentUserId", 0)).getValue();

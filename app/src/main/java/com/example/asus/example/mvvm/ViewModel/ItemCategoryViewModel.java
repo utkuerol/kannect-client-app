@@ -33,15 +33,9 @@ public class ItemCategoryViewModel extends ViewModel {
     private GroupRepository groupRepository;
     private EventRepository eventRepository;
 
-    /**
-     * Creates an instance with the chosenCategory and the application context.
-     *
-     * @param chosenCategory to set
-     * @param context        of the application.
-     */
-    public ItemCategoryViewModel(MutableLiveData<Category> chosenCategory, Context context) {
-        this.chosenCategory = chosenCategory;
-        this.context = context;
+
+    public void init(Category chosenCategory) {
+        this.chosenCategory.setValue(chosenCategory);
         UserRepository userRepository = new UserRepository();
         groupRepository = new GroupRepository();
         eventRepository = new EventRepository();
