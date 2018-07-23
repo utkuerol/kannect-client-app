@@ -29,7 +29,7 @@ public interface ServiceAPI {
      * @return List of all the Events which match the search Query as a Response Object
      */
     @GET("/events")
-    Call<List<Event>> getSearchEvents(String searchQuery);
+    Call<List<Event>> getSearchEvents(@Query("name") String searchQuery);
 
     /**
      * service to create an Event
@@ -41,20 +41,20 @@ public interface ServiceAPI {
 
     /**
      * service to delete a given event
-     * @param eventID event to be deleted
+     * @param event event to be deleted
      * @return void, no response needed
      */
     @DELETE("/delete")
-    Call<Event> deleteEvent(long eventID);
+    Call<Event> deleteEvent(@Body Event event);
 
 
     /**
-     * service to find Groups by given search suery
+     * service to find Groups by given search query
      * @param searchQuery search query the User typed in
      * @return List of Groups which match the search query as a Response Object
      */
     @GET("/groups")
-    Call<List<Group>> getSearchGroups(String searchQuery);
+    Call<List<Group>> getSearchGroups(@Query("name") String searchQuery);
 
     /**
      * service to create a Group
@@ -66,11 +66,11 @@ public interface ServiceAPI {
 
     /**
      * service to delete a Group
-     * @param groupID group to be deleted
+     * @param group group to be deleted
      * @return void, no response needed
      */
     @DELETE("/deleteGroup")
-    Call<Group> deleteGroup(long groupID);
+    Call<Group> deleteGroup(@Body Group group);
 
 
     /**
@@ -79,7 +79,7 @@ public interface ServiceAPI {
      * @return List of all Posts for the Users feed as a Response object
      */
     @GET("/personalFeed")
-    Call<List<Post>> getPersonalFeed(long userID);
+    Call<List<Post>> getPersonalFeed(@Query("userId") long userID);
 
     /**
      * service to get all Posts for a Groups feed
@@ -87,7 +87,7 @@ public interface ServiceAPI {
      * @return List of all Posts for the Groups feed as a Response Object
      */
     @GET("/groupFeed")
-    Call<List<Post>> getGroupFeed(long groupID);
+    Call<List<Post>> getGroupFeed(@Query("groupId") long groupID);
 
     /**
      * service to get all Posts for a Events feed
@@ -95,7 +95,7 @@ public interface ServiceAPI {
      * @return List of all Posts for the Groups as a Response Object
      */
     @GET("/eventFeed")
-    Call<List<Post>>  getEventFeed(long eventID);
+    Call<List<Post>> getEventFeed(@Query("eventId") long eventID);
 
     /**
      * service to save a new Post in the server
@@ -107,11 +107,11 @@ public interface ServiceAPI {
 
     /**
      * service to delete an existing Post
-     * @param postID post to be deleted
+     * @param post post to be deleted
      * @return void, no response needed
      */
     @DELETE("/deletePost")
-    Call<Post> deletePost(long postID);
+    Call<Post> deletePost(@Body Post post);
 
 
     /**
@@ -149,7 +149,7 @@ public interface ServiceAPI {
      * @return List of all the Users, who match the search query as a Response object
      */
     @GET("/users")
-    Call<List<User>> getSearchUsers(String searchQuery);
+    Call<List<User>> getSearchUsers(@Query("name") String searchQuery);
 
     /**
      * service to indicate to the server that a user subscribed to another user
@@ -213,25 +213,26 @@ public interface ServiceAPI {
 
     /**
      * service to get Categories by given search query
-     * @param searchQuery typed in by the user
      * @return List of Categories which match the search query as a Call object
      */
     @GET("/categories")
-    Call<List<Category>> getCategories(String searchQuery);
+    Call<List<Category>> getCategories();
 
 
     /**
      * service to get a user by mail
      *
-     * @param userMail
+     * @param userMail mail of user
      * @return User By Mail
      */
     @GET("/userByMail")
     Call<User> getUserByMail(@Query("userMail") String userMail);
 
-    /**
-     * @param user
-     * @return
+
+    /*
+     *service to create a user
+     * @param user to be created
+     * @return void no response needed
      */
     @POST("/createUser")
     Call<ResponseBody> createUser(@Body User user);
@@ -243,7 +244,7 @@ public interface ServiceAPI {
      * @return user which matched the id
      */
     @GET("/userById")
-    Call<User> getUserByID(long userId);
+    Call<User> getUserByID(@Query("userId") long userId);
 
     /**
      * service to get the feed of a user by his id
@@ -252,6 +253,6 @@ public interface ServiceAPI {
      * @return list of posts for the feed of the user
      */
     @GET("/userProfile")
-    Call<List<Post>> getUserProfile(long userID);
+    Call<List<Post>> getUserProfile(@Query("userId") long userID);
 
 }
