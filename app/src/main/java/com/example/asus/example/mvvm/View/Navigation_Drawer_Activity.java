@@ -94,7 +94,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         return true;
     }
 
-    private void launchPersonalFeedFragment() {
+    public void launchPersonalFeedFragment() {
 
         PersonalFeedFragment personalFeedFragment = new PersonalFeedFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -103,7 +103,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
-    private void launchUserProfileFragment() {
+    public void launchUserProfileFragment() {
         UserProfileFragment userProfileFragment = new UserProfileFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, userProfileFragment);
@@ -111,7 +111,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
-    private void launchGroupFragments() {
+    public void launchGroupFragments() {
         CategoriesGroupFragment categoriesGroupFragment = new CategoriesGroupFragment();
         MyGroupsFragment myGroupsFragment = new MyGroupsFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -121,7 +121,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
-    private void launchEventFragments() {
+    public void launchEventFragments() {
         CategoriesEventFragment categoriesEventFragment = new CategoriesEventFragment();
         MyEventsFragment myEventsFragment = new MyEventsFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -131,7 +131,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
-    private void launchSearchFragments() {
+    public void launchSearchFragments() {
         SearchInputFragment searchInputFragment = new SearchInputFragment();
         UserSearchResultsFragment userSearchResultsFragment = new UserSearchResultsFragment();
         EventSearchResultsFragment eventSearchResultsFragment = new EventSearchResultsFragment();
@@ -146,7 +146,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
 
     }
 
-    private void launchCategoriesEventFragment() {
+    public void launchCategoriesEventFragment() {
         CategoriesEventFragment categoriesEventFragment = new CategoriesEventFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, categoriesEventFragment);
