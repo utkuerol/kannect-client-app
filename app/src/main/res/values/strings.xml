@@ -38,6 +38,7 @@
     <string name="eventImageUrl">Bild Url</string>
     <string name="eventName">Name</string>
     <string name="title_activity_login2">Sign in</string>
+    <string name="logout">Abmelden</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

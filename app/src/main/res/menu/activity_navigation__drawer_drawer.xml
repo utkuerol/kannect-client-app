@@ -17,7 +17,10 @@
             android:id="@+id/nav_profile"
             android:title="@string/profile"
             android:icon="@drawable/ic_profile_icon"/>
-
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_log_out_icon"
+            android:title="@string/logout" />
 
     </group>
 
