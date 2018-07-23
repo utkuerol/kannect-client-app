@@ -25,18 +25,12 @@ public class CategoriesEventFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        // Defines the xml file for the fragment
-        return inflater.inflate(R.layout.fragment_categories_event, parent, false);
-    }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-        super.onViewCreated(view, savedInstanceState);
 
         //set viewmodel
         categoryViewModel = ViewModelProviders.of(this).get(CategoryViewModel.class);
         categoryViewModel.setCategoriesToAllCategories();
+        fragmentCategoriesEventBinding = FragmentCategoriesEventBinding.inflate(inflater, parent, false);
 
         //set adapter
         CategoryAdapter categoryAdapter = new CategoryAdapter();
@@ -44,7 +38,7 @@ public class CategoriesEventFragment extends Fragment {
         fragmentCategoriesEventBinding.categoriesEventCategoryRV.setAdapter(categoryAdapter);
         fragmentCategoriesEventBinding.categoriesEventCategoryRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        //TODO: observe livedata somehow
-
+        return fragmentCategoriesEventBinding.getRoot();
     }
+
 }

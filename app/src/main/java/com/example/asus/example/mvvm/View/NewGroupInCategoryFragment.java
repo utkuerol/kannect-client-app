@@ -20,26 +20,16 @@ import com.example.asus.example.mvvm.ViewModel.GroupViewModel;
  */
 public class NewGroupInCategoryFragment extends Fragment {
     private GroupViewModel groupViewModel;
-    private FragmentNewGroupBinding FragmentNewGroupBinding;
+    private FragmentNewGroupBinding fragmentNewGroupBinding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        // Defines the xml file for the fragment
-        return inflater.inflate(R.layout.fragment_new_group, parent, false);
-    }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-        super.onViewCreated(view, savedInstanceState);
-
+        fragmentNewGroupBinding = FragmentNewGroupBinding.inflate(inflater, parent, false);
         //set viewmodel
         groupViewModel = ViewModelProviders.of(this).get(GroupViewModel.class);
-
-        //groupViewModel.add(null);
-
-
-        //TODO: observe livedata somehow
-
+        // Defines the xml file for the fragment
+        return fragmentNewGroupBinding.getRoot();
     }
+
 }

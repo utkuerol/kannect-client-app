@@ -1,5 +1,6 @@
 package com.example.asus.example.mvvm.View;
 
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentGroupsInSubcategoryBinding;
+import com.example.asus.example.mvvm.Model.Entities.Subcategory;
 import com.example.asus.example.mvvm.View.Adapter.GroupAdapter;
 import com.example.asus.example.mvvm.ViewModel.GroupViewModel;
 
@@ -25,19 +27,13 @@ public class GroupsInSubcategoryFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        // Defines the xml file for the fragment
-        return inflater.inflate(R.layout.fragment_groups_in_subcategory, parent, false);
-    }
+        Subcategory subcategory = (Subcategory) getArguments().getSerializable("subcategory");
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-        super.onViewCreated(view, savedInstanceState);
-
+        fragmentGroupsInSubcategory = FragmentGroupsInSubcategoryBinding.inflate(inflater, parent, false);
         //set viewmodel
         groupViewModel = ViewModelProviders.of(this).get(GroupViewModel.class);
         /*keine Ahnung welche Query*/
-        groupViewModel.setGroupsFilteredBySubcategory(null);
+        groupViewModel.setGroupsFilteredBySubcategory(subcategory);
 
         //set adapter
         GroupAdapter groupAdapter = new GroupAdapter();
@@ -46,6 +42,8 @@ public class GroupsInSubcategoryFragment extends Fragment {
         fragmentGroupsInSubcategory.groupsInSubcategoryGroupRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         //TODO: observe livedata somehow
-
+        // Defines the xml file for the fragment
+        return fragmentGroupsInSubcategory.getRoot();
     }
+
 }

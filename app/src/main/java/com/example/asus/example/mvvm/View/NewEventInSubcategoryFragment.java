@@ -24,23 +24,14 @@ public class NewEventInSubcategoryFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        // Defines the xml file for the fragment
-        return inflater.inflate(R.layout.fragment_new_event, parent, false);
-    }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-        super.onViewCreated(view, savedInstanceState);
-
+        fragmentNewEventBinding = FragmentNewEventBinding.inflate(inflater, parent, false);
         //set viewmodel
         eventViewModel = ViewModelProviders.of(this).get(EventViewModel.class);
-        /*keine Ahnung welche Query*/
-        //eventViewModel.add(null);
-
-
-        //TODO: observe livedata somehow
-
+        // Defines the xml file for the fragment
+        return fragmentNewEventBinding.getRoot();
     }
+
+
 
 }
