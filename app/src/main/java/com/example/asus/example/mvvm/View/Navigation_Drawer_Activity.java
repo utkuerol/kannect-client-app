@@ -156,74 +156,194 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
 
 
     public void launchCategoriesGroupFragment() {
+        CategoriesGroupFragment categoriesGroupFragment = new CategoriesGroupFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, categoriesGroupFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     public void launchEventFeedFragment() {
+        EventFeedFragment eventFeedFragment = new EventFeedFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, eventFeedFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     public void launchEventSearchResultsInFragment() {
+        EventSearchResultsFragment eventSearchResultsFragment = new EventSearchResultsFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, eventSearchResultsFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     public void launchEventInCategoryFragment() {
+        EventsInCategoryFragment eventInCategoryFragment = new EventsInCategoryFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, eventInCategoryFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     public void launchEventsInSubcategoryFragment() {
+        EventsInSubcategoryFragment eventsInSubcategoryFragment = new EventsInSubcategoryFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, eventsInSubcategoryFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     public void launchGroupFeedFragment() {
+        GroupFeedFragment groupFeedFragment = new GroupFeedFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, groupFeedFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     public void launchGroupSearchResultsFragment() {
+        GroupSearchResultsFragment groupSearchResultsFragment = new GroupSearchResultsFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, groupSearchResultsFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     public void launchGroupsInCategoryFragment() {
+        GroupsInCategoryFragment groupsInCategoryFragment = new GroupsInCategoryFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, groupsInCategoryFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     public void launchGroupsInSubcategoryFragment() {
+        GroupsInSubcategoryFragment groupsInSubcategoryFragment = new GroupsInSubcategoryFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, groupsInSubcategoryFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     public void launchMyEventsFragment() {
+        MyEventsFragment myEventsFragment = new MyEventsFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, myEventsFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     public void launchMyGroupsFragment() {
+        MyGroupsFragment myGroupsFragment = new MyGroupsFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, myGroupsFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     public void launchNewEventInCategoryFragment() {
+        NewEventInCategoryFragment newEventInCategoryFragment = new NewEventInCategoryFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, newEventInCategoryFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     public void launchNewEventInSubategoryFragment() {
+        NewEventInSubcategoryFragment newEventInSubategoryFragment = new NewEventInSubcategoryFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, newEventInSubategoryFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     public void launchNewEventPostFragment() {
+        NewEventPostFragment newEventPostFragment = new NewEventPostFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, newEventPostFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     public void launchNewGroupInCategoryFragment() {
+        NewGroupInCategoryFragment newGroupInCategoryFragment = new NewGroupInCategoryFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, newGroupInCategoryFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     public void launchNewGroupInSubcategoryFragment() {
+        NewGroupInSubcategoryFragment newGroupInSubcategoryFragment = new NewGroupInSubcategoryFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, newGroupInSubcategoryFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     public void launchGroupPostFragment() {
+        NewGroupPostFragment newGroupPostFragment = new NewGroupPostFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, newGroupPostFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     public void launchNewUserPostFragment() {
+        NewUserPostFragment newUserPostFragment = new NewUserPostFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, newUserPostFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     public void launchSearchInputFragment() {
+        SearchInputFragment searchInputFragment = new SearchInputFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, searchInputFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     public void launchShowPostFragment() {
+        ShowPostFragment showPostFragment = new ShowPostFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, showPostFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     public void launchSubcategoriesEventFragment() {
+        SubcategoriesEventFragment subcategoriesEventFragment = new SubcategoriesEventFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, subcategoriesEventFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     public void launchSubcategoriesGroupFragment() {
+        SubcategoriesGroupFragment subcategoriesGroupFragment = new SubcategoriesGroupFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, subcategoriesGroupFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     public void launchSubscriptionsFragment() {
+        SubscriptionsFragment subscriptionsFragment = new SubscriptionsFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, subscriptionsFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     public void launchUserSearchResultsFragment() {
+        UserSearchResultsFragment userSearchResultsFragment = new UserSearchResultsFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, userSearchResultsFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }
