@@ -34,8 +34,8 @@ public class SubcategoriesGroupFragment extends Fragment {
 
         //set databinding
         FragmentSubcategoriesGroupBinding fragmentSubcategoriesGroupBinding = FragmentSubcategoriesGroupBinding.inflate(inflater, parent, false);
-        fragmentSubcategoriesGroupBinding.subcategoriesRV.setAdapter(subcategoryAdapter);
-        fragmentSubcategoriesGroupBinding.subcategoriesRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        fragmentSubcategoriesGroupBinding.subcategoriesGroupSubcategoriesRV.setAdapter(subcategoryAdapter);
+        fragmentSubcategoriesGroupBinding.subcategoriesGroupSubcategoriesRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         //TODO: observe livedata somehow
 

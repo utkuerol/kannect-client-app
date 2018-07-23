@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.asus.example.databinding.FragmentUserProfileBinding;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.View.Adapter.PostAdapter;
 import com.example.asus.example.mvvm.ViewModel.ItemUserViewModel;
@@ -31,9 +32,9 @@ public class UserProfileFragment extends Fragment {
         postAdapter.setPostList(itemUserViewModel.getUserProfile());
 
         //set binding
-        FragmentUserProfileBinding fragmentUserProfileBinding = FragmentUserProfileBinding.inflate(inflater, parent, false)
-        fragmentUserProfileBinding.userPostsRV.setAdapter(postAdapter);
-        fragmentUserProfileBinding.userPostsRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        FragmentUserProfileBinding fragmentUserProfileBinding = FragmentUserProfileBinding.inflate(inflater, parent, false);
+        fragmentUserProfileBinding.userProfilePostRV.setAdapter(postAdapter);
+        fragmentUserProfileBinding.userProfilePostRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
         fragmentUserProfileBinding.setItemUserViewModel(itemUserViewModel);
         //TODO: observe livedata somehow
 

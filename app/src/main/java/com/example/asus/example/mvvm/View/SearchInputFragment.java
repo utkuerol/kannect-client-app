@@ -29,8 +29,8 @@ public class SearchInputFragment extends Fragment {
 
         //set databinding
         FragmentPersonalFeedBinding fragmentPersonalFeedBinding = FragmentPersonalFeedBinding.inflate(inflater, parent, false);
-        fragmentPersonalFeedBinding.personalFeedRV.setAdapter(postAdapter);
-        fragmentPersonalFeedBinding.personalFeedRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        fragmentPersonalFeedBinding.personalFeedPostRV.setAdapter(postAdapter);
+        fragmentPersonalFeedBinding.personalFeedPostRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         //TODO: observe livedata somehow
 

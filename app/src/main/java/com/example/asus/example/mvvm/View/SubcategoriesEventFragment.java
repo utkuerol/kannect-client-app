@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.asus.example.databinding.FragmentSubcategoriesGroupBinding;
+import com.example.asus.example.databinding.FragmentSubcategoriesEventBinding;
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.View.Adapter.SubcategoryAdapter;
 import com.example.asus.example.mvvm.ViewModel.ItemCategoryViewModel;
@@ -33,9 +33,9 @@ public class SubcategoriesEventFragment extends Fragment {
         subcategoryAdapter.setSubcategoryList(itemCategoryViewModel.getSubcategories());
 
         //set databinding
-        com.example.asus.example.databinding.FragmentSubcategoriesEventBinding fragmentSubcategoriesEventBinding = FragmentSubcategoriesGroupBinding.inflate(inflater, parent, false);
-        fragmentSubcategoriesEventBinding.subcategoriesRV.setAdapter(subcategoryAdapter);
-        fragmentSubcategoriesEventBinding.subcategoriesRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        FragmentSubcategoriesEventBinding fragmentSubcategoriesEventBinding = FragmentSubcategoriesEventBinding.inflate(inflater, parent, false);
+        fragmentSubcategoriesEventBinding.subcategoriesEventSubcategoryRV.setAdapter(subcategoryAdapter);
+        fragmentSubcategoriesEventBinding.subcategoriesEventSubcategoryRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         //TODO: observe livedata somehow
 

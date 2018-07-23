@@ -141,6 +141,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.add(R.id.container_layout, groupSearchResultsFragment);
         transaction.addToBackStack(null);
         transaction.commit();
+
     }
 
 

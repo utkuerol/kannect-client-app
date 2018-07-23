@@ -28,8 +28,8 @@ public class SubscriptionsFragment extends Fragment {
 
         //set binding
         FragmentSubscriptionsBinding fragmentSubscriptionsBinding = FragmentSubscriptionsBinding.inflate(inflater, parent, false);
-        fragmentSubscriptionsBinding.subscriptionsRV.setAdapter(userAdapter);
-        fragmentSubscriptionsBinding.subscriptionsRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        fragmentSubscriptionsBinding.subscriptionsUserRV.setAdapter(userAdapter);
+        fragmentSubscriptionsBinding.subscriptionsUserRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         //TODO: observe livedata somehow
 

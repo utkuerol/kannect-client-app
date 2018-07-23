@@ -98,7 +98,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                 mItemCategoryBinding.setCategoryViewModel(
                         new ItemCategoryViewModel(cat, itemView.getContext()));
             } else {
-                mItemCategoryBinding.getCategoryViewModel().setChosenCategory(cat);
+                mItemCategoryBinding.getCategoryViewModel().setChosenCategory(cat.getValue());
             }
         }
     }

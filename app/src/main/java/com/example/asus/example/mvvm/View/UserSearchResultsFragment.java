@@ -33,8 +33,8 @@ public class UserSearchResultsFragment extends Fragment {
 
         //set databinding, define the xml of the fragment
         FragmentUserSearchResultBinding fragmentUserSearchResultBinding = FragmentUserSearchResultBinding.inflate(inflater, parent, false);
-        fragmentUserSearchResultBinding.userSearchResultRV.setAdapter(userAdapter);
-        fragmentUserSearchResultBinding.userSearchResultRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        fragmentUserSearchResultBinding.userSearchResultUserRV.setAdapter(userAdapter);
+        fragmentUserSearchResultBinding.userSearchResultUserRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         //TODO: observe livedata somehow
 
