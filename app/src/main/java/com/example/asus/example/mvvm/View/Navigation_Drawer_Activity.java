@@ -70,21 +70,20 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_feed) {
-            // Handle the camera action
+            launchPersonalFeedFragment();
         } else if (id == R.id.nav_settings) {
 
         } else if (id == R.id.nav_profile) {
-
+            launchUserProfileFragment();
         } else if (id == R.id.nav_groups) {
-
+            launchGroupFragments();
         } else if (id == R.id.nav_events) {
-
+            launchEventFragments();
         } else if (id == R.id.nav_search) {
-
+            launchSearchFragments();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -100,6 +99,49 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
+    public void launchUserProfileFragment() {
+        UserProfileFragment userProfileFragment = new UserProfileFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container_layout, userProfileFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    public void launchGroupFragments() {
+        CategoriesGroupFragment categoriesGroupFragment = new CategoriesGroupFragment();
+        MyGroupsFragment myGroupsFragment = new MyGroupsFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container_layout, categoriesGroupFragment);
+        transaction.add(R.id.container_layout, myGroupsFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    public void launchEventFragments() {
+        CategoriesEventFragment categoriesEventFragment = new CategoriesEventFragment();
+        MyEventsFragment myEventsFragment = new MyEventsFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container_layout, categoriesEventFragment);
+        transaction.add(R.id.container_layout, myEventsFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    public void launchSearchFragments() {
+        UserSearchInputFragment userSearchInputFragment = new UserSearchInputFragment();
+        UserSearchResultsFragment userSearchResultsFragment = new UserSearchResultsFragment();
+        EventSearchResultsFragment eventSearchResultsFragment = new EventSearchResultsFragment();
+        GroupSearchResultsFragment groupSearchResultsFragment = new GroupSearchResultsFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container_layout, userSearchInputFragment);
+        transaction.add(R.id.container_layout, userSearchResultsFragment);
+        transaction.add(R.id.container_layout, eventSearchResultsFragment);
+        transaction.add(R.id.container_layout, groupSearchResultsFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
 
 
 }
