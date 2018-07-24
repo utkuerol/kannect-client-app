@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="categoryViewModel"
+            name="itemCategoryViewModel"
             type="com.example.asus.example.mvvm.ViewModel.ItemCategoryViewModel" />
     </data>
 
@@ -27,7 +27,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="TextView"
+        android:text="@{itrmCategoryViewModel.name}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

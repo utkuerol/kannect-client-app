@@ -5,7 +5,7 @@
     <data>
 
         <variable
-            name="userViewModel"
+            name="itemUserViewModel"
             type="com.example.asus.example.mvvm.ViewModel.ItemUserViewModel" />
     </data>
 
@@ -38,7 +38,7 @@
         android:layout_marginRight="184dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="@{itemUserViewModel.name}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
