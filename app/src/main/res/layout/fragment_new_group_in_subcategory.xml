@@ -15,6 +15,22 @@
         android:layout_height="@dimen/oneFragmentHeight">
 
 
+        <Button
+            android:id="@+id/newGroupInSubcategoryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/create"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/newGroupInSubcategoryImageUrlET" />
+
         <EditText
             android:id="@+id/newGroupInSubcategoryNameET"
             android:layout_width="wrap_content"
@@ -51,18 +67,15 @@
             android:id="@+id/newGroupInSubcategoryImageUrlET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="28dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="28dp"
-            android:layout_marginTop="164dp"
+            android:layout_marginTop="92dp"
             android:hint="@string/groupImageUrl"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/newGroupInSubcategoryDescriptionET"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/newGroupInSubcategoryDescriptionET" />
     </android.support.constraint.ConstraintLayout>
 </layout>
