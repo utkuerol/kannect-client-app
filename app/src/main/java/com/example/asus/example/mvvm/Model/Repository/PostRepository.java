@@ -31,7 +31,7 @@ public class PostRepository {
      * @param post which was created .
      */
     public void createPost(Post post) {
-        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        ServiceAPI client = ServiceGenerator.getRetrofitInstance().create(ServiceAPI.class);
         Call<Post> call = client.createPost(post);
         call.enqueue(new Callback<Post>() {
             @Override
@@ -52,7 +52,7 @@ public class PostRepository {
      * @param post which was deleted.
      */
     public void deletePost(Post post) {
-        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        ServiceAPI client = ServiceGenerator.getRetrofitInstance().create(ServiceAPI.class);
         Call<Post> call = client.deletePost(post.getId());
         call.enqueue(new Callback<Post>() {
             @Override
@@ -75,7 +75,7 @@ public class PostRepository {
      * @param post which was liked.
      */
     public void likePost(Post post, User user) {
-        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        ServiceAPI client = ServiceGenerator.getRetrofitInstance().create(ServiceAPI.class);
         Call<ResponseBody> call = client.likePost(post, user);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -97,7 +97,7 @@ public class PostRepository {
      * @param post which was unliked.
      */
     public void unlikePost(Post post, User user) {
-        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        ServiceAPI client = ServiceGenerator.getRetrofitInstance().create(ServiceAPI.class);
         Call<ResponseBody> call = client.unlikePost(post, user);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -118,7 +118,7 @@ public class PostRepository {
      * @param comment created by the User.
      */
     public void commentPost(Comment comment) {
-        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        ServiceAPI client = ServiceGenerator.getRetrofitInstance().create(ServiceAPI.class);
         Call<Comment> call = client.commentPost(comment);
         call.enqueue(new Callback<Comment>() {
             @Override

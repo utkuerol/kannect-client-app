@@ -36,7 +36,7 @@ public class CategoryRepository {
      */
     public MutableLiveData<List<Category>> getCategories(String searchQuery) {
 
-    ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        ServiceAPI client = ServiceGenerator.getRetrofitInstance().create(ServiceAPI.class);
     Call<List<Category>> call = client.getCategories(searchQuery);
     final MutableLiveData<List<Category>> result = new MutableLiveData<>();
 

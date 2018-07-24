@@ -1,6 +1,5 @@
 package com.example.asus.example.mvvm.View;
 
-import android.arch.lifecycle.MutableLiveData;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,6 +11,8 @@ import android.widget.Toast;
 
 import com.example.asus.example.R;
 import com.example.asus.example.mvvm.Model.Entities.User;
+import com.example.asus.example.mvvm.Model.WebServices.ServiceAPI;
+import com.example.asus.example.mvvm.Model.WebServices.ServiceGenerator;
 import com.example.asus.example.mvvm.ViewModel.LoginViewModel;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -21,6 +22,10 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -55,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         //update ui
         updateUI(account);
+
 
     }
 
@@ -92,29 +98,38 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+
     private void updateUI(GoogleSignInAccount account) {
         //Account is not null then user is logged in
+
+
         if (account != null) {
 
-            if (viewModel.getUserByMail(account).getValue() != null) {
-                Log.d("debug", "not null");
-                MutableLiveData<User> user = viewModel.getUserByMail(account);
-                SharedPreferences myPrefs = getSharedPreferences("CurrentUser", 0);
-                SharedPreferences.Editor prefsEditor;
-                prefsEditor = myPrefs.edit();
-                prefsEditor.putInt("CurrentUserId", user.getValue().getId());
-                prefsEditor.commit();
-            } else {
-                Log.d("debug", "null");
-                viewModel.invoke(account);
-                MutableLiveData<User> user = viewModel.getUserByMail(account);
+            viewModel.invoke(account);
+            Call<User> call = getApi().getUserByMail(account.getEmail());
 
-                SharedPreferences myPrefs = getSharedPreferences("CurrentUser", 0);
-                SharedPreferences.Editor prefsEditor;
-                prefsEditor = myPrefs.edit();
-                prefsEditor.putInt("CurrentUserId", user.getValue().getId());
-                prefsEditor.commit();
-            }
+            call.enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+                    if (!response.isSuccessful()) {
+                        Log.d("debug", "response fail");
+                    } else {
+                        Log.d("debug", "response success");
+                        User user = response.body();
+                        Log.d("debug", "response null " + (response.body() == null));
+                        SharedPreferences myPrefs = getSharedPreferences("CurrentUser", 0);
+                        SharedPreferences.Editor prefsEditor;
+                        prefsEditor = myPrefs.edit();
+                        prefsEditor.putInt("CurrentUserId", user.getId());
+                        prefsEditor.commit();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+                    Log.d("debug", t.getMessage());
+                }
+            });
 
             Intent i = new Intent(getApplicationContext(), Navigation_Drawer_Activity.class);
             startActivity(i);
@@ -141,5 +156,9 @@ public class LoginActivity extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
         }
+    }
+
+    public ServiceAPI getApi() {
+        return ServiceGenerator.getRetrofitInstance().create(ServiceAPI.class);
     }
 }

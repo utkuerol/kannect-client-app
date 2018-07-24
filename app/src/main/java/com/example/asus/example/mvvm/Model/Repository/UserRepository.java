@@ -34,7 +34,7 @@ public class UserRepository {
      */
     public MutableLiveData<List<User>> getUsers(String searchQuery) {
         final MutableLiveData<List<User>> result = new MutableLiveData<>();
-        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        ServiceAPI client = ServiceGenerator.getRetrofitInstance().create(ServiceAPI.class);
         Call<List<User>> call = client.getSearchUsers(searchQuery);
         call.enqueue(new Callback<List<User>>() {
             @Override
@@ -57,7 +57,7 @@ public class UserRepository {
      * @param subscribed User who was subscribed to.
      */
     public void subscribeUser(User subscriber, User subscribed) {
-        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        ServiceAPI client = ServiceGenerator.getRetrofitInstance().create(ServiceAPI.class);
         Call<ResponseBody> call = client.subscribeUser(subscriber, subscribed);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -79,7 +79,7 @@ public class UserRepository {
      * @param subscribed User who was unsubscribed to.
      */
     public void unsubscribeUser(User subscriber, User subscribed) {
-        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        ServiceAPI client = ServiceGenerator.getRetrofitInstance().create(ServiceAPI.class);
         Call<ResponseBody> call = client.unsubscribeUser(subscriber, subscribed);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -94,23 +94,21 @@ public class UserRepository {
         });
     }
 
-    final MutableLiveData<User> result = new MutableLiveData<>();
 
 
     public void findByEmail(String accountEmail) {
 
+        final MutableLiveData<User> user = new MutableLiveData<>();
         Log.d("debug", "on repo");
 
-        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        ServiceAPI client = ServiceGenerator.getRetrofitInstance().create(ServiceAPI.class);
 
         Call<User> call = client.getUserByMail(accountEmail);
+
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                result.setValue(response.body());
-                if (result.getValue() == null) {
-                    Log.d("debug", "got null from server");
-                }
+                Log.d("debug", "onresponse");
             }
 
             @Override
@@ -118,14 +116,12 @@ public class UserRepository {
                 t.printStackTrace();
             }
         });
+
     }
 
-    public MutableLiveData<User> getResult() {
-        return result;
-    }
 
     public void createUser(MutableLiveData<User> user) {
-        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        ServiceAPI client = ServiceGenerator.getRetrofitInstance().create(ServiceAPI.class);
         Call<ResponseBody> call = client.createUser(user.getValue());
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -142,7 +138,7 @@ public class UserRepository {
 
     public MutableLiveData<User> getUserByID(long userID) {
         final MutableLiveData<User> result = new MutableLiveData<>();
-        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        ServiceAPI client = ServiceGenerator.getRetrofitInstance().create(ServiceAPI.class);
         Call<User> call = client.getUserByID(userID);
         call.enqueue(new Callback<User>() {
             @Override
@@ -162,7 +158,7 @@ public class UserRepository {
 
     public MutableLiveData<List<Post>> getUserProfile(User user) {
         final MutableLiveData<List<Post>> result = new MutableLiveData<>();
-        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        ServiceAPI client = ServiceGenerator.getRetrofitInstance().create(ServiceAPI.class);
         Call<List<Post>> call = client.getUserProfile(user.getId());
         call.enqueue(new Callback<List<Post>>() {
             @Override

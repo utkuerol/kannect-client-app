@@ -1,5 +1,6 @@
 package com.example.asus.example.mvvm.Model.Entities;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -14,28 +15,40 @@ import java.util.List;
 public class User implements Serializable {
 
     @SerializedName("id")
+    @Expose
     private int id;
     @SerializedName("name")
+    @Expose
     private String name;
     @SerializedName("email")
+    @Expose
     private String email;
     @SerializedName("imageUrl")
+    @Expose
     private String imageUrl;
     @SerializedName("subscriptions")
+    @Expose
     private List<User> subscriptions;
     @SerializedName("subscribers")
+    @Expose
     private List<User> subscribers;
     @SerializedName("joinedGroups")
+    @Expose
     private List<Group> joinedGroups;
     @SerializedName("participatedEvents")
+    @Expose
     private List<Event> participatedEvents;
     @SerializedName("createdPosts")
+    @Expose
     private List<Post> createdPosts;
     @SerializedName("createdGroups")
+    @Expose
     private List<Group> createdGroups;
     @SerializedName("createdEvents")
+    @Expose
     private List<Event> createdEvents;
     @SerializedName("createdComments")
+    @Expose
     private List<Comment> createdComments;
 
     /**

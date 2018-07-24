@@ -34,7 +34,7 @@ public class EventRepository {
      * @return List of all the Events which match the search query as a MutableLiveData object
      */
     public MutableLiveData<List<Event>> getEvents(String searchQuery) {
-        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        ServiceAPI client = ServiceGenerator.getRetrofitInstance().create(ServiceAPI.class);
         Call<List<Event>> call = client.getSearchEvents(searchQuery);
         final MutableLiveData<List<Event>> result = new MutableLiveData<>();
 
@@ -61,7 +61,7 @@ public class EventRepository {
      */
     public void createEvent(Event event) {
 
-        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        ServiceAPI client = ServiceGenerator.getRetrofitInstance().create(ServiceAPI.class);
         Call<Event> call = client.createEvent(event);
         call.enqueue(new Callback<Event>() {
             @Override
@@ -83,7 +83,7 @@ public class EventRepository {
      */
     public void deleteEvent(Event event) {
 
-        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        ServiceAPI client = ServiceGenerator.getRetrofitInstance().create(ServiceAPI.class);
         Call<Event> call = client.deleteEvent(event.getId());
         call.enqueue(new Callback<Event>() {
             @Override
@@ -108,7 +108,7 @@ public class EventRepository {
      * @param event in which the User wants to participate in.
      */
     public void participateEvent(User user, Event event) {
-        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        ServiceAPI client = ServiceGenerator.getRetrofitInstance().create(ServiceAPI.class);
         Call<ResponseBody> call = client.participateInEvent(user, event);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -131,7 +131,7 @@ public class EventRepository {
      * @param event which the User wants to leave.
      */
     public void leaveEvent(User user, Event event) {
-        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        ServiceAPI client = ServiceGenerator.getRetrofitInstance().create(ServiceAPI.class);
         Call<ResponseBody> call = client.leaveEvent(user, event);
         call.enqueue(new Callback<ResponseBody>() {
             @Override

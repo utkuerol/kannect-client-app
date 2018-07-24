@@ -233,7 +233,7 @@ public interface ServiceAPI {
      * @param user
      * @return
      */
-    @POST("/createUser")
+    @POST("createUser")
     Call<ResponseBody> createUser(@Body User user);
 
     /**
@@ -243,7 +243,7 @@ public interface ServiceAPI {
      * @return user which matched the id
      */
     @GET("/userById")
-    Call<User> getUserByID(long userId);
+    Call<User> getUserByID(@Query(value = "userId") long userId);
 
     /**
      * service to get the feed of a user by his id

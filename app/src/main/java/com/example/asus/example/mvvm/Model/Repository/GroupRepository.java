@@ -31,7 +31,7 @@ public class GroupRepository {
      * @return List of all the Groups which match the search query as a MutableLiveData object
      */
     public MutableLiveData<List<Group>> getGroups(String searchQuery) {
-        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        ServiceAPI client = ServiceGenerator.getRetrofitInstance().create(ServiceAPI.class);
         Call<List<Group>> call = client.getSearchGroups(searchQuery);
         final MutableLiveData<List<Group>> result = new MutableLiveData<>();
 
@@ -57,7 +57,7 @@ public class GroupRepository {
      * @param group created Group
      */
     public void createGroup(Group group) {
-        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        ServiceAPI client = ServiceGenerator.getRetrofitInstance().create(ServiceAPI.class);
         Call<Group> call = client.createGroup(group);
         call.enqueue(new Callback<Group>() {
             @Override
@@ -80,7 +80,7 @@ public class GroupRepository {
      * @param group which will be deleted
      */
     public void deleteGroup(Group group) {
-        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        ServiceAPI client = ServiceGenerator.getRetrofitInstance().create(ServiceAPI.class);
         Call<Group> call = client.deleteGroup(group.getId());
         call.enqueue(new Callback<Group>() {
             @Override
@@ -105,7 +105,7 @@ public class GroupRepository {
      * @param group which the User left.
      */
     public void joinGroup(User user, Group group) {
-        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        ServiceAPI client = ServiceGenerator.getRetrofitInstance().create(ServiceAPI.class);
         Call<ResponseBody> call = client.joinGroup(user, group);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -128,7 +128,7 @@ public class GroupRepository {
      * @param group which the User left.
      */
     public void leaveGroup(User user, Group group) {
-        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        ServiceAPI client = ServiceGenerator.getRetrofitInstance().create(ServiceAPI.class);
         Call<ResponseBody> call = client.leaveGroup(user, group);
         call.enqueue(new Callback<ResponseBody>() {
             @Override

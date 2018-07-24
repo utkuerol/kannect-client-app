@@ -2,10 +2,18 @@ package com.example.asus.example.mvvm.ViewModel;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.util.Log;
 
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.Repository.UserRepository;
+import com.example.asus.example.mvvm.Model.WebServices.ServiceAPI;
+import com.example.asus.example.mvvm.Model.WebServices.ServiceGenerator;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * ViewModel class for login, that is responsible for preparing and managing the data for Views
@@ -24,18 +32,31 @@ public class LoginViewModel extends ViewModel {
      * @param account google sign in account.
      */
     public void invoke(GoogleSignInAccount account) {
-
             User u = new User();
             u.setEmail(account.getEmail());
             u.setImageUrl(account.getPhotoUrl().toString());
             u.setName(account.getDisplayName());
             user.setValue(u);
-            userRepository.createUser(user);
+        Call<ResponseBody> call = getApi().createUser(u);
+        Log.d("debug", "invoke");
+
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("debug", "succesfull" + (response.isSuccessful()));
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("debug", "fail");
+
+            }
+        });
+
     }
 
-    public MutableLiveData<User> getUserByMail(GoogleSignInAccount account) {
+    public void getUserByMail(GoogleSignInAccount account) {
         userRepository.findByEmail(account.getEmail());
-        return userRepository.getResult();
     }
 
 
@@ -46,5 +67,13 @@ public class LoginViewModel extends ViewModel {
      */
     public MutableLiveData<User> getUser() {
         return user;
+    }
+
+    public void setUser(MutableLiveData<User> user) {
+        this.user = user;
+    }
+
+    public ServiceAPI getApi() {
+        return ServiceGenerator.getRetrofitInstance().create(ServiceAPI.class);
     }
 }

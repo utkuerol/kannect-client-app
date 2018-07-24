@@ -34,7 +34,7 @@ public class FeedRepository {
      * @return List of all the Posts, which belong to the Users feed as a MutableLiveData object
      */
     public MutableLiveData<List<Post>> getPersonalFeed(User user) {
-        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        ServiceAPI client = ServiceGenerator.getRetrofitInstance().create(ServiceAPI.class);
         Call<List<Post>> call = client.getPersonalFeed(user.getId());
         final MutableLiveData<List<Post>> result = new MutableLiveData<>();
 
@@ -61,7 +61,7 @@ public class FeedRepository {
      * @return List of all the Posts, which belong to the Groups feed as a MutableLiveData object
      */
     public MutableLiveData<List<Post>> getGroupFeed(Group group) {
-        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        ServiceAPI client = ServiceGenerator.getRetrofitInstance().create(ServiceAPI.class);
         Call<List<Post>> call = client.getGroupFeed(group.getId());
         final MutableLiveData<List<Post>> result = new MutableLiveData<>();
 
@@ -87,7 +87,7 @@ public class FeedRepository {
      * @return List of all the Posts, which belong to the Groups feed as a MutableLiveData object
      */
     public MutableLiveData<List<Post>> getEventFeed(Event event) {
-        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        ServiceAPI client = ServiceGenerator.getRetrofitInstance().create(ServiceAPI.class);
         Call<List<Post>> call = client.getEventFeed(event.getId());
         final MutableLiveData<List<Post>> result = new MutableLiveData<>();
 
