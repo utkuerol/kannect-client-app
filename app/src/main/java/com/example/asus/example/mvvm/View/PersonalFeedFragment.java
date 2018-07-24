@@ -44,11 +44,6 @@ public class PersonalFeedFragment extends Fragment implements View.OnClickListen
         View v = inflater.inflate(R.layout.fragment_personal_feed, parent, false);
 
 
-        ////////////////////////
-        Button b = (Button) v.findViewById(R.id.button);
-        b.setOnClickListener(this);
-        ///////////////////////
-
         return fragmentPersonalFeedBinding.getRoot();
 
     }

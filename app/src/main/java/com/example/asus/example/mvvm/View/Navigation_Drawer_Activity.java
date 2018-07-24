@@ -146,6 +146,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         //transaction.add(R.id.content_frame, userSearchResultsFragment);
         //transaction.add(R.id.content_frame, eventSearchResultsFragment);
         //transaction.add(R.id.content_frame, groupSearchResultsFragment);
+
         transaction.addToBackStack(null);
         transaction.commit();
 

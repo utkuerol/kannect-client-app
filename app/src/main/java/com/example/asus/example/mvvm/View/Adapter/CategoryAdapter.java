@@ -91,12 +91,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
          * @param category which will be bound.
          */
         void bindCategory(Category category) {
-            if (mItemCategoryBinding.getCategoryViewModel() == null) {
+            if (mItemCategoryBinding.getItemCategoryViewModel() == null) {
                 ItemCategoryViewModel itemCategoryViewModel = new ItemCategoryViewModel();
                 itemCategoryViewModel.init(category);
-                mItemCategoryBinding.setCategoryViewModel(itemCategoryViewModel);
+                mItemCategoryBinding.setItemCategoryViewModel(itemCategoryViewModel);
             } else {
-                mItemCategoryBinding.getCategoryViewModel().init(category);
+                mItemCategoryBinding.getItemCategoryViewModel().init(category);
             }
         }
     }
