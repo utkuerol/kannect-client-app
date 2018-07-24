@@ -28,7 +28,7 @@ import java.util.List;
  */
 public class ItemUserViewModel extends ViewModel {
 
-    private MutableLiveData<User> chosenUser;
+    private MutableLiveData<User> chosenUser = new MutableLiveData<>();
     private User currentUser;
     private Context context;
     private UserRepository userRepository;
@@ -40,7 +40,6 @@ public class ItemUserViewModel extends ViewModel {
 
     public void init(User user) {
         this.chosenUser.setValue(user);
-        ;
         userRepository = new UserRepository();
         postRepository = new PostRepository();
 

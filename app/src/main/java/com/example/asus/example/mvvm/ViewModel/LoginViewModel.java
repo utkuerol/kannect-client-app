@@ -23,22 +23,20 @@ public class LoginViewModel extends ViewModel {
      *
      * @param account google sign in account.
      */
-    public void invoke(GoogleSignInAccount account) {
-        MutableLiveData<User> userCheck = userRepository.findByEmail(account.getEmail());
-        if (userCheck.getValue() == null) {
-            User u = new User();
-            u.setEmail(account.getEmail());
-            u.setImageUrl(account.getPhotoUrl().toString());
-            u.setName(account.getDisplayName());
-
-            userRepository.createUser(u);
-
-            this.user = userRepository.findByEmail(account.getEmail());
-        } else {
-            this.setUser(userRepository.findByEmail(account.getEmail()));
-        }
-
+    public MutableLiveData<User> invoke(GoogleSignInAccount account) {
+        return userRepository.findByEmail(account.getEmail());
     }
+
+    public void createAndSetCurrentUser(GoogleSignInAccount account) {
+        User u = new User();
+        u.setEmail(account.getEmail());
+        u.setImageUrl(account.getPhotoUrl().toString());
+        u.setName(account.getDisplayName());
+
+        userRepository.createUser(u);
+        getUser().setValue(u);
+    }
+
 
     /**
      * Gets the user, which is logging in.

@@ -62,8 +62,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable User user) {
                 if (user != null) {
-                    updateUI(account);
-
                     SharedPreferences myPrefs = getSharedPreferences("CurrentUser", 0);
                     SharedPreferences.Editor prefsEditor;
                     prefsEditor = myPrefs.edit();
@@ -111,10 +109,19 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void updateUI(GoogleSignInAccount account) {
+    private void updateUI(final GoogleSignInAccount account) {
         //Account is not null then user is logged in
         if (account != null) {
-            viewModel.invoke(account);
+            viewModel.invoke(account).observe(this, new Observer<User>() {
+                @Override
+                public void onChanged(@Nullable User user) {
+                    if (user == null) {
+                        viewModel.createAndSetCurrentUser(account);
+                    } else {
+                        viewModel.setUser(viewModel.invoke(account));
+                    }
+                }
+            });
 
             Intent i = new Intent(getApplicationContext(), Navigation_Drawer_Activity.class);
             startActivity(i);

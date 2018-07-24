@@ -1,7 +1,9 @@
 package com.example.asus.example.mvvm.View;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
@@ -10,8 +12,11 @@ import android.view.ViewGroup;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentPersonalFeedBinding;
+import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.View.Adapter.PostAdapter;
 import com.example.asus.example.mvvm.ViewModel.PostViewModel;
+
+import java.util.List;
 
 /**
  * Personal Feed Activity to show all Posts for this signed user of his groups , posts , events
@@ -28,20 +33,19 @@ public class PersonalFeedFragment extends Fragment implements View.OnClickListen
         postViewModel.setPostsToPersonalFeed();
 
         //set adapter
-        PostAdapter postAdapter = new PostAdapter();
+        final PostAdapter postAdapter = new PostAdapter();
         postAdapter.setPostList(postViewModel.getPosts().getValue());
 
-
         //set databinding
-
         fragmentPersonalFeedBinding.personalFeedPostRV.setAdapter(postAdapter);
         fragmentPersonalFeedBinding.personalFeedPostRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        //TODO: observe livedata somehow
-
-
-        View v = inflater.inflate(R.layout.fragment_personal_feed, parent, false);
-
+        postViewModel.getPosts().observe(this, new Observer<List<Post>>() {
+            @Override
+            public void onChanged(@Nullable List<Post> posts) {
+                postAdapter.setPostList(posts);
+            }
+        });
 
         return fragmentPersonalFeedBinding.getRoot();
 
