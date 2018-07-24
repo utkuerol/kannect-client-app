@@ -48,6 +48,23 @@ public class ItemUserViewModel extends ViewModel {
         currentUser = userRepository.getUserByID(myPrefs.getLong("CurrentUserId", 0)).getValue();
     }
 
+    @BindingAdapter({"currentUserImageUrl"})
+    public static void loadCurrentUserImage(ImageView view, String currentUserImageUrl) {
+        Picasso.get().load(currentUserImageUrl)
+                .placeholder(android.R.drawable.ic_menu_help)
+                .error(android.R.drawable.ic_menu_camera)
+                .resize(50, 50)
+                .into(view);
+    }
+
+    public String getCurrentUserName() {
+        return currentUser.getName();
+    }
+
+    public String getCurrentUserEmail() {
+        return currentUser.getEmail();
+    }
+
     /**
      * Gets the chosen user.
      * @return observable user.
@@ -63,6 +80,10 @@ public class ItemUserViewModel extends ViewModel {
                 .error(android.R.drawable.ic_menu_camera)
                 .resize(50, 50)
                 .into(view);
+    }
+
+    public String getCurrentUserImageUrl() {
+        return currentUser.getImageUrl();
     }
 
     /**
