@@ -11,7 +11,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/categoriesGroupCategoryRV"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/twoFragmentHeight"
             tools:listitem="@layout/item_category">
 
         </android.support.v7.widget.RecyclerView>

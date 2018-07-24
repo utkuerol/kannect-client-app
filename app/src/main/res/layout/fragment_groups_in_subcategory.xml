@@ -6,7 +6,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/groupsInSubcategoryGroupRV"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/oneFragmentHeight"
         tools:listitem="@layout/item_group">
 
     </android.support.v7.widget.RecyclerView>
