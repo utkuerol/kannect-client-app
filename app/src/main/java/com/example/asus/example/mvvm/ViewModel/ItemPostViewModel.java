@@ -42,10 +42,12 @@ public class ItemPostViewModel extends ViewModel {
     }
 
 
-    @BindingAdapter({"bind:creatorProfilePictureUrl"})
+    @BindingAdapter({"creatorProfilePictureUrl"})
     public static void loadImage(ImageView view, String imageUrl) {
         Picasso.get().load(imageUrl)
-                //.placeholder(R.drawable.placeholder)
+                .placeholder(android.R.drawable.ic_menu_help)
+                .error(android.R.drawable.ic_menu_camera)
+                .resize(50, 50)
                 .into(view);
     }
 
