@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.asus.example.R;
 
@@ -33,7 +35,10 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        launchPersonalFeedFragment();
+        Button a = (Button) findViewById(R.id.newEventInCategoryButton);
+
+
+        //launchPersonalFeedFragment();
     }
 
     @Override
@@ -133,14 +138,14 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
 
     public void launchSearchFragments() {
         SearchInputFragment searchInputFragment = new SearchInputFragment();
-        UserSearchResultsFragment userSearchResultsFragment = new UserSearchResultsFragment();
-        EventSearchResultsFragment eventSearchResultsFragment = new EventSearchResultsFragment();
-        GroupSearchResultsFragment groupSearchResultsFragment = new GroupSearchResultsFragment();
+        // UserSearchResultsFragment userSearchResultsFragment = new UserSearchResultsFragment();
+        // EventSearchResultsFragment eventSearchResultsFragment = new EventSearchResultsFragment();
+        // GroupSearchResultsFragment groupSearchResultsFragment = new GroupSearchResultsFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, searchInputFragment);
-        transaction.add(R.id.content_frame, userSearchResultsFragment);
-        transaction.add(R.id.content_frame, eventSearchResultsFragment);
-        transaction.add(R.id.content_frame, groupSearchResultsFragment);
+        //transaction.add(R.id.content_frame, userSearchResultsFragment);
+        //transaction.add(R.id.content_frame, eventSearchResultsFragment);
+        //transaction.add(R.id.content_frame, groupSearchResultsFragment);
         transaction.addToBackStack(null);
         transaction.commit();
 
@@ -346,4 +351,5 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
 }

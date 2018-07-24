@@ -7,7 +7,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentPersonalFeedBinding;
 import com.example.asus.example.mvvm.View.Adapter.PostAdapter;
 import com.example.asus.example.mvvm.ViewModel.PostViewModel;
@@ -15,14 +17,14 @@ import com.example.asus.example.mvvm.ViewModel.PostViewModel;
 /**
  * Personal Feed Activity to show all Posts for this signed user of his groups , posts , events
  */
-public class PersonalFeedFragment extends Fragment {
+public class PersonalFeedFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
-
+        FragmentPersonalFeedBinding fragmentPersonalFeedBinding = FragmentPersonalFeedBinding.inflate(inflater, parent, false);
         //set viewmodel
-        PostViewModel postViewModel = ViewModelProviders.of(this).get(PostViewModel.class);
+        /*PostViewModel postViewModel = ViewModelProviders.of(this).get(PostViewModel.class);
         postViewModel.init();
         postViewModel.setPostsToPersonalFeed();
 
@@ -32,11 +34,20 @@ public class PersonalFeedFragment extends Fragment {
 
 
         //set databinding
-        FragmentPersonalFeedBinding fragmentPersonalFeedBinding = FragmentPersonalFeedBinding.inflate(inflater, parent, false);
+
         fragmentPersonalFeedBinding.personalFeedPostRV.setAdapter(postAdapter);
         fragmentPersonalFeedBinding.personalFeedPostRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
-
+*/
         //TODO: observe livedata somehow
+
+
+        View v = inflater.inflate(R.layout.fragment_personal_feed, parent, false);
+
+
+        ////////////////////////
+        Button b = (Button) v.findViewById(R.id.button);
+        b.setOnClickListener(this);
+        ///////////////////////
 
         return fragmentPersonalFeedBinding.getRoot();
 
@@ -47,4 +58,13 @@ public class PersonalFeedFragment extends Fragment {
         navigation_drawer_activity.launchPersonalFeedFragment();
     }
 
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.newEventInCategoryButton:
+                launchFragment();
+                break;
+        }
+    }
 }

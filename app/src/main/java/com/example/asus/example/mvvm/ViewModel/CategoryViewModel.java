@@ -39,7 +39,7 @@ public class CategoryViewModel extends ViewModel {
      * Sets categories to all categories.
      */
     public void setCategoriesToAllCategories() {
-        categories = categoryRepository.getCategories("");
+        categories = categoryRepository.getCategories();
     }
 
 }

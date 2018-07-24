@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.asus.example.R;
-import com.example.asus.example.databinding.FragmentNewEventBinding;
+import com.example.asus.example.databinding.FragmentNewEventInSubcategoryBinding;
 import com.example.asus.example.mvvm.ViewModel.EventViewModel;
 
 /**
@@ -20,12 +20,12 @@ import com.example.asus.example.mvvm.ViewModel.EventViewModel;
 public class NewEventInSubcategoryFragment extends Fragment {
 
     private EventViewModel eventViewModel;
-    private FragmentNewEventBinding fragmentNewEventBinding;
+    private FragmentNewEventInSubcategoryBinding fragmentNewEventBinding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
-        fragmentNewEventBinding = FragmentNewEventBinding.inflate(inflater, parent, false);
+        fragmentNewEventBinding = FragmentNewEventInSubcategoryBinding.inflate(inflater, parent, false);
         //set viewmodel
         eventViewModel = ViewModelProviders.of(this).get(EventViewModel.class);
         // Defines the xml file for the fragment

@@ -24,7 +24,7 @@ import com.google.android.gms.tasks.Task;
 
 public class LoginActivity extends AppCompatActivity {
 
-    LoginViewModel viewModel = new LoginViewModel();
+    // LoginViewModel viewModel = new LoginViewModel();
 
 
     //Google sign in api Client
@@ -94,13 +94,13 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUI(GoogleSignInAccount account) {
         //Account is not null then user is logged in
         if (account != null) {
-            MutableLiveData<User> user = viewModel.invoke(account);
+            /*MutableLiveData<User> user = viewModel.invoke(account);
 
             SharedPreferences myPrefs = getSharedPreferences("CurrentUser", 0);
             SharedPreferences.Editor prefsEditor;
             prefsEditor = myPrefs.edit();
             prefsEditor.putLong("CurrentUserId", user.getValue().getId());
-            prefsEditor.commit();
+            prefsEditor.commit();*/
 
 
             Intent i = new Intent(getApplicationContext(), Navigation_Drawer_Activity.class);
