@@ -40,6 +40,7 @@ public class UserSearchResultsFragment extends Fragment {
         //TODO: observe livedata somehow
 
         return fragmentUserSearchResultBinding.getRoot();
+
     }
 
 

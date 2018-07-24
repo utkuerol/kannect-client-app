@@ -17,6 +17,8 @@ import com.example.asus.example.mvvm.ViewModel.ItemPostViewModel;
  */
 public class ShowPostFragment extends Fragment {
 
+    FragmentShowPostBinding fragmentShowPostBinding;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
@@ -30,7 +32,7 @@ public class ShowPostFragment extends Fragment {
         //set adapter for comments recycler view (if we implement this feature eventually
 
         //set databinding
-        FragmentShowPostBinding fragmentShowPostBinding = FragmentShowPostBinding.inflate(inflater, parent, false);
+        fragmentShowPostBinding = FragmentShowPostBinding.inflate(inflater, parent, false);
         fragmentShowPostBinding.setItemPostViewModel(itemPostViewModel);
 
         //TODO: observe livedata somehow
@@ -38,4 +40,5 @@ public class ShowPostFragment extends Fragment {
         return fragmentShowPostBinding.getRoot();
 
     }
+
 }

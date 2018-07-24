@@ -226,7 +226,7 @@ public interface ServiceAPI {
      * @param userMail
      * @return User By Mail
      */
-    @GET("/userByMail")
+    @GET("userByMail")
     Call<User> getUserByMail(@Query("userMail") String userMail);
 
     /**

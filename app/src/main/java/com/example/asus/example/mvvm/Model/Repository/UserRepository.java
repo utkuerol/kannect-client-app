@@ -1,6 +1,7 @@
 package com.example.asus.example.mvvm.Model.Repository;
 
 import android.arch.lifecycle.MutableLiveData;
+import android.util.Log;
 
 import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
@@ -93,10 +94,12 @@ public class UserRepository {
         });
     }
 
+    final MutableLiveData<User> result = new MutableLiveData<>();
 
-    public MutableLiveData<User> findByEmail(String accountEmail) {
 
-        final MutableLiveData<User> result = new MutableLiveData<>();
+    public void findByEmail(String accountEmail) {
+
+        Log.d("debug", "on repo");
 
         ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
 
@@ -105,6 +108,9 @@ public class UserRepository {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 result.setValue(response.body());
+                if (result.getValue() == null) {
+                    Log.d("debug", "got null from server");
+                }
             }
 
             @Override
@@ -112,8 +118,9 @@ public class UserRepository {
                 t.printStackTrace();
             }
         });
+    }
 
-
+    public MutableLiveData<User> getResult() {
         return result;
     }
 
@@ -145,6 +152,7 @@ public class UserRepository {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
+
                 t.printStackTrace();
             }
         });

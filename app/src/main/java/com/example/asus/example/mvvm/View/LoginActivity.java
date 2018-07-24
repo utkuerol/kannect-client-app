@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -94,14 +95,26 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUI(GoogleSignInAccount account) {
         //Account is not null then user is logged in
         if (account != null) {
-            MutableLiveData<User> user = viewModel.invoke(account);
 
-            SharedPreferences myPrefs = getSharedPreferences("CurrentUser", 0);
-            SharedPreferences.Editor prefsEditor;
-            prefsEditor = myPrefs.edit();
-            prefsEditor.putLong("CurrentUserId", user.getValue().getId());
-            prefsEditor.commit();
+            if (viewModel.getUserByMail(account).getValue() != null) {
+                Log.d("debug", "not null");
+                MutableLiveData<User> user = viewModel.getUserByMail(account);
+                SharedPreferences myPrefs = getSharedPreferences("CurrentUser", 0);
+                SharedPreferences.Editor prefsEditor;
+                prefsEditor = myPrefs.edit();
+                prefsEditor.putInt("CurrentUserId", user.getValue().getId());
+                prefsEditor.commit();
+            } else {
+                Log.d("debug", "null");
+                viewModel.invoke(account);
+                MutableLiveData<User> user = viewModel.getUserByMail(account);
 
+                SharedPreferences myPrefs = getSharedPreferences("CurrentUser", 0);
+                SharedPreferences.Editor prefsEditor;
+                prefsEditor = myPrefs.edit();
+                prefsEditor.putInt("CurrentUserId", user.getValue().getId());
+                prefsEditor.commit();
+            }
 
             Intent i = new Intent(getApplicationContext(), Navigation_Drawer_Activity.class);
             startActivity(i);
