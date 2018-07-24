@@ -1,10 +1,12 @@
 package com.example.asus.example.mvvm.View;
 
-import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
@@ -24,7 +26,7 @@ import com.google.android.gms.tasks.Task;
 
 public class LoginActivity extends AppCompatActivity {
 
-    // LoginViewModel viewModel = new LoginViewModel();
+    LoginViewModel viewModel;
 
 
     //Google sign in api Client
@@ -51,8 +53,26 @@ public class LoginActivity extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         //get currently signed in user returns null if there is no logged in user
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        //update ui
+        final GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+
+
+        viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+
+        viewModel.getUser().observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(@Nullable User user) {
+                if (user != null) {
+                    updateUI(account);
+
+                    SharedPreferences myPrefs = getSharedPreferences("CurrentUser", 0);
+                    SharedPreferences.Editor prefsEditor;
+                    prefsEditor = myPrefs.edit();
+                    prefsEditor.putInt("CurrentUserId", user.getId());
+                    prefsEditor.commit();
+                }
+            }
+        });
+
         updateUI(account);
 
     }
@@ -94,14 +114,7 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUI(GoogleSignInAccount account) {
         //Account is not null then user is logged in
         if (account != null) {
-            /*MutableLiveData<User> user = viewModel.invoke(account);
-
-            SharedPreferences myPrefs = getSharedPreferences("CurrentUser", 0);
-            SharedPreferences.Editor prefsEditor;
-            prefsEditor = myPrefs.edit();
-            prefsEditor.putLong("CurrentUserId", user.getValue().getId());
-            prefsEditor.commit();*/
-
+            viewModel.invoke(account);
 
             Intent i = new Intent(getApplicationContext(), Navigation_Drawer_Activity.class);
             startActivity(i);

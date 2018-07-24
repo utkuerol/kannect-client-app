@@ -15,7 +15,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
  */
 public class LoginViewModel extends ViewModel {
 
-    private MutableLiveData<User> user;
+    private MutableLiveData<User> user = new MutableLiveData<>();
     private UserRepository userRepository = new UserRepository();
 
     /**
@@ -23,19 +23,21 @@ public class LoginViewModel extends ViewModel {
      *
      * @param account google sign in account.
      */
-    public MutableLiveData<User> invoke(GoogleSignInAccount account) {
-        MutableLiveData<User> user = userRepository.findByEmail(account.getEmail());
-        if (user != null) {
-            return user;
-        } else {
+    public void invoke(GoogleSignInAccount account) {
+        MutableLiveData<User> userCheck = userRepository.findByEmail(account.getEmail());
+        if (userCheck.getValue() == null) {
             User u = new User();
             u.setEmail(account.getEmail());
             u.setImageUrl(account.getPhotoUrl().toString());
             u.setName(account.getDisplayName());
-            user.setValue(u);
-            userRepository.createUser(user);
-            return userRepository.findByEmail(account.getEmail());
+
+            userRepository.createUser(u);
+
+            this.user = userRepository.findByEmail(account.getEmail());
+        } else {
+            this.setUser(userRepository.findByEmail(account.getEmail()));
         }
+
     }
 
     /**
@@ -45,5 +47,9 @@ public class LoginViewModel extends ViewModel {
      */
     public MutableLiveData<User> getUser() {
         return user;
+    }
+
+    public void setUser(MutableLiveData<User> user) {
+        this.user = user;
     }
 }

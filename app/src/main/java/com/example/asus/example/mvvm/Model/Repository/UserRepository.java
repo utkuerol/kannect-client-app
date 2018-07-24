@@ -1,6 +1,7 @@
 package com.example.asus.example.mvvm.Model.Repository;
 
 import android.arch.lifecycle.MutableLiveData;
+import android.util.Log;
 
 import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
@@ -117,17 +118,18 @@ public class UserRepository {
         return result;
     }
 
-    public void createUser(MutableLiveData<User> user) {
+    public void createUser(User user) {
         ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
-        Call<ResponseBody> call = client.createUser(user.getValue());
+        Call<ResponseBody> call = client.createUser(user);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
+                Log.d("debug", "onResponse create user");
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("debug", "onFailure create user:" + t.getMessage());
                 t.printStackTrace();
             }
         });
