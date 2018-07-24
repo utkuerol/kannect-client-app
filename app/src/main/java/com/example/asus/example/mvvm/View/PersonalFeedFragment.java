@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentPersonalFeedBinding;
@@ -24,7 +23,7 @@ public class PersonalFeedFragment extends Fragment implements View.OnClickListen
 
         FragmentPersonalFeedBinding fragmentPersonalFeedBinding = FragmentPersonalFeedBinding.inflate(inflater, parent, false);
         //set viewmodel
-        /*PostViewModel postViewModel = ViewModelProviders.of(this).get(PostViewModel.class);
+        PostViewModel postViewModel = ViewModelProviders.of(this).get(PostViewModel.class);
         postViewModel.init();
         postViewModel.setPostsToPersonalFeed();
 
@@ -37,7 +36,7 @@ public class PersonalFeedFragment extends Fragment implements View.OnClickListen
 
         fragmentPersonalFeedBinding.personalFeedPostRV.setAdapter(postAdapter);
         fragmentPersonalFeedBinding.personalFeedPostRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
-*/
+
         //TODO: observe livedata somehow
 
 

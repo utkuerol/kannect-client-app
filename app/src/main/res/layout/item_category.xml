@@ -16,35 +16,24 @@
         android:id="@+id/item_category"
         android:layout_height="@dimen/itemRVHeight">
 
-    <TextView
-        android:id="@+id/categoryNameTV"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/pictureRVSize"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="212dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="212dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="@{itemCategoryViewModel.name}"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/categoryPictureIV"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/categoryNameTV"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/pictureRVSize"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="212dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="212dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@{itemCategoryViewModel.name}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/categoryPictureIV"
-        android:layout_width="@dimen/pictureRVSize"
-        android:layout_height="@dimen/pictureRVSize"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="44dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.045" />
-</android.support.constraint.ConstraintLayout>
+
+    </android.support.constraint.ConstraintLayout>
 </layout>
