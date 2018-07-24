@@ -14,7 +14,7 @@ public class Category implements Serializable{
     private List<Subcategory> subcategories;
     private List<Event> events;
     private List<Group> groups;
-    private long id;
+    private int id;
 
     /**
      * Overwrites Default Constructor and
@@ -48,7 +48,7 @@ public class Category implements Serializable{
      * @param groups Groups, which fall into this category.
      * @param id unique Identifier of the Category
      */
-    public Category(String name, List<Subcategory> subcategories, List<Event> events, List<Group> groups, long id) {
+    public Category(String name, List<Subcategory> subcategories, List<Event> events, List<Group> groups, int id) {
         this.name = name;
         this.subcategories = subcategories;
         this.events = events;
@@ -124,7 +124,7 @@ public class Category implements Serializable{
      * method to get the id of the Category
      * @return id of the Category
      */
-    public long getId() {
+    public int getId() {
         return id;
     }
 
@@ -132,7 +132,7 @@ public class Category implements Serializable{
      * sets the id of the Category
      * @param id of the Category
      */
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 }

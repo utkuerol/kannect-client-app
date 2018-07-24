@@ -18,7 +18,7 @@ public class Comment implements Serializable {
 
     private User creator;
 
-    private long id;
+    private int id;
 
 
     /**
@@ -43,7 +43,7 @@ public class Comment implements Serializable {
      * @param creator User, which created this comment
      * @param id unique Identifier of the Object
      */
-    public Comment(String text, Post post, Date date, User creator, long id) {
+    public Comment(String text, Post post, Date date, User creator, int id) {
         this.text = text;
         this.post = post;
         this.date = date;
@@ -119,7 +119,7 @@ public class Comment implements Serializable {
      * method to get the id of the Comment
      * @return id of the Comment
      */
-    public long getId() {
+    public int getId() {
         return id;
     }
 
@@ -127,7 +127,7 @@ public class Comment implements Serializable {
      * sets the id of the Comment
      * @param id of the Comment
      */
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 }

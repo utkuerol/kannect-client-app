@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class Event implements Serializable {
 
-    private long id;
+    private int id;
     private String name;
     private Date date;
     private String description;
@@ -34,7 +34,7 @@ public class Event implements Serializable {
      * method to get the id of the Event.
      * @return id of the Event.
      */
-    public long getId() {
+    public int getId() {
         return id;
     }
 
@@ -42,7 +42,7 @@ public class Event implements Serializable {
      * sets the id of the Event.
      * @param id sets the id of the Event.
      */
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

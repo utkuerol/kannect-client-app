@@ -23,7 +23,7 @@ public class Post implements Serializable {
     private Group ownerGroup;
     private Event ownerEvent;
     private List<Comment> comments;
-    private long id;
+    private int id;
 
     /*
 
@@ -44,7 +44,7 @@ public class Post implements Serializable {
      * @param id unique identifier of the Object.
      * @param ownedBy id of the entity, which this posts belongs to
      */
-    public Post(String text, User creator, List<User> likedUsers, Date date, List<Comment> comments, long id, long ownedBy) {
+    public Post(String text, User creator, List<User> likedUsers, Date date, List<Comment> comments, int id, long ownedBy) {
         this.text = text;
         this.creator = creator;
         this.likedUsers = likedUsers;
@@ -158,7 +158,7 @@ public class Post implements Serializable {
      * method to get the id of the post
      * @return id of the post
      */
-    public long getId() {
+    public int getId() {
         return id;
     }
 

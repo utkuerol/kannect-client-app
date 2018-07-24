@@ -10,13 +10,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.asus.example.R;
 
 public class Navigation_Drawer_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,9 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         Button a = (Button) findViewById(R.id.newEventInCategoryButton);
+        TextView currentUserName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.navigationHeaderUserNameTV);
+        TextView currentUserMail = (TextView) navigationView.getHeaderView(0).findViewById(R.id.NavigationHeaderUserMailTV);
+        ImageView currentUserPicture = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.navigationHeaderUserPictureIV);
 
 
         //launchPersonalFeedFragment();

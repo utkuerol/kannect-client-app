@@ -79,7 +79,7 @@ public interface ServiceAPI {
      * @return List of all Posts for the Users feed as a Response object
      */
     @GET("personalFeed")
-    Call<List<Post>> getPersonalFeed(@Query("userId") long userID);
+    Call<List<Post>> getPersonalFeed(@Query("userId") int userID);
 
     /**
      * service to get all Posts for a Groups feed
@@ -87,7 +87,7 @@ public interface ServiceAPI {
      * @return List of all Posts for the Groups feed as a Response Object
      */
     @GET("groupFeed")
-    Call<List<Post>> getGroupFeed(@Query("groupId") long groupID);
+    Call<List<Post>> getGroupFeed(@Query("groupId") int groupID);
 
     /**
      * service to get all Posts for a Events feed
@@ -95,7 +95,7 @@ public interface ServiceAPI {
      * @return List of all Posts for the Groups as a Response Object
      */
     @GET("eventFeed")
-    Call<List<Post>> getEventFeed(@Query("eventId") long eventID);
+    Call<List<Post>> getEventFeed(@Query("eventId") int eventID);
 
     /**
      * service to save a new Post in the server
@@ -244,7 +244,7 @@ public interface ServiceAPI {
      * @return user which matched the id
      */
     @GET("userById")
-    Call<User> getUserByID(@Query("userId") long userId);
+    Call<User> getUserByID(@Query("userId") int userId);
 
     /**
      * service to get the feed of a user by his id
@@ -253,6 +253,6 @@ public interface ServiceAPI {
      * @return list of posts for the feed of the user
      */
     @GET("userProfile")
-    Call<List<Post>> getUserProfile(@Query("userId") long userID);
+    Call<List<Post>> getUserProfile(@Query("userId") int userID);
 
 }
