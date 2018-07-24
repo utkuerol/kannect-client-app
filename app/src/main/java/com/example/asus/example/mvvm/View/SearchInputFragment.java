@@ -24,10 +24,6 @@ public class SearchInputFragment extends Fragment implements View.OnClickListene
         View v = inflater.inflate(R.layout.fragment_user_search_input, parent, false);
 
 
-        ////////////////////////
-        Button b = (Button) v.findViewById(R.id.uhar);
-        b.setOnClickListener(this);
-        ///////////////////////
 
 
         return v;
@@ -41,9 +37,7 @@ public class SearchInputFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.uhar:
-                launchFragment();
-                break;
+            
         }
     }
 

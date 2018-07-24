@@ -2,15 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/twoFragmentHeight"
-        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/create" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/twoFragmentHeight">
+
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/categoriesEventCategoryRV"
             android:layout_width="match_parent"
@@ -19,6 +16,7 @@
 
         </android.support.v7.widget.RecyclerView>
 
+    </android.support.constraint.ConstraintLayout>
 
-    </LinearLayout>
+
 </layout>

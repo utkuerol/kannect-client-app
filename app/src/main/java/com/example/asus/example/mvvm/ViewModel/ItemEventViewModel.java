@@ -135,10 +135,12 @@ public class ItemEventViewModel extends ViewModel {
     }
 
 
-    @BindingAdapter({"bind:imageUrl"})
+    @BindingAdapter({"imageUrl"})
     public static void loadImage(ImageView view, String imageUrl) {
         Picasso.get().load(imageUrl)
-                // .placeholder(R.drawable.placeholder)
+                .placeholder(android.R.drawable.ic_menu_help)
+                .error(android.R.drawable.ic_menu_camera)
+                .resize(50, 50)
                 .into(view);
     }
 
