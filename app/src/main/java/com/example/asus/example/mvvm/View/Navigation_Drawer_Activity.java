@@ -13,8 +13,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.NavHeaderNavigationDrawerBinding;
@@ -49,9 +47,6 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         Button a = (Button) findViewById(R.id.newEventInCategoryButton);
-        TextView currentUserName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.navigationHeaderUserNameTV);
-        TextView currentUserMail = (TextView) navigationView.getHeaderView(0).findViewById(R.id.NavigationHeaderUserMailTV);
-        ImageView currentUserPicture = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.navigationHeaderUserPictureIV);
 
 
         //launchPersonalFeedFragment();
@@ -119,7 +114,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
 
         PersonalFeedFragment personalFeedFragment = new PersonalFeedFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.content_frame, personalFeedFragment);
+        transaction.replace(R.id.ActivityNavigationDrawerLinearLayout, personalFeedFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -127,7 +122,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
     public void launchUserProfileFragment() {
         UserProfileFragment userProfileFragment = new UserProfileFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.content_frame, userProfileFragment);
+        transaction.replace(R.id.ActivityNavigationDrawerLinearLayout, userProfileFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -136,7 +131,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         CategoriesGroupFragment categoriesGroupFragment = new CategoriesGroupFragment();
         MyGroupsFragment myGroupsFragment = new MyGroupsFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.content_frame, categoriesGroupFragment);
+        transaction.replace(R.id.ActivityNavigationDrawerLinearLayout, categoriesGroupFragment);
         transaction.add(R.id.content_frame, myGroupsFragment);
         transaction.addToBackStack(null);
         transaction.commit();
@@ -146,7 +141,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         CategoriesEventFragment categoriesEventFragment = new CategoriesEventFragment();
         MyEventsFragment myEventsFragment = new MyEventsFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.content_frame, categoriesEventFragment);
+        transaction.replace(R.id.ActivityNavigationDrawerLinearLayout, categoriesEventFragment);
         transaction.add(R.id.content_frame, myEventsFragment);
         transaction.addToBackStack(null);
         transaction.commit();
