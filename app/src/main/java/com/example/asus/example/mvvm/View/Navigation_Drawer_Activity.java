@@ -2,8 +2,10 @@ package com.example.asus.example.mvvm.View;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
@@ -26,14 +28,32 @@ import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.Subcategory;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.ViewModel.ItemUserViewModel;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 public class Navigation_Drawer_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
+    GoogleSignInClient mGoogleSignInClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Build Google Sign in options
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        //get Sign in client
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+
+
+
         final com.example.asus.example.databinding.ActivityNavigationDrawerBinding binding;
         binding = DataBindingUtil.setContentView(this, R.layout.activity_navigation__drawer);
 
@@ -65,10 +85,21 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        Button a = (Button) findViewById(R.id.newEventInCategoryButton);
-
-
         launchPersonalFeedFragment();
+    }
+
+    //method to sign out
+    private void signOut() {
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                            startActivity(i);
+                        }
+                    }
+                });
     }
 
     @Override
@@ -122,6 +153,8 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
             launchEventFragments();
         } else if (id == R.id.nav_search) {
             launchSearchFragments();
+        } else if (id == R.id.nav_logout) {
+            signOut();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

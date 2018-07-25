@@ -1,6 +1,7 @@
 package com.example.asus.example.mvvm.View;
 
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,8 @@ import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.View.Adapter.OnItemClickListenerPost;
 import com.example.asus.example.mvvm.View.Adapter.PostAdapter;
 import com.example.asus.example.mvvm.ViewModel.ItemEventViewModel;
+
+import java.util.List;
 
 /**
  * The Activity displayed when accessing an event. It shows informations about the event and all the posts
@@ -34,9 +37,9 @@ public class EventFeedFragment extends Fragment {
         fragmentEventFeedBinding = FragmentEventFeedBinding.inflate(inflater, parent, false);
         //set viewmodel
         itemEventViewModel = ViewModelProviders.of(this).get(ItemEventViewModel.class);
-        itemEventViewModel.init(event, getContext());
+        itemEventViewModel.init(event, getContext().getApplicationContext());
 
-        PostAdapter postAdapter = new PostAdapter();
+        final PostAdapter postAdapter = new PostAdapter();
         OnItemClickListenerPost listener = new OnItemClickListenerPost() {
             @Override
             public void onItemClick(Post item) {
@@ -45,6 +48,8 @@ public class EventFeedFragment extends Fragment {
             }
         };
         postAdapter.setListener(listener);
+
+
         postAdapter.setPostList(itemEventViewModel.getEventFeed());
         fragmentEventFeedBinding.eventFeedRV.setAdapter(postAdapter);
         fragmentEventFeedBinding.eventFeedRV.setLayoutManager(new LinearLayoutManager(this.getContext()));

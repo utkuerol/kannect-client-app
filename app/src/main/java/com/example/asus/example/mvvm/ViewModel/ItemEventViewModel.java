@@ -31,6 +31,7 @@ import java.util.List;
 public class ItemEventViewModel extends ViewModel {
 
     private MutableLiveData<Event> event;
+    private MutableLiveData<List<Post>> mEventFeed;
     private MutableLiveData<User> currentUser;
     private EventRepository eventRepository;
     private FeedRepository feedRepository;
