@@ -296,7 +296,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
     }
 
     public void launchNewGroupInCategoryFragment() {
-        NewGroupInCategoryFragment newGroupInCategoryFragment = new NewGroupInCategoryFragment();
+        NewGroupInCategoryFragment newGroupInCategoryFragment = new NewGroupInCategoryFragment(groupViewModel);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, newGroupInCategoryFragment);
         transaction.addToBackStack(null);

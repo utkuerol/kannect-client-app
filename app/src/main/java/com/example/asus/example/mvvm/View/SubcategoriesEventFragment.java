@@ -1,7 +1,9 @@
 package com.example.asus.example.mvvm.View;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.asus.example.databinding.FragmentSubcategoriesEventBinding;
 import com.example.asus.example.mvvm.Model.Entities.Category;
+import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.View.Adapter.SubcategoryAdapter;
 import com.example.asus.example.mvvm.ViewModel.ItemCategoryViewModel;
 
@@ -25,22 +28,28 @@ public class SubcategoriesEventFragment extends Fragment {
         Category category = (Category) getArguments().getSerializable("category");
 
         //set viewmodel
-        ItemCategoryViewModel itemCategoryViewModel = ViewModelProviders.of(this).get(ItemCategoryViewModel.class);
-        itemCategoryViewModel.init(category, this.getContext().getApplicationContext());
+        final ItemCategoryViewModel itemCategoryViewModel = ViewModelProviders.of(this).get(ItemCategoryViewModel.class);
 
         //set adapter
-        SubcategoryAdapter subcategoryAdapter = new SubcategoryAdapter();
-        subcategoryAdapter.setSubcategoryList(itemCategoryViewModel.getSubcategories());
+        final SubcategoryAdapter subcategoryAdapter = new SubcategoryAdapter();
 
         //set databinding
-        FragmentSubcategoriesEventBinding fragmentSubcategoriesEventBinding = FragmentSubcategoriesEventBinding.inflate(inflater, parent, false);
-        fragmentSubcategoriesEventBinding.subcategoriesEventSubcategoryRV.setAdapter(subcategoryAdapter);
+        final FragmentSubcategoriesEventBinding fragmentSubcategoriesEventBinding = FragmentSubcategoriesEventBinding.inflate(inflater, parent, false);
+
+
+        itemCategoryViewModel.init(category, this.getContext().getApplicationContext());
+
+        itemCategoryViewModel.getCurrentUser().observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(@Nullable User user) {
+                subcategoryAdapter.setSubcategoryList(itemCategoryViewModel.getSubcategories());
+                fragmentSubcategoriesEventBinding.subcategoriesEventSubcategoryRV.setAdapter(subcategoryAdapter);
+            }
+        });
+
         fragmentSubcategoriesEventBinding.subcategoriesEventSubcategoryRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        //TODO: observe livedata somehow
-
         return fragmentSubcategoriesEventBinding.getRoot();
-
     }
 
 

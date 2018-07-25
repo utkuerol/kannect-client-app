@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.BindingAdapter;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.example.asus.example.mvvm.Model.Entities.Event;
@@ -89,14 +88,6 @@ public class ItemUserViewModel extends ViewModel {
         return currentUser.getValue().getImageUrl();
     }
 
-    /**
-     * Starts UserProfileFragment with the chosen user.
-     * @param view
-     */
-    public void onItemClick(View view) {
-
-        //context.startActivity(UserProfileFragment.launchWithDetails(view.getContext(), mUser));
-    }
 
     /**
      * Sets the chosen user.
@@ -186,7 +177,7 @@ public class ItemUserViewModel extends ViewModel {
      * @return
      */
     public MutableLiveData<List<Post>> getUserProfile() {
-        return userRepository.getUserProfile(currentUser.getValue());
+        return userRepository.getUserProfile(chosenUser.getValue());
     }
 
 

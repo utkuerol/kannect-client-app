@@ -1,7 +1,9 @@
 package com.example.asus.example.mvvm.View;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.asus.example.databinding.FragmentSubcategoriesGroupBinding;
 import com.example.asus.example.mvvm.Model.Entities.Category;
+import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.View.Adapter.SubcategoryAdapter;
 import com.example.asus.example.mvvm.ViewModel.ItemCategoryViewModel;
 
@@ -25,19 +28,26 @@ public class SubcategoriesGroupFragment extends Fragment {
         Category category = (Category) getArguments().getSerializable("category");
 
         //set viewmodel
-        ItemCategoryViewModel itemCategoryViewModel = ViewModelProviders.of(this).get(ItemCategoryViewModel.class);
+        final ItemCategoryViewModel itemCategoryViewModel = ViewModelProviders.of(this).get(ItemCategoryViewModel.class);
         itemCategoryViewModel.init(category, this.getContext().getApplicationContext());
 
         //set adapter
-        SubcategoryAdapter subcategoryAdapter = new SubcategoryAdapter();
-        subcategoryAdapter.setSubcategoryList(itemCategoryViewModel.getSubcategories());
+        final SubcategoryAdapter subcategoryAdapter = new SubcategoryAdapter();
 
         //set databinding
-        FragmentSubcategoriesGroupBinding fragmentSubcategoriesGroupBinding = FragmentSubcategoriesGroupBinding.inflate(inflater, parent, false);
-        fragmentSubcategoriesGroupBinding.subcategoriesGroupSubcategoriesRV.setAdapter(subcategoryAdapter);
-        fragmentSubcategoriesGroupBinding.subcategoriesGroupSubcategoriesRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        final FragmentSubcategoriesGroupBinding fragmentSubcategoriesGroupBinding = FragmentSubcategoriesGroupBinding.inflate(inflater, parent, false);
 
-        //TODO: observe livedata somehow
+        itemCategoryViewModel.getCurrentUser().observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(@Nullable User user) {
+                if (user != null) {
+                    subcategoryAdapter.setSubcategoryList(itemCategoryViewModel.getSubcategories());
+                    fragmentSubcategoriesGroupBinding.subcategoriesGroupSubcategoriesRV.setAdapter(subcategoryAdapter);
+                }
+            }
+        });
+
+        fragmentSubcategoriesGroupBinding.subcategoriesGroupSubcategoriesRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         return fragmentSubcategoriesGroupBinding.getRoot();
 

@@ -1,7 +1,9 @@
 package com.example.asus.example.mvvm.View;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.example.asus.example.databinding.FragmentShowPostBinding;
 import com.example.asus.example.mvvm.Model.Entities.Post;
+import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.ViewModel.ItemPostViewModel;
 
 /**
@@ -24,19 +27,25 @@ public class ShowPostFragment extends Fragment {
         Post post = (Post) getArguments().getSerializable("post");
 
         //set viewmodel
-        ItemPostViewModel itemPostViewModel = ViewModelProviders.of(this).get(ItemPostViewModel.class);
-        itemPostViewModel.init(post, this.getContext().getApplicationContext());
-
-        //set adapter for comments recycler view (if we implement this feature eventually
+        final ItemPostViewModel itemPostViewModel = ViewModelProviders.of(this).get(ItemPostViewModel.class);
 
         //set databinding
-        FragmentShowPostBinding fragmentShowPostBinding = FragmentShowPostBinding.inflate(inflater, parent, false);
-        fragmentShowPostBinding.setItemPostViewModel(itemPostViewModel);
+        final FragmentShowPostBinding fragmentShowPostBinding = FragmentShowPostBinding.inflate(inflater, parent, false);
 
-        //TODO: observe livedata somehow
+        //set adapter for comments recycler view (if we implement this feature eventually)
+
+        itemPostViewModel.init(post, this.getContext().getApplicationContext());
+
+        itemPostViewModel.getCurrentUser().observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(@Nullable User user) {
+                if (user != null) {
+                    fragmentShowPostBinding.setItemPostViewModel(itemPostViewModel);
+                }
+            }
+        });
 
         return fragmentShowPostBinding.getRoot();
-
     }
 
 

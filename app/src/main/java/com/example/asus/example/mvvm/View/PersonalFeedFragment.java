@@ -27,9 +27,15 @@ public class PersonalFeedFragment extends Fragment implements View.OnClickListen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
-        FragmentPersonalFeedBinding fragmentPersonalFeedBinding = FragmentPersonalFeedBinding.inflate(inflater, parent, false);
         //set viewmodel
         final PostViewModel postViewModel = ViewModelProviders.of(this).get(PostViewModel.class);
+
+        //set databinding
+        final FragmentPersonalFeedBinding fragmentPersonalFeedBinding = FragmentPersonalFeedBinding.inflate(inflater, parent, false);
+
+        //set adapter
+        final PostAdapter postAdapter = new PostAdapter();
+
         postViewModel.init(this.getContext().getApplicationContext());
 
         postViewModel.getCurrentUser().observe(this, new Observer<User>() {
@@ -41,26 +47,18 @@ public class PersonalFeedFragment extends Fragment implements View.OnClickListen
             }
         });
 
-        //set adapter
-        final PostAdapter postAdapter = new PostAdapter();
         postViewModel.getPosts().observe(this, new Observer<List<Post>>() {
             @Override
             public void onChanged(@Nullable List<Post> posts) {
                 if (posts != null) {
                     postAdapter.setPostList(posts);
-
+                    fragmentPersonalFeedBinding.personalFeedPostRV.setAdapter(postAdapter);
                 }
             }
         });
 
-        //set databinding
-        fragmentPersonalFeedBinding.personalFeedPostRV.setAdapter(postAdapter);
         fragmentPersonalFeedBinding.personalFeedPostRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
-
-
-
         return fragmentPersonalFeedBinding.getRoot();
-
     }
 
     public void launchFragment() {
