@@ -100,7 +100,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupAdapter
                 itemGroupViewModel.init(group, context);
                 mItemGroupBinding.setItemGroupViewModel(itemGroupViewModel);
             } else {
-                mItemGroupBinding.getItemGroupViewModel().setChosenGroup(group);
+                mItemGroupBinding.getItemGroupViewModel().init(group, context);
             }
         }
     }

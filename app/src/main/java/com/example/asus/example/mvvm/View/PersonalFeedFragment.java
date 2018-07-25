@@ -30,7 +30,7 @@ public class PersonalFeedFragment extends Fragment implements View.OnClickListen
         FragmentPersonalFeedBinding fragmentPersonalFeedBinding = FragmentPersonalFeedBinding.inflate(inflater, parent, false);
         //set viewmodel
         final PostViewModel postViewModel = ViewModelProviders.of(this).get(PostViewModel.class);
-        postViewModel.init();
+        postViewModel.init(this.getContext().getApplicationContext());
 
         postViewModel.getCurrentUser().observe(this, new Observer<User>() {
             @Override

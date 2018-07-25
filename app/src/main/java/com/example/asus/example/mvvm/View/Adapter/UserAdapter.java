@@ -99,7 +99,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserAdapterVie
                 itemUserViewModel.init(user, context);
                 mItemUserBinding.setItemUserViewModel(itemUserViewModel);
             } else {
-                mItemUserBinding.getItemUserViewModel().setChosenUser(user);
+                mItemUserBinding.getItemUserViewModel().init(user, context);
             }
         }
     }

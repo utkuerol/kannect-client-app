@@ -25,7 +25,7 @@ public class ShowPostFragment extends Fragment {
 
         //set viewmodel
         ItemPostViewModel itemPostViewModel = ViewModelProviders.of(this).get(ItemPostViewModel.class);
-        itemPostViewModel.init(post);
+        itemPostViewModel.init(post, this.getContext().getApplicationContext());
 
         //set adapter for comments recycler view (if we implement this feature eventually
 

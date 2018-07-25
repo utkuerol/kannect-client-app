@@ -35,7 +35,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         final ItemUserViewModel itemUserViewModel = ViewModelProviders.of(this).get(ItemUserViewModel.class);
-        itemUserViewModel.init();
+        itemUserViewModel.init(this.getApplicationContext());
 
         itemUserViewModel.getCurrentUser().observe(this, new Observer<User>() {
             @Override

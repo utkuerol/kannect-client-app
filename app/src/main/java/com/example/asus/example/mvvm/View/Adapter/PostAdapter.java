@@ -98,7 +98,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostAdapterVie
                 itemPostViewModel.init(post, context);
                 mItemPostBinding.setItemPostViewModel(itemPostViewModel);
             } else {
-                mItemPostBinding.getItemPostViewModel().setPost(post);
+                mItemPostBinding.getItemPostViewModel().init(post, context);
             }
         }
     }
