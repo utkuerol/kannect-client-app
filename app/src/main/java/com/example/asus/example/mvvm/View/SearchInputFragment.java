@@ -20,18 +20,7 @@ public class SearchInputFragment extends Fragment implements View.OnClickListene
 
         //TODO: observe livedata somehow
         Toast.makeText(getContext(), "In Event Fragment", Toast.LENGTH_LONG).show();
-
-        View v = inflater.inflate(R.layout.fragment_user_search_input, parent, false);
-
-
-
-
-        return v;
-    }
-
-    public void launchFragment() {
-        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
-        navigation_drawer_activity.launchCategoriesEventFragment();
+        return inflater.inflate(R.layout.fragment_user_search_input, parent, false);
     }
 
     @Override

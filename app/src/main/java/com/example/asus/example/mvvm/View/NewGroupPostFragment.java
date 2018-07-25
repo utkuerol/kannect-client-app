@@ -6,10 +6,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
+import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.ViewModel.ItemGroupViewModel;
 
 public class NewGroupPostFragment extends Fragment {
 
+
+    private Group group;
     private ItemGroupViewModel viewModel;
     //binding
 
@@ -27,8 +30,8 @@ public class NewGroupPostFragment extends Fragment {
         this.viewModel = viewModel;
     }
 
-    public void launchFragment() {
-        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
-        navigation_drawer_activity.launchGroupPostFragment();
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 }

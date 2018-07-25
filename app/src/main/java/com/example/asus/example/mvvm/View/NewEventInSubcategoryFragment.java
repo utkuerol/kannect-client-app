@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentNewEventInSubcategoryBinding;
+import com.example.asus.example.mvvm.Model.Entities.Subcategory;
 import com.example.asus.example.mvvm.ViewModel.EventViewModel;
 
 /**
@@ -19,6 +20,7 @@ import com.example.asus.example.mvvm.ViewModel.EventViewModel;
  */
 public class NewEventInSubcategoryFragment extends Fragment {
 
+    private Subcategory subcategory;
     private EventViewModel eventViewModel;
     private FragmentNewEventInSubcategoryBinding fragmentNewEventBinding;
 
@@ -32,10 +34,8 @@ public class NewEventInSubcategoryFragment extends Fragment {
         return fragmentNewEventBinding.getRoot();
     }
 
-    public void launchFragment() {
-        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
-        navigation_drawer_activity.launchNewEventInSubategoryFragment();
+
+    public void setSubcategory(Subcategory subcategory) {
+        this.subcategory = subcategory;
     }
-
-
 }

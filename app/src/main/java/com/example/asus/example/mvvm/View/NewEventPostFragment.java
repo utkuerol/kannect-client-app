@@ -8,10 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.asus.example.databinding.FragmentNewPostBinding;
+import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.ViewModel.EventViewModel;
 
 public class NewEventPostFragment extends Fragment {
 
+    private Event event;
     private EventViewModel eventViewModel;
     private FragmentNewPostBinding fragmentNewEventBinding;
 
@@ -24,8 +26,7 @@ public class NewEventPostFragment extends Fragment {
         return fragmentNewEventBinding.getRoot();
     }
 
-    public void launchFragment() {
-        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
-        navigation_drawer_activity.launchNewEventPostFragment();
+    public void setEvent(Event event) {
+        this.event = event;
     }
 }

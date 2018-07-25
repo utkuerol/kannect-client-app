@@ -337,9 +337,8 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
-    public void launchNewUserPostFragment(User user) {
+    public void launchNewUserPostFragment() {
         NewUserPostFragment newUserPostFragment = new NewUserPostFragment();
-        newUserPostFragment.setUser(user);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, newUserPostFragment);
         transaction.addToBackStack(null);

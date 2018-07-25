@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.asus.example.databinding.FragmentNewGroupInCategoryBinding;
+import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.ViewModel.GroupViewModel;
 
 /**
@@ -15,6 +16,8 @@ import com.example.asus.example.mvvm.ViewModel.GroupViewModel;
  * Uses the ItemCategoryViewModel as its ViewModel.
  */
 public class NewGroupInCategoryFragment extends Fragment {
+
+    private Category category;
     private GroupViewModel groupViewModel;
     private FragmentNewGroupInCategoryBinding fragmentNewGroupBinding;
 
@@ -28,9 +31,8 @@ public class NewGroupInCategoryFragment extends Fragment {
         return fragmentNewGroupBinding.getRoot();
     }
 
-    public void launchFragment() {
-        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
-        navigation_drawer_activity.launchNewGroupInCategoryFragment();
-    }
 
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 }
