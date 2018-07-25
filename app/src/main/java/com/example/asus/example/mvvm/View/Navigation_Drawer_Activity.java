@@ -143,7 +143,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         MyGroupsFragment myGroupsFragment = new MyGroupsFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.ActivityNavigationDrawerLinearLayout, categoriesGroupFragment);
-        transaction.add(R.id.content_frame, myGroupsFragment);
+        transaction.add(R.id.ActivityNavigationDrawerLinearLayout, myGroupsFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -153,21 +153,21 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         MyEventsFragment myEventsFragment = new MyEventsFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.ActivityNavigationDrawerLinearLayout, categoriesEventFragment);
-        transaction.add(R.id.content_frame, myEventsFragment);
+        transaction.add(R.id.ActivityNavigationDrawerLinearLayout, myEventsFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
 
     public void launchSearchFragments() {
         SearchInputFragment searchInputFragment = new SearchInputFragment();
-        // UserSearchResultsFragment userSearchResultsFragment = new UserSearchResultsFragment();
-        // EventSearchResultsFragment eventSearchResultsFragment = new EventSearchResultsFragment();
-        // GroupSearchResultsFragment groupSearchResultsFragment = new GroupSearchResultsFragment();
+        UserSearchResultsFragment userSearchResultsFragment = new UserSearchResultsFragment();
+        EventSearchResultsFragment eventSearchResultsFragment = new EventSearchResultsFragment();
+        GroupSearchResultsFragment groupSearchResultsFragment = new GroupSearchResultsFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.content_frame, searchInputFragment);
-        //transaction.add(R.id.content_frame, userSearchResultsFragment);
-        //transaction.add(R.id.content_frame, eventSearchResultsFragment);
-        //transaction.add(R.id.content_frame, groupSearchResultsFragment);
+        transaction.replace(R.id.ActivityNavigationDrawerLinearLayout, searchInputFragment);
+        transaction.add(R.id.ActivityNavigationDrawerLinearLayout, userSearchResultsFragment);
+        transaction.add(R.id.ActivityNavigationDrawerLinearLayout, eventSearchResultsFragment);
+        transaction.add(R.id.ActivityNavigationDrawerLinearLayout, groupSearchResultsFragment);
 
         transaction.addToBackStack(null);
         transaction.commit();
