@@ -21,7 +21,6 @@ public class NewGroupPostFragment extends Fragment {
 
     private Group group;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
