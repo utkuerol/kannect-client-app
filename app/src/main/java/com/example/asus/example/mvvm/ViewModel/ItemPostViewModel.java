@@ -26,7 +26,7 @@ import java.util.List;
  */
 public class ItemPostViewModel extends ViewModel {
 
-    private MutableLiveData<Post> post;
+    private MutableLiveData<Post> post = new MutableLiveData<>();
     private MutableLiveData<User> currentUser;
     private PostRepository postRepository;
 

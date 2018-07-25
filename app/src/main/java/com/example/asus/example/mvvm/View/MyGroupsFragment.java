@@ -52,8 +52,10 @@ public class MyGroupsFragment extends Fragment {
         groupViewModel.getCurrentUser().observe(this, new Observer<User>() {
             @Override
             public void onChanged(@Nullable User user) {
-                groupViewModel.setGroupsToJoinedGroups();
-                groupAdapter.setGroupList(groupViewModel.getGroups().getValue());
+                if (user != null) {
+                    groupViewModel.setGroupsToJoinedGroups();
+                    groupAdapter.setGroupList(groupViewModel.getGroups().getValue());
+                }
             }
         });
 

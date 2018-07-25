@@ -26,7 +26,7 @@ import java.util.List;
  */
 public class ItemCategoryViewModel extends ViewModel {
 
-    private MutableLiveData<Category> chosenCategory;
+    private MutableLiveData<Category> chosenCategory = new MutableLiveData<>();
     private MutableLiveData<User> currentUser;
 
     private GroupRepository groupRepository;

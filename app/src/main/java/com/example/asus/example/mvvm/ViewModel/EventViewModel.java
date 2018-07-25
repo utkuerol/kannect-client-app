@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class EventViewModel extends ViewModel {
 
-    private MutableLiveData<List<Event>> events;
+    private MutableLiveData<List<Event>> events = new MutableLiveData<>();
     private MutableLiveData<User> currentUser;
     private EventRepository eventRepository;
 

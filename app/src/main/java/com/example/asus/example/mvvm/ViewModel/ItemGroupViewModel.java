@@ -30,7 +30,7 @@ import java.util.List;
  */
 public class ItemGroupViewModel extends ViewModel {
 
-    private MutableLiveData<Group> chosenGroup;
+    private MutableLiveData<Group> chosenGroup = new MutableLiveData<>();
     private MutableLiveData<User> currentUser;
     private GroupRepository groupRepository;
     private FeedRepository feedRepository;
