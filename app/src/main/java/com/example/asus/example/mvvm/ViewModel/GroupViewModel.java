@@ -51,8 +51,8 @@ public class GroupViewModel extends ViewModel {
         groups.setValue(subcategory.getGroups());
     }
 
-    public void setGroupsToJoinedGroups(User currentUser) {
-        groups.setValue(currentUser.getJoinedGroups());
+    public void setGroupsToJoinedGroups() {
+        groups.setValue(currentUser.getValue().getJoinedGroups());
     }
 
     public MutableLiveData<User> getCurrentUser() {

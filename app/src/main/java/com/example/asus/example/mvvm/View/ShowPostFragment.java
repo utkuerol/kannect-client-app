@@ -17,15 +17,22 @@ import com.example.asus.example.mvvm.ViewModel.ItemPostViewModel;
  */
 public class ShowPostFragment extends Fragment {
 
+
+    private Post post;
+
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
         //get extra arguments from the initiating activity
-        Post post = (Post) getArguments().getSerializable("post");
+
 
         //set viewmodel
         ItemPostViewModel itemPostViewModel = ViewModelProviders.of(this).get(ItemPostViewModel.class);
-        itemPostViewModel.init(post, this.getContext().getApplicationContext());
+        itemPostViewModel.init(post, getContext());
 
         //set adapter for comments recycler view (if we implement this feature eventually
 
@@ -39,9 +46,4 @@ public class ShowPostFragment extends Fragment {
 
     }
 
-
-    public void launchFragment() {
-        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
-        navigation_drawer_activity.launchShowPostFragment();
-    }
 }

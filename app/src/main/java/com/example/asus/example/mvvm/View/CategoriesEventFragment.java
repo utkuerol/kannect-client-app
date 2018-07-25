@@ -16,6 +16,8 @@ import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentCategoriesEventBinding;
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.View.Adapter.CategoryAdapter;
+import com.example.asus.example.mvvm.View.Adapter.OnItemClickListenerCategory;
+import com.example.asus.example.mvvm.View.Adapter.OnItemClickListenerEvent;
 import com.example.asus.example.mvvm.ViewModel.CategoryViewModel;
 
 /**
@@ -49,8 +51,8 @@ public class CategoriesEventFragment extends Fragment {
         categoryAdapter.setCategoryList(categoryViewModel.getCategories().getValue());
         fragmentCategoriesEventBinding.categoriesEventCategoryRV.setAdapter(categoryAdapter);
         fragmentCategoriesEventBinding.categoriesEventCategoryRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        View v = inflater.inflate(R.layout.fragment_categories_event, parent, false);
-        return v;
+
+        return inflater.inflate(R.layout.fragment_categories_event, parent, false);
 
 
     }

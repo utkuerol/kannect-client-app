@@ -2,6 +2,6 @@ package com.example.asus.example.mvvm.View.Adapter;
 
 import com.example.asus.example.mvvm.Model.Entities.Group;
 
-interface OnItemClickListenerGroup {
+public interface OnItemClickListenerGroup {
     void onItemClick(Group group);
 }
