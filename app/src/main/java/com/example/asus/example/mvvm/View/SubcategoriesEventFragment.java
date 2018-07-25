@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.asus.example.databinding.FragmentSubcategoriesEventBinding;
 import com.example.asus.example.mvvm.Model.Entities.Category;
+import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.View.Adapter.SubcategoryAdapter;
 import com.example.asus.example.mvvm.ViewModel.ItemCategoryViewModel;
 
@@ -18,6 +19,7 @@ import com.example.asus.example.mvvm.ViewModel.ItemCategoryViewModel;
  */
 public class SubcategoriesEventFragment extends Fragment {
 
+    private Event event;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
@@ -44,4 +46,13 @@ public class SubcategoriesEventFragment extends Fragment {
     }
 
 
+    public void launchFragment() {
+        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+        navigation_drawer_activity.launchSubcategoriesEventFragment();
+    }
+
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
 }

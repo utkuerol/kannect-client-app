@@ -9,11 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.asus.example.databinding.FragmentSubscriptionsBinding;
+import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.View.Adapter.UserAdapter;
 import com.example.asus.example.mvvm.ViewModel.UserViewModel;
 
 public class SubscriptionsFragment extends Fragment {
 
+
+    private User user;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -37,5 +40,12 @@ public class SubscriptionsFragment extends Fragment {
         return fragmentSubscriptionsBinding.getRoot();
     }
 
+    public void launchFragment() {
+        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+        navigation_drawer_activity.launchSubscriptionsFragment();
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

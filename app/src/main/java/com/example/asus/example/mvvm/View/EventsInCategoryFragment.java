@@ -19,7 +19,7 @@ import com.example.asus.example.mvvm.ViewModel.EventViewModel;
  * Fragment for the view, to show all events that exist in the chosen Category.
  */
 public class EventsInCategoryFragment extends Fragment {
-
+    private Category category;
     private EventViewModel eventViewModel;
     private FragmentEventsInCategoryBinding fragmentEventsInCategoryBinding;
 
@@ -47,5 +47,9 @@ public class EventsInCategoryFragment extends Fragment {
 
         //TODO: observe livedata somehow
 
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

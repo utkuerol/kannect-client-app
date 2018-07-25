@@ -1,15 +1,19 @@
 package com.example.asus.example.mvvm.View.Adapter;
 
-import android.arch.lifecycle.MutableLiveData;
 import android.databinding.DataBindingUtil;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.ItemEventBinding;
+import com.example.asus.example.mvvm.Interfaces.OnItemClickListenerEvent;
+import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.ViewModel.ItemEventViewModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.Collections;
 import java.util.List;
@@ -21,7 +25,7 @@ import java.util.List;
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapterViewHolder> {
 
     private List<Event> eventsList;
-
+    private static OnItemClickListenerEvent listener;
     /**
      * Constructor.
      * Initializes the private EventList attribute.
@@ -43,6 +47,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
         return new EventAdapterViewHolder(itemEventBinding);
     }
 
+
     /**
      * Method which binds a ViewHolder to a position in the Recycler View, using the bindUser method.
      * @param holder ViewHolder which will be shown.
@@ -50,6 +55,15 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
      */
     @Override public void onBindViewHolder(EventAdapterViewHolder holder, int position) {
         holder.bindEvent(eventsList.get(position));
+        final Event model = eventsList.get(position);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                    listener.onItemClick(model);
+                }
+            }
+        });
     }
 
     /**
@@ -68,6 +82,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
         this.eventsList = eventsList;
     }
 
+
+    public void setListener(OnItemClickListenerEvent listener) {
+        this.listener = listener;
+    }
+
+
     /**
      * Nested Class.
      * Builds for every item in the Recycler View its View Model.
@@ -83,6 +103,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
         public EventAdapterViewHolder(ItemEventBinding itemEventBinding) {
             super(itemEventBinding.itemEvent);
             this.mItemEventBinding = itemEventBinding;
+
         }
 
         /**
@@ -90,13 +111,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
          * @param event which will be bound.
          */
         void bindEvent(Event event) {
-            MutableLiveData<Event> eventMutableLiveData = new MutableLiveData<>();
-            eventMutableLiveData.setValue(event);
             if (mItemEventBinding.getItemEventViewModel() == null) {
-                mItemEventBinding.setItemEventViewModel(
-                        new ItemEventViewModel(eventMutableLiveData, itemView.getContext()));
+                ItemEventViewModel itemEventViewModel = new ItemEventViewModel();
+                itemEventViewModel.init(event);
+                mItemEventBinding.setItemEventViewModel(itemEventViewModel);
             } else {
-                mItemEventBinding.getItemEventViewModel().setEvent(eventMutableLiveData);
+                mItemEventBinding.getItemEventViewModel().init(event);
             }
         }
     }

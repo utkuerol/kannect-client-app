@@ -10,7 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.asus.example.R;
-import com.example.asus.example.databinding.FragmentNewEventBinding;
+import com.example.asus.example.databinding.FragmentNewEventInSubcategoryBinding;
+import com.example.asus.example.mvvm.Model.Entities.Subcategory;
 import com.example.asus.example.mvvm.ViewModel.EventViewModel;
 
 /**
@@ -18,29 +19,27 @@ import com.example.asus.example.mvvm.ViewModel.EventViewModel;
  * Uses the ItemSubcategoryViewModel as its ViewModel.
  */
 public class NewEventInSubcategoryFragment extends Fragment {
-
+    private Subcategory subcategory;
     private EventViewModel eventViewModel;
-    private FragmentNewEventBinding fragmentNewEventBinding;
+    private FragmentNewEventInSubcategoryBinding fragmentNewEventBinding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        // Defines the xml file for the fragment
-        return inflater.inflate(R.layout.fragment_new_event, parent, false);
-    }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-        super.onViewCreated(view, savedInstanceState);
-
+        fragmentNewEventBinding = FragmentNewEventInSubcategoryBinding.inflate(inflater, parent, false);
         //set viewmodel
         eventViewModel = ViewModelProviders.of(this).get(EventViewModel.class);
-        /*keine Ahnung welche Query*/
-        //eventViewModel.add(null);
-
-
-        //TODO: observe livedata somehow
-
+        // Defines the xml file for the fragment
+        return fragmentNewEventBinding.getRoot();
     }
 
+    public void launchFragment() {
+        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+        navigation_drawer_activity.launchNewEventInSubategoryFragment();
+    }
+
+
+    public void setSubcategory(Subcategory subcategory) {
+        this.subcategory = subcategory;
+    }
 }

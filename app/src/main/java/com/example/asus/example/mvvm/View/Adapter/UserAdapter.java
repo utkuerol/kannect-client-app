@@ -4,10 +4,12 @@ import android.arch.lifecycle.MutableLiveData;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.ItemUserBinding;
+import com.example.asus.example.mvvm.Interfaces.OnItemClickListenerUser;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.ViewModel.ItemUserViewModel;
 
@@ -20,7 +22,7 @@ import java.util.List;
  */
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserAdapterViewHolder> {
     private List<User> usersList;
-
+    private OnItemClickListenerUser listener;
     /**
      * Constructor.
      * Initializes the private usersList attribute.
@@ -29,6 +31,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserAdapterVie
         this.usersList = Collections.emptyList();
     }
 
+    public void setListener(OnItemClickListenerUser listener) {
+        this.listener = listener;
+    }
 
     /**
      * Method inflates the View, meaning it creates the layout for every list item, using DataBindingUtil inflate method.
@@ -50,6 +55,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserAdapterVie
      */
     @Override public void onBindViewHolder(UserAdapterViewHolder holder, int position) {
         holder.bindUser(usersList.get(position));
+        final User model = usersList.get(position);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                    listener.onItemClick(model);
+                }
+            }
+        });
     }
 
     /**

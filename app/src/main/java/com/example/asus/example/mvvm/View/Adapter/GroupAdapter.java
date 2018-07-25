@@ -4,10 +4,12 @@ import android.arch.lifecycle.MutableLiveData;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.ItemGroupBinding;
+import com.example.asus.example.mvvm.Interfaces.OnItemClickListenerGroup;
 import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.ViewModel.ItemGroupViewModel;
 
@@ -20,15 +22,19 @@ import java.util.List;
  */
 public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupAdapterViewHolder> {
     private List<Group> groupsList;
-
+    private OnItemClickListenerGroup listener;
     /**
      * Constructor.
      * Initializes the private groupsList attribute.
      */
     public GroupAdapter() {
         this.groupsList = Collections.emptyList();
+
     }
 
+    public void setListener(OnItemClickListenerGroup listener) {
+        this.listener = listener;
+    }
 
     /**
      * Method inflates the View, meaning it creates the layout for every list item, using DataBindingUtil inflate method.
@@ -50,6 +56,15 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupAdapter
      */
     @Override public void onBindViewHolder(GroupAdapterViewHolder holder, int position) {
         holder.bindGroup(groupsList.get(position));
+        final Group model = groupsList.get(position);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                    listener.onItemClick(model);
+                }
+            }
+        });
     }
 
     /**

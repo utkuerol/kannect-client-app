@@ -18,6 +18,8 @@ import com.example.asus.example.mvvm.ViewModel.ItemUserViewModel;
  */
 public class UserProfileFragment extends Fragment {
 
+
+    private User user;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
@@ -42,4 +44,7 @@ public class UserProfileFragment extends Fragment {
     }
 
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

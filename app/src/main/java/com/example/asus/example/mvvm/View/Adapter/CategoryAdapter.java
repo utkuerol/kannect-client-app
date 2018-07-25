@@ -1,13 +1,15 @@
 package com.example.asus.example.mvvm.View.Adapter;
 
-import android.arch.lifecycle.MutableLiveData;
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.ItemCategoryBinding;
+import com.example.asus.example.mvvm.Interfaces.OnItemClickListenerCategory;
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.ViewModel.ItemCategoryViewModel;
 
@@ -20,8 +22,9 @@ import java.util.List;
  */
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryAdapterViewHolder> {
 
-
+    private OnItemClickListenerCategory listener;
     private List<Category> categoryList;
+    private Context context;
 
     /**
      * Constructor.
@@ -29,8 +32,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
      */
     public CategoryAdapter() {
         this.categoryList = Collections.emptyList();
+
     }
 
+
+    public void setListener(OnItemClickListenerCategory listener) {
+
+        this.listener = listener;
+    }
 
     /**
      * Method inflates the View, meaning it creates the layout for every list item, using DataBindingUtil inflate method.
@@ -52,7 +61,17 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
      */
     @Override public void onBindViewHolder(CategoryAdapterViewHolder holder, int position) {
         holder.bindCategory(categoryList.get(position));
+        final Category model = categoryList.get(position);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                    listener.onItemClick(model);
+                }
+            }
+        });
     }
+
 
     /**
      * method to get the size of the List of items that will be shown in the ui.
@@ -64,10 +83,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     /**
      * sets the list of groups which will be shown in the ui.
-     * @param CategorysList list of Categories
+     * @param categoryList list of Categories
      */
-    public void setCategoryList(List<Category> CategorysList) {
-        this.categoryList = CategorysList;
+    public void setCategoryList(List<Category> categoryList) {
+        this.categoryList = categoryList;
     }
 
     /**
@@ -85,6 +104,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         public CategoryAdapterViewHolder(ItemCategoryBinding itemCategoryBinding) {
             super(itemCategoryBinding.itemCategory);
             this.mItemCategoryBinding = itemCategoryBinding;
+
         }
 
         /**
@@ -92,13 +112,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
          * @param category which will be bound.
          */
         void bindCategory(Category category) {
-            MutableLiveData<Category> cat = new MutableLiveData<Category>();
-            cat.setValue(category);
-            if (mItemCategoryBinding.getCategoryViewModel() == null) {
-                mItemCategoryBinding.setCategoryViewModel(
-                        new ItemCategoryViewModel(cat, itemView.getContext()));
+            if (mItemCategoryBinding.getItemCategoryViewModel() == null) {
+                ItemCategoryViewModel itemCategoryViewModel = new ItemCategoryViewModel();
+                itemCategoryViewModel.init(category);
+                mItemCategoryBinding.setItemCategoryViewModel(itemCategoryViewModel);
             } else {
-                mItemCategoryBinding.getCategoryViewModel().setChosenCategory(cat.getValue());
+                mItemCategoryBinding.getItemCategoryViewModel().init(category);
             }
         }
     }

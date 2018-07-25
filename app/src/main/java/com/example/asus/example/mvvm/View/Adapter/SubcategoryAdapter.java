@@ -3,10 +3,12 @@ package com.example.asus.example.mvvm.View.Adapter;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.ItemSubcategoryBinding;
+import com.example.asus.example.mvvm.Interfaces.OnItemClickListenerSubcategory;
 import com.example.asus.example.mvvm.Model.Entities.Subcategory;
 import com.example.asus.example.mvvm.ViewModel.ItemSubcategoryView;
 
@@ -19,13 +21,14 @@ import java.util.List;
  */
 public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.SubcategoryAdapterViewHolder> {
     private List<Subcategory> subcategoryList;
-
+    private OnItemClickListenerSubcategory listener;
     /**
      * Constructor.
      * Initializes the private subCategoryList attribute.
      */
     public SubcategoryAdapter() {
         this.subcategoryList = Collections.emptyList();
+
     }
 
     /**
@@ -48,6 +51,19 @@ public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.
      */
     @Override public void onBindViewHolder(SubcategoryAdapterViewHolder holder, int position) {
         holder.bindSubcategory(subcategoryList.get(position));
+        final Subcategory model = subcategoryList.get(position);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                    listener.onItemClick(model);
+                }
+            }
+        });
+    }
+
+    public void setListener(OnItemClickListenerSubcategory listener) {
+        this.listener = listener;
     }
 
     /**

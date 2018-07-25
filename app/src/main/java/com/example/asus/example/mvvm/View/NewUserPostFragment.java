@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.ViewModel.ItemUserViewModel;
 
 /**
@@ -14,7 +15,7 @@ import com.example.asus.example.mvvm.ViewModel.ItemUserViewModel;
  */
 public class NewUserPostFragment extends Fragment {
 
-
+    private User user;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
@@ -27,4 +28,12 @@ public class NewUserPostFragment extends Fragment {
         return getView();
     }
 
+    public void launchFragment() {
+        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+        navigation_drawer_activity.launchNewUserPostFragment();
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

@@ -19,7 +19,7 @@ import com.example.asus.example.mvvm.ViewModel.GroupViewModel;
  * Activity class for the view regarding showing subcategories and the groups which belong to the parent category.
  */
 public class GroupsInSubcategoryFragment extends Fragment {
-
+    private Subcategory subcategory;
     private GroupViewModel groupViewModel;
     private FragmentGroupsInSubcategoryBinding fragmentGroupsInSubcategory;
 
@@ -47,5 +47,9 @@ public class GroupsInSubcategoryFragment extends Fragment {
 
         //TODO: observe livedata somehow
 
+    }
+
+    public void setSubcategory(Subcategory subcategory) {
+        this.subcategory = subcategory;
     }
 }

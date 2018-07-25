@@ -4,10 +4,12 @@ import android.arch.lifecycle.MutableLiveData;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.ItemPostBinding;
+import com.example.asus.example.mvvm.Interfaces.OnItemClickListenerPost;
 import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.ViewModel.ItemPostViewModel;
 
@@ -21,13 +23,19 @@ import java.util.List;
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostAdapterViewHolder> {
 
     private List<Post> postsList;
-
+    private OnItemClickListenerPost listener;
     /**
      * Constructor.
      * Initializes the private postList attribute.
      */
     public PostAdapter() {
         this.postsList = Collections.emptyList();
+
+    }
+
+
+    public void setListener(OnItemClickListenerPost listener) {
+        this.listener = listener;
     }
 
     /**
@@ -50,6 +58,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostAdapterVie
      */
     @Override public void onBindViewHolder(PostAdapterViewHolder holder, int position) {
         holder.bindPost(postsList.get(position));
+        final Post model = postsList.get(position);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                    listener.onItemClick(model);
+                }
+            }
+        });
     }
 
     /**

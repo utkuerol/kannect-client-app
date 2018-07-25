@@ -17,11 +17,18 @@ import com.example.asus.example.mvvm.ViewModel.ItemPostViewModel;
  */
 public class ShowPostFragment extends Fragment {
 
+
+    private Post post;
+
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
         //get extra arguments from the initiating activity
-        Post post = (Post) getArguments().getSerializable("post");
+
 
         //set viewmodel
         ItemPostViewModel itemPostViewModel = ViewModelProviders.of(this).get(ItemPostViewModel.class);

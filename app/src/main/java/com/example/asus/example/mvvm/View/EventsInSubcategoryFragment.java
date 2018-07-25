@@ -19,7 +19,7 @@ import com.example.asus.example.mvvm.ViewModel.EventViewModel;
  * Activity class for the view regarding showing subcategories and the events which belong to the parent category.
  */
 public class EventsInSubcategoryFragment extends Fragment {
-
+    private Subcategory subcategory;
     private EventViewModel eventViewModel;
     private FragmentEventsInSubcategoryBinding fragmentEventsInSubcategoryBinding;
 
@@ -47,5 +47,9 @@ public class EventsInSubcategoryFragment extends Fragment {
 
         //TODO: observe livedata somehow
 
+    }
+
+    public void setSubcategory(Subcategory subcategory) {
+        this.subcategory = subcategory;
     }
 }

@@ -9,9 +9,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentCategoriesGroupBinding;
+import com.example.asus.example.mvvm.Interfaces.OnItemClickListenerCategory;
+import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.View.Adapter.CategoryAdapter;
 import com.example.asus.example.mvvm.ViewModel.CategoryViewModel;
 
@@ -25,26 +28,30 @@ public class CategoriesGroupFragment extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        // Defines the xml file for the fragment
-        return inflater.inflate(R.layout.fragment_categories_group, parent, false);
-    }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-        super.onViewCreated(view, savedInstanceState);
-
+        fragmentCategoriesGroupBinding = FragmentCategoriesGroupBinding.inflate(inflater, parent, false);
         //set viewmodel
         categoryViewModel = ViewModelProviders.of(this).get(CategoryViewModel.class);
         categoryViewModel.setCategoriesToAllCategories();
 
         //set adapter
         CategoryAdapter categoryAdapter = new CategoryAdapter();
+        OnItemClickListenerCategory listener = new OnItemClickListenerCategory() {
+            @Override
+            public void onItemClick(Category item) {
+                Toast.makeText(getActivity(), "Item clicked: " + item.getName(), Toast.LENGTH_SHORT).show();
+
+                Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+                navigation_drawer_activity.launchSubcategoriesEventAndEventsInCategoryFragment(item);
+
+            }
+        };
         categoryAdapter.setCategoryList(categoryViewModel.getCategories().getValue());
         fragmentCategoriesGroupBinding.categoriesGroupCategoryRV.setAdapter(categoryAdapter);
         fragmentCategoriesGroupBinding.categoriesGroupCategoryRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
-
-        //TODO: observe livedata somehow
-
+        return fragmentCategoriesGroupBinding.getRoot();
     }
+
+
+
 }

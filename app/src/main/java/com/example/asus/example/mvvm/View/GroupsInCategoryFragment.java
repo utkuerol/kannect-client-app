@@ -19,7 +19,7 @@ import com.example.asus.example.mvvm.ViewModel.GroupViewModel;
  * Fragment for the view, to show all groups that exist in the chosen Category.
  */
 public class GroupsInCategoryFragment extends Fragment {
-
+    private Category category;
     private GroupViewModel groupViewModel;
     private FragmentGroupsInCategoryBinding fragmentGroupsInCategoryBinding;
 
@@ -47,5 +47,9 @@ public class GroupsInCategoryFragment extends Fragment {
 
         //TODO: observe livedata somehow
 
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

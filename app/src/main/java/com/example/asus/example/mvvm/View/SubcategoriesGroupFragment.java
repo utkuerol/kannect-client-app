@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.asus.example.databinding.FragmentSubcategoriesGroupBinding;
 import com.example.asus.example.mvvm.Model.Entities.Category;
+import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.View.Adapter.SubcategoryAdapter;
 import com.example.asus.example.mvvm.ViewModel.ItemCategoryViewModel;
 
@@ -18,6 +19,7 @@ import com.example.asus.example.mvvm.ViewModel.ItemCategoryViewModel;
  */
 public class SubcategoriesGroupFragment extends Fragment {
 
+    private Group group;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
@@ -41,5 +43,14 @@ public class SubcategoriesGroupFragment extends Fragment {
 
         return fragmentSubcategoriesGroupBinding.getRoot();
 
+    }
+
+    public void launchFragment() {
+        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+        navigation_drawer_activity.launchSubcategoriesGroupFragment();
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 }
