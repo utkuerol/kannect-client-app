@@ -47,6 +47,14 @@ public class ItemUserViewModel extends ViewModel {
         currentUser = userRepository.getUserByID(myPrefs.getLong("CurrentUserId", 0)).getValue();
     }
 
+    public void init() {
+        userRepository = new UserRepository();
+        postRepository = new PostRepository();
+
+        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
+        currentUser = userRepository.getUserByID(myPrefs.getLong("CurrentUserId", 0)).getValue();
+    }
+
     @BindingAdapter({"currentUserImageUrl"})
     public static void loadCurrentUserImage(ImageView view, String currentUserImageUrl) {
         Picasso.get().load(currentUserImageUrl)
