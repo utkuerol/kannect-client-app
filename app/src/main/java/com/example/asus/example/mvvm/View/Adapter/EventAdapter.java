@@ -4,6 +4,7 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.asus.example.R;
@@ -21,14 +22,22 @@ import java.util.List;
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapterViewHolder> {
 
     private List<Event> eventsList;
+    private OnItemClickListenerEvent listener;
 
     /**
      * Constructor.
      * Initializes the private EventList attribute.
      */
+
     public EventAdapter() {
         this.eventsList = Collections.emptyList();
     }
+
+    public void setListener(OnItemClickListenerEvent listener) {
+
+        this.listener = listener;
+    }
+
 
     /**
      * Method inflates the View, meaning it creates the layout for every list item, using DataBindingUtil inflate method.
@@ -50,6 +59,15 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
      */
     @Override public void onBindViewHolder(EventAdapterViewHolder holder, int position) {
         holder.bindEvent(eventsList.get(position));
+        final Event model = eventsList.get(position);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                    listener.onItemClick(model);
+                }
+            }
+        });
     }
 
     /**

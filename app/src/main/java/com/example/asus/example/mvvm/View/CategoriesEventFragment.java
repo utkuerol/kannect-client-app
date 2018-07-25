@@ -14,13 +14,14 @@ import android.widget.Button;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentCategoriesEventBinding;
+import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.View.Adapter.CategoryAdapter;
 import com.example.asus.example.mvvm.ViewModel.CategoryViewModel;
 
 /**
  * Fragment for the view, to show all categories that exist for a event.
  */
-public class CategoriesEventFragment extends Fragment implements View.OnClickListener {
+public class CategoriesEventFragment extends Fragment {
 
     FragmentCategoriesEventBinding fragmentCategoriesEventBinding;
     private CategoryViewModel categoryViewModel;
@@ -29,43 +30,29 @@ public class CategoriesEventFragment extends Fragment implements View.OnClickLis
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
         fragmentCategoriesEventBinding = FragmentCategoriesEventBinding.inflate(inflater, parent, false);
-        //set viewmodel
-       /* categoryViewModel = ViewModelProviders.of(this).get(CategoryViewModel.class);
-        categoryViewModel.setCategoriesToAllCategories();
 
+        categoryViewModel = ViewModelProviders.of(this).get(CategoryViewModel.class);
+        categoryViewModel.init();
+        categoryViewModel.setCategoriesToAllCategories();
 
         //set adapter
         CategoryAdapter categoryAdapter = new CategoryAdapter();
+        OnItemClickListenerCategory listener = new OnItemClickListenerCategory() {
+            @Override
+            public void onItemClick(Category item) {
+                Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+                navigation_drawer_activity.launchSubcategoriesEventAndEventsInCategoryFragment(item);
+
+            }
+        };
+        categoryAdapter.setListener(listener);
         categoryAdapter.setCategoryList(categoryViewModel.getCategories().getValue());
         fragmentCategoriesEventBinding.categoriesEventCategoryRV.setAdapter(categoryAdapter);
-        fragmentCategoriesEventBinding.categoriesEventCategoryRV.setLayoutManager(new LinearLayoutManager(this.getContext()));*/
-
-
+        fragmentCategoriesEventBinding.categoriesEventCategoryRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
         View v = inflater.inflate(R.layout.fragment_categories_event, parent, false);
+        return v;
 
 
-        ////////////////////////
-        /*Button b = (Button) v.findViewById(R.id.newEventInCategoryButton);
-        b.setOnClickListener(this);*/
-        ///////////////////////
-
-
-        return fragmentCategoriesEventBinding.getRoot();
-    }
-
-
-    public void launchFragment() {
-        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
-        navigation_drawer_activity.launchCategoriesEventFragment();
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.newEventInCategoryButton:
-                launchFragment();
-                break;
-        }
     }
 
 
