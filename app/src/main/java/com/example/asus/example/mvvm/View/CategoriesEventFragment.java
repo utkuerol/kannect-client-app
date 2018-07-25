@@ -38,6 +38,7 @@ public class CategoriesEventFragment extends Fragment {
         fragmentCategoriesEventBinding = FragmentCategoriesEventBinding.inflate(inflater, parent, false);
 
         categoryViewModel = ViewModelProviders.of(this).get(CategoryViewModel.class);
+        categoryViewModel.init();
         categoryViewModel.setCategoriesToAllCategories();
 
         //set adapter

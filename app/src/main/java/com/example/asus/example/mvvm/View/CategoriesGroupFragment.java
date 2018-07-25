@@ -32,6 +32,7 @@ public class CategoriesGroupFragment extends Fragment{
         fragmentCategoriesGroupBinding = FragmentCategoriesGroupBinding.inflate(inflater, parent, false);
         //set viewmodel
         categoryViewModel = ViewModelProviders.of(this).get(CategoryViewModel.class);
+        categoryViewModel.init();
         categoryViewModel.setCategoriesToAllCategories();
 
         //set adapter
@@ -49,7 +50,8 @@ public class CategoriesGroupFragment extends Fragment{
         categoryAdapter.setCategoryList(categoryViewModel.getCategories().getValue());
         fragmentCategoriesGroupBinding.categoriesGroupCategoryRV.setAdapter(categoryAdapter);
         fragmentCategoriesGroupBinding.categoriesGroupCategoryRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        return fragmentCategoriesGroupBinding.getRoot();
+        View v = inflater.inflate(R.layout.fragment_categories_group, parent, false);
+        return v;
     }
 
 

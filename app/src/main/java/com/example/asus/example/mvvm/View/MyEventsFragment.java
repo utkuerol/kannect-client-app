@@ -12,6 +12,10 @@ import android.view.ViewGroup;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentMyEventsBinding;
+import com.example.asus.example.mvvm.Interfaces.OnItemClickListenerEvent;
+import com.example.asus.example.mvvm.Interfaces.OnItemClickListenerGroup;
+import com.example.asus.example.mvvm.Model.Entities.Event;
+import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.View.Adapter.EventAdapter;
 import com.example.asus.example.mvvm.ViewModel.EventViewModel;
 
@@ -25,27 +29,27 @@ public class MyEventsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        // Defines the xml file for the fragment
-        return inflater.inflate(R.layout.fragment_my_events, parent, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-        super.onViewCreated(view, savedInstanceState);
 
         //set viewmodel
         eventViewModel = ViewModelProviders.of(this).get(EventViewModel.class);
-        /*keine Ahnung welche Query*/
+        eventViewModel.init();
         eventViewModel.setEventsToParticipatingEvents();
 
         //set adapter
         EventAdapter eventAdapter = new EventAdapter();
+        OnItemClickListenerEvent listener = new OnItemClickListenerEvent() {
+            @Override
+            public void onItemClick(Event item) {
+                Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+                navigation_drawer_activity.launchEventFeedFragment(item);
+            }
+        };
         eventAdapter.setEventList(eventViewModel.getEvents().getValue());
         fragmentMyEventsBinding.myEventsEventRV.setAdapter(eventAdapter);
         fragmentMyEventsBinding.myEventsEventRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
-
-        //TODO: observe livedata somehow
-
+        // Defines the xml file for the fragment
+        return inflater.inflate(R.layout.fragment_my_events, parent, false);
     }
+
+
 }

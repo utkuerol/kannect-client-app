@@ -42,14 +42,12 @@ public class EventFeedFragment extends Fragment {
         fragmentEventFeedBinding = FragmentEventFeedBinding.inflate(inflater, parent, false);
         //set viewmodel
         itemEventViewModel = ViewModelProviders.of(this).get(ItemEventViewModel.class);
-        itemEventViewModel.setEvent(e);
+        itemEventViewModel.init(event);
 
         PostAdapter postAdapter = new PostAdapter();
         OnItemClickListenerPost listener = new OnItemClickListenerPost() {
             @Override
             public void onItemClick(Post item) {
-                Toast.makeText(getActivity(), "Item clicked: " + item.getText(), Toast.LENGTH_SHORT).show();
-
                 Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
                 navigation_drawer_activity.launchShowPostFragment(item);
             }
@@ -59,7 +57,8 @@ public class EventFeedFragment extends Fragment {
         fragmentEventFeedBinding.eventFeedRV.setAdapter(postAdapter);
         fragmentEventFeedBinding.eventFeedRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
         // Defines the xml file for the fragment
-        return fragmentEventFeedBinding.getRoot();
+
+        return inflater.inflate(R.layout.fragment_event_feed, parent, false);
     }
 
 
