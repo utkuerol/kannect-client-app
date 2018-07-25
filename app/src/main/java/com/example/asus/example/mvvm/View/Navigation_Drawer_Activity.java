@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 
 import com.example.asus.example.R;
@@ -23,7 +24,6 @@ import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.Subcategory;
-import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.ViewModel.ItemUserViewModel;
 
@@ -47,8 +47,10 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
             @Override
             public void onChanged(@Nullable User user) {
                 if (user != null) {
-                    NavHeaderNavigationDrawerBinding navHeaderNavigationDrawerBinding = NavHeaderNavigationDrawerBinding.bind(binding.navView.getHeaderView(0));
-                    navHeaderNavigationDrawerBinding.setItemUserViewModel(itemUserViewModel);
+                    View headerView = binding.navView.getHeaderView(0);
+                    NavHeaderNavigationDrawerBinding headerBinding = NavHeaderNavigationDrawerBinding.bind(headerView);
+                    headerBinding.setItemUserViewModel(itemUserViewModel);
+
                 }
             }
         });
