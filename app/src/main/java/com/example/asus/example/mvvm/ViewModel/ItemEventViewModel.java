@@ -160,8 +160,8 @@ public class ItemEventViewModel extends ViewModel {
      * Gets the feed of the event.
      * @return list of posts.
      */
-    public List<Post> getEventFeed() {
-        return feedRepository.getEventFeed(event.getValue()).getValue();
+    public MutableLiveData<List<Post>> getEventFeed() {
+        return feedRepository.getEventFeed(event.getValue());
     }
 
     /**

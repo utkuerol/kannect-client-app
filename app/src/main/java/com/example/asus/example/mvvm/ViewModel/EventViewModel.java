@@ -47,16 +47,16 @@ public class EventViewModel extends ViewModel {
      * Sets the events with all groups of the given category.
      * @param category to filter
      */
-    public void setEventsFilteredByCategory(MutableLiveData<Category> category) {
-        events.setValue(category.getValue().getEvents());
+    public void setEventsFilteredByCategory(Category category) {
+        events.setValue(category.getEvents());
     }
 
     /**
      * Sets the events with all groups of the given subcategory.
      * @param subcategory to filter.
      */
-    public void setEventsFilteredBySubcategory(MutableLiveData<Subcategory> subcategory) {
-        events.setValue(subcategory.getValue().getEvents());
+    public void setEventsFilteredBySubcategory(Subcategory subcategory) {
+        events.setValue(subcategory.getEvents());
     }
 
     /**

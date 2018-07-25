@@ -3,7 +3,6 @@ package com.example.asus.example.mvvm.View;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentCategoriesGroupBinding;
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.View.Adapter.CategoryAdapter;
@@ -26,16 +24,16 @@ import java.util.List;
 public class CategoriesGroupFragment extends Fragment {
 
     private CategoryViewModel categoryViewModel;
-    private FragmentCategoriesGroupBinding fragmentCategoriesGroupBinding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
-        fragmentCategoriesGroupBinding = FragmentCategoriesGroupBinding.inflate(inflater, parent, false);
+        //Set binding
+        final FragmentCategoriesGroupBinding fragmentCategoriesGroupBinding = FragmentCategoriesGroupBinding.inflate(inflater, parent, false);
+
         //set viewmodel
-        categoryViewModel = ViewModelProviders.of(this).get(CategoryViewModel.class);
+        final CategoryViewModel categoryViewModel = ViewModelProviders.of(this).get(CategoryViewModel.class);
         categoryViewModel.init();
-        categoryViewModel.setCategoriesToAllCategories();
 
         //set adapter
         final CategoryAdapter categoryAdapter = new CategoryAdapter();
@@ -49,6 +47,7 @@ public class CategoriesGroupFragment extends Fragment {
         };
         categoryAdapter.setListener(listener);
 
+        categoryViewModel.setCategoriesToAllCategories();
 
         categoryViewModel.getCategories().observe(this, new Observer<List<Category>>() {
             @Override
@@ -61,6 +60,7 @@ public class CategoriesGroupFragment extends Fragment {
         });
 
         fragmentCategoriesGroupBinding.categoriesGroupCategoryRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
         return fragmentCategoriesGroupBinding.getRoot();
     }
 

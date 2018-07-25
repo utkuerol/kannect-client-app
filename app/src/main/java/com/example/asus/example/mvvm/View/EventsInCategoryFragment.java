@@ -1,18 +1,19 @@
 package com.example.asus.example.mvvm.View;
 
-import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentEventsInCategoryBinding;
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.Entities.Event;
+import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.View.Adapter.EventAdapter;
 import com.example.asus.example.mvvm.View.Adapter.OnItemClickListenerEvent;
 import com.example.asus.example.mvvm.ViewModel.EventViewModel;
@@ -23,23 +24,21 @@ import com.example.asus.example.mvvm.ViewModel.EventViewModel;
 public class EventsInCategoryFragment extends Fragment {
 
     private Category category;
-    private EventViewModel eventViewModel;
-    private FragmentEventsInCategoryBinding fragmentEventsInCategoryBinding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
-        MutableLiveData<Category> n = new MutableLiveData<>();
-        n.setValue(category);
 
+        final FragmentEventsInCategoryBinding fragmentEventsInCategoryBinding =
+                FragmentEventsInCategoryBinding.inflate(inflater, parent, false);
 
         //set viewmodel
-        eventViewModel = ViewModelProviders.of(this).get(EventViewModel.class);
+        final EventViewModel eventViewModel = ViewModelProviders.of(this).get(EventViewModel.class);
         eventViewModel.init(getContext());
-        eventViewModel.setEventsFilteredByCategory(n);
+
 
         //set adapter
-        EventAdapter eventAdapter = new EventAdapter();
+        final EventAdapter eventAdapter = new EventAdapter();
         OnItemClickListenerEvent listener = new OnItemClickListenerEvent() {
             @Override
             public void onItemClick(Event item) {
@@ -48,12 +47,20 @@ public class EventsInCategoryFragment extends Fragment {
             }
         };
         eventAdapter.setListener(listener);
-        eventAdapter.setEventList(eventViewModel.getEvents().getValue());
-        fragmentEventsInCategoryBinding.eventsInCategoryEventRV.setAdapter(eventAdapter);
+
+        eventViewModel.getCurrentUser().observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(@Nullable User user) {
+                eventViewModel.setEventsFilteredByCategory(category);
+                eventAdapter.setEventList(eventViewModel.getEvents().getValue());
+                fragmentEventsInCategoryBinding.eventsInCategoryEventRV.setAdapter(eventAdapter);
+
+            }
+        });
+
         fragmentEventsInCategoryBinding.eventsInCategoryEventRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        //TODO: observe livedata somehow
-        return inflater.inflate(R.layout.fragment_events_in_category, parent, false);
+        return fragmentEventsInCategoryBinding.getRoot();
     }
 
 
