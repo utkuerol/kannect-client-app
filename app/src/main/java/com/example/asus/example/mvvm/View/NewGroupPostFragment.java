@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.databinding.FragmentNewGroupBinding;
 import com.example.asus.example.databinding.FragmentNewGroupInSubcategoryBinding;
 import com.example.asus.example.mvvm.Model.Entities.Group;
@@ -16,6 +17,12 @@ import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.ViewModel.ItemGroupViewModel;
 
 public class NewGroupPostFragment extends Fragment {
+
+
+    private Group group;
+    private ItemGroupViewModel viewModel;
+    //binding
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -44,8 +51,8 @@ public class NewGroupPostFragment extends Fragment {
         return fragmentNewGroupBinding.getRoot();
     }
 
-    public void launchFragment() {
-        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
-        navigation_drawer_activity.launchGroupPostFragment();
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 }

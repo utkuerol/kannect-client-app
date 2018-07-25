@@ -5,6 +5,7 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.asus.example.R;
@@ -21,6 +22,13 @@ import java.util.List;
  */
 public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupAdapterViewHolder> {
     private List<Group> groupsList;
+    private OnItemClickListenerGroup listener;
+
+
+    public void setListener(OnItemClickListenerGroup listener) {
+
+        this.listener = listener;
+    }
 
     /**
      * Constructor.
@@ -51,6 +59,15 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupAdapter
      */
     @Override public void onBindViewHolder(GroupAdapterViewHolder holder, int position) {
         holder.bindGroup(groupsList.get(position));
+        final Group model = groupsList.get(position);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                    listener.onItemClick(model);
+                }
+            }
+        });
     }
 
     /**

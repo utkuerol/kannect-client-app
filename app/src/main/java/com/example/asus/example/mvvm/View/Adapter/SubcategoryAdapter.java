@@ -4,6 +4,7 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.asus.example.R;
@@ -20,7 +21,13 @@ import java.util.List;
  */
 public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.SubcategoryAdapterViewHolder> {
     private List<Subcategory> subcategoryList;
+    private OnItemClickListenerSubcategory listener;
 
+
+    public void setListener(OnItemClickListenerSubcategory listener) {
+
+        this.listener = listener;
+    }
     /**
      * Constructor.
      * Initializes the private subCategoryList attribute.
@@ -49,6 +56,15 @@ public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.
      */
     @Override public void onBindViewHolder(SubcategoryAdapterViewHolder holder, int position) {
         holder.bindSubcategory(subcategoryList.get(position));
+        final Subcategory model = subcategoryList.get(position);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                    listener.onItemClick(model);
+                }
+            }
+        });
     }
 
     /**

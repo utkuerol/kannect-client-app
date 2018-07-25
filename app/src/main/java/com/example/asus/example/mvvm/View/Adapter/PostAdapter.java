@@ -4,6 +4,7 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.asus.example.R;
@@ -21,6 +22,13 @@ import java.util.List;
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostAdapterViewHolder> {
 
     private List<Post> postsList;
+    private OnItemClickListenerPost listener;
+
+
+    public void setListener(OnItemClickListenerPost listener) {
+
+        this.listener = listener;
+    }
 
     /**
      * Constructor.
@@ -50,6 +58,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostAdapterVie
      */
     @Override public void onBindViewHolder(PostAdapterViewHolder holder, int position) {
         holder.bindPost(postsList.get(position));
+        final Post model = postsList.get(position);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                    listener.onItemClick(model);
+                }
+            }
+        });
     }
 
     /**

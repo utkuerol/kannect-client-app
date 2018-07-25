@@ -13,8 +13,10 @@ import android.view.ViewGroup;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentMyGroupsBinding;
+import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.View.Adapter.GroupAdapter;
+import com.example.asus.example.mvvm.View.Adapter.OnItemClickListenerGroup;
 import com.example.asus.example.mvvm.ViewModel.GroupViewModel;
 
 /**
@@ -27,27 +29,32 @@ public class MyGroupsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+        // Defines the xml file for the fragment
 
-        User user = (User) getArguments().getSerializable("user");
-
-        fragmentMyGroupsBinding = FragmentMyGroupsBinding.inflate(inflater, parent, false);
         //set viewmodel
         groupViewModel = ViewModelProviders.of(this).get(GroupViewModel.class);
-        /*keine Ahnung welche Query*/
-        groupViewModel.setGroupsToJoinedGroups(user);
+        groupViewModel.init(getContext());
+        groupViewModel.setGroupsToJoinedGroups();
+
         //set adapter
         GroupAdapter groupAdapter = new GroupAdapter();
+        OnItemClickListenerGroup listener = new OnItemClickListenerGroup() {
+            @Override
+            public void onItemClick(Group group) {
+
+                Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+                navigation_drawer_activity.launchGroupFeedFragment(group);
+
+            }
+        };
+        groupAdapter.setListener(listener);
         groupAdapter.setGroupList(groupViewModel.getGroups().getValue());
         fragmentMyGroupsBinding.myGroupsGroupRV.setAdapter(groupAdapter);
         fragmentMyGroupsBinding.myGroupsGroupRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        // Defines the xml file for the fragment
-        return fragmentMyGroupsBinding.getRoot();
+
+        //TODO: observe livedata somehow
+        return inflater.inflate(R.layout.fragment_my_groups, parent, false);
     }
 
-
-    public void launchFragment() {
-        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
-        navigation_drawer_activity.launchMyGroupsFragment();
-    }
 
 }

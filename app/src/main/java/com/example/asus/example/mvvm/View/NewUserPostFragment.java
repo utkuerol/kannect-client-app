@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.example.asus.example.databinding.FragmentNewPostBinding;
 import com.example.asus.example.mvvm.Model.Entities.User;
+import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.ViewModel.ItemUserViewModel;
 
 /**
@@ -46,5 +47,6 @@ public class NewUserPostFragment extends Fragment {
         Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
         navigation_drawer_activity.launchNewUserPostFragment();
     }
+
 
 }

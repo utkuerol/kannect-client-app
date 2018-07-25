@@ -14,7 +14,9 @@ import android.view.ViewGroup;
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentEventsInCategoryBinding;
 import com.example.asus.example.mvvm.Model.Entities.Category;
+import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.View.Adapter.EventAdapter;
+import com.example.asus.example.mvvm.View.Adapter.OnItemClickListenerEvent;
 import com.example.asus.example.mvvm.ViewModel.EventViewModel;
 
 import java.net.MalformedURLException;
@@ -24,35 +26,42 @@ import java.net.MalformedURLException;
  */
 public class EventsInCategoryFragment extends Fragment {
 
+    private Category category;
     private EventViewModel eventViewModel;
     private FragmentEventsInCategoryBinding fragmentEventsInCategoryBinding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
-        //get extra arguments from the initiating activity
-        Category category = (Category) getArguments().getSerializable("category");
-        MutableLiveData<Category> c = new MutableLiveData<>();
-        c.setValue(category);
+        MutableLiveData<Category> n = new MutableLiveData<>();
+        n.setValue(category);
 
-        fragmentEventsInCategoryBinding = FragmentEventsInCategoryBinding.inflate(inflater, parent, false);
+
         //set viewmodel
         eventViewModel = ViewModelProviders.of(this).get(EventViewModel.class);
-        /*keine Ahnung welche Query*/
-        eventViewModel.setEventsFilteredByCategory(c);
+        eventViewModel.init(getContext());
+        eventViewModel.setEventsFilteredByCategory(n);
 
         //set adapter
         EventAdapter eventAdapter = new EventAdapter();
+        OnItemClickListenerEvent listener = new OnItemClickListenerEvent() {
+            @Override
+            public void onItemClick(Event item) {
+                Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+                navigation_drawer_activity.launchEventFeedFragment(item);
+            }
+        };
+        eventAdapter.setListener(listener);
         eventAdapter.setEventList(eventViewModel.getEvents().getValue());
         fragmentEventsInCategoryBinding.eventsInCategoryEventRV.setAdapter(eventAdapter);
         fragmentEventsInCategoryBinding.eventsInCategoryEventRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        // Defines the xml file for the fragment
 
-        return fragmentEventsInCategoryBinding.getRoot();
+        //TODO: observe livedata somehow
+        return inflater.inflate(R.layout.fragment_events_in_category, parent, false);
     }
 
-    public void launchFragment() {
-        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
-        navigation_drawer_activity.launchEventInCategoryFragment();
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

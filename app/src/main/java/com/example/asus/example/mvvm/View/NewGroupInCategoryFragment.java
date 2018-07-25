@@ -1,6 +1,5 @@
 package com.example.asus.example.mvvm.View;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.asus.example.databinding.FragmentNewGroupInCategoryBinding;
 import com.example.asus.example.mvvm.Model.Entities.Category;
-import com.example.asus.example.mvvm.Model.Entities.User;
+import com.example.asus.example.mvvm.ViewModel.GroupViewModel;
 import com.example.asus.example.mvvm.ViewModel.ItemCategoryViewModel;
 
 /**
@@ -20,6 +19,9 @@ import com.example.asus.example.mvvm.ViewModel.ItemCategoryViewModel;
  */
 public class NewGroupInCategoryFragment extends Fragment {
 
+    private Category category;
+    private GroupViewModel groupViewModel;
+    private FragmentNewGroupInCategoryBinding fragmentNewGroupBinding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -46,9 +48,8 @@ public class NewGroupInCategoryFragment extends Fragment {
         return fragmentNewGroupBinding.getRoot();
     }
 
-    public void launchFragment() {
-        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
-        navigation_drawer_activity.launchNewGroupInCategoryFragment();
-    }
 
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 }

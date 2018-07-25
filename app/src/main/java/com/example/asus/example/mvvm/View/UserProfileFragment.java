@@ -10,9 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentUserProfileBinding;
 import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
+import com.example.asus.example.mvvm.View.Adapter.OnItemClickListenerPost;
 import com.example.asus.example.mvvm.View.Adapter.PostAdapter;
 import com.example.asus.example.mvvm.ViewModel.ItemUserViewModel;
 
@@ -22,11 +24,9 @@ import java.util.List;
  * User Profile Activity to show all Posts for this User
  */
 public class UserProfileFragment extends Fragment {
-
+    private User user;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-
-        User user = (User) getArguments().getSerializable("user");
 
         //set viewmodel
         final ItemUserViewModel itemUserViewModel = ViewModelProviders.of(this).get(ItemUserViewModel.class);
@@ -34,6 +34,18 @@ public class UserProfileFragment extends Fragment {
 
         //set adapter
         final PostAdapter postAdapter = new PostAdapter();
+
+        OnItemClickListenerPost listener = new OnItemClickListenerPost() {
+            @Override
+            public void onItemClick(Post post) {
+
+                Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+                navigation_drawer_activity.launchShowPostFragment(post);
+
+            }
+        };
+        postAdapter.setListener(listener);
+
 
         //set binding
         final FragmentUserProfileBinding fragmentUserProfileBinding = FragmentUserProfileBinding.inflate(inflater, parent, false);
@@ -66,8 +78,8 @@ public class UserProfileFragment extends Fragment {
 
     }
 
-    public void launchFragment() {
-        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
-        navigation_drawer_activity.launchUserProfileFragment();
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

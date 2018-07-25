@@ -12,41 +12,47 @@ import android.view.ViewGroup;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentEventSearchResultBinding;
+import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.View.Adapter.EventAdapter;
+import com.example.asus.example.mvvm.View.Adapter.OnItemClickListenerEvent;
 import com.example.asus.example.mvvm.ViewModel.EventViewModel;
 
 /**
  * This fragment displays events related to the searched terms.
  */
 public class EventSearchResultsFragment extends Fragment {
-
+    private String query;
 
     private EventViewModel eventViewModel;
     private FragmentEventSearchResultBinding fragmentEventSearchResultBinding;
 
+    public void setQuery(String query) {
+        this.query = query;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        //get extra arguments from the initiating activity
-        String query = getArguments().getString("query");
-        fragmentEventSearchResultBinding = FragmentEventSearchResultBinding.inflate(inflater, parent, false);
+
 
         //set viewmodel
         eventViewModel = ViewModelProviders.of(this).get(EventViewModel.class);
-        /*keine Ahnung welche Query*/
+        eventViewModel.init(getContext());
         eventViewModel.setEventsToSearchResults(query);
 
         //set adapter
         EventAdapter eventAdapter = new EventAdapter();
+        OnItemClickListenerEvent listener = new OnItemClickListenerEvent() {
+            @Override
+            public void onItemClick(Event item) {
+                Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+                navigation_drawer_activity.launchEventFeedFragment(item);
+            }
+        };
+        eventAdapter.setListener(listener);
         eventAdapter.setEventList(eventViewModel.getEvents().getValue());
         fragmentEventSearchResultBinding.eventSearchResultEventRV.setAdapter(eventAdapter);
         fragmentEventSearchResultBinding.eventSearchResultEventRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
         // Defines the xml file for the fragment
-        return fragmentEventSearchResultBinding.getRoot();
+        return inflater.inflate(R.layout.fragment_event_search_result, parent, false);
     }
-
-    public void launchFragment() {
-        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
-        navigation_drawer_activity.launchEventSearchResultsInFragment();
-    }
-
 }

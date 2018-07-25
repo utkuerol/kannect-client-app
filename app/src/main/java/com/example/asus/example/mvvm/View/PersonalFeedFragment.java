@@ -14,6 +14,7 @@ import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentPersonalFeedBinding;
 import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
+import com.example.asus.example.mvvm.View.Adapter.OnItemClickListenerPost;
 import com.example.asus.example.mvvm.View.Adapter.PostAdapter;
 import com.example.asus.example.mvvm.ViewModel.PostViewModel;
 
@@ -22,10 +23,12 @@ import java.util.List;
 /**
  * Personal Feed Activity to show all Posts for this signed user of his groups , posts , events
  */
-public class PersonalFeedFragment extends Fragment implements View.OnClickListener {
+public class PersonalFeedFragment extends Fragment {
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+
 
         //set viewmodel
         final PostViewModel postViewModel = ViewModelProviders.of(this).get(PostViewModel.class);
@@ -35,6 +38,17 @@ public class PersonalFeedFragment extends Fragment implements View.OnClickListen
 
         //set adapter
         final PostAdapter postAdapter = new PostAdapter();
+
+        OnItemClickListenerPost listener = new OnItemClickListenerPost() {
+            @Override
+            public void onItemClick(Post post) {
+
+                Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+                navigation_drawer_activity.launchShowPostFragment(post);
+
+            }
+        };
+        postAdapter.setListener(listener);
 
         postViewModel.init(this.getContext().getApplicationContext());
 
@@ -61,18 +75,5 @@ public class PersonalFeedFragment extends Fragment implements View.OnClickListen
         return fragmentPersonalFeedBinding.getRoot();
     }
 
-    public void launchFragment() {
-        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
-        navigation_drawer_activity.launchPersonalFeedFragment();
-    }
 
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.newEventInCategoryButton:
-                launchFragment();
-                break;
-        }
-    }
 }

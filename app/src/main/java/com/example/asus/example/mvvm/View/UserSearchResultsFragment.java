@@ -10,8 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentUserSearchResultBinding;
 import com.example.asus.example.mvvm.Model.Entities.User;
+import com.example.asus.example.mvvm.Model.Entities.User;
+import com.example.asus.example.mvvm.View.Adapter.OnItemClickListenerUser;
 import com.example.asus.example.mvvm.View.Adapter.UserAdapter;
 import com.example.asus.example.mvvm.ViewModel.UserViewModel;
 
@@ -21,12 +24,13 @@ import java.util.List;
  * Fragment for the view, to show all users which match the search query.
  */
 public class UserSearchResultsFragment extends Fragment {
-
+    private String query;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
         //get extra arguments from the initiating activity
         final String query = getArguments().getString("query");
+
 
         //set viewmodel
         final UserViewModel userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
@@ -42,6 +46,16 @@ public class UserSearchResultsFragment extends Fragment {
 
         //set adapter
         final UserAdapter userAdapter = new UserAdapter();
+        OnItemClickListenerUser listener = new OnItemClickListenerUser() {
+            @Override
+            public void onItemClick(User user) {
+
+                Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+                navigation_drawer_activity.launchUserProfileFragment(user);
+
+            }
+        };
+        userAdapter.setListener(listener);
 
         //set databinding, define the xml of the fragment
         final FragmentUserSearchResultBinding fragmentUserSearchResultBinding = FragmentUserSearchResultBinding.inflate(inflater, parent, false);
@@ -62,10 +76,9 @@ public class UserSearchResultsFragment extends Fragment {
         return fragmentUserSearchResultBinding.getRoot();
     }
 
+    public void setQuery(String query) {
 
-    public void launchFragment() {
-        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
-        navigation_drawer_activity.launchUserSearchResultsFragment();
+        this.query = query;
     }
 
 }

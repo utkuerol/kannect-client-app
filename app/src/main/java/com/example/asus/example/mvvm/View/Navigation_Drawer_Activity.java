@@ -18,6 +18,12 @@ import android.widget.Button;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.NavHeaderNavigationDrawerBinding;
+import com.example.asus.example.mvvm.Model.Entities.Category;
+import com.example.asus.example.mvvm.Model.Entities.Event;
+import com.example.asus.example.mvvm.Model.Entities.Group;
+import com.example.asus.example.mvvm.Model.Entities.Post;
+import com.example.asus.example.mvvm.Model.Entities.Subcategory;
+import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.ViewModel.ItemUserViewModel;
 
@@ -106,7 +112,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         } else if (id == R.id.nav_settings) {
 
         } else if (id == R.id.nav_profile) {
-            launchUserProfileFragment();
+            //launchUserProfileFragment();
             //TODO methode muss noch geändert werden so dass alle Posts of user angezeigt werden
         } else if (id == R.id.nav_groups) {
             launchGroupFragments();
@@ -125,15 +131,16 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
 
         PersonalFeedFragment personalFeedFragment = new PersonalFeedFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.ActivityNavigationDrawerLinearLayout, personalFeedFragment);
+        transaction.replace(R.id.content_frame, personalFeedFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
 
-    public void launchUserProfileFragment() {
+    public void launchUserProfileFragment(User user) {
         UserProfileFragment userProfileFragment = new UserProfileFragment();
+        userProfileFragment.setUser(user);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.ActivityNavigationDrawerLinearLayout, userProfileFragment);
+        transaction.replace(R.id.content_frame, userProfileFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -142,8 +149,8 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         CategoriesGroupFragment categoriesGroupFragment = new CategoriesGroupFragment();
         MyGroupsFragment myGroupsFragment = new MyGroupsFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.ActivityNavigationDrawerLinearLayout, categoriesGroupFragment);
-        transaction.add(R.id.ActivityNavigationDrawerLinearLayout, myGroupsFragment);
+        transaction.replace(R.id.content_frame, categoriesGroupFragment);
+        transaction.add(R.id.content_frame, myGroupsFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -152,22 +159,22 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         CategoriesEventFragment categoriesEventFragment = new CategoriesEventFragment();
         MyEventsFragment myEventsFragment = new MyEventsFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.ActivityNavigationDrawerLinearLayout, categoriesEventFragment);
-        transaction.add(R.id.ActivityNavigationDrawerLinearLayout, myEventsFragment);
+        transaction.replace(R.id.content_frame, categoriesEventFragment);
+        transaction.add(R.id.content_frame, myEventsFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
 
     public void launchSearchFragments() {
         SearchInputFragment searchInputFragment = new SearchInputFragment();
-        UserSearchResultsFragment userSearchResultsFragment = new UserSearchResultsFragment();
-        EventSearchResultsFragment eventSearchResultsFragment = new EventSearchResultsFragment();
-        GroupSearchResultsFragment groupSearchResultsFragment = new GroupSearchResultsFragment();
+        // UserSearchResultsFragment userSearchResultsFragment = new UserSearchResultsFragment();
+        // EventSearchResultsFragment eventSearchResultsFragment = new EventSearchResultsFragment();
+        // GroupSearchResultsFragment groupSearchResultsFragment = new GroupSearchResultsFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.ActivityNavigationDrawerLinearLayout, searchInputFragment);
-        transaction.add(R.id.ActivityNavigationDrawerLinearLayout, userSearchResultsFragment);
-        transaction.add(R.id.ActivityNavigationDrawerLinearLayout, eventSearchResultsFragment);
-        transaction.add(R.id.ActivityNavigationDrawerLinearLayout, groupSearchResultsFragment);
+        transaction.replace(R.id.content_frame, searchInputFragment);
+        //transaction.add(R.id.content_frame, userSearchResultsFragment);
+        //transaction.add(R.id.content_frame, eventSearchResultsFragment);
+        //transaction.add(R.id.content_frame, groupSearchResultsFragment);
 
         transaction.addToBackStack(null);
         transaction.commit();
@@ -191,8 +198,9 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
-    public void launchEventFeedFragment() {
+    public void launchEventFeedFragment(Event event) {
         EventFeedFragment eventFeedFragment = new EventFeedFragment();
+        eventFeedFragment.setEvent(event);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, eventFeedFragment);
         transaction.addToBackStack(null);
@@ -207,24 +215,27 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
-    public void launchEventInCategoryFragment() {
+    public void launchEventInCategoryFragment(Category category) {
         EventsInCategoryFragment eventInCategoryFragment = new EventsInCategoryFragment();
+        eventInCategoryFragment.setCategory(category);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, eventInCategoryFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
 
-    public void launchEventsInSubcategoryFragment() {
+    public void launchEventsInSubcategoryFragment(Subcategory subcategory) {
         EventsInSubcategoryFragment eventsInSubcategoryFragment = new EventsInSubcategoryFragment();
+        eventsInSubcategoryFragment.setSubcategory(subcategory);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, eventsInSubcategoryFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
 
-    public void launchGroupFeedFragment() {
+    public void launchGroupFeedFragment(Group group) {
         GroupFeedFragment groupFeedFragment = new GroupFeedFragment();
+        groupFeedFragment.setGroup(group);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, groupFeedFragment);
         transaction.addToBackStack(null);
@@ -239,16 +250,18 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
-    public void launchGroupsInCategoryFragment() {
+    public void launchGroupsInCategoryFragment(Category category) {
         GroupsInCategoryFragment groupsInCategoryFragment = new GroupsInCategoryFragment();
+        groupsInCategoryFragment.setCategory(category);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, groupsInCategoryFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
 
-    public void launchGroupsInSubcategoryFragment() {
+    public void launchGroupsInSubcategoryFragment(Subcategory subcategory) {
         GroupsInSubcategoryFragment groupsInSubcategoryFragment = new GroupsInSubcategoryFragment();
+        groupsInSubcategoryFragment.setSubcategory(subcategory);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, groupsInSubcategoryFragment);
         transaction.addToBackStack(null);
@@ -271,48 +284,54 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
-    public void launchNewEventInCategoryFragment() {
+    public void launchNewEventInCategoryFragment(Category category) {
         NewEventInCategoryFragment newEventInCategoryFragment = new NewEventInCategoryFragment();
+        newEventInCategoryFragment.setCategory(category);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, newEventInCategoryFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
 
-    public void launchNewEventInSubategoryFragment() {
+    public void launchNewEventInSubategoryFragment(Subcategory subcategory) {
         NewEventInSubcategoryFragment newEventInSubategoryFragment = new NewEventInSubcategoryFragment();
+        newEventInSubategoryFragment.setSubcategory(subcategory);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, newEventInSubategoryFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
 
-    public void launchNewEventPostFragment() {
+    public void launchNewEventPostFragment(Event event) {
         NewEventPostFragment newEventPostFragment = new NewEventPostFragment();
+        newEventPostFragment.setEvent(event);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, newEventPostFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
 
-    public void launchNewGroupInCategoryFragment() {
-        NewGroupInCategoryFragment newGroupInCategoryFragment = new NewGroupInCategoryFragment(groupViewModel);
+    public void launchNewGroupInCategoryFragment(Category category) {
+        NewGroupInCategoryFragment newGroupInCategoryFragment = new NewGroupInCategoryFragment();
+        newGroupInCategoryFragment.setCategory(category);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, newGroupInCategoryFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
 
-    public void launchNewGroupInSubcategoryFragment() {
+    public void launchNewGroupInSubcategoryFragment(Subcategory subcategory) {
         NewGroupInSubcategoryFragment newGroupInSubcategoryFragment = new NewGroupInSubcategoryFragment();
+        newGroupInSubcategoryFragment.setSubcategory(subcategory);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, newGroupInSubcategoryFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
 
-    public void launchGroupPostFragment() {
+    public void launchNewGroupPostFragment(Group group) {
         NewGroupPostFragment newGroupPostFragment = new NewGroupPostFragment();
+        newGroupPostFragment.setGroup(group);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, newGroupPostFragment);
         transaction.addToBackStack(null);
@@ -335,32 +354,39 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
-    public void launchShowPostFragment() {
+    public void launchShowPostFragment(Post post) {
         ShowPostFragment showPostFragment = new ShowPostFragment();
+        showPostFragment.setPost(post);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, showPostFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
 
-    public void launchSubcategoriesEventFragment() {
+    public void launchSubcategoriesEventAndEventsInCategoryFragment(Category category) {
         SubcategoriesEventFragment subcategoriesEventFragment = new SubcategoriesEventFragment();
+        EventsInCategoryFragment eventsInCategoryFragment = new EventsInCategoryFragment();
+        eventsInCategoryFragment.setCategory(category);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, subcategoriesEventFragment);
+        transaction.add(R.id.content_frame, eventsInCategoryFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
 
-    public void launchSubcategoriesGroupFragment() {
+    public void launchSubcategoriesGroupAndGroupsInCategoryFragment(Category category) {
         SubcategoriesGroupFragment subcategoriesGroupFragment = new SubcategoriesGroupFragment();
+        GroupsInCategoryFragment groupsInCategoryFragment = new GroupsInCategoryFragment();
+        groupsInCategoryFragment.setCategory(category);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, subcategoriesGroupFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
 
-    public void launchSubscriptionsFragment() {
+    public void launchSubscriptionsFragment(User user) {
         SubscriptionsFragment subscriptionsFragment = new SubscriptionsFragment();
+        subscriptionsFragment.setUser(user);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, subscriptionsFragment);
         transaction.addToBackStack(null);
