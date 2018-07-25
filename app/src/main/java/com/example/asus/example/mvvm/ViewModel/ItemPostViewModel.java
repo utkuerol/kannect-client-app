@@ -1,10 +1,11 @@
 package com.example.asus.example.mvvm.ViewModel;
 
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.BindingAdapter;
+import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
 import com.example.asus.example.mvvm.Model.Entities.Comment;
@@ -24,12 +25,15 @@ import java.util.List;
  * PostRepository class, which has the post business logic of the application.
  * Objects received from repositories will be stored as MutableLiveData Objects.
  */
-public class ItemPostViewModel extends ViewModel {
+public class ItemPostViewModel extends AndroidViewModel {
 
     private MutableLiveData<Post> post;
-    private Context context;
-    private User currentUser;
+    private MutableLiveData<User> currentUser;
     private PostRepository postRepository;
+
+    public ItemPostViewModel(@NonNull Application application) {
+        super(application);
+    }
 
 
     public void init(Post post) {
@@ -37,8 +41,8 @@ public class ItemPostViewModel extends ViewModel {
         postRepository = new PostRepository();
         UserRepository userRepository = new UserRepository();
 
-        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
-        currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0)).getValue();
+        SharedPreferences myPrefs = getApplication().getSharedPreferences("CurrentUser", 0);
+        currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
     }
 
 
@@ -160,14 +164,14 @@ public class ItemPostViewModel extends ViewModel {
      * Likes the post.
      */
     public void like() {
-        postRepository.likePost(post.getValue(), currentUser);
+        postRepository.likePost(post.getValue(), currentUser.getValue());
     }
 
     /**
      * Unlikes the post.
      */
     public void unlike() {
-        postRepository.unlikePost(post.getValue(), currentUser);
+        postRepository.unlikePost(post.getValue(), currentUser.getValue());
     }
 
     /**
@@ -176,7 +180,7 @@ public class ItemPostViewModel extends ViewModel {
      * @return boolean
      */
     public boolean isCreator() {
-        return post.getValue().getCreator().getId() == currentUser.getId();
+        return post.getValue().getCreator().getId() == currentUser.getValue().getId();
     }
 
     /**
@@ -192,9 +196,16 @@ public class ItemPostViewModel extends ViewModel {
      * @param text for the comment to be created.
      */
     public void comment(String text) {
-        Comment comment = new Comment(text, post.getValue(), new Date(), currentUser);
+        Comment comment = new Comment(text, post.getValue(), new Date(), currentUser.getValue());
         postRepository.commentPost(comment);
     }
 
+    public MutableLiveData<User> getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(MutableLiveData<User> currentUser) {
+        this.currentUser = currentUser;
+    }
 }
 

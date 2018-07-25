@@ -1,9 +1,10 @@
 package com.example.asus.example.mvvm.ViewModel;
 
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
-import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.example.asus.example.mvvm.Model.Entities.Event;
@@ -24,13 +25,16 @@ import java.util.Date;
  * CategoryRepository class, which has the category and subcategory business logic of the application.
  * Objects received from repositories will be stored as MutableLiveData Objects.
  */
-public class ItemSubcategoryViewModel extends ViewModel {
+public class ItemSubcategoryViewModel extends AndroidViewModel {
 
     private MutableLiveData<Subcategory> subcategory;
-    private User currentUser;
-    private Context context;
+    private MutableLiveData<User> currentUser;
     private GroupRepository groupRepository;
     private EventRepository eventRepository;
+
+    public ItemSubcategoryViewModel(@NonNull Application application) {
+        super(application);
+    }
 
 
     public void init(Subcategory subcategory) {
@@ -40,8 +44,8 @@ public class ItemSubcategoryViewModel extends ViewModel {
         eventRepository = new EventRepository();
 
         UserRepository userRepository = new UserRepository();
-        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
-        currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0)).getValue();
+        SharedPreferences myPrefs = getApplication().getSharedPreferences("CurrentUser", 0);
+        currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
     }
 
     public void setSubcategory(Subcategory subcategory) {
@@ -89,7 +93,7 @@ public class ItemSubcategoryViewModel extends ViewModel {
         group.setImageURl(imageUrl);
         group.setDescription(description);
         group.setCategory(subcategory.getValue().getCategory());
-        group.setCreator(currentUser);
+        group.setCreator(currentUser.getValue());
         group.setSubcategory(subcategory.getValue());
         groupRepository.createGroup(group);
     }
@@ -110,7 +114,7 @@ public class ItemSubcategoryViewModel extends ViewModel {
         Date date = new SimpleDateFormat("dd.mm.yyyy").parse(givenDate);
         event.setCategory(subcategory.getValue().getCategory());
         event.setSubcategory(subcategory.getValue());
-        event.setCreator(currentUser);
+        event.setCreator(currentUser.getValue());
         event.setDate(date);
         event.setDescription(description);
         event.setName(name);
@@ -118,4 +122,11 @@ public class ItemSubcategoryViewModel extends ViewModel {
         eventRepository.createEvent(event);
     }
 
+    public MutableLiveData<User> getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(MutableLiveData<User> currentUser) {
+        this.currentUser = currentUser;
+    }
 }

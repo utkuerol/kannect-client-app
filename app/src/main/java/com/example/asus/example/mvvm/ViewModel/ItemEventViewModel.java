@@ -1,10 +1,11 @@
 package com.example.asus.example.mvvm.ViewModel;
 
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.BindingAdapter;
+import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
@@ -28,14 +29,17 @@ import java.util.List;
  * EventRepository class, which has the group business logic of the application.
  * Objects received from repositories will be stored as MutableLiveData Objects.
  */
-public class ItemEventViewModel extends ViewModel {
+public class ItemEventViewModel extends AndroidViewModel {
 
     private MutableLiveData<Event> event;
-    private Context context;
-    private User currentUser;
+    private MutableLiveData<User> currentUser;
     private EventRepository eventRepository;
     private FeedRepository feedRepository;
     private PostRepository postRepository;
+
+    public ItemEventViewModel(@NonNull Application application) {
+        super(application);
+    }
 
 
     public void init(Event event) {
@@ -45,8 +49,8 @@ public class ItemEventViewModel extends ViewModel {
         feedRepository = new FeedRepository();
         eventRepository = new EventRepository();
 
-        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
-        currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0)).getValue();
+        SharedPreferences myPrefs = getApplication().getSharedPreferences("CurrentUser", 0);
+        currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
     }
 
     /**
@@ -169,7 +173,7 @@ public class ItemEventViewModel extends ViewModel {
      * @return boolean result
      */
     public boolean isCreator() {
-        return event.getValue().getCreator().getId() == currentUser.getId();
+        return event.getValue().getCreator().getId() == currentUser.getValue().getId();
     }
 
     /**
@@ -185,14 +189,14 @@ public class ItemEventViewModel extends ViewModel {
      * Participates in the event.
      */
     public void participateEvent() {
-        eventRepository.participateEvent(currentUser, event.getValue());
+        eventRepository.participateEvent(currentUser.getValue(), event.getValue());
     }
 
     /**
      * Leaves the event
      */
     public void leaveEvent() {
-        eventRepository.leaveEvent(currentUser, event.getValue());
+        eventRepository.leaveEvent(currentUser.getValue(), event.getValue());
     }
 
 
@@ -210,7 +214,7 @@ public class ItemEventViewModel extends ViewModel {
      */
     public void createPost(String text) {
         Post post = new Post();
-        post.setCreator(currentUser);
+        post.setCreator(currentUser.getValue());
         post.setText(text);
         post.setOwnedBy(event.getValue().getId());
         post.setOwnerEvent(event.getValue());
@@ -218,5 +222,11 @@ public class ItemEventViewModel extends ViewModel {
         postRepository.createPost(post);
     }
 
+    public MutableLiveData<User> getCurrentUser() {
+        return currentUser;
+    }
 
+    public void setCurrentUser(MutableLiveData<User> currentUser) {
+        this.currentUser = currentUser;
+    }
 }

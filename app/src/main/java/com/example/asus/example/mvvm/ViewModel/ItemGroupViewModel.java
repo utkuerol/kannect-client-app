@@ -1,10 +1,11 @@
 package com.example.asus.example.mvvm.ViewModel;
 
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.BindingAdapter;
+import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
@@ -28,14 +29,17 @@ import java.util.List;
  * GroupRepository class, which has the group business logic of the application.
  * Objects received from repositories will be stored as MutableLiveData Objects.
  */
-public class ItemGroupViewModel extends ViewModel {
+public class ItemGroupViewModel extends AndroidViewModel {
 
     private MutableLiveData<Group> chosenGroup;
-    private User currentUser;
-    private Context context;
+    private MutableLiveData<User> currentUser;
     private GroupRepository groupRepository;
     private FeedRepository feedRepository;
     private PostRepository postRepository;
+
+    public ItemGroupViewModel(@NonNull Application application) {
+        super(application);
+    }
 
 
     public void init(Group chosenGroup) {
@@ -45,8 +49,8 @@ public class ItemGroupViewModel extends ViewModel {
         feedRepository = new FeedRepository();
         groupRepository = new GroupRepository();
 
-        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
-        currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0)).getValue();
+        SharedPreferences myPrefs = getApplication().getSharedPreferences("CurrentUser", 0);
+        currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
     }
 
 
@@ -139,7 +143,7 @@ public class ItemGroupViewModel extends ViewModel {
      * @return boolean result
      */
     public boolean isCreator() {
-        return chosenGroup.getValue().getCreator().getId() == currentUser.getId();
+        return chosenGroup.getValue().getCreator().getId() == currentUser.getValue().getId();
     }
 
 
@@ -160,14 +164,14 @@ public class ItemGroupViewModel extends ViewModel {
      * Joins the group.
      */
     public void joinGroup() {
-        groupRepository.joinGroup(currentUser, chosenGroup.getValue());
+        groupRepository.joinGroup(currentUser.getValue(), chosenGroup.getValue());
     }
 
     /**
      * Leaves the group
      */
     public void leaveGroup() {
-        groupRepository.leaveGroup(currentUser, chosenGroup.getValue());
+        groupRepository.leaveGroup(currentUser.getValue(), chosenGroup.getValue());
     }
 
 
@@ -186,11 +190,17 @@ public class ItemGroupViewModel extends ViewModel {
         Post post = new Post();
         post.setDate(new Date());
         post.setText(text);
-        post.setCreator(currentUser);
+        post.setCreator(currentUser.getValue());
         post.setOwnedBy(chosenGroup.getValue().getId());
         post.setOwnerGroup(chosenGroup.getValue());
         postRepository.createPost(post);
     }
 
+    public MutableLiveData<User> getCurrentUser() {
+        return currentUser;
+    }
 
+    public void setCurrentUser(MutableLiveData<User> currentUser) {
+        this.currentUser = currentUser;
+    }
 }

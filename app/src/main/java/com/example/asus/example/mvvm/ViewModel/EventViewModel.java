@@ -1,9 +1,10 @@
 package com.example.asus.example.mvvm.ViewModel;
 
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
-import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.Entities.Event;
@@ -20,21 +21,23 @@ import java.util.List;
  * EventRepository class, which has the group business logic of the application.
  * Objects received from repositories will be stored as MutableLiveData Objects.
  */
-public class EventViewModel extends ViewModel {
+public class EventViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<Event>> events;
-    private User currentUser;
-    private Context context;
+    private MutableLiveData<User> currentUser;
     private EventRepository eventRepository;
+
+    public EventViewModel(@NonNull Application application) {
+        super(application);
+    }
 
 
     public void init() {
-        this.context = context;
         eventRepository = new EventRepository();
 
         UserRepository userRepository = new UserRepository();
-        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
-        currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0)).getValue();
+        SharedPreferences myPrefs = getApplication().getSharedPreferences("CurrentUser", 0);
+        currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
     }
 
     /**
@@ -65,7 +68,7 @@ public class EventViewModel extends ViewModel {
      * Sets the events to current user's list of participating events.
      */
     public void setEventsToParticipatingEvents() {
-        events.setValue(currentUser.getParticipatedEvents());
+        events.setValue(currentUser.getValue().getParticipatedEvents());
     }
 
 
@@ -78,4 +81,11 @@ public class EventViewModel extends ViewModel {
     }
 
 
+    public MutableLiveData<User> getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(MutableLiveData<User> currentUser) {
+        this.currentUser = currentUser;
+    }
 }
