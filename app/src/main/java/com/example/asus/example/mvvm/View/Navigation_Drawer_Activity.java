@@ -125,7 +125,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
 
         PersonalFeedFragment personalFeedFragment = new PersonalFeedFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.content_frame, personalFeedFragment);
+        transaction.replace(R.id.ActivityNavigationDrawerLinearLayout, personalFeedFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -133,7 +133,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
     public void launchUserProfileFragment() {
         UserProfileFragment userProfileFragment = new UserProfileFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.content_frame, userProfileFragment);
+        transaction.replace(R.id.ActivityNavigationDrawerLinearLayout, userProfileFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -142,7 +142,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         CategoriesGroupFragment categoriesGroupFragment = new CategoriesGroupFragment();
         MyGroupsFragment myGroupsFragment = new MyGroupsFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.content_frame, categoriesGroupFragment);
+        transaction.replace(R.id.ActivityNavigationDrawerLinearLayout, categoriesGroupFragment);
         transaction.add(R.id.content_frame, myGroupsFragment);
         transaction.addToBackStack(null);
         transaction.commit();
@@ -152,7 +152,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         CategoriesEventFragment categoriesEventFragment = new CategoriesEventFragment();
         MyEventsFragment myEventsFragment = new MyEventsFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.content_frame, categoriesEventFragment);
+        transaction.replace(R.id.ActivityNavigationDrawerLinearLayout, categoriesEventFragment);
         transaction.add(R.id.content_frame, myEventsFragment);
         transaction.addToBackStack(null);
         transaction.commit();
