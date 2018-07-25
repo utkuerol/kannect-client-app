@@ -8,9 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentSubcategoriesGroupBinding;
+import com.example.asus.example.mvvm.Interfaces.OnItemClickListenerSubcategory;
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.Entities.Group;
+import com.example.asus.example.mvvm.Model.Entities.Subcategory;
 import com.example.asus.example.mvvm.View.Adapter.SubcategoryAdapter;
 import com.example.asus.example.mvvm.ViewModel.ItemCategoryViewModel;
 
@@ -32,6 +35,16 @@ public class SubcategoriesGroupFragment extends Fragment {
 
         //set adapter
         SubcategoryAdapter subcategoryAdapter = new SubcategoryAdapter();
+        OnItemClickListenerSubcategory listener = new OnItemClickListenerSubcategory() {
+            @Override
+            public void onItemClick(Subcategory subcategory) {
+
+                Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+                navigation_drawer_activity.launchGroupsInSubcategoryFragment(subcategory);
+
+            }
+        };
+        subcategoryAdapter.setListener(listener);
         subcategoryAdapter.setSubcategoryList(itemCategoryViewModel.getSubcategories());
 
         //set databinding
@@ -41,14 +54,10 @@ public class SubcategoriesGroupFragment extends Fragment {
 
         //TODO: observe livedata somehow
 
-        return fragmentSubcategoriesGroupBinding.getRoot();
+        return inflater.inflate(R.layout.fragment_subcategories_group, parent, false);
 
     }
 
-    public void launchFragment() {
-        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
-        navigation_drawer_activity.launchSubcategoriesGroupFragment();
-    }
 
     public void setGroup(Group group) {
         this.group = group;

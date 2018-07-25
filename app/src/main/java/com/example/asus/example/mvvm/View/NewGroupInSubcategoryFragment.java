@@ -13,7 +13,7 @@ import com.example.asus.example.mvvm.ViewModel.GroupViewModel;
 
 /**
  * Activity class for the view regarding creating a new Group in a Subcategory.
- * Uses the ItemSubcategoryViewModel as its ViewModel.
+ * Uses the ItemSubcategoryView as its ViewModel.
  */
 public class NewGroupInSubcategoryFragment extends Fragment {
 

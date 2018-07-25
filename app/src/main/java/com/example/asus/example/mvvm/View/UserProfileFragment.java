@@ -8,7 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentUserProfileBinding;
+import com.example.asus.example.mvvm.Interfaces.OnItemClickListenerPost;
+import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.View.Adapter.PostAdapter;
 import com.example.asus.example.mvvm.ViewModel.ItemUserViewModel;
@@ -32,6 +35,17 @@ public class UserProfileFragment extends Fragment {
         //set adapter
         PostAdapter postAdapter = new PostAdapter();
         postAdapter.setPostList(itemUserViewModel.getUserProfile());
+        OnItemClickListenerPost listener = new OnItemClickListenerPost() {
+            @Override
+            public void onItemClick(Post post) {
+
+                Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+                navigation_drawer_activity.launchShowPostFragment(post);
+
+            }
+        };
+        postAdapter.setListener(listener);
+
 
         //set binding
         FragmentUserProfileBinding fragmentUserProfileBinding = FragmentUserProfileBinding.inflate(inflater, parent, false);
@@ -40,7 +54,7 @@ public class UserProfileFragment extends Fragment {
         fragmentUserProfileBinding.setItemUserViewModel(itemUserViewModel);
         //TODO: observe livedata somehow
 
-        return fragmentUserProfileBinding.getRoot();
+        return inflater.inflate(R.layout.fragment_user_profile, parent, false);
     }
 
 

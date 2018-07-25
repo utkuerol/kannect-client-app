@@ -8,7 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentPersonalFeedBinding;
+import com.example.asus.example.mvvm.Interfaces.OnItemClickListenerPost;
+import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.View.Adapter.PostAdapter;
 import com.example.asus.example.mvvm.ViewModel.PostViewModel;
 
@@ -28,6 +31,16 @@ public class PersonalFeedFragment extends Fragment {
 
         //set adapter
         PostAdapter postAdapter = new PostAdapter();
+        OnItemClickListenerPost listener = new OnItemClickListenerPost() {
+            @Override
+            public void onItemClick(Post post) {
+
+                Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+                navigation_drawer_activity.launchShowPostFragment(post);
+
+            }
+        };
+        postAdapter.setListener(listener);
         postAdapter.setPostList(postViewModel.getPosts().getValue());
 
 
@@ -38,7 +51,7 @@ public class PersonalFeedFragment extends Fragment {
 
         //TODO: observe livedata somehow
 
-        return fragmentPersonalFeedBinding.getRoot();
+        return inflater.inflate(R.layout.fragment_personal_feed, parent, false);
 
     }
 
