@@ -15,8 +15,8 @@ import java.util.List;
 
 public class PostViewModel extends AndroidViewModel {
 
-    private MutableLiveData<List<Post>> posts;
-    private User currentUser;
+    private MutableLiveData<List<Post>> posts = new MutableLiveData<>();
+    private MutableLiveData<User> currentUser = new MutableLiveData<>();
     private FeedRepository feedRepository;
 
     public PostViewModel(@NonNull Application application) {
@@ -27,15 +27,22 @@ public class PostViewModel extends AndroidViewModel {
         feedRepository = new FeedRepository();
         UserRepository userRepository = new UserRepository();
         SharedPreferences myPrefs = getApplication().getSharedPreferences("CurrentUser", 0);
-        currentUser = userRepository.getUserByID(myPrefs.getLong("CurrentUserId", 0)).getValue();
+        currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
     }
 
     public void setPostsToPersonalFeed() {
-        this.posts = feedRepository.getPersonalFeed(currentUser);
+        this.posts = feedRepository.getPersonalFeed(currentUser.getValue());
     }
 
     public MutableLiveData<List<Post>> getPosts() {
         return posts;
     }
 
+    public MutableLiveData<User> getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(MutableLiveData<User> currentUser) {
+        this.currentUser = currentUser;
+    }
 }

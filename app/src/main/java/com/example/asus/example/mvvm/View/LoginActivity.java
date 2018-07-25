@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -62,11 +63,12 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable User user) {
                 if (user != null) {
+                    Log.d("debug", "setting preferences");
                     SharedPreferences myPrefs = getSharedPreferences("CurrentUser", 0);
                     SharedPreferences.Editor prefsEditor;
                     prefsEditor = myPrefs.edit();
                     prefsEditor.putInt("CurrentUserId", user.getId());
-                    prefsEditor.commit();
+                    prefsEditor.apply();
                 }
             }
         });
@@ -119,6 +121,12 @@ public class LoginActivity extends AppCompatActivity {
                         viewModel.createAndSetCurrentUser(account);
                     } else {
                         viewModel.setUser(viewModel.invoke(account));
+                        Log.d("debug", "setting preferences");
+                        SharedPreferences myPrefs = getSharedPreferences("CurrentUser", 0);
+                        SharedPreferences.Editor prefsEditor;
+                        prefsEditor = myPrefs.edit();
+                        prefsEditor.putInt("CurrentUserId", user.getId());
+                        prefsEditor.commit();
                     }
                 }
             });

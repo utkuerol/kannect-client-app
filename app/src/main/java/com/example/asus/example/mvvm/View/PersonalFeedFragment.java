@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentPersonalFeedBinding;
 import com.example.asus.example.mvvm.Model.Entities.Post;
+import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.View.Adapter.PostAdapter;
 import com.example.asus.example.mvvm.ViewModel.PostViewModel;
 
@@ -28,24 +29,35 @@ public class PersonalFeedFragment extends Fragment implements View.OnClickListen
 
         FragmentPersonalFeedBinding fragmentPersonalFeedBinding = FragmentPersonalFeedBinding.inflate(inflater, parent, false);
         //set viewmodel
-        PostViewModel postViewModel = ViewModelProviders.of(this).get(PostViewModel.class);
+        final PostViewModel postViewModel = ViewModelProviders.of(this).get(PostViewModel.class);
         postViewModel.init();
-        postViewModel.setPostsToPersonalFeed();
+
+        postViewModel.getCurrentUser().observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(@Nullable User user) {
+                if (user != null) {
+                    postViewModel.setPostsToPersonalFeed();
+                }
+            }
+        });
 
         //set adapter
         final PostAdapter postAdapter = new PostAdapter();
-        postAdapter.setPostList(postViewModel.getPosts().getValue());
+        postViewModel.getPosts().observe(this, new Observer<List<Post>>() {
+            @Override
+            public void onChanged(@Nullable List<Post> posts) {
+                if (posts != null) {
+                    postAdapter.setPostList(posts);
+
+                }
+            }
+        });
 
         //set databinding
         fragmentPersonalFeedBinding.personalFeedPostRV.setAdapter(postAdapter);
         fragmentPersonalFeedBinding.personalFeedPostRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        postViewModel.getPosts().observe(this, new Observer<List<Post>>() {
-            @Override
-            public void onChanged(@Nullable List<Post> posts) {
-                postAdapter.setPostList(posts);
-            }
-        });
+
 
         return fragmentPersonalFeedBinding.getRoot();
 

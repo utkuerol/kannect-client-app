@@ -46,7 +46,7 @@ public class ItemEventViewModel extends ViewModel {
         eventRepository = new EventRepository();
 
         SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
-        currentUser = userRepository.getUserByID(myPrefs.getLong("CurrentUserId", 0)).getValue();
+        currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0)).getValue();
     }
 
     /**

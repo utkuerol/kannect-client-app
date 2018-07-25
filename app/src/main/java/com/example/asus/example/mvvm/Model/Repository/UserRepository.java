@@ -135,7 +135,7 @@ public class UserRepository {
         });
     }
 
-    public MutableLiveData<User> getUserByID(long userID) {
+    public MutableLiveData<User> getUserByID(int userID) {
         final MutableLiveData<User> result = new MutableLiveData<>();
         ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
         Call<User> call = client.getUserByID(userID);

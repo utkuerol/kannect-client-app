@@ -4,11 +4,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 
-import com.example.asus.example.R;
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.Group;
@@ -17,9 +13,6 @@ import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.Repository.EventRepository;
 import com.example.asus.example.mvvm.Model.Repository.GroupRepository;
 import com.example.asus.example.mvvm.Model.Repository.UserRepository;
-import com.example.asus.example.mvvm.View.CategoriesEventFragment;
-import com.example.asus.example.mvvm.View.MyEventsFragment;
-import com.example.asus.example.mvvm.View.Navigation_Drawer_Activity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -48,7 +41,7 @@ public class ItemCategoryViewModel extends ViewModel {
         eventRepository = new EventRepository();
 
         SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
-        currentUser = userRepository.getUserByID(myPrefs.getLong("CurrentUserId", 0)).getValue();
+        currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0)).getValue();
     }
 
 
