@@ -28,8 +28,6 @@ public class CategoriesGroupFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
-        //Set binding
-        final FragmentCategoriesGroupBinding fragmentCategoriesGroupBinding = FragmentCategoriesGroupBinding.inflate(inflater, parent, false);
 
         //set viewmodel
         final CategoryViewModel categoryViewModel = ViewModelProviders.of(this).get(CategoryViewModel.class);
@@ -47,6 +45,11 @@ public class CategoriesGroupFragment extends Fragment {
         };
         categoryAdapter.setListener(listener);
 
+        //Set binding
+        final FragmentCategoriesGroupBinding fragmentCategoriesGroupBinding = FragmentCategoriesGroupBinding.inflate(inflater, parent, false);
+        fragmentCategoriesGroupBinding.categoriesGroupCategoryRV.setAdapter(categoryAdapter);
+
+
         categoryViewModel.setCategoriesToAllCategories();
 
         categoryViewModel.getCategories().observe(this, new Observer<List<Category>>() {
@@ -54,7 +57,6 @@ public class CategoriesGroupFragment extends Fragment {
             public void onChanged(@Nullable List<Category> categories) {
                 if (categories != null) {
                     categoryAdapter.setCategoryList(categoryViewModel.getCategories().getValue());
-                    fragmentCategoriesGroupBinding.categoriesGroupCategoryRV.setAdapter(categoryAdapter);
                 }
             }
         });

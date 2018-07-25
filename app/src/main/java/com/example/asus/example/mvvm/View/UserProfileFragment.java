@@ -23,6 +23,7 @@ import java.util.List;
  * User Profile Activity to show all Posts for this User
  */
 public class UserProfileFragment extends Fragment {
+
     private User user;
 
     @Override
@@ -49,15 +50,14 @@ public class UserProfileFragment extends Fragment {
 
         //set binding
         final FragmentUserProfileBinding fragmentUserProfileBinding = FragmentUserProfileBinding.inflate(inflater, parent, false);
+        fragmentUserProfileBinding.userProfilePostRV.setAdapter(postAdapter);
 
 
         final Observer<List<Post>> postsObserver = new Observer<List<Post>>() {
             @Override
             public void onChanged(@Nullable List<Post> posts) {
                 if (posts != null) {
-                    fragmentUserProfileBinding.setItemUserViewModel(itemUserViewModel);
                     postAdapter.setPostList(itemUserViewModel.getUserProfile().getValue());
-                    fragmentUserProfileBinding.userProfilePostRV.setAdapter(postAdapter);
                 }
             }
         };
@@ -67,6 +67,8 @@ public class UserProfileFragment extends Fragment {
             @Override
             public void onChanged(@Nullable User user) {
                 if (user != null) {
+                    itemUserViewModel.setChosenUser(user);
+                    fragmentUserProfileBinding.setItemUserViewModel(itemUserViewModel);
                     itemUserViewModel.getUserProfile().observe(UserProfileFragment.this, postsObserver);
                 }
             }

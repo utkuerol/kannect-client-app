@@ -29,7 +29,6 @@ public class CategoriesEventFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
-        fragmentCategoriesEventBinding = FragmentCategoriesEventBinding.inflate(inflater, parent, false);
 
         categoryViewModel = ViewModelProviders.of(this).get(CategoryViewModel.class);
         categoryViewModel.init();
@@ -53,11 +52,12 @@ public class CategoriesEventFragment extends Fragment {
             public void onChanged(@Nullable List<Category> categories) {
                 if (categories != null) {
                     categoryAdapter.setCategoryList(categoryViewModel.getCategories().getValue());
-                    fragmentCategoriesEventBinding.categoriesEventCategoryRV.setAdapter(categoryAdapter);
                 }
             }
         });
 
+        fragmentCategoriesEventBinding = FragmentCategoriesEventBinding.inflate(inflater, parent, false);
+        fragmentCategoriesEventBinding.categoriesEventCategoryRV.setAdapter(categoryAdapter);
         fragmentCategoriesEventBinding.categoriesEventCategoryRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         return fragmentCategoriesEventBinding.getRoot();

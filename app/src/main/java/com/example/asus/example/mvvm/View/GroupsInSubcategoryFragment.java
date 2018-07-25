@@ -34,7 +34,6 @@ public class GroupsInSubcategoryFragment extends Fragment {
         groupViewModel.init(getContext());
         groupViewModel.setGroupsFilteredBySubcategory(subcategory);
 
-        final FragmentGroupsInSubcategoryBinding fragmentGroupsInSubcategoryBinding = FragmentGroupsInSubcategoryBinding.inflate(inflater, parent, false);
 
         //set adapter
         final GroupAdapter groupAdapter = new GroupAdapter();
@@ -47,13 +46,15 @@ public class GroupsInSubcategoryFragment extends Fragment {
         };
         groupAdapter.setListener(listener);
 
+        final FragmentGroupsInSubcategoryBinding fragmentGroupsInSubcategoryBinding = FragmentGroupsInSubcategoryBinding.inflate(inflater, parent, false);
+        fragmentGroupsInSubcategoryBinding.groupsInSubcategoryGroupRV.setAdapter(groupAdapter);
+
 
         groupViewModel.getCurrentUser().observe(this, new Observer<User>() {
             @Override
             public void onChanged(@Nullable User user) {
                 if (user != null) {
                     groupAdapter.setGroupList(groupViewModel.getGroups().getValue());
-                    fragmentGroupsInSubcategoryBinding.groupsInSubcategoryGroupRV.setAdapter(groupAdapter);
                 }
             }
         });

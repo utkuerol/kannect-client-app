@@ -43,6 +43,7 @@ public class SubscriptionsFragment extends Fragment {
 
         //set binding
         final FragmentSubscriptionsBinding fragmentSubscriptionsBinding = FragmentSubscriptionsBinding.inflate(inflater, parent, false);
+        fragmentSubscriptionsBinding.subscriptionsUserRV.setAdapter(userAdapter);
 
         userViewModel.getCurrentUser().observe(this, new Observer<User>() {
             @Override
@@ -50,7 +51,6 @@ public class SubscriptionsFragment extends Fragment {
                 if (user != null) {
                     userViewModel.setUsersToSubscriptions();
                     userAdapter.setUserList(userViewModel.getUsers().getValue());
-                    fragmentSubscriptionsBinding.subscriptionsUserRV.setAdapter(userAdapter);
                 }
             }
         });

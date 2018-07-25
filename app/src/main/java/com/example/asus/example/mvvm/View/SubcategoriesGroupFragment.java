@@ -47,13 +47,13 @@ public class SubcategoriesGroupFragment extends Fragment {
 
         //set databinding
         final FragmentSubcategoriesGroupBinding fragmentSubcategoriesGroupBinding = FragmentSubcategoriesGroupBinding.inflate(inflater, parent, false);
+        fragmentSubcategoriesGroupBinding.subcategoriesGroupSubcategoriesRV.setAdapter(subcategoryAdapter);
 
         itemCategoryViewModel.getCurrentUser().observe(this, new Observer<User>() {
             @Override
             public void onChanged(@Nullable User user) {
                 if (user != null) {
                     subcategoryAdapter.setSubcategoryList(itemCategoryViewModel.getSubcategories());
-                    fragmentSubcategoriesGroupBinding.subcategoriesGroupSubcategoriesRV.setAdapter(subcategoryAdapter);
                 }
             }
         });

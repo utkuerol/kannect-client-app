@@ -30,8 +30,6 @@ public class GroupsInCategoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
-        //set binding
-        final FragmentGroupsInCategoryBinding fragmentGroupsInCategoryBinding = FragmentGroupsInCategoryBinding.inflate(inflater, parent, false);
 
         //set viewmodel
         final GroupViewModel groupViewModel = ViewModelProviders.of(this).get(GroupViewModel.class);
@@ -49,13 +47,17 @@ public class GroupsInCategoryFragment extends Fragment {
         };
         groupAdapter.setListener(listener);
 
+        //set binding
+        final FragmentGroupsInCategoryBinding fragmentGroupsInCategoryBinding = FragmentGroupsInCategoryBinding.inflate(inflater, parent, false);
+        fragmentGroupsInCategoryBinding.groupsInCategoryGroupRV.setAdapter(groupAdapter);
+
+
         groupViewModel.getCurrentUser().observe(this, new Observer<User>() {
             @Override
             public void onChanged(@Nullable User user) {
                 if (user != null) {
                     groupViewModel.setGroupsFilteredByCategory(category);
                     groupAdapter.setGroupList(groupViewModel.getGroups().getValue());
-                    fragmentGroupsInCategoryBinding.groupsInCategoryGroupRV.setAdapter(groupAdapter);
                 }
 
             }

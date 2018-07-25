@@ -36,8 +36,6 @@ public class EventSearchResultsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
-        final FragmentEventSearchResultBinding fragmentEventSearchResultBinding =
-                FragmentEventSearchResultBinding.inflate(inflater, parent, false);
 
         //set viewmodel
         final EventViewModel eventViewModel = ViewModelProviders.of(this).get(EventViewModel.class);
@@ -54,6 +52,10 @@ public class EventSearchResultsFragment extends Fragment {
         };
         eventAdapter.setListener(listener);
 
+        final FragmentEventSearchResultBinding fragmentEventSearchResultBinding =
+                FragmentEventSearchResultBinding.inflate(inflater, parent, false);
+        fragmentEventSearchResultBinding.eventSearchResultEventRV.setAdapter(eventAdapter);
+
 
         final Observer<List<Event>> eventsObserver = new Observer<List<Event>>() {
             @Override
@@ -61,7 +63,6 @@ public class EventSearchResultsFragment extends Fragment {
                 if (events != null) {
                     eventViewModel.setEventsToSearchResults(query);
                     eventAdapter.setEventList(eventViewModel.getEvents().getValue());
-                    fragmentEventSearchResultBinding.eventSearchResultEventRV.setAdapter(eventAdapter);
                 }
             }
         };

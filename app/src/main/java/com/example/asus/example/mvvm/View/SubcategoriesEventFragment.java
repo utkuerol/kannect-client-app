@@ -47,6 +47,7 @@ public class SubcategoriesEventFragment extends Fragment {
 
         //set databinding
         final FragmentSubcategoriesEventBinding fragmentSubcategoriesEventBinding = FragmentSubcategoriesEventBinding.inflate(inflater, parent, false);
+        fragmentSubcategoriesEventBinding.subcategoriesEventSubcategoryRV.setAdapter(subcategoryAdapter);
 
 
         itemCategoryViewModel.init(category, this.getContext().getApplicationContext());
@@ -55,7 +56,6 @@ public class SubcategoriesEventFragment extends Fragment {
             @Override
             public void onChanged(@Nullable User user) {
                 subcategoryAdapter.setSubcategoryList(itemCategoryViewModel.getSubcategories());
-                fragmentSubcategoriesEventBinding.subcategoriesEventSubcategoryRV.setAdapter(subcategoryAdapter);
             }
         });
 

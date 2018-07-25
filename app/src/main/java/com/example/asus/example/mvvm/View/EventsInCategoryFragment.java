@@ -29,8 +29,6 @@ public class EventsInCategoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
 
-        final FragmentEventsInCategoryBinding fragmentEventsInCategoryBinding =
-                FragmentEventsInCategoryBinding.inflate(inflater, parent, false);
 
         //set viewmodel
         final EventViewModel eventViewModel = ViewModelProviders.of(this).get(EventViewModel.class);
@@ -48,12 +46,15 @@ public class EventsInCategoryFragment extends Fragment {
         };
         eventAdapter.setListener(listener);
 
+        final FragmentEventsInCategoryBinding fragmentEventsInCategoryBinding =
+                FragmentEventsInCategoryBinding.inflate(inflater, parent, false);
+        fragmentEventsInCategoryBinding.eventsInCategoryEventRV.setAdapter(eventAdapter);
+
         eventViewModel.getCurrentUser().observe(this, new Observer<User>() {
             @Override
             public void onChanged(@Nullable User user) {
                 eventViewModel.setEventsFilteredByCategory(category);
                 eventAdapter.setEventList(eventViewModel.getEvents().getValue());
-                fragmentEventsInCategoryBinding.eventsInCategoryEventRV.setAdapter(eventAdapter);
 
             }
         });

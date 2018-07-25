@@ -145,8 +145,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         } else if (id == R.id.nav_settings) {
 
         } else if (id == R.id.nav_profile) {
-            //launchUserProfileFragment();
-            //TODO methode muss noch geändert werden so dass alle Posts of user angezeigt werden
+            launchPersonalProfileFragment();
         } else if (id == R.id.nav_groups) {
             launchGroupFragments();
         } else if (id == R.id.nav_events) {
@@ -174,6 +173,14 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
     public void launchUserProfileFragment(User user) {
         UserProfileFragment userProfileFragment = new UserProfileFragment();
         userProfileFragment.setUser(user);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, userProfileFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    public void launchPersonalProfileFragment() {
+        UserProfileFragment userProfileFragment = new UserProfileFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, userProfileFragment);
         transaction.addToBackStack(null);
