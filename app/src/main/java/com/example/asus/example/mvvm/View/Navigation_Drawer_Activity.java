@@ -11,13 +11,13 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.NavHeaderNavigationDrawerBinding;
@@ -39,6 +39,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
 
 
     GoogleSignInClient mGoogleSignInClient;
+    private DrawerLayout mDrawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
                 .build();
         //get Sign in client
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
+        mDrawerLayout = findViewById(R.id.drawer_layout);
 
 
 
@@ -59,6 +60,9 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_icon);
 
         final ItemUserViewModel itemUserViewModel = ViewModelProviders.of(this).get(ItemUserViewModel.class);
         itemUserViewModel.init(this.getApplicationContext());
@@ -119,7 +123,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         return true;
     }
 
-    /*@Override
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
          //Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -127,11 +131,12 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-        return super.onOptionsItemSelected(item);
+        if (id == android.R.id.home) {
+            mDrawerLayout.openDrawer(GravityCompat.START);
+            return true;
     }
             return true;
-}*/
+    }
 
 
 
