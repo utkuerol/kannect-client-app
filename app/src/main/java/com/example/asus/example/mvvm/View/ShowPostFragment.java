@@ -24,14 +24,8 @@ public class ShowPostFragment extends Fragment {
     private Post post;
 
 
-    public void setPost(Post post) {
-        this.post = post;
-    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-
-        //get extra arguments from the initiating activity
-
 
         //set viewmodel
         final ItemPostViewModel itemPostViewModel = ViewModelProviders.of(this).get(ItemPostViewModel.class);
@@ -53,6 +47,10 @@ public class ShowPostFragment extends Fragment {
         });
 
         return fragmentShowPostBinding.getRoot();
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
     }
 
 }

@@ -10,9 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentUserSearchResultBinding;
-import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.View.Adapter.OnItemClickListenerUser;
 import com.example.asus.example.mvvm.View.Adapter.UserAdapter;
@@ -24,12 +22,11 @@ import java.util.List;
  * Fragment for the view, to show all users which match the search query.
  */
 public class UserSearchResultsFragment extends Fragment {
+
     private String query;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-
-        //get extra arguments from the initiating activity
-        final String query = getArguments().getString("query");
 
 
         //set viewmodel

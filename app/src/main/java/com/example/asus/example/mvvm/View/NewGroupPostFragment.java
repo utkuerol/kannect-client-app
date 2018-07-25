@@ -9,29 +9,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.asus.example.mvvm.Model.Entities.Group;
-import com.example.asus.example.databinding.FragmentNewGroupBinding;
 import com.example.asus.example.databinding.FragmentNewGroupInSubcategoryBinding;
+import com.example.asus.example.databinding.FragmentNewPostBinding;
 import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.ViewModel.ItemGroupViewModel;
 
+//TODO change layout names
 public class NewGroupPostFragment extends Fragment {
 
 
     private Group group;
-    private ItemGroupViewModel viewModel;
-    //binding
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
-        //TODO chosen group
-        Group group = new Group();
 
         //set databinding
-        final FragmentNewGroupBinding fragmentNewGroupBinding = FragmentNewGroupInSubcategoryBinding.inflate(inflater, parent, false);
+        final FragmentNewPostBinding fragmentNewPostBinding = FragmentNewGroupInSubcategoryBinding.inflate(inflater, parent, false);
 
         //set viewmodel
         final ItemGroupViewModel itemGroupViewModel = ViewModelProviders.of(this).get(ItemGroupViewModel.class);
@@ -43,12 +39,12 @@ public class NewGroupPostFragment extends Fragment {
             public void onChanged(@Nullable User user) {
                 if (user != null) {
                     //TODO add viewmodel to the layout
-                    fragmentNewGroupBinding.setItemGroupViewModel(itemGroupViewModel);
+                    fragmentNewPostBinding.setItemGroupViewModel(itemGroupViewModel);
                 }
             }
         });
 
-        return fragmentNewGroupBinding.getRoot();
+        return fragmentNewPostBinding.getRoot();
     }
 
 

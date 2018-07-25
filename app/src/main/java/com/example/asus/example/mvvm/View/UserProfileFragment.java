@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentUserProfileBinding;
 import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
@@ -25,6 +24,7 @@ import java.util.List;
  */
 public class UserProfileFragment extends Fragment {
     private User user;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 

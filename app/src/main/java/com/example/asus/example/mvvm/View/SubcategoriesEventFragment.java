@@ -10,12 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentSubcategoriesEventBinding;
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.Entities.Subcategory;
 import com.example.asus.example.mvvm.Model.Entities.User;
-import com.example.asus.example.mvvm.Model.Entities.Subcategory;
 import com.example.asus.example.mvvm.View.Adapter.OnItemClickListenerSubcategory;
 import com.example.asus.example.mvvm.View.Adapter.SubcategoryAdapter;
 import com.example.asus.example.mvvm.ViewModel.ItemCategoryViewModel;
@@ -24,6 +22,7 @@ import com.example.asus.example.mvvm.ViewModel.ItemCategoryViewModel;
  * Fragment for the view, to show all the subcategories that exist for a event.
  */
 public class SubcategoriesEventFragment extends Fragment {
+
     private Category category;
 
     @Override

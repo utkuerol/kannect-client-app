@@ -10,12 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentSubcategoriesGroupBinding;
 import com.example.asus.example.mvvm.Model.Entities.Category;
-import com.example.asus.example.mvvm.Model.Entities.User;
-import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.Model.Entities.Subcategory;
+import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.View.Adapter.OnItemClickListenerSubcategory;
 import com.example.asus.example.mvvm.View.Adapter.SubcategoryAdapter;
 import com.example.asus.example.mvvm.ViewModel.ItemCategoryViewModel;
@@ -29,8 +27,6 @@ public class SubcategoriesGroupFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
-        //get extra arguments from the initiating activity
-        Category category = (Category) getArguments().getSerializable("category");
 
         //set viewmodel
         final ItemCategoryViewModel itemCategoryViewModel = ViewModelProviders.of(this).get(ItemCategoryViewModel.class);

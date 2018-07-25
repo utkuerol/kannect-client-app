@@ -1,5 +1,6 @@
 package com.example.asus.example.mvvm.View;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.example.asus.example.databinding.FragmentNewGroupInCategoryBinding;
 import com.example.asus.example.mvvm.Model.Entities.Category;
-import com.example.asus.example.mvvm.ViewModel.GroupViewModel;
+import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.ViewModel.ItemCategoryViewModel;
 
 /**
@@ -19,15 +20,11 @@ import com.example.asus.example.mvvm.ViewModel.ItemCategoryViewModel;
  */
 public class NewGroupInCategoryFragment extends Fragment {
 
-    private Category category;
-    private GroupViewModel groupViewModel;
-    private FragmentNewGroupInCategoryBinding fragmentNewGroupBinding;
+    private Category chosenCategory;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
-        //TODO get chosen category
-        final Category chosenCategory = new Category();
 
         //set viewmodel
         final ItemCategoryViewModel itemCategoryViewModel = ViewModelProviders.of(this).get(ItemCategoryViewModel.class);
@@ -50,6 +47,6 @@ public class NewGroupInCategoryFragment extends Fragment {
 
 
     public void setCategory(Category category) {
-        this.category = category;
+        this.chosenCategory = category;
     }
 }
