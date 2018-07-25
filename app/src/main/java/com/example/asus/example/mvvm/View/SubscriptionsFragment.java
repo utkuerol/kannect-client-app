@@ -10,9 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentSubscriptionsBinding;
-import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.View.Adapter.OnItemClickListenerUser;
 import com.example.asus.example.mvvm.View.Adapter.UserAdapter;

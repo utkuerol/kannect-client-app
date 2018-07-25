@@ -3,8 +3,6 @@ package com.example.asus.example.mvvm.View;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
@@ -15,12 +13,8 @@ import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentEventFeedBinding;
 import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.Post;
-import com.example.asus.example.mvvm.View.Adapter.CategoryAdapter;
-import com.example.asus.example.mvvm.View.Adapter.EventAdapter;
 import com.example.asus.example.mvvm.View.Adapter.OnItemClickListenerPost;
 import com.example.asus.example.mvvm.View.Adapter.PostAdapter;
-import com.example.asus.example.mvvm.ViewModel.CategoryViewModel;
-import com.example.asus.example.mvvm.ViewModel.EventViewModel;
 import com.example.asus.example.mvvm.ViewModel.ItemEventViewModel;
 
 /**
