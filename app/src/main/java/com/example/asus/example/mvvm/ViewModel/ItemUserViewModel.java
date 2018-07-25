@@ -1,10 +1,11 @@
 package com.example.asus.example.mvvm.ViewModel;
 
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.BindingAdapter;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -26,33 +27,33 @@ import java.util.List;
  * UserRepository class, which has the user business logic of the application.
  * Objects received from repositories will be stored as MutableLiveData Objects.
  */
-public class ItemUserViewModel extends ViewModel {
+public class ItemUserViewModel extends AndroidViewModel {
 
     private MutableLiveData<User> chosenUser = new MutableLiveData<>();
-    private User currentUser;
-    private Context context;
+    private MutableLiveData<User> currentUser;
     private UserRepository userRepository;
     private PostRepository postRepository;
 
-
-    public ItemUserViewModel() {
+    public ItemUserViewModel(@NonNull Application application) {
+        super(application);
     }
+
 
     public void init(User user) {
         this.chosenUser.setValue(user);
         userRepository = new UserRepository();
         postRepository = new PostRepository();
 
-        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
-        currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0)).getValue();
+        SharedPreferences myPrefs = getApplication().getSharedPreferences("CurrentUser", 0);
+        currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
     }
 
     public void init() {
         userRepository = new UserRepository();
         postRepository = new PostRepository();
 
-        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
-        currentUser = userRepository.getUserByID(myPrefs.getLong("CurrentUserId", 0)).getValue();
+        SharedPreferences myPrefs = getApplication().getSharedPreferences("CurrentUser", 0);
+        currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
     }
 
     @BindingAdapter({"currentUserImageUrl"})
@@ -65,11 +66,11 @@ public class ItemUserViewModel extends ViewModel {
     }
 
     public String getCurrentUserName() {
-        return currentUser.getName();
+        return currentUser.getValue().getName();
     }
 
     public String getCurrentUserEmail() {
-        return currentUser.getEmail();
+        return currentUser.getValue().getEmail();
     }
 
     /**
@@ -90,7 +91,7 @@ public class ItemUserViewModel extends ViewModel {
     }
 
     public String getCurrentUserImageUrl() {
-        return currentUser.getImageUrl();
+        return currentUser.getValue().getImageUrl();
     }
 
     /**
@@ -189,8 +190,8 @@ public class ItemUserViewModel extends ViewModel {
      * Gets all posts created by the current user.
      * @return
      */
-    public List<Post> getUserProfile() {
-        return userRepository.getUserProfile(currentUser).getValue();
+    public MutableLiveData<List<Post>> getUserProfile() {
+        return userRepository.getUserProfile(currentUser.getValue());
     }
 
 
@@ -199,21 +200,21 @@ public class ItemUserViewModel extends ViewModel {
      * @return boolean result
      */
     public boolean isCurrentUsersProfile() {
-        return chosenUser.getValue().getId() == currentUser.getId();
+        return chosenUser.getValue().getId() == currentUser.getValue().getId();
     }
 
     /**
      * Subscribes the chosenUser by the current user.
      */
     public void subscribeUser() {
-        userRepository.subscribeUser(currentUser, chosenUser.getValue());
+        userRepository.subscribeUser(currentUser.getValue(), chosenUser.getValue());
     }
 
     /**
      * Unsubscribes the chosenUser by the current user.
      */
     public void unsubscribeUser() {
-        userRepository.unsubscribeUser(currentUser, chosenUser.getValue());
+        userRepository.unsubscribeUser(currentUser.getValue(), chosenUser.getValue());
     }
 
     /**
@@ -224,13 +225,23 @@ public class ItemUserViewModel extends ViewModel {
     public void createPost(String text) {
         Post postToCreate = new Post();
         postToCreate.setText(text);
-        postToCreate.setCreator(currentUser);
+        postToCreate.setCreator(currentUser.getValue());
         postToCreate.setDate(new Date());
-        postToCreate.setOwnerUser(currentUser);
-        postToCreate.setOwnedBy(currentUser.getId());
+        postToCreate.setOwnerUser(currentUser.getValue());
+        postToCreate.setOwnedBy(currentUser.getValue().getId());
         postRepository.createPost(postToCreate);
     }
 
+    public void setChosenUser(MutableLiveData<User> chosenUser) {
+        this.chosenUser = chosenUser;
+    }
 
+    public MutableLiveData<User> getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(MutableLiveData<User> currentUser) {
+        this.currentUser = currentUser;
+    }
 }
 

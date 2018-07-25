@@ -29,7 +29,7 @@ public class UserProfileFragment extends Fragment {
 
         //set adapter
         PostAdapter postAdapter = new PostAdapter();
-        postAdapter.setPostList(itemUserViewModel.getUserProfile());
+        postAdapter.setPostList(itemUserViewModel.getUserProfile().getValue());
 
         //set binding
         FragmentUserProfileBinding fragmentUserProfileBinding = FragmentUserProfileBinding.inflate(inflater, parent, false);

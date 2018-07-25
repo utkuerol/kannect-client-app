@@ -1,5 +1,7 @@
 package com.example.asus.example.mvvm.View.Adapter;
 
+import android.app.Application;
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,6 +21,7 @@ import java.util.List;
  */
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserAdapterViewHolder> {
     private List<User> usersList;
+    private static Context context;
 
     /**
      * Constructor.
@@ -39,6 +42,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserAdapterVie
         ItemUserBinding itemUserBinding =
                 DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_user,
                         parent, false);
+        context = parent.getContext();
         return new UserAdapterViewHolder(itemUserBinding);
     }
 
@@ -58,6 +62,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserAdapterVie
     @Override public int getItemCount() {
         return usersList.size();
     }
+
 
     /**
      * sets the list of groups which will be shown in the ui.
@@ -91,7 +96,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserAdapterVie
         void bindUser(User user) {
 
             if (mItemUserBinding.getItemUserViewModel() == null) {
-                ItemUserViewModel itemUserViewModel = new ItemUserViewModel();
+                ItemUserViewModel itemUserViewModel = new ItemUserViewModel((Application) context.getApplicationContext());
                 itemUserViewModel.init(user);
                 mItemUserBinding.setItemUserViewModel(itemUserViewModel);
             } else {

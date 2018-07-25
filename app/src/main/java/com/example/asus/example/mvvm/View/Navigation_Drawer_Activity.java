@@ -1,8 +1,10 @@
 package com.example.asus.example.mvvm.View;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -13,11 +15,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.NavHeaderNavigationDrawerBinding;
+import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.ViewModel.ItemUserViewModel;
 
 public class Navigation_Drawer_Activity extends AppCompatActivity
@@ -27,17 +28,25 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        com.example.asus.example.databinding.ActivityNavigationDrawerBinding binding;
+        final com.example.asus.example.databinding.ActivityNavigationDrawerBinding binding;
         binding = DataBindingUtil.setContentView(this, R.layout.activity_navigation__drawer);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ItemUserViewModel itemUserViewModel = ViewModelProviders.of(this).get(ItemUserViewModel.class);
+        final ItemUserViewModel itemUserViewModel = ViewModelProviders.of(this).get(ItemUserViewModel.class);
         itemUserViewModel.init();
+
+        itemUserViewModel.getCurrentUser().observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(@Nullable User user) {
+                if (user != null) {
+                    NavHeaderNavigationDrawerBinding navHeaderNavigationDrawerBinding = NavHeaderNavigationDrawerBinding.bind(binding.navView.getHeaderView(0));
+                    navHeaderNavigationDrawerBinding.setItemUserViewModel(itemUserViewModel);
+                }
+            }
+        });
         //DataBindingUtil.inflate(getLayoutInflater(), R.layout.nav_header_navigation__drawer_, binding.navView, false);
-        NavHeaderNavigationDrawerBinding navHeaderNavigationDrawerBinding = NavHeaderNavigationDrawerBinding.bind(binding.navView.getHeaderView(0));
-        navHeaderNavigationDrawerBinding.setItemUserViewModel(itemUserViewModel);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -49,12 +58,9 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         Button a = (Button) findViewById(R.id.newEventInCategoryButton);
-        TextView currentUserName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.navigationHeaderUserNameTV);
-        TextView currentUserMail = (TextView) navigationView.getHeaderView(0).findViewById(R.id.NavigationHeaderUserMailTV);
-        ImageView currentUserPicture = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.navigationHeaderUserPictureIV);
 
 
-        //launchPersonalFeedFragment();
+        launchPersonalFeedFragment();
     }
 
     @Override
