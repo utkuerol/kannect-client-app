@@ -57,7 +57,7 @@ public class GroupsInSubcategoryFragment extends Fragment {
             }
         });
 
-        FragmentGroupsInSubcategoryBinding.groupsInSubcategoryGroupRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        fragmentGroupsInSubcategoryBinding.groupsInSubcategoryGroupRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         return fragmentGroupsInSubcategoryBinding.getRoot();
     }

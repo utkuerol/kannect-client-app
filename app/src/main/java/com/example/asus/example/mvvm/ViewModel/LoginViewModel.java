@@ -31,7 +31,7 @@ public class LoginViewModel extends ViewModel {
     public void createAndSetCurrentUser(GoogleSignInAccount account) {
         User u = new User();
         u.setEmail(account.getEmail());
-        u.setImageUrl(account.getPhotoUrl().toString());
+        u.setImageUrl(account.getPhotoUrl() != null ? account.getPhotoUrl().toString() : null);
         u.setName(account.getDisplayName());
 
         userRepository.createUser(u);
