@@ -1,5 +1,6 @@
 package com.example.asus.example.mvvm.View.Adapter;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -39,7 +40,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostAdapterVie
         ItemPostBinding itemPostBinding =
                 DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_post,
                         parent, false);
-        return new PostAdapterViewHolder(itemPostBinding);
+        return new PostAdapterViewHolder(itemPostBinding, parent.getContext().getApplicationContext());
     }
 
     /**
@@ -73,15 +74,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostAdapterVie
      */
     public static class PostAdapterViewHolder extends RecyclerView.ViewHolder {
         ItemPostBinding mItemPostBinding;
+        private Context context;
 
         /**
          * Constructor.
          * Creates an PostAdapterViewHolder object.
          * @param itemPostBinding the Binding object of the new PostAdapterViewHolder.
          */
-        public PostAdapterViewHolder(ItemPostBinding itemPostBinding) {
+        public PostAdapterViewHolder(ItemPostBinding itemPostBinding, Context context) {
             super(itemPostBinding.itemPost);
             this.mItemPostBinding = itemPostBinding;
+            this.context = context;
         }
 
         /**
@@ -92,7 +95,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostAdapterVie
 
             if (mItemPostBinding.getItemPostViewModel() == null) {
                 ItemPostViewModel itemPostViewModel = new ItemPostViewModel();
-                itemPostViewModel.init(post);
+                itemPostViewModel.init(post, context);
                 mItemPostBinding.setItemPostViewModel(itemPostViewModel);
             } else {
                 mItemPostBinding.getItemPostViewModel().setPost(post);

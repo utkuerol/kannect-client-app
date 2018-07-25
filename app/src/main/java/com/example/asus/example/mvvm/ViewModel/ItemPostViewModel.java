@@ -1,11 +1,10 @@
 package com.example.asus.example.mvvm.ViewModel;
 
-import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.ViewModel;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.BindingAdapter;
-import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
 import com.example.asus.example.mvvm.Model.Entities.Comment;
@@ -25,23 +24,19 @@ import java.util.List;
  * PostRepository class, which has the post business logic of the application.
  * Objects received from repositories will be stored as MutableLiveData Objects.
  */
-public class ItemPostViewModel extends AndroidViewModel {
+public class ItemPostViewModel extends ViewModel {
 
     private MutableLiveData<Post> post;
     private MutableLiveData<User> currentUser;
     private PostRepository postRepository;
 
-    public ItemPostViewModel(@NonNull Application application) {
-        super(application);
-    }
 
-
-    public void init(Post post) {
+    public void init(Post post, Context context) {
         this.post.setValue(post);
         postRepository = new PostRepository();
         UserRepository userRepository = new UserRepository();
 
-        SharedPreferences myPrefs = getApplication().getSharedPreferences("CurrentUser", 0);
+        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
         currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
     }
 

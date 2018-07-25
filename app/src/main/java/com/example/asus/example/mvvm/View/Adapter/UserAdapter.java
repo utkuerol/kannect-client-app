@@ -1,6 +1,5 @@
 package com.example.asus.example.mvvm.View.Adapter;
 
-import android.app.Application;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
@@ -21,7 +20,6 @@ import java.util.List;
  */
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserAdapterViewHolder> {
     private List<User> usersList;
-    private static Context context;
 
     /**
      * Constructor.
@@ -42,8 +40,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserAdapterVie
         ItemUserBinding itemUserBinding =
                 DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_user,
                         parent, false);
-        context = parent.getContext();
-        return new UserAdapterViewHolder(itemUserBinding);
+        return new UserAdapterViewHolder(itemUserBinding, parent.getContext().getApplicationContext());
     }
 
     /**
@@ -77,16 +74,19 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserAdapterVie
      * Builds for every item in the Recycler View its View Model.
      */
     public static class UserAdapterViewHolder extends RecyclerView.ViewHolder {
-        ItemUserBinding mItemUserBinding;
+
+        private final Context context;
+        private ItemUserBinding mItemUserBinding;
 
         /**
          * Constructor.
          * Creates an UserAdapterViewHolder object.
          * @param itemUserBinding the Binding object of the new UserAdapterViewHolder.
          */
-        public UserAdapterViewHolder(ItemUserBinding itemUserBinding) {
+        public UserAdapterViewHolder(ItemUserBinding itemUserBinding, Context context) {
             super(itemUserBinding.itemUser);
             this.mItemUserBinding = itemUserBinding;
+            this.context = context;
         }
 
         /**
@@ -94,10 +94,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserAdapterVie
          * @param user which will be bound.
          */
         void bindUser(User user) {
-
             if (mItemUserBinding.getItemUserViewModel() == null) {
-                ItemUserViewModel itemUserViewModel = new ItemUserViewModel((Application) context.getApplicationContext());
-                itemUserViewModel.init(user);
+                ItemUserViewModel itemUserViewModel = new ItemUserViewModel();
+                itemUserViewModel.init(user, context);
                 mItemUserBinding.setItemUserViewModel(itemUserViewModel);
             } else {
                 mItemUserBinding.getItemUserViewModel().setChosenUser(user);

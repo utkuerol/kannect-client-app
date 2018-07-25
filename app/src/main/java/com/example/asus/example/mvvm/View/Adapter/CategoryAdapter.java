@@ -1,5 +1,6 @@
 package com.example.asus.example.mvvm.View.Adapter;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -41,7 +42,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         ItemCategoryBinding itemCategoryBinding =
                 DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_category,
                         parent, false);
-        return new CategoryAdapterViewHolder(itemCategoryBinding);
+        return new CategoryAdapterViewHolder(itemCategoryBinding, parent.getContext().getApplicationContext());
     }
 
     /**
@@ -75,15 +76,17 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
      */
     public static class CategoryAdapterViewHolder extends RecyclerView.ViewHolder {
         ItemCategoryBinding mItemCategoryBinding;
+        private Context context;
 
         /**
          * Constructor.
          * Creates an UserAdapterViewHolder object.
          * @param itemCategoryBinding the Binding object of the new CategoryAdapterViewHolder.
          */
-        public CategoryAdapterViewHolder(ItemCategoryBinding itemCategoryBinding) {
+        public CategoryAdapterViewHolder(ItemCategoryBinding itemCategoryBinding, Context context) {
             super(itemCategoryBinding.itemCategory);
             this.mItemCategoryBinding = itemCategoryBinding;
+            this.context = context;
         }
 
         /**
@@ -93,10 +96,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         void bindCategory(Category category) {
             if (mItemCategoryBinding.getItemCategoryViewModel() == null) {
                 ItemCategoryViewModel itemCategoryViewModel = new ItemCategoryViewModel();
-                itemCategoryViewModel.init(category);
+                itemCategoryViewModel.init(category, context);
                 mItemCategoryBinding.setItemCategoryViewModel(itemCategoryViewModel);
             } else {
-                mItemCategoryBinding.getItemCategoryViewModel().init(category);
+                mItemCategoryBinding.getItemCategoryViewModel().init(category, context);
             }
         }
     }

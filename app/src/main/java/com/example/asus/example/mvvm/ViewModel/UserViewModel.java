@@ -1,10 +1,9 @@
 package com.example.asus.example.mvvm.ViewModel;
 
-import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.ViewModel;
+import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
 
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.Repository.UserRepository;
@@ -17,23 +16,19 @@ import java.util.List;
  * UserRepository class, which has the user business logic of the application.
  * Objects received from repositories will be stored as MutableLiveData Objects.
  */
-public class UserViewModel extends AndroidViewModel {
+public class UserViewModel extends ViewModel {
 
 
     private MutableLiveData<List<User>> users;
     private MutableLiveData<User> currentUser;
     private UserRepository userRepository;
 
-    public UserViewModel(@NonNull Application application) {
-        super(application);
-    }
 
-
-    public void init() {
+    public void init(Context context) {
         users = new MutableLiveData<>();
         userRepository = new UserRepository();
 
-        SharedPreferences myPrefs = getApplication().getSharedPreferences("CurrentUser", 0);
+        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
         currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
     }
 

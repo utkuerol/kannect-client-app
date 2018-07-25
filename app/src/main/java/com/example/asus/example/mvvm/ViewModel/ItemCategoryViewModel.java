@@ -1,10 +1,9 @@
 package com.example.asus.example.mvvm.ViewModel;
 
-import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.ViewModel;
+import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.Entities.Event;
@@ -25,7 +24,7 @@ import java.util.List;
  * CategoryRepository class, which has the category business logic of the application.
  * Objects received from repositories will be stored as MutableLiveData Objects.
  */
-public class ItemCategoryViewModel extends AndroidViewModel {
+public class ItemCategoryViewModel extends ViewModel {
 
     private MutableLiveData<Category> chosenCategory;
     private MutableLiveData<User> currentUser;
@@ -33,18 +32,14 @@ public class ItemCategoryViewModel extends AndroidViewModel {
     private GroupRepository groupRepository;
     private EventRepository eventRepository;
 
-    public ItemCategoryViewModel(@NonNull Application application) {
-        super(application);
-    }
 
-
-    public void init(Category chosenCategory) {
+    public void init(Category chosenCategory, Context context) {
         this.chosenCategory.setValue(chosenCategory);
         UserRepository userRepository = new UserRepository();
         groupRepository = new GroupRepository();
         eventRepository = new EventRepository();
 
-        SharedPreferences myPrefs = getApplication().getSharedPreferences("CurrentUser", 0);
+        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
         currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
     }
 

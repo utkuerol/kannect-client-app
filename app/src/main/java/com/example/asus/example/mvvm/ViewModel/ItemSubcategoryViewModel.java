@@ -1,10 +1,9 @@
 package com.example.asus.example.mvvm.ViewModel;
 
-import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.ViewModel;
+import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.example.asus.example.mvvm.Model.Entities.Event;
@@ -25,26 +24,22 @@ import java.util.Date;
  * CategoryRepository class, which has the category and subcategory business logic of the application.
  * Objects received from repositories will be stored as MutableLiveData Objects.
  */
-public class ItemSubcategoryViewModel extends AndroidViewModel {
+public class ItemSubcategoryViewModel extends ViewModel {
 
     private MutableLiveData<Subcategory> subcategory;
     private MutableLiveData<User> currentUser;
     private GroupRepository groupRepository;
     private EventRepository eventRepository;
 
-    public ItemSubcategoryViewModel(@NonNull Application application) {
-        super(application);
-    }
 
-
-    public void init(Subcategory subcategory) {
+    public void init(Subcategory subcategory, Context context) {
         this.subcategory.setValue(subcategory);
 
         groupRepository = new GroupRepository();
         eventRepository = new EventRepository();
 
         UserRepository userRepository = new UserRepository();
-        SharedPreferences myPrefs = getApplication().getSharedPreferences("CurrentUser", 0);
+        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
         currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
     }
 

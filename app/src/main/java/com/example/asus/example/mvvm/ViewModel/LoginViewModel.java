@@ -1,9 +1,7 @@
 package com.example.asus.example.mvvm.ViewModel;
 
-import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
-import android.support.annotation.NonNull;
+import android.arch.lifecycle.ViewModel;
 
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.Repository.UserRepository;
@@ -15,14 +13,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
  * UserRepository class, which has the user/account business logic of the application.
  * Objects received from repositories will be stored as MutableLiveData Objects.
  */
-public class LoginViewModel extends AndroidViewModel {
+public class LoginViewModel extends ViewModel {
 
     private MutableLiveData<User> user = new MutableLiveData<>();
     private UserRepository userRepository = new UserRepository();
 
-    public LoginViewModel(@NonNull Application application) {
-        super(application);
-    }
 
     /**
      * Invokes the chains of events, leading to user login.

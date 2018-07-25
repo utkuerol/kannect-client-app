@@ -1,11 +1,10 @@
 package com.example.asus.example.mvvm.ViewModel;
 
-import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.ViewModel;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.BindingAdapter;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -27,32 +26,28 @@ import java.util.List;
  * UserRepository class, which has the user business logic of the application.
  * Objects received from repositories will be stored as MutableLiveData Objects.
  */
-public class ItemUserViewModel extends AndroidViewModel {
+public class ItemUserViewModel extends ViewModel {
 
     private MutableLiveData<User> chosenUser = new MutableLiveData<>();
     private MutableLiveData<User> currentUser;
     private UserRepository userRepository;
     private PostRepository postRepository;
 
-    public ItemUserViewModel(@NonNull Application application) {
-        super(application);
-    }
 
-
-    public void init(User user) {
+    public void init(User user, Context context) {
         this.chosenUser.setValue(user);
         userRepository = new UserRepository();
         postRepository = new PostRepository();
 
-        SharedPreferences myPrefs = getApplication().getSharedPreferences("CurrentUser", 0);
+        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
         currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
     }
 
-    public void init() {
+    public void init(Context context) {
         userRepository = new UserRepository();
         postRepository = new PostRepository();
 
-        SharedPreferences myPrefs = getApplication().getSharedPreferences("CurrentUser", 0);
+        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
         currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
     }
 

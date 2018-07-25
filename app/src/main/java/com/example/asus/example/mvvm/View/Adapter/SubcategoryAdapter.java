@@ -1,5 +1,6 @@
 package com.example.asus.example.mvvm.View.Adapter;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -38,7 +39,7 @@ public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.
         ItemSubcategoryBinding itemSubcategoryBinding =
                 DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_subcategory,
                         parent, false);
-        return new SubcategoryAdapterViewHolder(itemSubcategoryBinding);
+        return new SubcategoryAdapterViewHolder(itemSubcategoryBinding, parent.getContext().getApplicationContext());
     }
 
     /**
@@ -72,15 +73,17 @@ public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.
      */
     public static class SubcategoryAdapterViewHolder extends RecyclerView.ViewHolder {
         ItemSubcategoryBinding mItemSubcategoryBinding;
+        private Context context;
 
         /**
          * Constructor.
          * Creates a SubcategoryAdapterViewHolder object.
          * @param itemSubcategoryBinding the Binding object of the new SubcategoryAdapterViewHolder.
          */
-        public SubcategoryAdapterViewHolder(ItemSubcategoryBinding itemSubcategoryBinding) {
+        public SubcategoryAdapterViewHolder(ItemSubcategoryBinding itemSubcategoryBinding, Context context) {
             super(itemSubcategoryBinding.itemSubcategory);
             this.mItemSubcategoryBinding = itemSubcategoryBinding;
+            this.context = context;
         }
 
 
@@ -91,10 +94,10 @@ public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.
         void bindSubcategory(Subcategory subcategory) {
             if (mItemSubcategoryBinding.getItemSubcategoryViewModel() == null) {
                 ItemSubcategoryViewModel itemSubcategoryViewModel = new ItemSubcategoryViewModel();
-                itemSubcategoryViewModel.init(subcategory);
+                itemSubcategoryViewModel.init(subcategory, context);
                 mItemSubcategoryBinding.setItemSubcategoryViewModel(itemSubcategoryViewModel);
             } else {
-                mItemSubcategoryBinding.getItemSubcategoryViewModel().init(subcategory);
+                mItemSubcategoryBinding.getItemSubcategoryViewModel().init(subcategory, context);
             }
         }
     }

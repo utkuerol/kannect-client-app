@@ -1,11 +1,10 @@
 package com.example.asus.example.mvvm.ViewModel;
 
-import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.ViewModel;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.BindingAdapter;
-import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
@@ -29,7 +28,7 @@ import java.util.List;
  * EventRepository class, which has the group business logic of the application.
  * Objects received from repositories will be stored as MutableLiveData Objects.
  */
-public class ItemEventViewModel extends AndroidViewModel {
+public class ItemEventViewModel extends ViewModel {
 
     private MutableLiveData<Event> event;
     private MutableLiveData<User> currentUser;
@@ -37,19 +36,15 @@ public class ItemEventViewModel extends AndroidViewModel {
     private FeedRepository feedRepository;
     private PostRepository postRepository;
 
-    public ItemEventViewModel(@NonNull Application application) {
-        super(application);
-    }
 
-
-    public void init(Event event) {
+    public void init(Event event, Context context) {
         this.event.setValue(event);
         postRepository = new PostRepository();
         UserRepository userRepository = new UserRepository();
         feedRepository = new FeedRepository();
         eventRepository = new EventRepository();
 
-        SharedPreferences myPrefs = getApplication().getSharedPreferences("CurrentUser", 0);
+        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
         currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
     }
 
