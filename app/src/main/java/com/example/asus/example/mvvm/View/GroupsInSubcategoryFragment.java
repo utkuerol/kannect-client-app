@@ -18,6 +18,7 @@ import com.example.asus.example.mvvm.View.Adapter.GroupAdapter;
 import com.example.asus.example.mvvm.View.Adapter.OnItemClickListenerGroup;
 import com.example.asus.example.mvvm.ViewModel.GroupViewModel;
 
+
 /**
  * Activity class for the view regarding showing subcategories and the groups which belong to the parent category.
  */
