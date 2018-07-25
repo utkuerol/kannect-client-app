@@ -9,8 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.asus.example.databinding.FragmentNewPostBinding;
-import com.example.asus.example.mvvm.Model.Entities.User;
+import com.example.asus.example.databinding.FragmentNewUserPostBinding;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.ViewModel.ItemUserViewModel;
 
@@ -27,7 +26,7 @@ public class NewUserPostFragment extends Fragment {
         final ItemUserViewModel itemUserViewModel = ViewModelProviders.of(this).get(ItemUserViewModel.class);
 
         //set databinding
-        final FragmentNewPostBinding fragmentNewPostBinding = FragmentNewPostBinding.inflate(inflater, parent, false);
+        final FragmentNewUserPostBinding fragmentNewPostBinding = FragmentNewUserPostBinding.inflate(inflater, parent, false);
 
         itemUserViewModel.init(this.getContext().getApplicationContext());
 
@@ -43,10 +42,6 @@ public class NewUserPostFragment extends Fragment {
         return fragmentNewPostBinding.getRoot();
     }
 
-    public void launchFragment() {
-        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
-        navigation_drawer_activity.launchNewUserPostFragment();
-    }
 
 
 }

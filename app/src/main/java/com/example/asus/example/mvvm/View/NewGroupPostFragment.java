@@ -9,8 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.asus.example.databinding.FragmentNewGroupInSubcategoryBinding;
-import com.example.asus.example.databinding.FragmentNewPostBinding;
+import com.example.asus.example.databinding.FragmentNewGroupPostBinding;
 import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.ViewModel.ItemGroupViewModel;
@@ -26,7 +25,7 @@ public class NewGroupPostFragment extends Fragment {
 
 
         //set databinding
-        final FragmentNewPostBinding fragmentNewPostBinding = FragmentNewGroupInSubcategoryBinding.inflate(inflater, parent, false);
+        final FragmentNewGroupPostBinding fragmentNewPostBinding = FragmentNewGroupPostBinding.inflate(inflater, parent, false);
 
         //set viewmodel
         final ItemGroupViewModel itemGroupViewModel = ViewModelProviders.of(this).get(ItemGroupViewModel.class);
