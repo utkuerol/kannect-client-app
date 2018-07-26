@@ -52,8 +52,6 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
 
-
-
         final com.example.asus.example.databinding.ActivityNavigationDrawerBinding binding;
         binding = DataBindingUtil.setContentView(this, R.layout.activity_navigation__drawer);
 
@@ -160,6 +158,8 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 
     public void launchPersonalFeedFragment() {
 
@@ -407,12 +407,12 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
 
     public void launchSubcategoriesEventAndEventsInCategoryFragment(Category category) {
         SubcategoriesEventFragment subcategoriesEventFragment = new SubcategoriesEventFragment();
-        EventsInCategoryFragment eventsInCategoryFragment = new EventsInCategoryFragment();
-        eventsInCategoryFragment.setCategory(category);
+        //EventsInCategoryFragment eventsInCategoryFragment = new EventsInCategoryFragment();
+        //eventsInCategoryFragment.setCategory(category);
         subcategoriesEventFragment.setSubcategory(category);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, subcategoriesEventFragment);
-        transaction.add(R.id.content_frame, eventsInCategoryFragment);
+        //transaction.add(R.id.content_frame, eventsInCategoryFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -444,5 +444,6 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
 
 }

@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.asus.example.databinding.FragmentCategoriesEventBinding;
 import com.example.asus.example.mvvm.Model.Entities.Category;
@@ -33,6 +34,8 @@ public class CategoriesEventFragment extends Fragment {
         categoryViewModel = ViewModelProviders.of(this).get(CategoryViewModel.class);
         categoryViewModel.init();
         categoryViewModel.setCategoriesToAllCategories();
+
+
 
 
         //set adapter
@@ -61,10 +64,13 @@ public class CategoriesEventFragment extends Fragment {
         fragmentCategoriesEventBinding.categoriesEventCategoryRV.setAdapter(categoryAdapter);
         fragmentCategoriesEventBinding.categoriesEventCategoryRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
+
         return fragmentCategoriesEventBinding.getRoot();
 
 
     }
+
+
 
 
 }
