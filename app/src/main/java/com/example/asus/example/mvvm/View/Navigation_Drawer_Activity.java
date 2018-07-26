@@ -18,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.NavHeaderNavigationDrawerBinding;
@@ -132,8 +133,28 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         if (id == android.R.id.home) {
             mDrawerLayout.openDrawer(GravityCompat.START);
             return true;
-    }
+        } else if (id == R.id.nav_feed) {
+            launchPersonalFeedFragment();
             return true;
+        } else if (id == R.id.nav_profile) {
+            launchPersonalProfileFragment();
+            return true;
+        } else if (id == R.id.nav_groups) {
+            launchGroupFragments();
+            return true;
+        } else if (id == R.id.nav_search) {
+            launchSearchInputFragment();
+            return true;
+        } else if (id == R.id.nav_events) {
+            launchEventFragments();
+            return true;
+        } else if (id == R.id.nav_logout) {
+            signOut();
+            return true;
+        }
+
+
+        return true;
     }
 
 
@@ -146,13 +167,14 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         if (id == R.id.nav_feed) {
             launchPersonalFeedFragment();
         }  else if (id == R.id.nav_profile) {
+
             launchPersonalProfileFragment();
         } else if (id == R.id.nav_groups) {
             launchGroupFragments();
         } else if (id == R.id.nav_events) {
             launchEventFragments();
         } else if (id == R.id.nav_search) {
-            launchSearchFragments();
+            launchSearchInputFragment();
         } else if (id == R.id.nav_logout) {
             signOut();
         }
@@ -210,13 +232,24 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
-    public void launchSearchFragments() {
-        SearchInputFragment searchInputFragment = new SearchInputFragment();
+
+    public void launchSearchResultFragments(String query) {
+
+
         UserSearchResultsFragment userSearchResultsFragment = new UserSearchResultsFragment();
+        userSearchResultsFragment.setQuery(query);
+
+
         EventSearchResultsFragment eventSearchResultsFragment = new EventSearchResultsFragment();
+        eventSearchResultsFragment.setQuery(query);
+
+
         GroupSearchResultsFragment groupSearchResultsFragment = new GroupSearchResultsFragment();
+        groupSearchResultsFragment.setQuery(query);
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.content_frame, searchInputFragment);
+
+
         transaction.add(R.id.content_frame, userSearchResultsFragment);
         transaction.add(R.id.content_frame, eventSearchResultsFragment);
         transaction.add(R.id.content_frame, groupSearchResultsFragment);
@@ -392,6 +425,8 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
     }
 
     public void launchSearchInputFragment() {
+        Toast.makeText(this, "1", Toast.LENGTH_SHORT);
+
         SearchInputFragment searchInputFragment = new SearchInputFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, searchInputFragment);

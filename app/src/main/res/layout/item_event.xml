@@ -12,7 +12,8 @@
     <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
         android:id="@+id/item_event"
-        android:layout_height="@dimen/itemRVHeight">
+        android:layout_height="@dimen/itemRVHeight"
+        android:background="@color/white">
 
     <TextView
         android:id="@+id/eventNameTV"

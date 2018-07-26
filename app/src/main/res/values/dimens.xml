@@ -11,7 +11,7 @@
     <dimen name="twoFragmentHeight">255dp</dimen>
     <dimen name="logoLoginScreenSize">200dp</dimen>
     <dimen name="searchInputHeight">50dp</dimen>
-    <dimen name="userProfilePostRV">450dp</dimen>
+    <dimen name="userProfilePostRV">400dp</dimen>
     <dimen name="groupAndEventFeedRVHeight">350dp</dimen>
     <dimen name="searchResultHeight">150dp</dimen>
     <dimen name="oneFragmentHeight">500dp</dimen>
@@ -19,4 +19,5 @@
     <dimen name="searchInputButtonWidth">60dp</dimen>
     <dimen name="createInCatOrSubcategoryRVHeight">230dp</dimen>
     <dimen name="personalFeedRVHeight">470dp</dimen>
+    <dimen name="toolbarHeight">50dp</dimen>
 </resources>

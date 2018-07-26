@@ -1,15 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/eventsInSubcategoryEventRV"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/oneFragmentHeight"
-        tools:listitem="@layout/item_event">
+        android:layout_marginTop="@dimen/toolbarHeight"
+        android:background="@color/white">
 
-    </android.support.v7.widget.RecyclerView>
 
+        <ImageView
+            android:id="@+id/eventsInSubcategoryCreateEventIV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/eventsInSubcategoryEventRV"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="14dp"
+            android:layout_marginRight="14dp"
+            app:srcCompat="@drawable/ic_baseline_create_24px"
+            tools:layout_editor_absoluteX="344dp"
+            tools:layout_editor_absoluteY="0dp" />
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/eventsInSubcategoryEventRV"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/personalFeedRVHeight"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:listitem="@layout/item_event" />
+
+    </RelativeLayout>
 </layout>

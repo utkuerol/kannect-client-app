@@ -3,12 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/userSearchResultUserRV"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/searchResultHeight"
-            tools:listitem="@layout/item_user">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/userSearchResultUserRV"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/searchResultHeight"
+        android:background="@color/white"
+        android:layout_marginTop="100dp"
+        tools:listitem="@layout/item_user">
 
-        </android.support.v7.widget.RecyclerView>
+    </android.support.v7.widget.RecyclerView>
+
 
 </layout>

@@ -10,7 +10,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/oneFragmentHeight">
+        android:layout_height="@dimen/oneFragmentHeight"
+        android:layout_marginTop="@dimen/toolbarHeight"
+        android:background="@color/white">
 
         <EditText
             android:id="@+id/newUserPostET"
@@ -20,6 +22,7 @@
             android:layout_centerVertical="true"
             android:gravity="center"
             android:hint="@string/typePost"
+            android:inputType="textMultiLine"
             android:text="@{}" />
     </RelativeLayout>
 </layout>

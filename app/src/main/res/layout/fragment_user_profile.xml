@@ -13,74 +13,89 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/oneFragmentHeight">
+        android:layout_height="@dimen/oneFragmentHeight"
+        android:layout_marginTop="@dimen/toolbarHeight"
+        android:background="@color/white">
 
 
         <TextView
             android:id="@+id/subscriptionsTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="4dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="64dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="8dp"
             android:text="@string/subscriptions"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.911"
-            app:layout_constraintStart_toEndOf="@+id/subscribersTV"
-            app:layout_constraintTop_toTopOf="@+id/userSubscriptionsTV" />
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/userProfilePostRV"
+            app:layout_constraintEnd_toEndOf="@+id/userSubscriptionsTV"
+            app:layout_constraintStart_toStartOf="@+id/userSubscriptionsTV"
+            app:layout_constraintTop_toTopOf="@+id/subscribersTV"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/subscribersTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="76dp"
-            android:layout_marginStart="76dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="8dp"
             android:text="@string/subscribers"
-            app:layout_constraintStart_toEndOf="@+id/userNameTV"
-            app:layout_constraintTop_toBottomOf="@+id/userSubscribersTV" />
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/userProfilePostRV"
+            app:layout_constraintEnd_toEndOf="@+id/userSubscribersTV"
+            app:layout_constraintHorizontal_bias="0.365"
+            app:layout_constraintStart_toStartOf="@+id/userSubscribersTV"
+            app:layout_constraintTop_toTopOf="@+id/userNameTV"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/userSubscriptionsTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="44dp"
+            android:layout_marginEnd="92dp"
+            android:layout_marginRight="92dp"
+            android:layout_marginTop="8dp"
             android:text="@{itemUserViewModel.numberOfSubscriptions}"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/userSubscribersTV"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.243"
-            app:layout_constraintStart_toEndOf="@+id/userSubscribersTV"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/userSubscribersTV"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/userSubscribersTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="84dp"
-            android:layout_marginStart="84dp"
-            android:layout_marginTop="44dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
             android:text="@{itemUserViewModel.numberOfSubscribers}"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/subscribersTV"
+            app:layout_constraintEnd_toStartOf="@+id/userSubscriptionsTV"
+            app:layout_constraintHorizontal_bias="0.455"
             app:layout_constraintStart_toEndOf="@+id/userProfilePictureIV"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/userNameTV"
             android:layout_width="wrap_content"
-            android:layout_height="18dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:text="@{itemUserViewModel.name}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.108"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/userProfilePostRV"
+            app:layout_constraintEnd_toStartOf="@+id/subscribersTV"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/userProfilePictureIV"
             app:layout_constraintVertical_bias="0.0" />
@@ -89,9 +104,9 @@
             android:id="@+id/userProfilePictureIV"
             android:layout_width="@dimen/pictureRVSize"
             android:layout_height="@dimen/pictureRVSize"
-            android:layout_marginLeft="28dp"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
             app:imageUrl="@{itemUserViewModel.imageUrl}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -104,12 +119,10 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userNameTV"
             tools:listitem="@layout/item_post">
 
         </android.support.v7.widget.RecyclerView>

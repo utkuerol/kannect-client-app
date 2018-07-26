@@ -6,7 +6,9 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/twoFragmentHeight">
+        android:layout_height="@dimen/twoFragmentHeight"
+        android:layout_marginTop="@dimen/toolbarHeight"
+        android:background="@color/white">
 
 
         <ImageView

@@ -9,7 +9,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentEventSearchResultBinding;
 import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.User;
@@ -36,7 +38,7 @@ public class EventSearchResultsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
-
+        Toast.makeText(getContext(), "EventSearchREsult", Toast.LENGTH_LONG);
         //set viewmodel
         final EventViewModel eventViewModel = ViewModelProviders.of(this).get(EventViewModel.class);
         eventViewModel.init(getContext());
@@ -81,6 +83,6 @@ public class EventSearchResultsFragment extends Fragment {
 
         fragmentEventSearchResultBinding.eventSearchResultEventRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        return fragmentEventSearchResultBinding.getRoot();
+        return inflater.inflate(R.layout.fragment_event_search_result, parent, false);
     }
 }
