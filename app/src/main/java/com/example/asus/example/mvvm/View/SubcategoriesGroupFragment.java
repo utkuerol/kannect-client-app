@@ -24,6 +24,7 @@ import com.example.asus.example.mvvm.ViewModel.ItemCategoryViewModel;
 public class SubcategoriesGroupFragment extends Fragment {
 
     private Category category;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 

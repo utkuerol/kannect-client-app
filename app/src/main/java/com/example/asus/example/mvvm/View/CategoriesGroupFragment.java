@@ -42,7 +42,7 @@ public class CategoriesGroupFragment extends Fragment {
             @Override
             public void onItemClick(Category item) {
                 Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
-                navigation_drawer_activity.launchSubcategoriesEventAndEventsInCategoryFragment(item);
+                navigation_drawer_activity.launchSubcategoriesGroupAndGroupsInCategoryFragment(item);
 
             }
         };

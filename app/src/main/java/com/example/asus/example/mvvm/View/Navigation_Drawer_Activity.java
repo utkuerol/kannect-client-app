@@ -199,10 +199,10 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
 
     public void launchEventFragments() {
         CategoriesEventFragment categoriesEventFragment = new CategoriesEventFragment();
-        MyEventsFragment myEventsFragment = new MyEventsFragment();
+        //MyEventsFragment myEventsFragment = new MyEventsFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, categoriesEventFragment);
-        transaction.add(R.id.content_frame, myEventsFragment);
+        //transaction.add(R.id.content_frame, myEventsFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -409,6 +409,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         SubcategoriesEventFragment subcategoriesEventFragment = new SubcategoriesEventFragment();
         EventsInCategoryFragment eventsInCategoryFragment = new EventsInCategoryFragment();
         eventsInCategoryFragment.setCategory(category);
+        subcategoriesEventFragment.setSubcategory(category);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, subcategoriesEventFragment);
         transaction.add(R.id.content_frame, eventsInCategoryFragment);
@@ -420,6 +421,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         SubcategoriesGroupFragment subcategoriesGroupFragment = new SubcategoriesGroupFragment();
         GroupsInCategoryFragment groupsInCategoryFragment = new GroupsInCategoryFragment();
         groupsInCategoryFragment.setCategory(category);
+        subcategoriesGroupFragment.setCategory(category);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, subcategoriesGroupFragment);
         transaction.addToBackStack(null);
