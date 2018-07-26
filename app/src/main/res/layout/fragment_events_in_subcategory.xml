@@ -24,7 +24,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/eventsInSubcategoryEventRV"
             android:layout_width="match_parent"
-            android:layout_height="470dp"
+            android:layout_height="@dimen/personalFeedRVHeight"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
