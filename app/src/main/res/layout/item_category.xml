@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/white">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
 
     <data>
@@ -12,9 +11,10 @@
 
 
     <RelativeLayout
-    android:layout_width="match_parent"
+        android:layout_width="match_parent"
         android:id="@+id/item_category"
-        android:layout_height="@dimen/itemRVHeight">
+        android:layout_height="@dimen/itemRVHeight"
+        android:background="@color/white">
 
 
         <TextView

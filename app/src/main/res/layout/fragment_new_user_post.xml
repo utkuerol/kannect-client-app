@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/white">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -11,7 +10,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/oneFragmentHeight">
+        android:layout_height="@dimen/oneFragmentHeight"
+        android:background="@color/white">
 
         <EditText
             android:id="@+id/newUserPostET"
@@ -21,6 +21,7 @@
             android:layout_centerVertical="true"
             android:gravity="center"
             android:hint="@string/typePost"
+            android:inputType="textMultiLine"
             android:text="@{}" />
     </RelativeLayout>
 </layout>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="itemPostViewModel"
@@ -10,7 +9,8 @@
 <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="@dimen/itemRVHeight"
-    android:id="@+id/item_post">
+    android:id="@+id/item_post"
+    android:background="@color/white">
 
 
     <ImageView
