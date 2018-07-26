@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.asus.example.databinding.FragmentNewEventPostBinding;
 import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.ViewModel.ItemEventViewModel;

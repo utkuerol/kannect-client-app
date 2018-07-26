@@ -30,8 +30,6 @@ public class GroupSearchResultsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
-        //set binding
-        final FragmentGroupSearchResultBinding fragmentGroupSearchResultBinding = FragmentGroupSearchResultBinding.inflate(inflater, parent, false);
 
         //set viewmodel
         final GroupViewModel groupViewModel = ViewModelProviders.of(this).get(GroupViewModel.class);
@@ -48,6 +46,11 @@ public class GroupSearchResultsFragment extends Fragment {
         };
         groupAdapter.setListener(listener);
 
+        //set binding
+        final FragmentGroupSearchResultBinding fragmentGroupSearchResultBinding = FragmentGroupSearchResultBinding.inflate(inflater, parent, false);
+        fragmentGroupSearchResultBinding.groupSearchResultGroupRV.setAdapter(groupAdapter);
+
+
         final Observer<List<Group>> groupsObserver = new Observer<List<Group>>() {
             @Override
             public void onChanged(@Nullable List<Group> groups) {
@@ -55,9 +58,11 @@ public class GroupSearchResultsFragment extends Fragment {
                     groupViewModel.setGroupsToSearchResults(query);
                     groupAdapter.setGroupList(groupViewModel.getGroups().getValue());
                     fragmentGroupSearchResultBinding.groupSearchResultGroupRV.setAdapter(groupAdapter);
+
                 }
             }
         };
+
 
         groupViewModel.getCurrentUser().observe(this, new Observer<User>() {
             @Override

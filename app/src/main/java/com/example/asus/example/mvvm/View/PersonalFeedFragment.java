@@ -33,8 +33,6 @@ public class PersonalFeedFragment extends Fragment {
         //set viewmodel
         final PostViewModel postViewModel = ViewModelProviders.of(this).get(PostViewModel.class);
 
-        //set databinding
-        final FragmentPersonalFeedBinding fragmentPersonalFeedBinding = FragmentPersonalFeedBinding.inflate(inflater, parent, false);
 
         //set adapter
         final PostAdapter postAdapter = new PostAdapter();
@@ -50,6 +48,10 @@ public class PersonalFeedFragment extends Fragment {
         };
         postAdapter.setListener(listener);
 
+        //set databinding
+        final FragmentPersonalFeedBinding fragmentPersonalFeedBinding = FragmentPersonalFeedBinding.inflate(inflater, parent, false);
+        fragmentPersonalFeedBinding.personalFeedPostRV.setAdapter(postAdapter);
+
         postViewModel.init(this.getContext().getApplicationContext());
 
         postViewModel.getCurrentUser().observe(this, new Observer<User>() {
@@ -57,6 +59,8 @@ public class PersonalFeedFragment extends Fragment {
             public void onChanged(@Nullable User user) {
                 if (user != null) {
                     postViewModel.setPostsToPersonalFeed();
+                    fragmentPersonalFeedBinding.personalFeedPostRV.setAdapter(postAdapter);
+
                 }
             }
         });
@@ -66,7 +70,6 @@ public class PersonalFeedFragment extends Fragment {
             public void onChanged(@Nullable List<Post> posts) {
                 if (posts != null) {
                     postAdapter.setPostList(posts);
-                    fragmentPersonalFeedBinding.personalFeedPostRV.setAdapter(postAdapter);
                 }
             }
         });

@@ -36,7 +36,6 @@ public class NewGroupPostFragment extends Fragment {
             @Override
             public void onChanged(@Nullable User user) {
                 if (user != null) {
-                    //TODO add viewmodel to the layout
                     fragmentNewPostBinding.setItemGroupViewModel(itemGroupViewModel);
                 }
             }

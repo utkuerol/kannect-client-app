@@ -26,7 +26,7 @@ import java.util.Date;
  */
 public class ItemSubcategoryViewModel extends ViewModel {
 
-    private MutableLiveData<Subcategory> subcategory;
+    private MutableLiveData<Subcategory> subcategory = new MutableLiveData<>();
     private MutableLiveData<User> currentUser;
     private GroupRepository groupRepository;
     private EventRepository eventRepository;

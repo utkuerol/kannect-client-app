@@ -24,6 +24,7 @@ import com.example.asus.example.mvvm.ViewModel.ItemCategoryViewModel;
 public class SubcategoriesGroupFragment extends Fragment {
 
     private Category category;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
@@ -47,6 +48,7 @@ public class SubcategoriesGroupFragment extends Fragment {
 
         //set databinding
         final FragmentSubcategoriesGroupBinding fragmentSubcategoriesGroupBinding = FragmentSubcategoriesGroupBinding.inflate(inflater, parent, false);
+        fragmentSubcategoriesGroupBinding.subcategoriesGroupSubcategoriesRV.setAdapter(subcategoryAdapter);
 
         itemCategoryViewModel.getCurrentUser().observe(this, new Observer<User>() {
             @Override
@@ -54,6 +56,7 @@ public class SubcategoriesGroupFragment extends Fragment {
                 if (user != null) {
                     subcategoryAdapter.setSubcategoryList(itemCategoryViewModel.getSubcategories());
                     fragmentSubcategoriesGroupBinding.subcategoriesGroupSubcategoriesRV.setAdapter(subcategoryAdapter);
+
                 }
             }
         });

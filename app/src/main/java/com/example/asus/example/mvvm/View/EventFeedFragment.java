@@ -31,8 +31,6 @@ public class EventFeedFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
-        //Set binding
-        final FragmentEventFeedBinding fragmentEventFeedBinding = FragmentEventFeedBinding.inflate(inflater, parent, false);
 
         //set viewmodel
         final ItemEventViewModel itemEventViewModel = ViewModelProviders.of(this).get(ItemEventViewModel.class);
@@ -49,6 +47,10 @@ public class EventFeedFragment extends Fragment {
         };
         postAdapter.setListener(listener);
 
+        //Set binding
+        final FragmentEventFeedBinding fragmentEventFeedBinding = FragmentEventFeedBinding.inflate(inflater, parent, false);
+        fragmentEventFeedBinding.eventFeedRV.setAdapter(postAdapter);
+
 
         final Observer<List<Post>> postsObserver = new Observer<List<Post>>() {
             @Override
@@ -56,6 +58,7 @@ public class EventFeedFragment extends Fragment {
                 if (posts != null) {
                     postAdapter.setPostList(itemEventViewModel.getEventFeed().getValue());
                     fragmentEventFeedBinding.eventFeedRV.setAdapter(postAdapter);
+
                 }
             }
         };

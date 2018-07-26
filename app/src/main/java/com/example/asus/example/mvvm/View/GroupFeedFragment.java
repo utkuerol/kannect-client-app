@@ -26,8 +26,6 @@ public class GroupFeedFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
-        //set binding
-        final FragmentGroupFeedBinding fragmentGroupFeedBinding = FragmentGroupFeedBinding.inflate(inflater, parent, false);
 
         //set viewmodel
         final ItemGroupViewModel itemGroupViewModel = ViewModelProviders.of(this).get(ItemGroupViewModel.class);
@@ -36,12 +34,18 @@ public class GroupFeedFragment extends Fragment {
         //set adapter
         final PostAdapter postAdapter = new PostAdapter();
 
+        //set binding
+        final FragmentGroupFeedBinding fragmentGroupFeedBinding = FragmentGroupFeedBinding.inflate(inflater, parent, false);
+        fragmentGroupFeedBinding.groupFeedPostRV.setAdapter(postAdapter);
+
+
         itemGroupViewModel.getCurrentUser().observe(this, new Observer<User>() {
             @Override
             public void onChanged(@Nullable User user) {
                 if (user != null) {
                     postAdapter.setPostList(itemGroupViewModel.getGroupFeed());
                     fragmentGroupFeedBinding.groupFeedPostRV.setAdapter(postAdapter);
+
                 }
             }
         });

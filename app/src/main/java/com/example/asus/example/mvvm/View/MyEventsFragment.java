@@ -31,8 +31,6 @@ public class MyEventsFragment extends Fragment {
         final EventViewModel eventViewModel = ViewModelProviders.of(this).get(EventViewModel.class);
         eventViewModel.init(getContext());
 
-        //set databinding
-        final FragmentMyEventsBinding fragmentMyEventsBinding = FragmentMyEventsBinding.inflate(inflater, parent, false);
 
         //set adapter
         final EventAdapter eventAdapter = new EventAdapter();
@@ -44,6 +42,11 @@ public class MyEventsFragment extends Fragment {
             }
         };
         eventAdapter.setListener(listener);
+
+        //set databinding
+        final FragmentMyEventsBinding fragmentMyEventsBinding = FragmentMyEventsBinding.inflate(inflater, parent, false);
+        fragmentMyEventsBinding.myEventsEventRV.setAdapter(eventAdapter);
+
 
         eventViewModel.getCurrentUser().observe(this, new Observer<User>() {
             @Override

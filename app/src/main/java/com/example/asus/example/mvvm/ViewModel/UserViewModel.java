@@ -19,7 +19,7 @@ import java.util.List;
 public class UserViewModel extends ViewModel {
 
 
-    private MutableLiveData<List<User>> users;
+    private MutableLiveData<List<User>> users = new MutableLiveData<>();
     private MutableLiveData<User> currentUser;
     private UserRepository userRepository;
 

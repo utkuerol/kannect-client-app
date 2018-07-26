@@ -26,8 +26,6 @@ public class MyGroupsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
-        //set databinding
-        final FragmentMyGroupsBinding fragmentMyGroupsBinding = FragmentMyGroupsBinding.inflate(inflater, parent, false);
 
         //set viewmodel
         final GroupViewModel groupViewModel = ViewModelProviders.of(this).get(GroupViewModel.class);
@@ -46,12 +44,20 @@ public class MyGroupsFragment extends Fragment {
         };
         groupAdapter.setListener(listener);
 
+        //set databinding
+        final FragmentMyGroupsBinding fragmentMyGroupsBinding = FragmentMyGroupsBinding.inflate(inflater, parent, false);
+        fragmentMyGroupsBinding.myGroupsGroupRV.setAdapter(groupAdapter);
+
+
         groupViewModel.getCurrentUser().observe(this, new Observer<User>() {
             @Override
             public void onChanged(@Nullable User user) {
-                groupViewModel.setGroupsToJoinedGroups();
-                groupAdapter.setGroupList(groupViewModel.getGroups().getValue());
-                fragmentMyGroupsBinding.myGroupsGroupRV.setAdapter(groupAdapter);
+                if (user != null) {
+                    groupViewModel.setGroupsToJoinedGroups();
+                    groupAdapter.setGroupList(groupViewModel.getGroups().getValue());
+                    fragmentMyGroupsBinding.myGroupsGroupRV.setAdapter(groupAdapter);
+
+                }
             }
         });
 

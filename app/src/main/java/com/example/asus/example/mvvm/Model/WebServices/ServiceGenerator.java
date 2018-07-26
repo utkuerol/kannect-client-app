@@ -1,5 +1,7 @@
 package com.example.asus.example.mvvm.Model.WebServices;
 
+import com.google.gson.GsonBuilder;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -15,7 +17,7 @@ public class ServiceGenerator {
     private static Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(new NullOnEmptyConverterFactory())
-            .addConverterFactory(GsonConverterFactory.create());
+            .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().setDateFormat("yyyy.MM.dd").create()));
 
     private static Retrofit retrofit = builder.build();
 
@@ -29,7 +31,5 @@ public class ServiceGenerator {
         return retrofit.create(serviceClass);
     }
 
-    //Todo weg machen
-    // kann man in repo so aufrufen
-    // ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+
 }

@@ -53,8 +53,6 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
-
-
         final com.example.asus.example.databinding.ActivityNavigationDrawerBinding binding;
         binding = DataBindingUtil.setContentView(this, R.layout.activity_navigation__drawer);
 
@@ -150,8 +148,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         } else if (id == R.id.nav_settings) {
 
         } else if (id == R.id.nav_profile) {
-            //launchUserProfileFragment();
-            //TODO methode muss noch geändert werden so dass alle Posts of user angezeigt werden
+            launchPersonalProfileFragment();
         } else if (id == R.id.nav_groups) {
             launchGroupFragments();
         } else if (id == R.id.nav_events) {
@@ -166,6 +163,8 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 
     public void launchPersonalFeedFragment() {
 
@@ -185,36 +184,44 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
+    public void launchPersonalProfileFragment() {
+        UserProfileFragment userProfileFragment = new UserProfileFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, userProfileFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
     public void launchGroupFragments() {
         CategoriesGroupFragment categoriesGroupFragment = new CategoriesGroupFragment();
-        MyGroupsFragment myGroupsFragment = new MyGroupsFragment();
+        //MyGroupsFragment myGroupsFragment = new MyGroupsFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, categoriesGroupFragment);
-        transaction.add(R.id.content_frame, myGroupsFragment);
+        //transaction.add(R.id.content_frame, myGroupsFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
 
     public void launchEventFragments() {
         CategoriesEventFragment categoriesEventFragment = new CategoriesEventFragment();
-        MyEventsFragment myEventsFragment = new MyEventsFragment();
+        //MyEventsFragment myEventsFragment = new MyEventsFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, categoriesEventFragment);
-        transaction.add(R.id.content_frame, myEventsFragment);
+        //transaction.add(R.id.content_frame, myEventsFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
 
     public void launchSearchFragments() {
         SearchInputFragment searchInputFragment = new SearchInputFragment();
-        // UserSearchResultsFragment userSearchResultsFragment = new UserSearchResultsFragment();
-        // EventSearchResultsFragment eventSearchResultsFragment = new EventSearchResultsFragment();
-        // GroupSearchResultsFragment groupSearchResultsFragment = new GroupSearchResultsFragment();
+        UserSearchResultsFragment userSearchResultsFragment = new UserSearchResultsFragment();
+        EventSearchResultsFragment eventSearchResultsFragment = new EventSearchResultsFragment();
+        GroupSearchResultsFragment groupSearchResultsFragment = new GroupSearchResultsFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, searchInputFragment);
-        //transaction.add(R.id.content_frame, userSearchResultsFragment);
-        //transaction.add(R.id.content_frame, eventSearchResultsFragment);
-        //transaction.add(R.id.content_frame, groupSearchResultsFragment);
+        transaction.add(R.id.content_frame, userSearchResultsFragment);
+        transaction.add(R.id.content_frame, eventSearchResultsFragment);
+        transaction.add(R.id.content_frame, groupSearchResultsFragment);
 
         transaction.addToBackStack(null);
         transaction.commit();
@@ -405,11 +412,12 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
 
     public void launchSubcategoriesEventAndEventsInCategoryFragment(Category category) {
         SubcategoriesEventFragment subcategoriesEventFragment = new SubcategoriesEventFragment();
-        EventsInCategoryFragment eventsInCategoryFragment = new EventsInCategoryFragment();
-        eventsInCategoryFragment.setCategory(category);
+        //EventsInCategoryFragment eventsInCategoryFragment = new EventsInCategoryFragment();
+        //eventsInCategoryFragment.setCategory(category);
+        subcategoriesEventFragment.setSubcategory(category);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, subcategoriesEventFragment);
-        transaction.add(R.id.content_frame, eventsInCategoryFragment);
+        //transaction.add(R.id.content_frame, eventsInCategoryFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -418,6 +426,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         SubcategoriesGroupFragment subcategoriesGroupFragment = new SubcategoriesGroupFragment();
         GroupsInCategoryFragment groupsInCategoryFragment = new GroupsInCategoryFragment();
         groupsInCategoryFragment.setCategory(category);
+        subcategoriesGroupFragment.setCategory(category);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, subcategoriesGroupFragment);
         transaction.addToBackStack(null);
@@ -440,5 +449,6 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
 
 }

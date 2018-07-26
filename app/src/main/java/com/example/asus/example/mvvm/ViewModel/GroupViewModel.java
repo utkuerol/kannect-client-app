@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class GroupViewModel extends ViewModel {
 
-    private MutableLiveData<List<Group>> groups;
+    private MutableLiveData<List<Group>> groups = new MutableLiveData<>();
     private MutableLiveData<User> currentUser;
     private GroupRepository groupRepository;
 

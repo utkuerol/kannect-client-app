@@ -4,6 +4,8 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.databinding.Bindable;
+import android.databinding.ObservableField;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.Entities.Event;
@@ -17,6 +19,7 @@ import com.example.asus.example.mvvm.Model.Repository.UserRepository;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * ViewModel class for one specific category, and is responsible for preparing and managing the data for Views,
@@ -26,11 +29,16 @@ import java.util.List;
  */
 public class ItemCategoryViewModel extends ViewModel {
 
-    private MutableLiveData<Category> chosenCategory;
+    private MutableLiveData<Category> chosenCategory = new MutableLiveData<>();
     private MutableLiveData<User> currentUser;
 
     private GroupRepository groupRepository;
     private EventRepository eventRepository;
+
+    public final ObservableField<String> inputName = new ObservableField<>("");
+    public final ObservableField<String>  inputDesc = new ObservableField<>("");
+    public final ObservableField<String> inputDate = new ObservableField<>("");
+    public final ObservableField<String> inputImageUrl = new ObservableField<>("");
 
 
     public void init(Category chosenCategory, Context context) {
@@ -60,6 +68,14 @@ public class ItemCategoryViewModel extends ViewModel {
         this.chosenCategory.setValue(chosenCategory);
     }
 
+    public MutableLiveData<User> getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(MutableLiveData<User> currentUser) {
+        this.currentUser = currentUser;
+    }
+
     /**
      * Gets list of subcategories of the category.
      * @return list of subcategories.
@@ -75,6 +91,8 @@ public class ItemCategoryViewModel extends ViewModel {
     public String getName() {
         return chosenCategory.getValue().getName();
     }
+
+
 
     /**
      * Creates a new group in the chosen category.
@@ -94,28 +112,26 @@ public class ItemCategoryViewModel extends ViewModel {
 
     /**
      * Creates a new event in the chosen category.
-     * @param name of the event to be created
-     * @param description of the event to be created
-     * @param imageUrl of the event to be created
      */
-    public void createEvent(String name, String description, String imageUrl, String givenDate)
-            throws Exception {
+    public void createEvent() throws Exception {
         Event event = new Event();
-        Date date = new SimpleDateFormat("dd.mm.yyyy").parse(givenDate);
+        Date date = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY).parse(inputDate.get());
         event.setCategory(chosenCategory.getValue());
         event.setCreator(currentUser.getValue());
         event.setDate(date);
-        event.setDescription(description);
-        event.setName(name);
-        event.setImageUrl(imageUrl);
+        event.setDescription(inputDesc.get());
+        event.setName(inputName.get());
+        event.setImageUrl(inputImageUrl.get());
         eventRepository.createEvent(event);
     }
 
-    public MutableLiveData<User> getCurrentUser() {
-        return currentUser;
+    public void onCreateEventClick() {
+        try {
+            createEvent();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public void setCurrentUser(MutableLiveData<User> currentUser) {
-        this.currentUser = currentUser;
-    }
+
 }

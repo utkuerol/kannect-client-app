@@ -21,14 +21,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
                 android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
-            <LinearLayout
-                android:id="@+id/ActivityNavigationDrawerLinearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
 
-
-            </LinearLayout>
 
         </FrameLayout>
 

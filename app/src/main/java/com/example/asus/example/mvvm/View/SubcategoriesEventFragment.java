@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.asus.example.databinding.FragmentSubcategoriesEventBinding;
 import com.example.asus.example.mvvm.Model.Entities.Category;
@@ -47,6 +48,7 @@ public class SubcategoriesEventFragment extends Fragment {
 
         //set databinding
         final FragmentSubcategoriesEventBinding fragmentSubcategoriesEventBinding = FragmentSubcategoriesEventBinding.inflate(inflater, parent, false);
+        fragmentSubcategoriesEventBinding.subcategoriesEventSubcategoryRV.setAdapter(subcategoryAdapter);
 
 
         itemCategoryViewModel.init(category, this.getContext().getApplicationContext());
@@ -56,8 +58,19 @@ public class SubcategoriesEventFragment extends Fragment {
             public void onChanged(@Nullable User user) {
                 subcategoryAdapter.setSubcategoryList(itemCategoryViewModel.getSubcategories());
                 fragmentSubcategoriesEventBinding.subcategoriesEventSubcategoryRV.setAdapter(subcategoryAdapter);
+
             }
         });
+
+        Button newEventInCategoryButton = (Button) fragmentSubcategoriesEventBinding.newEventInCategoryButton;
+        newEventInCategoryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+                navigation_drawer_activity.launchNewEventInCategoryFragment(category);
+            }
+        });
+
 
         fragmentSubcategoriesEventBinding.subcategoriesEventSubcategoryRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
@@ -68,6 +81,7 @@ public class SubcategoriesEventFragment extends Fragment {
     public void setSubcategory(Category category) {
         this.category = category;
     }
+
 
 
 }

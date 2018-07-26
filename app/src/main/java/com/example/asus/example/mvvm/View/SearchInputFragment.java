@@ -19,10 +19,6 @@ public class SearchInputFragment extends Fragment implements View.OnClickListene
         return fragmentUserSearchInputBinding.getRoot();
     }
 
-    public void launchFragment() {
-        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
-        navigation_drawer_activity.launchCategoriesEventFragment();
-    }
 
     @Override
     public void onClick(View v) {

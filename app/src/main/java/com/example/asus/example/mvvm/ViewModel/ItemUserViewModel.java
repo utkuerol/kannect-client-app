@@ -55,7 +55,7 @@ public class ItemUserViewModel extends ViewModel {
         Picasso.get().load(currentUserImageUrl)
                 .placeholder(android.R.drawable.ic_menu_help)
                 .error(android.R.drawable.ic_menu_camera)
-                .resize(50, 50)
+                .resize(100, 100)
                 .into(view);
     }
 
@@ -119,7 +119,7 @@ public class ItemUserViewModel extends ViewModel {
      * @return the imageUrl
      */
     public String getImageUrl() {
-        return chosenUser.getValue().getImageUrl();
+        return chosenUser.getValue().getImageUrl() != null ? chosenUser.getValue().getImageUrl() : "http://www.skywardimaging.com/wp-content/uploads/2015/11/default-user-image.png";
     }
 
     /**
@@ -135,8 +135,8 @@ public class ItemUserViewModel extends ViewModel {
      *
      * @return size of the list of subscribers
      */
-    public int getNumberOfSubscribers() {
-        return chosenUser.getValue().getSubscribers().size();
+    public String getNumberOfSubscribers() {
+        return Integer.toString(chosenUser.getValue().getSubscribers().size());
     }
 
     /**
@@ -144,8 +144,8 @@ public class ItemUserViewModel extends ViewModel {
      *
      * @return size of list of subscriptions of the user
      */
-    public int getNumberOfSubscriptions() {
-        return chosenUser.getValue().getSubscriptions().size();
+    public String getNumberOfSubscriptions() {
+        return Integer.toString(chosenUser.getValue().getSubscriptions().size());
     }
     /**
      * method to get the List of Users, who subscribe to this User

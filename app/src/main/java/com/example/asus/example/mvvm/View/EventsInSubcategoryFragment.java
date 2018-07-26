@@ -24,14 +24,10 @@ import com.example.asus.example.mvvm.ViewModel.EventViewModel;
 public class EventsInSubcategoryFragment extends Fragment {
 
     private Subcategory subcategory;
-    private FragmentEventsInSubcategoryBinding fragmentEventsInSubcategoryBinding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
-        //Set binding
-        final FragmentEventsInSubcategoryBinding fragmentEventsInSubcategoryBinding
-                = FragmentEventsInSubcategoryBinding.inflate(inflater, parent, false);
 
         //set viewmodel
         final EventViewModel eventViewModel = ViewModelProviders.of(this).get(EventViewModel.class);
@@ -49,6 +45,12 @@ public class EventsInSubcategoryFragment extends Fragment {
         };
         eventAdapter.setListener(listener);
 
+        //Set binding
+        final FragmentEventsInSubcategoryBinding fragmentEventsInSubcategoryBinding
+                = FragmentEventsInSubcategoryBinding.inflate(inflater, parent, false);
+        fragmentEventsInSubcategoryBinding.eventsInSubcategoryEventRV.setAdapter(eventAdapter);
+
+
         eventViewModel.getCurrentUser().observe(this, new Observer<User>() {
             @Override
             public void onChanged(@Nullable User user) {
@@ -56,6 +58,7 @@ public class EventsInSubcategoryFragment extends Fragment {
                     eventViewModel.setEventsFilteredBySubcategory(subcategory);
                     eventAdapter.setEventList(eventViewModel.getEvents().getValue());
                     fragmentEventsInSubcategoryBinding.eventsInSubcategoryEventRV.setAdapter(eventAdapter);
+
 
                 }
             }

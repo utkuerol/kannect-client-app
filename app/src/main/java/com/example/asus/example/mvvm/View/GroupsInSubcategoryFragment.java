@@ -18,6 +18,7 @@ import com.example.asus.example.mvvm.View.Adapter.GroupAdapter;
 import com.example.asus.example.mvvm.View.Adapter.OnItemClickListenerGroup;
 import com.example.asus.example.mvvm.ViewModel.GroupViewModel;
 
+
 /**
  * Activity class for the view regarding showing subcategories and the groups which belong to the parent category.
  */
@@ -33,7 +34,6 @@ public class GroupsInSubcategoryFragment extends Fragment {
         groupViewModel.init(getContext());
         groupViewModel.setGroupsFilteredBySubcategory(subcategory);
 
-        final FragmentGroupsInSubcategoryBinding fragmentGroupsInSubcategoryBinding = FragmentGroupsInSubcategoryBinding.inflate(inflater, parent, false);
 
         //set adapter
         final GroupAdapter groupAdapter = new GroupAdapter();
@@ -46,6 +46,9 @@ public class GroupsInSubcategoryFragment extends Fragment {
         };
         groupAdapter.setListener(listener);
 
+        final FragmentGroupsInSubcategoryBinding fragmentGroupsInSubcategoryBinding = FragmentGroupsInSubcategoryBinding.inflate(inflater, parent, false);
+        fragmentGroupsInSubcategoryBinding.groupsInSubcategoryGroupRV.setAdapter(groupAdapter);
+
 
         groupViewModel.getCurrentUser().observe(this, new Observer<User>() {
             @Override
@@ -53,11 +56,12 @@ public class GroupsInSubcategoryFragment extends Fragment {
                 if (user != null) {
                     groupAdapter.setGroupList(groupViewModel.getGroups().getValue());
                     fragmentGroupsInSubcategoryBinding.groupsInSubcategoryGroupRV.setAdapter(groupAdapter);
+
                 }
             }
         });
 
-        FragmentGroupsInSubcategoryBinding.groupsInSubcategoryGroupRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        fragmentGroupsInSubcategoryBinding.groupsInSubcategoryGroupRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         return fragmentGroupsInSubcategoryBinding.getRoot();
     }

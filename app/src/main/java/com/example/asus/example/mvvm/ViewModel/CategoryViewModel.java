@@ -17,7 +17,7 @@ import java.util.List;
 public class CategoryViewModel extends ViewModel {
 
 
-    private MutableLiveData<List<Category>> categories;
+    private MutableLiveData<List<Category>> categories = new MutableLiveData<>();
     private CategoryRepository categoryRepository;
 
 

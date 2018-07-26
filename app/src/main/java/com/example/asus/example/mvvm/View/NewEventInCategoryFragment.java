@@ -19,6 +19,7 @@ import com.example.asus.example.mvvm.ViewModel.ItemCategoryViewModel;
  * Uses the ItemCategoryViewModel as its ViewModel.
  */
 public class NewEventInCategoryFragment extends Fragment {
+
     private Category chosenCategory;
 
     @Override

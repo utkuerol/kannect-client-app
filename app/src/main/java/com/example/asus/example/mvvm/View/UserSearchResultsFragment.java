@@ -56,6 +56,7 @@ public class UserSearchResultsFragment extends Fragment {
 
         //set databinding, define the xml of the fragment
         final FragmentUserSearchResultBinding fragmentUserSearchResultBinding = FragmentUserSearchResultBinding.inflate(inflater, parent, false);
+        fragmentUserSearchResultBinding.userSearchResultUserRV.setAdapter(userAdapter);
 
         userViewModel.getUsers().observe(this, new Observer<List<User>>() {
             @Override

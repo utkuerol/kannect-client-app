@@ -36,7 +36,7 @@ public interface ServiceAPI {
      * @param event to be created
      * @return void, no response needed
      */
-    @POST("create")
+    @POST("createEvent")
     Call<Event> createEvent(@Body Event event);
 
     /**
