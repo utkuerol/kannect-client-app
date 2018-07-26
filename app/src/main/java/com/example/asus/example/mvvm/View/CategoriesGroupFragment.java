@@ -1,35 +1,74 @@
 package com.example.asus.example.mvvm.View;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+
+import com.example.asus.example.R;
+import com.example.asus.example.databinding.FragmentCategoriesGroupBinding;
+import com.example.asus.example.mvvm.Model.Entities.Category;
+import com.example.asus.example.mvvm.View.Adapter.CategoryAdapter;
+import com.example.asus.example.mvvm.View.Adapter.OnItemClickListenerCategory;
+import com.example.asus.example.mvvm.ViewModel.CategoryViewModel;
+
+import java.util.List;
+import java.util.zip.Inflater;
 
 /**
  * Fragment for the view, to show all categories that exist for a group.
  */
-public class CategoriesGroupFragment extends Fragment{
+public class CategoriesGroupFragment extends Fragment {
 
-    /**
-     * Called immediately after onCreateView(LayoutInflater, ViewGroup, Bundle) has returned,
-     * but before any saved state has been restored in to the view.
-     * Initializes the Data binding and sets the adapter for the recylcer view.
-     * @param view The View returned by onCreateView(LayoutInflater, ViewGroup, Bundle).
-     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state as given here.
-     */
+    private CategoryViewModel categoryViewModel;
+
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+
+
+        //set viewmodel
+        final CategoryViewModel categoryViewModel = ViewModelProviders.of(this).get(CategoryViewModel.class);
+        categoryViewModel.init();
+
+        //set adapter
+        final CategoryAdapter categoryAdapter = new CategoryAdapter();
+        OnItemClickListenerCategory listener = new OnItemClickListenerCategory() {
+            @Override
+            public void onItemClick(Category item) {
+                Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+                navigation_drawer_activity.launchSubcategoriesGroupAndGroupsInCategoryFragment(item);
+
+            }
+        };
+        categoryAdapter.setListener(listener);
+
+        //Set binding
+        final FragmentCategoriesGroupBinding fragmentCategoriesGroupBinding = FragmentCategoriesGroupBinding.inflate(inflater, parent, false);
+        fragmentCategoriesGroupBinding.categoriesGroupCategoryRV.setAdapter(categoryAdapter);
+
+
+        categoryViewModel.setCategoriesToAllCategories();
+
+        categoryViewModel.getCategories().observe(this, new Observer<List<Category>>() {
+            @Override
+            public void onChanged(@Nullable List<Category> categories) {
+                if (categories != null) {
+                    categoryAdapter.setCategoryList(categoryViewModel.getCategories().getValue());
+                    fragmentCategoriesGroupBinding.categoriesGroupCategoryRV.setAdapter(categoryAdapter);
+
+                }
+            }
+        });
+
+        fragmentCategoriesGroupBinding.categoriesGroupCategoryRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
+        return fragmentCategoriesGroupBinding.getRoot();
     }
 
-    /**
-     * Called when the Fragments activity has been create and this fragments view hierarchy instantiated.
-     * finds the correct View Model and makes it observe this Fragment, to sync with adapter.
-     * @param savedInstanceState If the fragment is being re-created from a previous saved state, this is the state.
-     */
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
 }

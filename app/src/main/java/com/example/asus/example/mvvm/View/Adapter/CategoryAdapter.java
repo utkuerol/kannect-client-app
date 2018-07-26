@@ -1,9 +1,10 @@
 package com.example.asus.example.mvvm.View.Adapter;
 
-import android.arch.lifecycle.MutableLiveData;
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.asus.example.R;
@@ -22,6 +23,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
 
     private List<Category> categoryList;
+    private OnItemClickListenerCategory listener;
+
+
+    public void setListener(OnItemClickListenerCategory listener) {
+
+        this.listener = listener;
+    }
 
     /**
      * Constructor.
@@ -42,7 +50,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         ItemCategoryBinding itemCategoryBinding =
                 DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_category,
                         parent, false);
-        return new CategoryAdapterViewHolder(itemCategoryBinding);
+        return new CategoryAdapterViewHolder(itemCategoryBinding, parent.getContext().getApplicationContext());
     }
 
     /**
@@ -52,6 +60,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
      */
     @Override public void onBindViewHolder(CategoryAdapterViewHolder holder, int position) {
         holder.bindCategory(categoryList.get(position));
+        final Category model = categoryList.get(position);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                    listener.onItemClick(model);
+                }
+            }
+        });
     }
 
     /**
@@ -64,10 +81,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     /**
      * sets the list of groups which will be shown in the ui.
-     * @param CategorysList list of Categories
+     * @param categoryList list of Categories
      */
-    public void setCategoryList(List<Category> CategorysList) {
-        this.categoryList = CategorysList;
+    public void setCategoryList(List<Category> categoryList) {
+        this.categoryList = categoryList;
     }
 
     /**
@@ -76,15 +93,17 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
      */
     public static class CategoryAdapterViewHolder extends RecyclerView.ViewHolder {
         ItemCategoryBinding mItemCategoryBinding;
+        private Context context;
 
         /**
          * Constructor.
          * Creates an UserAdapterViewHolder object.
          * @param itemCategoryBinding the Binding object of the new CategoryAdapterViewHolder.
          */
-        public CategoryAdapterViewHolder(ItemCategoryBinding itemCategoryBinding) {
+        public CategoryAdapterViewHolder(ItemCategoryBinding itemCategoryBinding, Context context) {
             super(itemCategoryBinding.itemCategory);
             this.mItemCategoryBinding = itemCategoryBinding;
+            this.context = context;
         }
 
         /**
@@ -92,13 +111,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
          * @param category which will be bound.
          */
         void bindCategory(Category category) {
-            MutableLiveData<Category> cat = new MutableLiveData<Category>();
-            cat.setValue(category);
-            if (mItemCategoryBinding.getCategoryViewModel() == null) {
-                mItemCategoryBinding.setCategoryViewModel(
-                        new ItemCategoryViewModel(cat, itemView.getContext()));
+            if (mItemCategoryBinding.getItemCategoryViewModel() == null) {
+                ItemCategoryViewModel itemCategoryViewModel = new ItemCategoryViewModel();
+                itemCategoryViewModel.init(category, context);
+                mItemCategoryBinding.setItemCategoryViewModel(itemCategoryViewModel);
             } else {
-                mItemCategoryBinding.getCategoryViewModel().setChosenCategory(cat);
+                mItemCategoryBinding.getItemCategoryViewModel().init(category, context);
             }
         }
     }

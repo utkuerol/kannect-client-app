@@ -7,8 +7,6 @@ import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.Repository.UserRepository;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
-import java.security.AccessController;
-
 /**
  * ViewModel class for login, that is responsible for preparing and managing the data for Views
  * regarding login functions, by handling the communication of the View with the
@@ -17,8 +15,9 @@ import java.security.AccessController;
  */
 public class LoginViewModel extends ViewModel {
 
-    private MutableLiveData<User> user;
+    private MutableLiveData<User> user = new MutableLiveData<>();
     private UserRepository userRepository = new UserRepository();
+
 
     /**
      * Invokes the chains of events, leading to user login.
@@ -26,19 +25,19 @@ public class LoginViewModel extends ViewModel {
      * @param account google sign in account.
      */
     public MutableLiveData<User> invoke(GoogleSignInAccount account) {
-        MutableLiveData<User> user = userRepository.findByEmail(account.getEmail());
-        if (user != null) {
-            return user;
-        } else {
-            User u = new User();
-            u.setEmail(account.getEmail());
-            u.setImageUrl(account.getPhotoUrl().toString());
-            u.setName(account.getDisplayName());
-            user.setValue(u);
-            userRepository.createUser(user);
-            return userRepository.findByEmail(account.getEmail());
-        }
+        return userRepository.findByEmail(account.getEmail());
     }
+
+    public void createAndSetCurrentUser(GoogleSignInAccount account) {
+        User u = new User();
+        u.setEmail(account.getEmail());
+        u.setImageUrl(account.getPhotoUrl() != null ? account.getPhotoUrl().toString() : null);
+        u.setName(account.getDisplayName());
+
+        userRepository.createUser(u);
+        getUser().setValue(u);
+    }
+
 
     /**
      * Gets the user, which is logging in.
@@ -47,5 +46,9 @@ public class LoginViewModel extends ViewModel {
      */
     public MutableLiveData<User> getUser() {
         return user;
+    }
+
+    public void setUser(MutableLiveData<User> user) {
+        this.user = user;
     }
 }

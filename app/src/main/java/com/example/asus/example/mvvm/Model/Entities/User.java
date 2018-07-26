@@ -1,6 +1,7 @@
 package com.example.asus.example.mvvm.Model.Entities;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ import java.util.List;
  */
 public class User implements Serializable {
 
-    private long id;
+    private int id;
     private String name;
     private String email;
     private String imageUrl;
@@ -22,8 +23,22 @@ public class User implements Serializable {
     private List<Group> createdGroups;
     private List<Event> createdEvents;
     private List<Comment> createdComments;
+    private List<Post> likedPosts;
 
+    /**
+     * Overwrites Default Constructor and
+     * initializes all lists
+     */
     public User() {
+        this.subscribers = new LinkedList<>();
+        this.subscriptions = new LinkedList<>();
+        this.joinedGroups = new LinkedList<>();
+        this.participatedEvents = new LinkedList<>();
+        this.createdPosts = new LinkedList<>();
+        this.createdGroups = new LinkedList<>();
+        this.createdEvents = new LinkedList<>();
+        this.createdComments = new LinkedList<>();
+        this.likedPosts = new LinkedList<>();
     }
 
     /**
@@ -41,7 +56,7 @@ public class User implements Serializable {
      * @param createdEvents all the Events, the User created.
      * @param createdComments all the Comments, the User created.
      */
-    public User(long id, String name, String email, String imageUrl, List<User> subscriptions, List<User> subscribers, List<Group> joinedGroups, List<Event> participatedEvents, List<Post> createdPosts, List<Group> createdGroups, List<Event> createdEvents, List<Comment> createdComments) {
+    public User(int id, String name, String email, String imageUrl, List<User> subscriptions, List<User> subscribers, List<Group> joinedGroups, List<Event> participatedEvents, List<Post> createdPosts, List<Group> createdGroups, List<Event> createdEvents, List<Comment> createdComments, List<Post> likedPosts) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -54,6 +69,7 @@ public class User implements Serializable {
         this.createdGroups = createdGroups;
         this.createdEvents = createdEvents;
         this.createdComments = createdComments;
+        this.likedPosts = likedPosts;
 
     }
 
@@ -91,7 +107,7 @@ public class User implements Serializable {
      * method to get the id of the User
      * @return id of the User
      */
-    public long getId() {
+    public int getId() {
         return id;
     }
 
@@ -99,7 +115,7 @@ public class User implements Serializable {
      * sets the id of the User
      * @param id if of the User
      */
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -213,5 +229,45 @@ public class User implements Serializable {
      */
     public void setParticipatedEvents(List<Event> participatedEvents) {
         this.participatedEvents = participatedEvents;
+    }
+
+    public List<Post> getCreatedPosts() {
+        return createdPosts;
+    }
+
+    public void setCreatedPosts(List<Post> createdPosts) {
+        this.createdPosts = createdPosts;
+    }
+
+    public List<Group> getCreatedGroups() {
+        return createdGroups;
+    }
+
+    public void setCreatedGroups(List<Group> createdGroups) {
+        this.createdGroups = createdGroups;
+    }
+
+    public List<Event> getCreatedEvents() {
+        return createdEvents;
+    }
+
+    public void setCreatedEvents(List<Event> createdEvents) {
+        this.createdEvents = createdEvents;
+    }
+
+    public List<Comment> getCreatedComments() {
+        return createdComments;
+    }
+
+    public void setCreatedComments(List<Comment> createdComments) {
+        this.createdComments = createdComments;
+    }
+
+    public List<Post> getLikedPosts() {
+        return likedPosts;
+    }
+
+    public void setLikedPosts(List<Post> likedPosts) {
+        this.likedPosts = likedPosts;
     }
 }

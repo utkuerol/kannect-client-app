@@ -1,9 +1,10 @@
 package com.example.asus.example.mvvm.View.Adapter;
 
-import android.arch.lifecycle.MutableLiveData;
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.asus.example.R;
@@ -20,7 +21,13 @@ import java.util.List;
  */
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserAdapterViewHolder> {
     private List<User> usersList;
+    private OnItemClickListenerUser listener;
 
+
+    public void setListener(OnItemClickListenerUser listener) {
+
+        this.listener = listener;
+    }
     /**
      * Constructor.
      * Initializes the private usersList attribute.
@@ -40,7 +47,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserAdapterVie
         ItemUserBinding itemUserBinding =
                 DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_user,
                         parent, false);
-        return new UserAdapterViewHolder(itemUserBinding);
+        return new UserAdapterViewHolder(itemUserBinding, parent.getContext().getApplicationContext());
     }
 
     /**
@@ -50,6 +57,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserAdapterVie
      */
     @Override public void onBindViewHolder(UserAdapterViewHolder holder, int position) {
         holder.bindUser(usersList.get(position));
+        final User model = usersList.get(position);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                    listener.onItemClick(model);
+                }
+            }
+        });
     }
 
     /**
@@ -59,6 +75,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserAdapterVie
     @Override public int getItemCount() {
         return usersList.size();
     }
+
 
     /**
      * sets the list of groups which will be shown in the ui.
@@ -73,16 +90,19 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserAdapterVie
      * Builds for every item in the Recycler View its View Model.
      */
     public static class UserAdapterViewHolder extends RecyclerView.ViewHolder {
-        ItemUserBinding mItemUserBinding;
+
+        private final Context context;
+        private ItemUserBinding mItemUserBinding;
 
         /**
          * Constructor.
          * Creates an UserAdapterViewHolder object.
          * @param itemUserBinding the Binding object of the new UserAdapterViewHolder.
          */
-        public UserAdapterViewHolder(ItemUserBinding itemUserBinding) {
+        public UserAdapterViewHolder(ItemUserBinding itemUserBinding, Context context) {
             super(itemUserBinding.itemUser);
             this.mItemUserBinding = itemUserBinding;
+            this.context = context;
         }
 
         /**
@@ -90,13 +110,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserAdapterVie
          * @param user which will be bound.
          */
         void bindUser(User user) {
-            MutableLiveData<User> u = new MutableLiveData<User>();
-            u.setValue(user);
-            if (mItemUserBinding.getUserViewModel() == null) {
-                mItemUserBinding.setUserViewModel(
-                        new ItemUserViewModel(u, itemView.getContext()));
+            if (mItemUserBinding.getItemUserViewModel() == null) {
+                ItemUserViewModel itemUserViewModel = new ItemUserViewModel();
+                itemUserViewModel.init(user, context);
+                mItemUserBinding.setItemUserViewModel(itemUserViewModel);
             } else {
-                mItemUserBinding.getUserViewModel().setChosenUser(u);
+                mItemUserBinding.getItemUserViewModel().init(user, context);
             }
         }
     }

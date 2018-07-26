@@ -1,5 +1,7 @@
 package com.example.asus.example.mvvm.Model.WebServices;
 
+import com.google.gson.GsonBuilder;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -9,12 +11,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ServiceGenerator {
 
     // better to store in Gradle String files
-    private static final String BASE_URL = "";
+    private static final String BASE_URL = "http://10.0.2.2:8080/";
 
 
     private static Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create());
+            .addConverterFactory(new NullOnEmptyConverterFactory())
+            //.addConverterFactory(JacksonConverterFactory.create());
+            .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().setDateFormat("yyyy.MM.dd").create()));
+
 
     private static Retrofit retrofit = builder.build();
 
@@ -28,7 +33,5 @@ public class ServiceGenerator {
         return retrofit.create(serviceClass);
     }
 
-    //Todo weg machen
-    // kann man in repo so aufrufen
-    // ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+
 }

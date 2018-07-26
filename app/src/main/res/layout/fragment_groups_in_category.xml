@@ -2,20 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/groupsInCategoryGroupRV"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="@dimen/twoFragmentHeight"
+        tools:listitem="@layout/item_group">
 
+    </android.support.v7.widget.RecyclerView>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/groupsInCategoryRV"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/item_group">
-
-        </android.support.v7.widget.RecyclerView>
-
-
-    </LinearLayout>
 </layout>

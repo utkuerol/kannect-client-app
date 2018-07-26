@@ -3,21 +3,20 @@ package com.example.asus.example.mvvm.ViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.databinding.BindingAdapter;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.example.asus.example.mvvm.Model.Entities.Comment;
-import com.example.asus.example.mvvm.Model.Entities.Event;
-import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.Repository.PostRepository;
-import com.example.asus.example.mvvm.View.ShowPostActivity;
+import com.example.asus.example.mvvm.Model.Repository.UserRepository;
 import com.squareup.picasso.Picasso;
 
 import java.util.Date;
 import java.util.List;
+
 
 /**
  * ViewModel class for one specific post, and is responsible for preparing and managing the data for Views,
@@ -27,28 +26,27 @@ import java.util.List;
  */
 public class ItemPostViewModel extends ViewModel {
 
-    private MutableLiveData<Post> post;
-    private String creatorProfilePictureUrl;
-    private Context context;
-    private User currentUser;
+    private MutableLiveData<Post> post = new MutableLiveData<>();
+    private MutableLiveData<User> currentUser;
     private PostRepository postRepository;
 
-    /**
-     * Creates an instance with the given post and application context.
-     *
-     * @param post    to be displayed.
-     * @param context of the application.
-     */
-    public ItemPostViewModel(MutableLiveData<Post> post, Context context) {
-        this.post = post;
-        this.context = context;
-        creatorProfilePictureUrl = this.getCreator().getImageUrl();
+
+    public void init(Post post, Context context) {
+        this.post.setValue(post);
+        postRepository = new PostRepository();
+        UserRepository userRepository = new UserRepository();
+
+        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
+        currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
     }
 
-    @BindingAdapter({"bind:creatorProfilePictureUrl"})
+
+    @BindingAdapter({"imageUrl"})
     public static void loadImage(ImageView view, String imageUrl) {
         Picasso.get().load(imageUrl)
-                //  .placeholder(R.drawable.placeholder)
+                .placeholder(android.R.drawable.ic_menu_help)
+                .error(android.R.drawable.ic_menu_camera)
+                .resize(50, 50)
                 .into(view);
     }
 
@@ -64,17 +62,11 @@ public class ItemPostViewModel extends ViewModel {
      * Sets the post.
      * @param post to be set.
      */
-    public void setPost(MutableLiveData<Post> post) {
-        this.post = post;
+    public void setPost(Post post) {
+        this.post.setValue(post);
     }
 
-    /**
-     * Starts CommentsActivity with this post.
-     * @param view
-     */
-    public void onItemClick(View view) {
-        context.startActivity(ShowPostActivity.launchWithDetails(view.getContext(), post.getValue()));
-    }
+
 
     /**
      * Gets text of the post.
@@ -124,10 +116,6 @@ public class ItemPostViewModel extends ViewModel {
         return post.getValue().getDate();
     }
 
-    public void setDate(Date d) {
-        post.getValue().setDate(d);
-    }
-
     /**
      * gets the date of creation of the post as string.
      * @return date of creation as string
@@ -136,29 +124,20 @@ public class ItemPostViewModel extends ViewModel {
         return post.getValue().getDate().toString();
     }
 
-    /**
-     * Gets the event to which the post belongs.
-     * @return event
-     */
-    public Event getBelongsToEvent() {
-        return post.getValue().getBelongsToEvent();
+
+    public String getOwnerName() {
+
+        if (post.getValue().getOwnerEvent() != null) {
+            return post.getValue().getOwnerEvent().getName();
+        } else if (post.getValue().getOwnerGroup() != null) {
+            return post.getValue().getOwnerGroup().getName();
+        } else if (post.getValue().getOwnerUser() != null) {
+            return post.getValue().getOwnerUser().getName();
+        }
+
+        return null;
     }
 
-    /**
-     * Gets the group to which the post belongs.
-     * @return group
-     */
-    public Group getBelongsToGroup() {
-        return post.getValue().getBelongsToGroup();
-    }
-
-    /**
-     * Gets the user to which the post belongs.
-     * @return user
-     */
-    public User getBelongsToUser() {
-        return post.getValue().getBelongsToUser();
-    }
 
     /**
      * Gets the comments belonging to the post.
@@ -180,14 +159,14 @@ public class ItemPostViewModel extends ViewModel {
      * Likes the post.
      */
     public void like() {
-        postRepository.likePost(post.getValue(), currentUser);
+        postRepository.likePost(post.getValue(), currentUser.getValue());
     }
 
     /**
-     *
+     * Unlikes the post.
      */
     public void unlike() {
-        postRepository.unlikePost(post.getValue(), currentUser);
+        postRepository.unlikePost(post.getValue(), currentUser.getValue());
     }
 
     /**
@@ -196,7 +175,7 @@ public class ItemPostViewModel extends ViewModel {
      * @return boolean
      */
     public boolean isCreator() {
-        return post.getValue().getCreator().getId() == currentUser.getId();
+        return post.getValue().getCreator().getId() == currentUser.getValue().getId();
     }
 
     /**
@@ -212,8 +191,16 @@ public class ItemPostViewModel extends ViewModel {
      * @param text for the comment to be created.
      */
     public void comment(String text) {
-        Comment comment = new Comment(text, post.getValue(), new Date(), currentUser);
+        Comment comment = new Comment(text, post.getValue(), new Date(), currentUser.getValue());
         postRepository.commentPost(comment);
     }
 
+    public MutableLiveData<User> getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(MutableLiveData<User> currentUser) {
+        this.currentUser = currentUser;
+    }
 }
+

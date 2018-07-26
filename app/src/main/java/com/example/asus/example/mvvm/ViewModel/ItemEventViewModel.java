@@ -3,7 +3,9 @@ package com.example.asus.example.mvvm.ViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
-import android.view.View;
+import android.content.SharedPreferences;
+import android.databinding.BindingAdapter;
+import android.widget.ImageView;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.Entities.Event;
@@ -12,7 +14,9 @@ import com.example.asus.example.mvvm.Model.Entities.Subcategory;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.Repository.EventRepository;
 import com.example.asus.example.mvvm.Model.Repository.FeedRepository;
-import com.example.asus.example.mvvm.View.EventFeedActivity;
+import com.example.asus.example.mvvm.Model.Repository.PostRepository;
+import com.example.asus.example.mvvm.Model.Repository.UserRepository;
+import com.squareup.picasso.Picasso;
 
 import java.util.Date;
 import java.util.List;
@@ -26,21 +30,23 @@ import java.util.List;
  */
 public class ItemEventViewModel extends ViewModel {
 
-    private MutableLiveData<Event> event;
-    private Context context;
-    private User currentUser;
+    private MutableLiveData<Event> event = new MutableLiveData<>();
+    private MutableLiveData<List<Post>> mEventFeed = new MutableLiveData<>();
+    private MutableLiveData<User> currentUser;
     private EventRepository eventRepository;
     private FeedRepository feedRepository;
+    private PostRepository postRepository;
 
-    /**
-     * creates an instance with the chosen event and application context.
-     *
-     * @param event   to set
-     * @param context of the application
-     */
-    public ItemEventViewModel(MutableLiveData<Event> event, Context context) {
-        this.context = context;
-        this.event = event;
+
+    public void init(Event event, Context context) {
+        this.event.setValue(event);
+        postRepository = new PostRepository();
+        UserRepository userRepository = new UserRepository();
+        feedRepository = new FeedRepository();
+        eventRepository = new EventRepository();
+
+        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
+        currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
     }
 
     /**
@@ -56,16 +62,10 @@ public class ItemEventViewModel extends ViewModel {
      * @param event to set to.
      */
     public void setEvent(MutableLiveData<Event> event) {
+
+        this.event = event;
     }
 
-    /**
-     * Starts EventFeedActivity with the event.
-     * @param view
-     */
-    public void onItemClick(View view) {
-
-        context.startActivity(EventFeedActivity.launchWithDetails(view.getContext(), event.getValue()));
-    }
 
     /**
      * method to get the Name of the Event.
@@ -135,6 +135,15 @@ public class ItemEventViewModel extends ViewModel {
     }
 
 
+    @BindingAdapter({"imageUrl"})
+    public static void loadImage(ImageView view, String imageUrl) {
+        Picasso.get().load(imageUrl)
+                .placeholder(android.R.drawable.ic_menu_help)
+                .error(android.R.drawable.ic_menu_camera)
+                .resize(50, 50)
+                .into(view);
+    }
+
     /**
      * method to get the List of User who want to participate in this Event.
      * @return List of Participants
@@ -143,12 +152,16 @@ public class ItemEventViewModel extends ViewModel {
         return event.getValue().getParticipants();
     }
 
+    public String getNumberOfParticipants() {
+        return Integer.toString(getParticipants().size());
+    }
+
     /**
      * Gets the feed of the event.
      * @return list of posts.
      */
-    public List<Post> getEventFeed() {
-        return feedRepository.getEventFeed(event.getValue()).getValue();
+    public MutableLiveData<List<Post>> getEventFeed() {
+        return feedRepository.getEventFeed(event.getValue());
     }
 
     /**
@@ -156,7 +169,7 @@ public class ItemEventViewModel extends ViewModel {
      * @return boolean result
      */
     public boolean isCreator() {
-        return event.getValue().getCreator().getId() == currentUser.getId();
+        return event.getValue().getCreator().getId() == currentUser.getValue().getId();
     }
 
     /**
@@ -172,14 +185,14 @@ public class ItemEventViewModel extends ViewModel {
      * Participates in the event.
      */
     public void participateEvent() {
-        eventRepository.participateEvent(currentUser, event.getValue());
+        eventRepository.participateEvent(currentUser.getValue(), event.getValue());
     }
 
     /**
      * Leaves the event
      */
     public void leaveEvent() {
-        eventRepository.leaveEvent(currentUser, event.getValue());
+        eventRepository.leaveEvent(currentUser.getValue(), event.getValue());
     }
 
 
@@ -196,8 +209,20 @@ public class ItemEventViewModel extends ViewModel {
      * @param text for the post.
      */
     public void createPost(String text) {
-
+        Post post = new Post();
+        post.setCreator(currentUser.getValue());
+        post.setText(text);
+        post.setOwnedBy(event.getValue().getId());
+        post.setOwnerEvent(event.getValue());
+        post.setDate(new Date());
+        postRepository.createPost(post);
     }
 
+    public MutableLiveData<User> getCurrentUser() {
+        return currentUser;
+    }
 
+    public void setCurrentUser(MutableLiveData<User> currentUser) {
+        this.currentUser = currentUser;
+    }
 }

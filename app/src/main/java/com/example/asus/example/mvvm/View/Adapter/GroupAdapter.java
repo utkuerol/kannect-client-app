@@ -1,9 +1,11 @@
 package com.example.asus.example.mvvm.View.Adapter;
 
 import android.arch.lifecycle.MutableLiveData;
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.asus.example.R;
@@ -20,6 +22,13 @@ import java.util.List;
  */
 public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupAdapterViewHolder> {
     private List<Group> groupsList;
+    private OnItemClickListenerGroup listener;
+
+
+    public void setListener(OnItemClickListenerGroup listener) {
+
+        this.listener = listener;
+    }
 
     /**
      * Constructor.
@@ -40,7 +49,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupAdapter
         ItemGroupBinding itemGroupBinding =
                 DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_group,
                         parent, false);
-        return new GroupAdapterViewHolder(itemGroupBinding);
+        return new GroupAdapterViewHolder(itemGroupBinding, parent.getContext().getApplicationContext());
     }
 
     /**
@@ -50,6 +59,15 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupAdapter
      */
     @Override public void onBindViewHolder(GroupAdapterViewHolder holder, int position) {
         holder.bindGroup(groupsList.get(position));
+        final Group model = groupsList.get(position);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                    listener.onItemClick(model);
+                }
+            }
+        });
     }
 
     /**
@@ -74,15 +92,17 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupAdapter
      */
     public static class GroupAdapterViewHolder extends RecyclerView.ViewHolder {
         ItemGroupBinding mItemGroupBinding;
+        private Context context;
 
         /**
          * Constructor.
          * Creates an GroupAdapterViewHolder object.
          * @param mItemGroupBinding the Binding object of the new GroupAdapterViewHolder.
          */
-        public GroupAdapterViewHolder(ItemGroupBinding mItemGroupBinding) {
+        public GroupAdapterViewHolder(ItemGroupBinding mItemGroupBinding, Context context) {
             super(mItemGroupBinding.itemGroup);
             this.mItemGroupBinding = mItemGroupBinding;
+            this.context = context;
         }
 
         /**
@@ -92,11 +112,12 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupAdapter
         void bindGroup(Group group) {
             MutableLiveData<Group> g = new MutableLiveData<>();
             g.setValue(group);
-            if (mItemGroupBinding.getGroupViewModel() == null) {
-                mItemGroupBinding.setGroupViewModel(
-                        new ItemGroupViewModel(g, itemView.getContext()));
+            if (mItemGroupBinding.getItemGroupViewModel() == null) {
+                ItemGroupViewModel itemGroupViewModel = new ItemGroupViewModel();
+                itemGroupViewModel.init(group, context);
+                mItemGroupBinding.setItemGroupViewModel(itemGroupViewModel);
             } else {
-                mItemGroupBinding.getGroupViewModel().setGroup(group);
+                mItemGroupBinding.getItemGroupViewModel().init(group, context);
             }
         }
     }

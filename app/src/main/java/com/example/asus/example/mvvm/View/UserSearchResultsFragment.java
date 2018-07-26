@@ -1,21 +1,19 @@
 package com.example.asus.example.mvvm.View;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.databinding.DataBindingUtil;
-import android.support.annotation.NonNull;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
-import com.example.asus.example.R;
+import com.example.asus.example.databinding.FragmentUserSearchResultBinding;
 import com.example.asus.example.mvvm.Model.Entities.User;
-import com.example.asus.example.mvvm.View.SearchResultFragments.UserSearchResultFragment;
-import com.example.asus.example.mvvm.ViewModel.SearchResultViewModel;
+import com.example.asus.example.mvvm.View.Adapter.OnItemClickListenerUser;
+import com.example.asus.example.mvvm.View.Adapter.UserAdapter;
 import com.example.asus.example.mvvm.ViewModel.UserViewModel;
 
 import java.util.List;
@@ -25,28 +23,60 @@ import java.util.List;
  */
 public class UserSearchResultsFragment extends Fragment {
 
-    UserViewModel viewModel;
+    private String query;
 
-
-    /**
-     * Called immediately after onCreateView(LayoutInflater, ViewGroup, Bundle) has returned,
-     * but before any saved state has been restored in to the view.
-     * Initializes the Data binding and sets the adapter for the recylcer view.
-     * @param view The View returned by onCreateView(LayoutInflater, ViewGroup, Bundle).
-     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state as given here.
-     */
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+
+
+        //set viewmodel
+        final UserViewModel userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+        userViewModel.init(this.getContext().getApplicationContext());
+        userViewModel.getCurrentUser().observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(@Nullable User user) {
+                if (user != null) {
+                    userViewModel.setUsersToSearchResults(query);
+                }
+            }
+        });
+
+        //set adapter
+        final UserAdapter userAdapter = new UserAdapter();
+        OnItemClickListenerUser listener = new OnItemClickListenerUser() {
+            @Override
+            public void onItemClick(User user) {
+
+                Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+                navigation_drawer_activity.launchUserProfileFragment(user);
+
+            }
+        };
+        userAdapter.setListener(listener);
+
+        //set databinding, define the xml of the fragment
+        final FragmentUserSearchResultBinding fragmentUserSearchResultBinding = FragmentUserSearchResultBinding.inflate(inflater, parent, false);
+        fragmentUserSearchResultBinding.userSearchResultUserRV.setAdapter(userAdapter);
+
+        userViewModel.getUsers().observe(this, new Observer<List<User>>() {
+            @Override
+            public void onChanged(@Nullable List<User> users) {
+                if (users != null) {
+                    userAdapter.setUserList(userViewModel.getUsers().getValue());
+                    fragmentUserSearchResultBinding.userSearchResultUserRV.setAdapter(userAdapter);
+                }
+            }
+        });
+
+        fragmentUserSearchResultBinding.userSearchResultUserRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
+
+        return fragmentUserSearchResultBinding.getRoot();
     }
 
-    /**
-     * Called when the Fragments activity has been create and this fragments view hierarchy instantiated.
-     * finds the correct View Model and makes it observe this Fragment, to sync with adapter.
-     * @param savedInstanceState If the fragment is being re-created from a previous saved state, this is the state.
-     */
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-    }
+    public void setQuery(String query) {
 
+        this.query = query;
+    }
 
 }

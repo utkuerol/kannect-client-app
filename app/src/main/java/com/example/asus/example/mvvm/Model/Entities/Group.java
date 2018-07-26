@@ -1,6 +1,7 @@
 package com.example.asus.example.mvvm.Model.Entities;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  */
 public class Group implements Serializable {
 
-    private long id;
+    private int id;
     private String name;
     private String description;
     private User creator;
@@ -18,7 +19,11 @@ public class Group implements Serializable {
     private String imageURl;
     private List<User> members;
 
+    /**
+     *
+     */
     public Group() {
+        this.members = new LinkedList<>();
     }
 
     /**
@@ -32,7 +37,7 @@ public class Group implements Serializable {
      * @param imageURl Url of the profile picture.
      * @param members Users, which have joined this group.
      */
-    public Group(long id, String name, String description, User creator, Category category, Subcategory subcategory, String imageURl, List<User> members) {
+    public Group(int id, String name, String description, User creator, Category category, Subcategory subcategory, String imageURl, List<User> members) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -68,7 +73,7 @@ public class Group implements Serializable {
      * method to get the id of the Group.
      * @return id of the Group.
      */
-    public long getId() {
+    public int getId() {
         return id;
     }
 
@@ -76,7 +81,7 @@ public class Group implements Serializable {
      * sets the id of the Group.
      * @param id ID of the Group.
      */
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

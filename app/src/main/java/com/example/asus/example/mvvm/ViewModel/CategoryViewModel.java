@@ -2,7 +2,6 @@ package com.example.asus.example.mvvm.ViewModel;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
-import android.content.Context;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.Repository.CategoryRepository;
@@ -18,17 +17,12 @@ import java.util.List;
 public class CategoryViewModel extends ViewModel {
 
 
-    private MutableLiveData<List<Category>> categories;
-    private Context context;
+    private MutableLiveData<List<Category>> categories = new MutableLiveData<>();
     private CategoryRepository categoryRepository;
 
-    /**
-     * Creates an instance with the given application context.
-     *
-     * @param context of the application.
-     */
-    public CategoryViewModel(Context context) {
-        this.context = context;
+
+    public void init() {
+        this.categoryRepository = new CategoryRepository();
     }
 
     /**
@@ -42,6 +36,8 @@ public class CategoryViewModel extends ViewModel {
     /**
      * Sets categories to all categories.
      */
-    public void setCategoriesToAllCategories() {}
+    public void setCategoriesToAllCategories() {
+        categories = categoryRepository.getCategories();
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.example.asus.example.mvvm.Model.Repository;
 
 import android.arch.lifecycle.MutableLiveData;
+import android.util.Log;
 
 import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.User;
@@ -66,7 +67,10 @@ public class EventRepository {
         call.enqueue(new Callback<Event>() {
             @Override
             public void onResponse(Call<Event> call, Response<Event> response) {
-
+                Log.d("debug", "on response create event");
+                if (!response.isSuccessful()) {
+                    Log.d("debug", "create event response fail");
+                }
             }
 
             @Override
@@ -84,7 +88,7 @@ public class EventRepository {
     public void deleteEvent(Event event) {
 
         ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
-        Call<Event> call = client.deleteEvent(event.getId());
+        Call<Event> call = client.deleteEvent(event);
         call.enqueue(new Callback<Event>() {
             @Override
             public void onResponse(Call<Event> call, Response<Event> response) {

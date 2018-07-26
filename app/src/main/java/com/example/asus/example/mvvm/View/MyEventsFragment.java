@@ -1,35 +1,68 @@
 package com.example.asus.example.mvvm.View;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+
+import com.example.asus.example.databinding.FragmentMyEventsBinding;
+import com.example.asus.example.mvvm.Model.Entities.Event;
+import com.example.asus.example.mvvm.Model.Entities.User;
+import com.example.asus.example.mvvm.View.Adapter.EventAdapter;
+import com.example.asus.example.mvvm.View.Adapter.OnItemClickListenerEvent;
+import com.example.asus.example.mvvm.ViewModel.EventViewModel;
 
 /**
  * Fragment for the view, to show all events in which the user is a member of.
  */
 public class MyEventsFragment extends Fragment {
 
-    /**
-     * Called immediately after onCreateView(LayoutInflater, ViewGroup, Bundle) has returned,
-     * but before any saved state has been restored in to the view.
-     * Initializes the Data binding and sets the adapter for the recylcer view.
-     * @param view The View returned by onCreateView(LayoutInflater, ViewGroup, Bundle).
-     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state as given here.
-     */
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
 
-    /**
-     * Called when the Fragments activity has been create and this fragments view hierarchy instantiated.
-     * finds the correct View Model and makes it observe this Fragment, to sync with adapter.
-     * @param savedInstanceState If the fragment is being re-created from a previous saved state, this is the state.
-     */
+
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+
+        //set viewmodel
+        final EventViewModel eventViewModel = ViewModelProviders.of(this).get(EventViewModel.class);
+        eventViewModel.init(getContext());
+
+
+        //set adapter
+        final EventAdapter eventAdapter = new EventAdapter();
+        OnItemClickListenerEvent listener = new OnItemClickListenerEvent() {
+            @Override
+            public void onItemClick(Event item) {
+                Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+                navigation_drawer_activity.launchEventFeedFragment(item);
+            }
+        };
+        eventAdapter.setListener(listener);
+
+        //set databinding
+        final FragmentMyEventsBinding fragmentMyEventsBinding = FragmentMyEventsBinding.inflate(inflater, parent, false);
+        fragmentMyEventsBinding.myEventsEventRV.setAdapter(eventAdapter);
+
+
+        eventViewModel.getCurrentUser().observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(@Nullable User user) {
+                if (user != null) {
+                    eventViewModel.setEventsToParticipatingEvents();
+                    eventAdapter.setEventList(eventViewModel.getEvents().getValue());
+                    fragmentMyEventsBinding.myEventsEventRV.setAdapter(eventAdapter);
+
+                }
+            }
+        });
+
+
+        fragmentMyEventsBinding.myEventsEventRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
+        return fragmentMyEventsBinding.getRoot();
     }
 }

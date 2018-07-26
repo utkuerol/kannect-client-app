@@ -3,17 +3,19 @@ package com.example.asus.example.mvvm.ViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.databinding.BindingAdapter;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
-import com.example.asus.example.mvvm.View.UserProfileActivity;
+import com.example.asus.example.mvvm.Model.Repository.PostRepository;
+import com.example.asus.example.mvvm.Model.Repository.UserRepository;
 import com.squareup.picasso.Picasso;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -25,20 +27,44 @@ import java.util.List;
  */
 public class ItemUserViewModel extends ViewModel {
 
-    private MutableLiveData<User> chosenUser;
-    private String profilePictureUrl;
-    private Context context;
+    private MutableLiveData<User> chosenUser = new MutableLiveData<>();
+    private MutableLiveData<User> currentUser;
+    private UserRepository userRepository;
+    private PostRepository postRepository;
 
-    /**
-     * Creates an instance with the chosen/given user and the application context.
-     *
-     * @param user    needed to be shown.
-     * @param context of the application.
-     */
-    public ItemUserViewModel(MutableLiveData<User> user, Context context) {
-        this.chosenUser = user;
-        this.context = context;
-        profilePictureUrl = this.getImageUrl();
+
+    public void init(User user, Context context) {
+        this.chosenUser.setValue(user);
+        userRepository = new UserRepository();
+        postRepository = new PostRepository();
+
+        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
+        currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
+    }
+
+    public void init(Context context) {
+        userRepository = new UserRepository();
+        postRepository = new PostRepository();
+
+        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
+        currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
+    }
+
+    @BindingAdapter({"currentUserImageUrl"})
+    public static void loadCurrentUserImage(ImageView view, String currentUserImageUrl) {
+        Picasso.get().load(currentUserImageUrl)
+                .placeholder(android.R.drawable.ic_menu_help)
+                .error(android.R.drawable.ic_menu_camera)
+                .resize(100, 100)
+                .into(view);
+    }
+
+    public String getCurrentUserName() {
+        return currentUser.getValue().getName();
+    }
+
+    public String getCurrentUserEmail() {
+        return currentUser.getValue().getEmail();
     }
 
     /**
@@ -49,55 +75,51 @@ public class ItemUserViewModel extends ViewModel {
         return chosenUser;
     }
 
+    @BindingAdapter({"imageUrl"})
+    public static void loadImage(ImageView view, String imageUrl) {
+        Picasso.get().load(imageUrl)
+                .placeholder(android.R.drawable.ic_menu_help)
+                .error(android.R.drawable.ic_menu_camera)
+                .resize(50, 50)
+                .into(view);
+    }
+
+    public String getCurrentUserImageUrl() {
+        return currentUser.getValue().getImageUrl();
+    }
+
+
     /**
      * Sets the chosen user.
+     *
      * @param user to set.
      */
-    public void setChosenUser(MutableLiveData<User> user) {
+    public void setChosenUser(User user) {
+        this.chosenUser.setValue(user);
     }
-
-    /**
-     * Starts UserProfileActivity with the chosen user.
-     * @param view
-     */
-    public void onItemClick(View view) {
-
-        context.startActivity(UserProfileActivity.launchWithDetails(view.getContext(), chosenUser.getValue()));
-    }
-
 
     /**
      * method to get the name of the User
      * @return the name of the User
      */
     public String getName() {
-        return null;
-        }
-
+        return chosenUser.getValue().getName();
+    }
 
     /**
      * method to get the Email of the User.
      * @return the Email of the User.
      */
     public String getEmail() {
-        return null;
+        return chosenUser.getValue().getEmail();
     }
-
 
     /**
      * method to get the imageURl of the Users profile picture
      * @return the imageUrl
      */
     public String getImageUrl() {
-        return null;
-    }
-
-
-    @BindingAdapter({"bind:profilePictureUrl"})
-    public static void loadImage(ImageView view, String imageUrl) {
-        Picasso.get().load(imageUrl)
-                // .placeholder(R.drawable.placeholder)
-                .into(view);
+        return chosenUser.getValue().getImageUrl() != null ? chosenUser.getValue().getImageUrl() : "http://www.skywardimaging.com/wp-content/uploads/2015/11/default-user-image.png";
     }
 
     /**
@@ -105,16 +127,32 @@ public class ItemUserViewModel extends ViewModel {
      * @return List of Subscriptions
      */
     public List<User> getSubscriptions() {
-        return null;
+        return this.chosenUser.getValue().getSubscriptions();
     }
 
+    /**
+     * method to get the number of users who subscribe to the chosen user
+     *
+     * @return size of the list of subscribers
+     */
+    public String getNumberOfSubscribers() {
+        return Integer.toString(chosenUser.getValue().getSubscribers().size());
+    }
 
+    /**
+     * method to get the number of users who the chosen user is subscribed to
+     *
+     * @return size of list of subscriptions of the user
+     */
+    public String getNumberOfSubscriptions() {
+        return Integer.toString(chosenUser.getValue().getSubscriptions().size());
+    }
     /**
      * method to get the List of Users, who subscribe to this User
      * @return List of Subscribers
      */
     public List<User> getSubscribers() {
-        return null;
+        return this.chosenUser.getValue().getSubscribers();
     }
 
     /**
@@ -122,7 +160,7 @@ public class ItemUserViewModel extends ViewModel {
      * @return list of groups
      */
     public List<Group> getJoinedGroups() {
-        return null;
+        return this.chosenUser.getValue().getJoinedGroups();
 
     }
 
@@ -131,46 +169,38 @@ public class ItemUserViewModel extends ViewModel {
      * @return list of events
      */
     public List<Event> getParticipatedEvents() {
-        return null;
+        return this.chosenUser.getValue().getParticipatedEvents();
     }
 
     /**
      * Gets all posts created by the current user.
      * @return
      */
-    public List<Post> getUserProfile() {
-        return null;
+    public MutableLiveData<List<Post>> getUserProfile() {
+        return userRepository.getUserProfile(chosenUser.getValue());
     }
 
-    /**
-     * Gets the personal feed of the current user, which includes the posts owned by
-     * the users joined groups, participating events and subscribed users.
-     * @return list of posts.
-     */
-    public List<Post> getPersonalFeed() {
-        return null;
-
-    }
 
     /**
      * Checks if the current profile is the profile of the current users own profile.
      * @return boolean result
      */
     public boolean isCurrentUsersProfile() {
-        return false;
+        return chosenUser.getValue().getId() == currentUser.getValue().getId();
     }
 
     /**
      * Subscribes the chosenUser by the current user.
      */
     public void subscribeUser() {
+        userRepository.subscribeUser(currentUser.getValue(), chosenUser.getValue());
     }
 
     /**
      * Unsubscribes the chosenUser by the current user.
      */
     public void unsubscribeUser() {
-
+        userRepository.unsubscribeUser(currentUser.getValue(), chosenUser.getValue());
     }
 
     /**
@@ -179,7 +209,25 @@ public class ItemUserViewModel extends ViewModel {
      * @param text for the post to be created.
      */
     public void createPost(String text) {
+        Post postToCreate = new Post();
+        postToCreate.setText(text);
+        postToCreate.setCreator(currentUser.getValue());
+        postToCreate.setDate(new Date());
+        postToCreate.setOwnerUser(currentUser.getValue());
+        postToCreate.setOwnedBy(currentUser.getValue().getId());
+        postRepository.createPost(postToCreate);
     }
 
+    public void setChosenUser(MutableLiveData<User> chosenUser) {
+        this.chosenUser = chosenUser;
+    }
 
+    public MutableLiveData<User> getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(MutableLiveData<User> currentUser) {
+        this.currentUser = currentUser;
+    }
 }
+

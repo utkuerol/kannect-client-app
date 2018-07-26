@@ -1,11 +1,12 @@
 package com.example.asus.example.mvvm.Model.Repository;
 
 import android.arch.lifecycle.MutableLiveData;
+import android.util.Log;
 
+import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.WebServices.ServiceAPI;
 import com.example.asus.example.mvvm.Model.WebServices.ServiceGenerator;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 import java.util.List;
 
@@ -117,19 +118,57 @@ public class UserRepository {
         return result;
     }
 
-    public void createUser(MutableLiveData<User> user) {
+    public void createUser(User user) {
         ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
-        Call<ResponseBody> call = client.createUser(user.getValue());
+        Call<ResponseBody> call = client.createUser(user);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
+                Log.d("debug", "onResponse create user");
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("debug", "onFailure create user:" + t.getMessage());
                 t.printStackTrace();
             }
         });
+    }
+
+    public MutableLiveData<User> getUserByID(int userID) {
+        final MutableLiveData<User> result = new MutableLiveData<>();
+        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        Call<User> call = client.getUserByID(userID);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                result.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+        return result;
+    }
+
+
+    public MutableLiveData<List<Post>> getUserProfile(User user) {
+        final MutableLiveData<List<Post>> result = new MutableLiveData<>();
+        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        Call<List<Post>> call = client.getUserProfile(user.getId());
+        call.enqueue(new Callback<List<Post>>() {
+            @Override
+            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+                result.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Post>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+        return result;
     }
 }

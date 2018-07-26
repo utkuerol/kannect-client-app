@@ -2,48 +2,49 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="itemGroupViewModel"
+            type="com.example.asus.example.mvvm.ViewModel.ItemGroupViewModel" />
+    </data>
 
     <android.support.constraint.ConstraintLayout
-    android:layout_width="match_parent"
         android:id="@+id/item_group"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/itemRVHeight">
 
-        <data>
-
-            <variable
-                name="groupViewModel"
-                type="com.example.asus.example.mvvm.ViewModel.ItemGroupViewModel" />
-        </data>
 
         <TextView
-        android:id="@+id/groupNameTV"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/pictureRVSize"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="212dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="212dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/groupPictureIV"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/groupNameTV"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/pictureRVSize"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="212dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="212dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@{itemGroupViewModel.name}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/groupPictureIV"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/groupPictureIV"
-        android:layout_width="@dimen/pictureRVSize"
-        android:layout_height="@dimen/pictureRVSize"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="44dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.045" />
+        <ImageView
+            android:id="@+id/groupPictureIV"
+            android:layout_width="@dimen/pictureRVSize"
+            android:layout_height="@dimen/pictureRVSize"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="44dp"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            imageUrl="@{itemGroupViewModel.imageURl}"
+            app:layout_constraintVertical_bias="0.045" />
 </android.support.constraint.ConstraintLayout>
 </layout>

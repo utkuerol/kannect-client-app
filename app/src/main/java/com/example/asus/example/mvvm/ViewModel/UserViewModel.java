@@ -3,6 +3,7 @@ package com.example.asus.example.mvvm.ViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.Repository.UserRepository;
@@ -18,19 +19,17 @@ import java.util.List;
 public class UserViewModel extends ViewModel {
 
 
-    private MutableLiveData<List<User>> users;
-    private User currentUser; //TODO
+    private MutableLiveData<List<User>> users = new MutableLiveData<>();
+    private MutableLiveData<User> currentUser;
     private UserRepository userRepository;
-    private Context context;
 
-    /**
-     * Constructor to create a new instance with the given application context.
-     *
-     * @param context
-     */
-    public UserViewModel(Context context) {
-        this.context = context;
+
+    public void init(Context context) {
         users = new MutableLiveData<>();
+        userRepository = new UserRepository();
+
+        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
+        currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
     }
 
     /**
@@ -40,6 +39,10 @@ public class UserViewModel extends ViewModel {
      */
     public MutableLiveData<List<User>> getUsers() {
         return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users.setValue(users);
     }
 
     /**
@@ -54,14 +57,21 @@ public class UserViewModel extends ViewModel {
      * Sets the list of users to subscriptions of the current user.
      */
     public void setUsersToSubscriptions() {
-        users.setValue(currentUser.getSubscriptions());
+        users.setValue(currentUser.getValue().getSubscriptions());
     }
 
     /**
      * Sets the list of users to subscribers of the current user.
      */
     public void setUsersToSubscribers() {
-        users.setValue(currentUser.getSubscribers());
+        users.setValue(currentUser.getValue().getSubscribers());
     }
 
+    public MutableLiveData<User> getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(MutableLiveData<User> currentUser) {
+        this.currentUser = currentUser;
+    }
 }
