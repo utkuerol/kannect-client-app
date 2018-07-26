@@ -9,7 +9,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.example.asus.example.databinding.FragmentSubcategoriesEventBinding;
 import com.example.asus.example.mvvm.Model.Entities.Category;
@@ -62,8 +61,7 @@ public class SubcategoriesEventFragment extends Fragment {
             }
         });
 
-        Button newEventInCategoryButton = (Button) fragmentSubcategoriesEventBinding.newEventInCategoryButton;
-        newEventInCategoryButton.setOnClickListener(new View.OnClickListener() {
+        fragmentSubcategoriesEventBinding.newEventInCategoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
