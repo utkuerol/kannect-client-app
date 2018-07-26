@@ -103,6 +103,14 @@ public class ItemGroupViewModel extends ViewModel {
     }
 
     /**
+     * method to get the creator of a group as String
+     *
+     * @return creator as string
+     */
+    public String getCreatorAsString() {
+        return chosenGroup.getValue().getCreator().toString();
+    }
+    /**
      * method to get The Category this Group belongs to.
      * @return Category this Group belongs to.
      */
