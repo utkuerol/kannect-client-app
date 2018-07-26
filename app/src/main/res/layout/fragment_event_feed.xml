@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/oneFragmentHeight"
         android:background="@color/white"
+        android:layout_marginTop="@dimen/toolbarHeight"
         android:orientation="vertical">
 
 

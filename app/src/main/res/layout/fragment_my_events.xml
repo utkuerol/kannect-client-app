@@ -7,6 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/twoFragmentHeight"
         android:background="@color/white"
+        android:layout_marginTop="305dp"
         android:orientation="vertical">
 
 

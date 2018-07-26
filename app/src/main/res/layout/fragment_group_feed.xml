@@ -15,6 +15,7 @@
         android:layout_height="@dimen/oneFragmentHeight"
         android:orientation="vertical"
         android:background="@color/white"
+        android:layout_marginTop="@dimen/toolbarHeight"
         tools:context=".mvvm.View.GroupFeedFragment">
 
         <android.support.constraint.ConstraintLayout

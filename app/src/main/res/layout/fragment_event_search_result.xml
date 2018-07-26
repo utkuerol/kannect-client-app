@@ -7,6 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/searchResultHeight"
         android:background="@color/white"
+        android:layout_marginTop="250dp"
         tools:listitem="@layout/item_event">
 
     </android.support.v7.widget.RecyclerView>
