@@ -145,9 +145,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
 
         if (id == R.id.nav_feed) {
             launchPersonalFeedFragment();
-        } else if (id == R.id.nav_settings) {
-
-        } else if (id == R.id.nav_profile) {
+        }  else if (id == R.id.nav_profile) {
             launchPersonalProfileFragment();
         } else if (id == R.id.nav_groups) {
             launchGroupFragments();
