@@ -52,6 +52,7 @@ public class CategoriesEventFragment extends Fragment {
             public void onChanged(@Nullable List<Category> categories) {
                 if (categories != null) {
                     categoryAdapter.setCategoryList(categoryViewModel.getCategories().getValue());
+                    fragmentCategoriesEventBinding.categoriesEventCategoryRV.setAdapter(categoryAdapter);
                 }
             }
         });

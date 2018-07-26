@@ -58,6 +58,8 @@ public class GroupsInCategoryFragment extends Fragment {
                 if (user != null) {
                     groupViewModel.setGroupsFilteredByCategory(category);
                     groupAdapter.setGroupList(groupViewModel.getGroups().getValue());
+                    fragmentGroupsInCategoryBinding.groupsInCategoryGroupRV.setAdapter(groupAdapter);
+
                 }
 
             }

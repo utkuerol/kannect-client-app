@@ -55,6 +55,8 @@ public class GroupsInSubcategoryFragment extends Fragment {
             public void onChanged(@Nullable User user) {
                 if (user != null) {
                     groupAdapter.setGroupList(groupViewModel.getGroups().getValue());
+                    fragmentGroupsInSubcategoryBinding.groupsInSubcategoryGroupRV.setAdapter(groupAdapter);
+
                 }
             }
         });

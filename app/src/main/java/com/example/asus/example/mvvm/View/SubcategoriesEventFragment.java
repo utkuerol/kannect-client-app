@@ -56,6 +56,8 @@ public class SubcategoriesEventFragment extends Fragment {
             @Override
             public void onChanged(@Nullable User user) {
                 subcategoryAdapter.setSubcategoryList(itemCategoryViewModel.getSubcategories());
+                fragmentSubcategoriesEventBinding.subcategoriesEventSubcategoryRV.setAdapter(subcategoryAdapter);
+
             }
         });
 

@@ -44,6 +44,8 @@ public class GroupFeedFragment extends Fragment {
             public void onChanged(@Nullable User user) {
                 if (user != null) {
                     postAdapter.setPostList(itemGroupViewModel.getGroupFeed());
+                    fragmentGroupFeedBinding.groupFeedPostRV.setAdapter(postAdapter);
+
                 }
             }
         });

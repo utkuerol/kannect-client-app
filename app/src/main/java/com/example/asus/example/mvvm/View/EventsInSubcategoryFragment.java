@@ -57,6 +57,8 @@ public class EventsInSubcategoryFragment extends Fragment {
                 if (user != null) {
                     eventViewModel.setEventsFilteredBySubcategory(subcategory);
                     eventAdapter.setEventList(eventViewModel.getEvents().getValue());
+                    fragmentEventsInSubcategoryBinding.eventsInSubcategoryEventRV.setAdapter(eventAdapter);
+
 
                 }
             }

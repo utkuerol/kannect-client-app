@@ -55,6 +55,8 @@ public class MyGroupsFragment extends Fragment {
                 if (user != null) {
                     groupViewModel.setGroupsToJoinedGroups();
                     groupAdapter.setGroupList(groupViewModel.getGroups().getValue());
+                    fragmentMyGroupsBinding.myGroupsGroupRV.setAdapter(groupAdapter);
+
                 }
             }
         });

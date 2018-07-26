@@ -54,6 +54,7 @@ public class MyEventsFragment extends Fragment {
                 if (user != null) {
                     eventViewModel.setEventsToParticipatingEvents();
                     eventAdapter.setEventList(eventViewModel.getEvents().getValue());
+                    fragmentMyEventsBinding.myEventsEventRV.setAdapter(eventAdapter);
 
                 }
             }

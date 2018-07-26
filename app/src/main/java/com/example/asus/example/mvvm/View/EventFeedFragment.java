@@ -57,6 +57,8 @@ public class EventFeedFragment extends Fragment {
             public void onChanged(@Nullable List<Post> posts) {
                 if (posts != null) {
                     postAdapter.setPostList(itemEventViewModel.getEventFeed().getValue());
+                    fragmentEventFeedBinding.eventFeedRV.setAdapter(postAdapter);
+
                 }
             }
         };

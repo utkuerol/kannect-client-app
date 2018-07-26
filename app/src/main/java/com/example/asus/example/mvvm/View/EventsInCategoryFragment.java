@@ -55,6 +55,8 @@ public class EventsInCategoryFragment extends Fragment {
             public void onChanged(@Nullable User user) {
                 eventViewModel.setEventsFilteredByCategory(category);
                 eventAdapter.setEventList(eventViewModel.getEvents().getValue());
+                fragmentEventsInCategoryBinding.eventsInCategoryEventRV.setAdapter(eventAdapter);
+
 
             }
         });

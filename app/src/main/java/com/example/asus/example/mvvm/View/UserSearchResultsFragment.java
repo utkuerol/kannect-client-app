@@ -63,6 +63,7 @@ public class UserSearchResultsFragment extends Fragment {
             public void onChanged(@Nullable List<User> users) {
                 if (users != null) {
                     userAdapter.setUserList(userViewModel.getUsers().getValue());
+                    fragmentUserSearchResultBinding.userSearchResultUserRV.setAdapter(userAdapter);
                 }
             }
         });

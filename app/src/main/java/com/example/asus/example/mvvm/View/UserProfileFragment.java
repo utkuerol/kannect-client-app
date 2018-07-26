@@ -58,6 +58,8 @@ public class UserProfileFragment extends Fragment {
             public void onChanged(@Nullable List<Post> posts) {
                 if (posts != null) {
                     postAdapter.setPostList(itemUserViewModel.getUserProfile().getValue());
+                    fragmentUserProfileBinding.userProfilePostRV.setAdapter(postAdapter);
+
                 }
             }
         };

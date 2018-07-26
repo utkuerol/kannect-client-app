@@ -57,6 +57,8 @@ public class GroupSearchResultsFragment extends Fragment {
                 if (groups != null) {
                     groupViewModel.setGroupsToSearchResults(query);
                     groupAdapter.setGroupList(groupViewModel.getGroups().getValue());
+                    fragmentGroupSearchResultBinding.groupSearchResultGroupRV.setAdapter(groupAdapter);
+
                 }
             }
         };

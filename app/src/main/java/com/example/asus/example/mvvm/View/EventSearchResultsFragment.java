@@ -63,6 +63,8 @@ public class EventSearchResultsFragment extends Fragment {
                 if (events != null) {
                     eventViewModel.setEventsToSearchResults(query);
                     eventAdapter.setEventList(eventViewModel.getEvents().getValue());
+                    fragmentEventSearchResultBinding.eventSearchResultEventRV.setAdapter(eventAdapter);
+
                 }
             }
         };

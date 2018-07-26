@@ -59,6 +59,8 @@ public class PersonalFeedFragment extends Fragment {
             public void onChanged(@Nullable User user) {
                 if (user != null) {
                     postViewModel.setPostsToPersonalFeed();
+                    fragmentPersonalFeedBinding.personalFeedPostRV.setAdapter(postAdapter);
+
                 }
             }
         });

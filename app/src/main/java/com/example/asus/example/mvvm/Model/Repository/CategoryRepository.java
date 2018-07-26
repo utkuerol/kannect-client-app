@@ -2,6 +2,7 @@ package com.example.asus.example.mvvm.Model.Repository;
 
 
 import android.arch.lifecycle.MutableLiveData;
+import android.util.Log;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.WebServices.ServiceAPI;
@@ -43,9 +44,6 @@ public class CategoryRepository {
         @Override
         public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
             result.setValue(response.body());
-
-
-
         }
 
 

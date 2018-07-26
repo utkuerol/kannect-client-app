@@ -51,6 +51,8 @@ public class SubscriptionsFragment extends Fragment {
                 if (user != null) {
                     userViewModel.setUsersToSubscriptions();
                     userAdapter.setUserList(userViewModel.getUsers().getValue());
+                    fragmentSubscriptionsBinding.subscriptionsUserRV.setAdapter(userAdapter);
+
                 }
             }
         });

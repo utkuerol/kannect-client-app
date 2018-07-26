@@ -189,10 +189,10 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
 
     public void launchGroupFragments() {
         CategoriesGroupFragment categoriesGroupFragment = new CategoriesGroupFragment();
-        MyGroupsFragment myGroupsFragment = new MyGroupsFragment();
+        //MyGroupsFragment myGroupsFragment = new MyGroupsFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, categoriesGroupFragment);
-        transaction.add(R.id.content_frame, myGroupsFragment);
+        //transaction.add(R.id.content_frame, myGroupsFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
