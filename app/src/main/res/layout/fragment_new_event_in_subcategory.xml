@@ -30,8 +30,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.985"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/newEventInSubcategoryImageUrlET"
-            app:layout_constraintVertical_bias="0.419" />
+            app:layout_constraintTop_toBottomOf="@+id/newEventInSubcategoryDate" />
 
         <EditText
             android:id="@+id/newEventInSubcategoryNameET"
@@ -56,11 +55,12 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="128dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="112dp"
+            android:layout_marginTop="24dp"
             android:ems="10"
             android:hint="@string/eventDescription"
             android:inputType="textMultiLine"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/newEventInSubcategoryNameET"
             app:layout_constraintTop_toBottomOf="@+id/newEventInSubcategoryNameET" />
 
@@ -77,5 +77,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/newEventInSubcategoryDescriptionET"
             app:layout_constraintTop_toBottomOf="@+id/newEventInSubcategoryDescriptionET" />
+
+        <EditText
+            android:id="@+id/newEventInSubcategoryDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="64dp"
+            android:hint="@string/eventDate"
+            android:inputType="date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/newEventInSubcategoryImageUrlET"
+            app:layout_constraintTop_toBottomOf="@+id/newEventInSubcategoryImageUrlET" />
     </android.support.constraint.ConstraintLayout>
 </layout>
