@@ -1,6 +1,8 @@
 package com.example.asus.example.mvvm.Model.Entities;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
@@ -14,6 +16,7 @@ public class Event implements Serializable {
 
     private int id;
     private String name;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
     private Date date;
     private String description;
     private User creator;

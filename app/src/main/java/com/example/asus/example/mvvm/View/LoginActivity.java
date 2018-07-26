@@ -118,6 +118,13 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onChanged(@Nullable User user) {
                     if (user == null) {
+                        while (account.getDisplayName() == null) {
+                            try {
+                                wait();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
                         viewModel.createAndSetCurrentUser(account);
                     } else {
                         viewModel.setUser(viewModel.invoke(account));

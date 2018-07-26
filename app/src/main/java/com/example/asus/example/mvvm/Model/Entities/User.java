@@ -23,6 +23,7 @@ public class User implements Serializable {
     private List<Group> createdGroups;
     private List<Event> createdEvents;
     private List<Comment> createdComments;
+    private List<Post> likedPosts;
 
     /**
      * Overwrites Default Constructor and
@@ -37,6 +38,7 @@ public class User implements Serializable {
         this.createdGroups = new LinkedList<>();
         this.createdEvents = new LinkedList<>();
         this.createdComments = new LinkedList<>();
+        this.likedPosts = new LinkedList<>();
     }
 
     /**
@@ -54,7 +56,7 @@ public class User implements Serializable {
      * @param createdEvents all the Events, the User created.
      * @param createdComments all the Comments, the User created.
      */
-    public User(int id, String name, String email, String imageUrl, List<User> subscriptions, List<User> subscribers, List<Group> joinedGroups, List<Event> participatedEvents, List<Post> createdPosts, List<Group> createdGroups, List<Event> createdEvents, List<Comment> createdComments) {
+    public User(int id, String name, String email, String imageUrl, List<User> subscriptions, List<User> subscribers, List<Group> joinedGroups, List<Event> participatedEvents, List<Post> createdPosts, List<Group> createdGroups, List<Event> createdEvents, List<Comment> createdComments, List<Post> likedPosts) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -67,6 +69,7 @@ public class User implements Serializable {
         this.createdGroups = createdGroups;
         this.createdEvents = createdEvents;
         this.createdComments = createdComments;
+        this.likedPosts = likedPosts;
 
     }
 
@@ -226,5 +229,45 @@ public class User implements Serializable {
      */
     public void setParticipatedEvents(List<Event> participatedEvents) {
         this.participatedEvents = participatedEvents;
+    }
+
+    public List<Post> getCreatedPosts() {
+        return createdPosts;
+    }
+
+    public void setCreatedPosts(List<Post> createdPosts) {
+        this.createdPosts = createdPosts;
+    }
+
+    public List<Group> getCreatedGroups() {
+        return createdGroups;
+    }
+
+    public void setCreatedGroups(List<Group> createdGroups) {
+        this.createdGroups = createdGroups;
+    }
+
+    public List<Event> getCreatedEvents() {
+        return createdEvents;
+    }
+
+    public void setCreatedEvents(List<Event> createdEvents) {
+        this.createdEvents = createdEvents;
+    }
+
+    public List<Comment> getCreatedComments() {
+        return createdComments;
+    }
+
+    public void setCreatedComments(List<Comment> createdComments) {
+        this.createdComments = createdComments;
+    }
+
+    public List<Post> getLikedPosts() {
+        return likedPosts;
+    }
+
+    public void setLikedPosts(List<Post> likedPosts) {
+        this.likedPosts = likedPosts;
     }
 }

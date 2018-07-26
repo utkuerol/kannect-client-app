@@ -17,7 +17,9 @@ public class ServiceGenerator {
     private static Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(new NullOnEmptyConverterFactory())
+            //.addConverterFactory(JacksonConverterFactory.create());
             .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().setDateFormat("yyyy.MM.dd").create()));
+
 
     private static Retrofit retrofit = builder.build();
 

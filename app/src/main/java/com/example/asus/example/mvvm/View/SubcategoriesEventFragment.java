@@ -55,9 +55,10 @@ public class SubcategoriesEventFragment extends Fragment {
         itemCategoryViewModel.getCurrentUser().observe(this, new Observer<User>() {
             @Override
             public void onChanged(@Nullable User user) {
-                subcategoryAdapter.setSubcategoryList(itemCategoryViewModel.getSubcategories());
-                fragmentSubcategoriesEventBinding.subcategoriesEventSubcategoryRV.setAdapter(subcategoryAdapter);
-
+                if (user != null) {
+                    subcategoryAdapter.setSubcategoryList(itemCategoryViewModel.getSubcategories());
+                    fragmentSubcategoriesEventBinding.subcategoriesEventSubcategoryRV.setAdapter(subcategoryAdapter);
+                }
             }
         });
 
