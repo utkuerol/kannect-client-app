@@ -84,6 +84,7 @@ public class ItemGroupViewModel extends ViewModel {
         return chosenGroup.getValue().getName();
     }
 
+
     /**
      * Gets the description of the group.
      * @return description
@@ -125,6 +126,14 @@ public class ItemGroupViewModel extends ViewModel {
         return chosenGroup.getValue().getImageURl();
     }
 
+    /**
+     * method to get the numberOfMembers as a string
+     *
+     * @return number of members as string
+     */
+    public String getNumberOfMembersAsString() {
+        return Integer.toString(chosenGroup.getValue().getMembers().size());
+    }
     /**
      * method to get the List of Users who joined the Group
      * @return List of Members
