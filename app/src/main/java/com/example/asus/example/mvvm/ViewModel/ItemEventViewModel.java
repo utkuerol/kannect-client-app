@@ -152,8 +152,8 @@ public class ItemEventViewModel extends ViewModel {
         return event.getValue().getParticipants();
     }
 
-    public int getNumberOfParticipants() {
-        return getParticipants().size();
+    public String getNumberOfParticipants() {
+        return Integer.toString(getParticipants().size());
     }
 
     /**
