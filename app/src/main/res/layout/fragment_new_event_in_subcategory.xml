@@ -12,7 +12,9 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/oneFragmentHeight">
+        android:layout_height="@dimen/oneFragmentHeight"
+        android:layout_marginTop="@dimen/toolbarHeight"
+        android:background="@color/white">
 
 
         <Button
@@ -20,16 +22,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="4dp"
+            android:layout_marginEnd="140dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="140dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/create"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.985"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/newEventInSubcategoryImageUrlET" />
+            app:layout_constraintTop_toBottomOf="@+id/newEventInSubcategoryDate" />
 
         <EditText
             android:id="@+id/newEventInSubcategoryNameET"
@@ -44,38 +47,55 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.007"
             app:layout_constraintStart_toStartOf="parent"
+            android:inputType="text"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/newEventInSubcategoryDescriptionET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="36dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginEnd="128dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="128dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="108dp"
+            android:layout_marginTop="24dp"
             android:ems="10"
             android:hint="@string/eventDescription"
             android:inputType="textMultiLine"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.196"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/newEventInSubcategoryNameET"
             app:layout_constraintTop_toBottomOf="@+id/newEventInSubcategoryNameET" />
 
         <EditText
             android:id="@+id/newEventInSubcategoryImageUrlET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="36dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginEnd="280dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="280dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="104dp"
             android:hint="@string/eventImageUrl"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.047"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/newEventInSubcategoryDescriptionET"
+            android:inputType="textUri"
             app:layout_constraintTop_toBottomOf="@+id/newEventInSubcategoryDescriptionET" />
+
+        <EditText
+            android:id="@+id/newEventInSubcategoryDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="64dp"
+            android:hint="@string/eventDate"
+            android:inputType="date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/newEventInSubcategoryImageUrlET"
+            app:layout_constraintTop_toBottomOf="@+id/newEventInSubcategoryImageUrlET" />
     </android.support.constraint.ConstraintLayout>
 </layout>

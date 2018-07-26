@@ -12,7 +12,9 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/oneFragmentHeight">
+        android:layout_height="@dimen/oneFragmentHeight"
+        android:layout_marginTop="@dimen/toolbarHeight"
+        android:background="@color/white">
 
 
         <Button
@@ -44,6 +46,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
+            android:inputType="text"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
@@ -51,31 +54,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:layout_marginLeft="28dp"
             android:layout_marginRight="8dp"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="132dp"
+            android:layout_marginTop="140dp"
             android:ems="10"
             android:hint="@string/groupDescription"
             android:inputType="textMultiLine"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/newGroupInSubcategoryNameET"
             app:layout_constraintTop_toBottomOf="@+id/newGroupInSubcategoryNameET" />
 
         <EditText
             android:id="@+id/newGroupInSubcategoryImageUrlET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="28dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="92dp"
+            android:layout_marginEnd="288dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="288dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="88dp"
             android:hint="@string/groupImageUrl"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/newGroupInSubcategoryDescriptionET"
+            android:inputType="textUri"
             app:layout_constraintTop_toBottomOf="@+id/newGroupInSubcategoryDescriptionET" />
     </android.support.constraint.ConstraintLayout>
 </layout>
