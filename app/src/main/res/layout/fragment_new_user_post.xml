@@ -14,12 +14,24 @@
         android:layout_marginTop="@dimen/toolbarHeight"
         android:background="@color/white">
 
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="23dp"
+            android:layout_marginRight="23dp"
+            android:text="@string/post" />
+
         <EditText
             android:id="@+id/newUserPostET"
             android:layout_width="match_parent"
             android:layout_height="450dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:gravity="center"
             android:hint="@string/typePost"
             android:inputType="textMultiLine"
