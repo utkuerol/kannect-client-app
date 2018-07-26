@@ -132,8 +132,22 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         if (id == android.R.id.home) {
             mDrawerLayout.openDrawer(GravityCompat.START);
             return true;
-    }
-            return true;
+        } else if (id == R.id.nav_feed) {
+            launchPersonalFeedFragment();
+        } else if (id == R.id.nav_profile) {
+            launchPersonalProfileFragment();
+        } else if (id == R.id.nav_groups) {
+            launchGroupFragments();
+        } else if (id == R.id.nav_search) {
+            launchSearchFragments();
+        } else if (id == R.id.nav_events) {
+            launchEventFragments();
+        } else if (id == R.id.nav_logout) {
+            signOut();
+        }
+
+
+        return true;
     }
 
 
