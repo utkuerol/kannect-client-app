@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.asus.example.databinding.FragmentUserSearchResultBinding;
 import com.example.asus.example.mvvm.Model.Entities.User;
@@ -28,7 +29,7 @@ public class UserSearchResultsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
-
+        Toast.makeText(getContext(), "UserSearchREsult", Toast.LENGTH_LONG);
         //set viewmodel
         final UserViewModel userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
         userViewModel.init(this.getContext().getApplicationContext());
