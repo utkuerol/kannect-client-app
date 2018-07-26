@@ -130,5 +130,26 @@ public class Comment implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
+
+    /**
+     * compares two Comments by their ids
+     *
+     * @param object comment to compare with
+     * @return true if object and this comment have the same id, else false
+     */
+    @Override
+    public boolean equals(Object object) {
+        if (object == null) {
+            return false;
+        }
+        if (!Comment.class.isAssignableFrom(object.getClass())) {
+            return false;
+        }
+        final Comment other = (Comment) object;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
 }
 

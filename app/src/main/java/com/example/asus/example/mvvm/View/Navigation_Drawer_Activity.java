@@ -212,20 +212,20 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
 
     public void launchGroupFragments() {
         CategoriesGroupFragment categoriesGroupFragment = new CategoriesGroupFragment();
-        //MyGroupsFragment myGroupsFragment = new MyGroupsFragment();
+        MyGroupsFragment myGroupsFragment = new MyGroupsFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, categoriesGroupFragment);
-        //transaction.add(R.id.content_frame, myGroupsFragment);
+        transaction.add(R.id.content_frame, myGroupsFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
 
     public void launchEventFragments() {
         CategoriesEventFragment categoriesEventFragment = new CategoriesEventFragment();
-        //MyEventsFragment myEventsFragment = new MyEventsFragment();
+        MyEventsFragment myEventsFragment = new MyEventsFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, categoriesEventFragment);
-        //transaction.add(R.id.content_frame, myEventsFragment);
+        transaction.add(R.id.content_frame, myEventsFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -240,7 +240,6 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.add(R.id.content_frame, userSearchResultsFragment);
         transaction.add(R.id.content_frame, eventSearchResultsFragment);
         transaction.add(R.id.content_frame, groupSearchResultsFragment);
-
         transaction.addToBackStack(null);
         transaction.commit();
 
@@ -430,12 +429,12 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
 
     public void launchSubcategoriesEventAndEventsInCategoryFragment(Category category) {
         SubcategoriesEventFragment subcategoriesEventFragment = new SubcategoriesEventFragment();
-        //EventsInCategoryFragment eventsInCategoryFragment = new EventsInCategoryFragment();
-        //eventsInCategoryFragment.setCategory(category);
+        EventsInCategoryFragment eventsInCategoryFragment = new EventsInCategoryFragment();
+        eventsInCategoryFragment.setCategory(category);
         subcategoriesEventFragment.setSubcategory(category);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, subcategoriesEventFragment);
-        //transaction.add(R.id.content_frame, eventsInCategoryFragment);
+        transaction.add(R.id.content_frame, eventsInCategoryFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -447,6 +446,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         subcategoriesGroupFragment.setCategory(category);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, subcategoriesGroupFragment);
+        transaction.add(R.id.content_frame, groupsInCategoryFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }

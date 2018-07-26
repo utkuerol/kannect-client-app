@@ -24,6 +24,16 @@
             android:background="@color/graylight">
 
             <TextView
+                android:id="@+id/eventFeedCreatePostTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/createPost"
+                app:layout_constraintEnd_toEndOf="@+id/createPostInEventIV"
+                app:layout_constraintHorizontal_bias="0.558"
+                app:layout_constraintStart_toStartOf="@+id/createPostInEventIV"
+                app:layout_constraintTop_toBottomOf="@+id/createPostInEventIV" />
+
+            <TextView
                 android:id="@+id/participantsTV"
                 android:layout_width="4dp"
                 android:layout_height="27dp"

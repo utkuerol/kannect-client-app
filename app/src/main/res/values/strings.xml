@@ -43,6 +43,9 @@
     <string name="logout">Abmelden</string>
     <string name="typePost">Text eingeben…</string>
     <string name="post">Posten</string>
+    <string name="createPost">Post erstellen</string>
+    <string name="createEvent">Veranstaltung erstellen</string>
+    <string name="createGroup">Gruppe erstellen</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>

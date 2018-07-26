@@ -18,6 +18,6 @@
     <dimen name="searchInputButtonHeight">45dp</dimen>
     <dimen name="searchInputButtonWidth">60dp</dimen>
     <dimen name="createInCatOrSubcategoryRVHeight">230dp</dimen>
-    <dimen name="personalFeedRVHeight">470dp</dimen>
+    <dimen name="personalFeedRVHeight">430dp</dimen>
     <dimen name="toolbarHeight">50dp</dimen>
 </resources>

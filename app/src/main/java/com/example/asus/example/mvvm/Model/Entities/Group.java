@@ -196,5 +196,26 @@ public class Group implements Serializable {
     public void setMembers(List<User> members) {
         this.members = members;
     }
+
+    /**
+     * compares two Groups by their ids
+     *
+     * @param object group to compare with
+     * @return true if object and this group have the same id, else false
+     */
+    @Override
+    public boolean equals(Object object) {
+        if (object == null) {
+            return false;
+        }
+        if (!Group.class.isAssignableFrom(object.getClass())) {
+            return false;
+        }
+        final Group other = (Group) object;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
 }
 

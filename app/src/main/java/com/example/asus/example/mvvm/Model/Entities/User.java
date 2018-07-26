@@ -270,4 +270,25 @@ public class User implements Serializable {
     public void setLikedPosts(List<Post> likedPosts) {
         this.likedPosts = likedPosts;
     }
+
+    /**
+     * compares two Users by their ids
+     *
+     * @param object user to compare with
+     * @return true if object and this user have the same id, else false
+     */
+    @Override
+    public boolean equals(Object object) {
+        if (object == null) {
+            return false;
+        }
+        if (!User.class.isAssignableFrom(object.getClass())) {
+            return false;
+        }
+        final User other = (User) object;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
 }

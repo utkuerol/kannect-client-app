@@ -135,4 +135,25 @@ public class Category implements Serializable{
     public void setId(int id) {
         this.id = id;
     }
+
+    /**
+     * compares two Categories by their ids
+     *
+     * @param object category to compare with
+     * @return true if object and this category have the same id, else false
+     */
+    @Override
+    public boolean equals(Object object) {
+        if (object == null) {
+            return false;
+        }
+        if (!Category.class.isAssignableFrom(object.getClass())) {
+            return false;
+        }
+        final Category other = (Category) object;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
 }
