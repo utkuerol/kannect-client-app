@@ -134,16 +134,22 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
             return true;
         } else if (id == R.id.nav_feed) {
             launchPersonalFeedFragment();
+            return true;
         } else if (id == R.id.nav_profile) {
             launchPersonalProfileFragment();
+            return true;
         } else if (id == R.id.nav_groups) {
             launchGroupFragments();
+            return true;
         } else if (id == R.id.nav_search) {
             launchSearchFragments();
+            return true;
         } else if (id == R.id.nav_events) {
             launchEventFragments();
+            return true;
         } else if (id == R.id.nav_logout) {
             signOut();
+            return true;
         }
 
 
