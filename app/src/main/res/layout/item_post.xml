@@ -10,8 +10,7 @@
 <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="@dimen/itemRVHeight"
-    android:id="@+id/item_post"
-    android:background="@color/graylight">
+    android:id="@+id/item_post">
 
 
     <ImageView
