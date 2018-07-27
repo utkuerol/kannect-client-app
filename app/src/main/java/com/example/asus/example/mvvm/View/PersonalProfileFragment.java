@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.asus.example.databinding.FragmentUserProfileBinding;
 import com.example.asus.example.mvvm.Model.Entities.Post;
@@ -60,6 +61,8 @@ public class PersonalProfileFragment extends Fragment {
                     Log.d("debug", "posts size: " + posts.size());
                     postAdapter.setPostList(posts);
                     fragmentUserProfileBinding.userProfilePostRV.setAdapter(postAdapter);
+                } else {
+                    Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT);
                 }
             }
         };

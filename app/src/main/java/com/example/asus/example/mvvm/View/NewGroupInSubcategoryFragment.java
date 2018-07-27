@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.asus.example.databinding.FragmentNewGroupInSubcategoryBinding;
 import com.example.asus.example.mvvm.Model.Entities.Subcategory;
@@ -39,6 +40,8 @@ public class NewGroupInSubcategoryFragment extends Fragment {
             public void onChanged(@Nullable User user) {
                 if (user != null) {
                     fragmentNewGroupBinding.setItemSubcategoryViewModel(itemSubcategoryViewModel);
+                } else {
+                    Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT);
                 }
             }
         });

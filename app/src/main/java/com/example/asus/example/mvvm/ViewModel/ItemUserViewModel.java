@@ -83,7 +83,7 @@ public class ItemUserViewModel extends ViewModel {
         Picasso.get().load(imageUrl)
                 .placeholder(android.R.drawable.ic_menu_help)
                 .error(android.R.drawable.ic_menu_camera)
-                .resize(50, 50)
+                .resize(100, 100)
                 .into(view);
     }
 
@@ -234,10 +234,13 @@ public class ItemUserViewModel extends ViewModel {
     }
 
     public void onCreatePostClick() {
-        try {
-            createPost();
-        } catch (Exception e) {
-            e.printStackTrace();
+
+        if (textValue.get().length() != 0) {
+            try {
+                createPost();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

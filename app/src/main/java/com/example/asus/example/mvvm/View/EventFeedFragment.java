@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentEventFeedBinding;
@@ -112,9 +113,9 @@ public class EventFeedFragment extends Fragment implements View.OnClickListener 
             case R.id.participateBt: {
                 if (fragmentEventFeedBinding.participateBt.getText().equals("particpate")) {
                     fragmentEventFeedBinding.participateBt.setText("participated");
-                    itemEventViewModel.getCurrentUser().getValue().getParticipatedEvents().add(event);
+                    itemEventViewModel.participateEvent();
                 } else {
-                    itemEventViewModel.getCurrentUser().getValue().getParticipatedEvents().remove(event);
+                    itemEventViewModel.leaveEvent();
                     fragmentEventFeedBinding.participateBt.setText("participate");
                 }
                 break;

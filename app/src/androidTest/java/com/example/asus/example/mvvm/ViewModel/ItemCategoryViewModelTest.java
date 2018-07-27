@@ -23,7 +23,6 @@ public class ItemCategoryViewModelTest {
     private String eventName;
     private String groupName;
     private String description;
-    @Mock
     private User currentUser;
 
     @Before

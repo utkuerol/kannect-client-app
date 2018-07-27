@@ -39,11 +39,16 @@ public class UserRepository {
         call.enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                result.setValue(response.body());
+                if (response.isSuccessful()) {
+                    result.setValue(response.body());
+                } else {
+                    result.setValue(null);
+                }
             }
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
+                result.setValue(null);
                 t.printStackTrace();
             }
         });
@@ -111,11 +116,16 @@ public class UserRepository {
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                result.setValue(response.body());
+                if (response.isSuccessful()) {
+                    result.setValue(response.body());
+                } else {
+                    result.setValue(null);
+                }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
+                result.setValue(null);
                 t.printStackTrace();
             }
         });
@@ -159,11 +169,16 @@ public class UserRepository {
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                result.setValue(response.body());
+                if (response.isSuccessful()) {
+                    result.setValue(response.body());
+                } else {
+                    result.setValue(null);
+                }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
+                result.setValue(null);
                 t.printStackTrace();
             }
         });
@@ -184,11 +199,16 @@ public class UserRepository {
         call.enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-                result.setValue(response.body());
+                if (response.isSuccessful()) {
+                    result.setValue(response.body());
+                } else {
+                    result.setValue(null);
+                }
             }
 
             @Override
             public void onFailure(Call<List<Post>> call, Throwable t) {
+                result.setValue(null);
                 t.printStackTrace();
             }
         });

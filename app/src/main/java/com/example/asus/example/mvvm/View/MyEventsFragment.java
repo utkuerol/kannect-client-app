@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentMyEventsBinding;
@@ -70,6 +71,8 @@ public class MyEventsFragment extends Fragment {
                     eventAdapter.setEventList(eventViewModel.getEvents().getValue());
                     fragmentMyEventsBinding.myEventsEventRV.setAdapter(eventAdapter);
 
+                } else {
+                    Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT);
                 }
             }
         });

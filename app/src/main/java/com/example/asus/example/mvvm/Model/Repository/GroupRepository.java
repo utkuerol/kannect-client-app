@@ -38,11 +38,16 @@ public class GroupRepository {
         call.enqueue(new Callback<List<Group>>() {
             @Override
             public void onResponse(Call<List<Group>> call, Response<List<Group>> response) {
-                result.setValue(response.body());
+                if (response.isSuccessful()) {
+                    result.setValue(response.body());
+                } else {
+                    result.setValue(null);
+                }
             }
 
             @Override
             public void onFailure(Call<List<Group>> call, Throwable t) {
+                result.setValue(null);
                 t.printStackTrace();
             }
         });

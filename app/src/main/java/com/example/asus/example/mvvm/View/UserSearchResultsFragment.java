@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.asus.example.databinding.FragmentUserSearchResultBinding;
 import com.example.asus.example.mvvm.Model.Entities.User;
@@ -61,9 +62,13 @@ public class UserSearchResultsFragment extends Fragment {
                             if (users != null) {
                                 userAdapter.setUserList(users);
                                 fragmentUserSearchResultBinding.userSearchResultUserRV.setAdapter(userAdapter);
+                            } else {
+                                Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT);
                             }
                         }
                     });
+                } else {
+                    Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT);
                 }
             }
         });

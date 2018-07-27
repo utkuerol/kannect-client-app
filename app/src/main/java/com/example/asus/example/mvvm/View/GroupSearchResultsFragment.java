@@ -75,6 +75,8 @@ public class GroupSearchResultsFragment extends Fragment {
                     groupAdapter.setGroupList(groups);
                     fragmentGroupSearchResultBinding.groupSearchResultGroupRV.setAdapter(groupAdapter);
 
+                } else {
+                    Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT);
                 }
             }
         };

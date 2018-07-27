@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentEventsInCategoryBinding;
@@ -68,9 +69,13 @@ public class EventsInCategoryFragment extends Fragment {
         eventViewModel.getCurrentUser().observe(this, new Observer<User>() {
             @Override
             public void onChanged(@Nullable User user) {
-                eventViewModel.setEventsFilteredByCategory(category);
-                eventAdapter.setEventList(eventViewModel.getEvents().getValue());
-                fragmentEventsInCategoryBinding.eventsInCategoryEventRV.setAdapter(eventAdapter);
+                if (user != null) {
+                    eventViewModel.setEventsFilteredByCategory(category);
+                    eventAdapter.setEventList(eventViewModel.getEvents().getValue());
+                    fragmentEventsInCategoryBinding.eventsInCategoryEventRV.setAdapter(eventAdapter);
+                } else {
+                    Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT);
+                }
 
 
             }
