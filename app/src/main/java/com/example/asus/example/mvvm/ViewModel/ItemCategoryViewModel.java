@@ -158,10 +158,13 @@ public class ItemCategoryViewModel extends ViewModel {
      * method which will be called, when the user presses the Button to create an Event.
      */
     public void onCreateEventClick() {
-        try {
-            createEvent();
-        } catch (Exception e) {
-            e.printStackTrace();
+
+        if (!checkIfUserInputFalse() && isValidFormat()) {
+            try {
+                createEvent();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -170,12 +173,37 @@ public class ItemCategoryViewModel extends ViewModel {
      * Method which will be called, when the user presses the Button to create a Group.
      */
     public void onCreateGroupClick() {
-        try {
-            createGroup();
-        } catch (Exception e) {
-            e.printStackTrace();
+
+
+        if (!checkIfUserInputFalse()) {
+            try {
+                createGroup();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
+    private boolean checkIfUserInputFalse() {
+        if (inputName.get().length() == 0) {
+            return true;
+        } else if (inputDesc.get().length() == 0) {
+            return true;
+        } else return inputImageUrl.get().length() == 0;
+    }
 
+
+    private boolean isValidFormat() {
+        Date date = null;
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+            date = sdf.parse(inputDate.get());
+            if (!inputDate.get().equals(sdf.format(date))) {
+                date = null;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return date != null;
+    }
 }

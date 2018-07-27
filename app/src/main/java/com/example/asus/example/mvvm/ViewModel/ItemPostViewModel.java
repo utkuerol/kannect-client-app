@@ -109,6 +109,14 @@ public class ItemPostViewModel extends ViewModel {
     }
 
     /**
+     * method to get the number of user that liked the post.
+     *
+     * @return number of user that liked the post as a String.
+     */
+    public String getNumberOfLikesAsString() {
+        return Integer.toString(post.getValue().getLikedUsers().size());
+    }
+    /**
      * Gets the date of creation of the post.
      * @return date of creation
      */

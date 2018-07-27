@@ -13,6 +13,21 @@
     android:background="@color/white">
 
 
+    <TextView
+        android:id="@+id/fragmentNameOfUserWhoPostedTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@{itemPostViewModel.creatorName}"
+        app:layout_constraintEnd_toStartOf="@+id/fragmentPostTV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentPictureOfUserWhoPostedIV" />
+
     <ImageView
         android:id="@+id/thumbsDown"
         android:layout_width="wrap_content"
@@ -35,63 +50,62 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentPictureOfUserWhoPostedIV"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintEnd_toStartOf="@+id/fragmentPostTV"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentNameOfUserWhoPostedTV"
         app:srcCompat="@drawable/ic_thumb_ub_icon" />
 
     <TextView
         android:id="@+id/datePostTV"
-        android:layout_width="90dp"
-        android:layout_height="26dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="70dp"
+        android:layout_height="27dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
         android:text="@{itemPostViewModel.dateAsString}"
-        app:layout_constraintBottom_toBottomOf="@+id/fragmentWherePostedTV"
+        app:layout_constraintBottom_toBottomOf="@+id/numberOfLikesTV"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/fragmentWherePostedTV"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="@+id/numberOfLikesTV"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/fragmentWherePostedTV"
         android:layout_width="90dp"
         android:layout_height="27dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
         android:text="@{itemPostViewModel.ownerName}"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/fragmentNameOfUserWhoPostedTV"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentPostTV"
+        app:layout_constraintBottom_toBottomOf="@+id/numberOfLikesTV"
+        app:layout_constraintStart_toStartOf="@+id/fragmentPostTV"
+        app:layout_constraintTop_toTopOf="@+id/numberOfLikesTV"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/fragmentNameOfUserWhoPostedTV"
+        android:id="@+id/numberOfLikesTV"
         android:layout_width="70dp"
         android:layout_height="27dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@{itemPostViewModel.numberOfLikes}"
+        android:text="@{itemPostViewModel.numberOfLikesAsString}"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/fragmentPostTV"
+        app:layout_constraintEnd_toStartOf="@+id/datePostTV"
+        app:layout_constraintHorizontal_bias="0.833"
+        app:layout_constraintStart_toEndOf="@+id/fragmentWherePostedTV"
         app:layout_constraintTop_toBottomOf="@+id/fragmentPostTV"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/fragmentPostTV"
-        android:layout_width="279dp"
+        android:layout_width="260dp"
         android:layout_height="86dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="@{itemPostViewModel.text}"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.608"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
