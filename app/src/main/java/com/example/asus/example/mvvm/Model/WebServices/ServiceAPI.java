@@ -102,7 +102,7 @@ public interface ServiceAPI {
      * @param post to be saved
      * @return void, no response needed
      */
-    @POST("post")
+    @POST("newPost")
     Call<Post> createPost(@Body Post post);
 
     /**

@@ -1,6 +1,8 @@
 package com.example.asus.example.mvvm.Model.Entities;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
@@ -17,8 +19,9 @@ public class Post implements Serializable {
     private String text;
     private User creator;
     private List<User> likedUsers;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy.MM.dd")
     private Date date;
-    private long ownedBy;
+    private int owned_by;
     private User ownerUser;
     private Group ownerGroup;
     private Event ownerEvent;
@@ -44,14 +47,14 @@ public class Post implements Serializable {
      * @param id unique identifier of the Object.
      * @param ownedBy id of the entity, which this posts belongs to
      */
-    public Post(String text, User creator, List<User> likedUsers, Date date, List<Comment> comments, int id, long ownedBy) {
+    public Post(String text, User creator, List<User> likedUsers, Date date, List<Comment> comments, int id, int ownedBy) {
         this.text = text;
         this.creator = creator;
         this.likedUsers = likedUsers;
         this.date = date;
         this.comments = comments;
         this.id = id;
-        this.ownedBy = ownedBy;
+        this.owned_by = ownedBy;
     }
 
     /**
@@ -64,13 +67,13 @@ public class Post implements Serializable {
      * @param comments Comments which belong to the Post
      * @param ownedBy id of the entity, which this posts belongs to
      */
-    public Post(String text, User creator, List<User> likedUsers, Date date, List<Comment> comments, long ownedBy) {
+    public Post(String text, User creator, List<User> likedUsers, Date date, List<Comment> comments, int ownedBy) {
         this.text = text;
         this.creator = creator;
         this.likedUsers = likedUsers;
         this.date = date;
         this.comments = comments;
-        this.ownedBy = ownedBy;
+        this.owned_by = ownedBy;
     }
 
     /**
@@ -167,8 +170,8 @@ public class Post implements Serializable {
      *
      * @return id of the entity
      */
-    public long getOwnedBy() {
-        return ownedBy;
+    public int getOwnedBy() {
+        return owned_by;
     }
 
     /**
@@ -176,8 +179,8 @@ public class Post implements Serializable {
      *
      * @param ownedBy id of the entity
      */
-    public void setOwnedBy(long ownedBy) {
-        this.ownedBy = ownedBy;
+    public void setOwnedBy(int ownedBy) {
+        this.owned_by = ownedBy;
     }
 
     public User getOwnerUser() {
