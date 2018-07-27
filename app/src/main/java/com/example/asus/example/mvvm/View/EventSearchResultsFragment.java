@@ -10,7 +10,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentEventSearchResultBinding;
@@ -43,7 +42,7 @@ public class EventSearchResultsFragment extends Fragment {
                 inflater, R.layout.fragment_event_search_result, parent, false);
         //set viewmodel
         eventViewModel = ViewModelProviders.of(this).get(EventViewModel.class);
-        eventViewModel.init(getContext());
+        eventViewModel.init(getContext().getApplicationContext());
 
         //set adapter
         final EventAdapter eventAdapter = new EventAdapter();
@@ -64,8 +63,7 @@ public class EventSearchResultsFragment extends Fragment {
             @Override
             public void onChanged(@Nullable List<Event> events) {
                 if (events != null) {
-                    eventViewModel.setEventsToSearchResults(query);
-                    eventAdapter.setEventList(eventViewModel.getEvents().getValue());
+                    eventAdapter.setEventList(events);
                     fragmentEventSearchResultBinding.eventSearchResultEventRV.setAdapter(eventAdapter);
 
                 }
@@ -76,11 +74,11 @@ public class EventSearchResultsFragment extends Fragment {
             @Override
             public void onChanged(@Nullable User user) {
                 if (user != null) {
+                    eventViewModel.setEventsToSearchResults(query);
                     eventViewModel.getEvents().observe(EventSearchResultsFragment.this, eventsObserver);
                 }
             }
         });
-
 
         fragmentEventSearchResultBinding.eventSearchResultEventRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 

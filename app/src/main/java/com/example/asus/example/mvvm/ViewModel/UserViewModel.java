@@ -19,13 +19,14 @@ import java.util.List;
 public class UserViewModel extends ViewModel {
 
 
-    private MutableLiveData<List<User>> users = new MutableLiveData<>();
+    private MutableLiveData<List<User>> users;
     private MutableLiveData<User> currentUser;
     private UserRepository userRepository;
 
 
     public void init(Context context) {
         users = new MutableLiveData<>();
+        currentUser = new MutableLiveData<>();
         userRepository = new UserRepository();
 
         SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);

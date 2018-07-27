@@ -34,7 +34,7 @@ public class GroupSearchResultsFragment extends Fragment {
         Toast.makeText(getContext(), "UserSearchREsult", Toast.LENGTH_LONG);
         //set viewmodel
         final GroupViewModel groupViewModel = ViewModelProviders.of(this).get(GroupViewModel.class);
-        groupViewModel.init(getContext());
+        groupViewModel.init(getContext().getApplicationContext());
 
         //set adapter
         final GroupAdapter groupAdapter = new GroupAdapter();
@@ -56,8 +56,7 @@ public class GroupSearchResultsFragment extends Fragment {
             @Override
             public void onChanged(@Nullable List<Group> groups) {
                 if (groups != null) {
-                    groupViewModel.setGroupsToSearchResults(query);
-                    groupAdapter.setGroupList(groupViewModel.getGroups().getValue());
+                    groupAdapter.setGroupList(groups);
                     fragmentGroupSearchResultBinding.groupSearchResultGroupRV.setAdapter(groupAdapter);
 
                 }
@@ -69,11 +68,11 @@ public class GroupSearchResultsFragment extends Fragment {
             @Override
             public void onChanged(@Nullable User user) {
                 if (user != null) {
+                    groupViewModel.setGroupsToSearchResults(query);
                     groupViewModel.getGroups().observe(GroupSearchResultsFragment.this, groupsObserver);
                 }
             }
         });
-
 
         fragmentGroupSearchResultBinding.groupSearchResultGroupRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 

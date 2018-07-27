@@ -9,7 +9,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.asus.example.databinding.FragmentUserSearchResultBinding;
 import com.example.asus.example.mvvm.Model.Entities.User;
@@ -29,18 +28,10 @@ public class UserSearchResultsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
-        Toast.makeText(getContext(), "UserSearchREsult", Toast.LENGTH_LONG);
         //set viewmodel
         final UserViewModel userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
         userViewModel.init(this.getContext().getApplicationContext());
-        userViewModel.getCurrentUser().observe(this, new Observer<User>() {
-            @Override
-            public void onChanged(@Nullable User user) {
-                if (user != null) {
-                    userViewModel.setUsersToSearchResults(query);
-                }
-            }
-        });
+
 
         //set adapter
         final UserAdapter userAdapter = new UserAdapter();
@@ -59,15 +50,24 @@ public class UserSearchResultsFragment extends Fragment {
         final FragmentUserSearchResultBinding fragmentUserSearchResultBinding = FragmentUserSearchResultBinding.inflate(inflater, parent, false);
         fragmentUserSearchResultBinding.userSearchResultUserRV.setAdapter(userAdapter);
 
-        userViewModel.getUsers().observe(this, new Observer<List<User>>() {
+        userViewModel.getCurrentUser().observe(this, new Observer<User>() {
             @Override
-            public void onChanged(@Nullable List<User> users) {
-                if (users != null) {
-                    userAdapter.setUserList(userViewModel.getUsers().getValue());
-                    fragmentUserSearchResultBinding.userSearchResultUserRV.setAdapter(userAdapter);
+            public void onChanged(@Nullable User user) {
+                if (user != null) {
+                    userViewModel.setUsersToSearchResults(query);
+                    userViewModel.getUsers().observe(UserSearchResultsFragment.this, new Observer<List<User>>() {
+                        @Override
+                        public void onChanged(@Nullable List<User> users) {
+                            if (users != null) {
+                                userAdapter.setUserList(users);
+                                fragmentUserSearchResultBinding.userSearchResultUserRV.setAdapter(userAdapter);
+                            }
+                        }
+                    });
                 }
             }
         });
+
 
         fragmentUserSearchResultBinding.userSearchResultUserRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 

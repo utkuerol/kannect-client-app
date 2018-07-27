@@ -12,7 +12,7 @@ import com.example.asus.example.databinding.ItemPostBinding;
 import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.ViewModel.ItemPostViewModel;
 
-import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -40,7 +40,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostAdapterVie
      * Initializes the private postList attribute.
      */
     public PostAdapter() {
-        this.postsList = Collections.emptyList();
+        this.postsList = new LinkedList<>();
     }
 
     /**
@@ -80,7 +80,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostAdapterVie
      * @return size of the list
      */
     @Override public int getItemCount() {
-        return postsList.size();
+        if (postsList != null) {
+            return postsList.size();
+        } else {
+            return 0;
+        }
     }
 
     /**
