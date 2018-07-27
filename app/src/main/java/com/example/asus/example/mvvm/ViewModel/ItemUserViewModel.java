@@ -83,7 +83,7 @@ public class ItemUserViewModel extends ViewModel {
         Picasso.get().load(imageUrl)
                 .placeholder(android.R.drawable.ic_menu_help)
                 .error(android.R.drawable.ic_menu_camera)
-                .resize(50, 50)
+                .resize(100, 100)
                 .into(view);
     }
 

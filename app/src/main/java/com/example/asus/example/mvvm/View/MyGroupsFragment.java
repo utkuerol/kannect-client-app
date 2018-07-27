@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.asus.example.databinding.FragmentMyGroupsBinding;
 import com.example.asus.example.mvvm.Model.Entities.Group;
@@ -67,6 +68,8 @@ public class MyGroupsFragment extends Fragment {
                     groupAdapter.setGroupList(groupViewModel.getGroups().getValue());
                     fragmentMyGroupsBinding.myGroupsGroupRV.setAdapter(groupAdapter);
 
+                } else {
+                    Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT);
                 }
             }
         });

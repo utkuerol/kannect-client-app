@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentEventsInSubcategoryBinding;
@@ -74,6 +75,8 @@ public class EventsInSubcategoryFragment extends Fragment implements View.OnClic
                     fragmentEventsInSubcategoryBinding.eventsInSubcategoryEventRV.setAdapter(eventAdapter);
 
 
+                } else {
+                    Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT);
                 }
             }
         });

@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.asus.example.databinding.FragmentNewEventPostBinding;
 import com.example.asus.example.mvvm.Model.Entities.Event;
@@ -33,6 +34,8 @@ public class NewEventPostFragment extends Fragment {
             public void onChanged(@Nullable User user) {
                 if (user != null) {
                     fragmentNewEventPostBinding.setItemEventViewModel(itemEventViewModel);
+                } else {
+                    Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT);
                 }
             }
         });

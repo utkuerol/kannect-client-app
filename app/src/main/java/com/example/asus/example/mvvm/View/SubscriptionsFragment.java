@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.asus.example.databinding.FragmentSubscriptionsBinding;
 import com.example.asus.example.mvvm.Model.Entities.User;
@@ -53,6 +54,8 @@ public class SubscriptionsFragment extends Fragment {
                     userAdapter.setUserList(userViewModel.getUsers().getValue());
                     fragmentSubscriptionsBinding.subscriptionsUserRV.setAdapter(userAdapter);
 
+                } else {
+                    Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT);
                 }
             }
         });

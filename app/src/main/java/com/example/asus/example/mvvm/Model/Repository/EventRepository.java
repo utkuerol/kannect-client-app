@@ -42,12 +42,17 @@ public class EventRepository {
         call.enqueue(new Callback<List<Event>>() {
             @Override
             public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
-                result.setValue(response.body());
+                if (response.isSuccessful()) {
+                    result.setValue(response.body());
+                } else {
+                    result.setValue(null);
+                }
 
             }
 
             @Override
             public void onFailure(Call<List<Event>> call, Throwable t) {
+                result.setValue(null);
                 t.printStackTrace();
             }
         });

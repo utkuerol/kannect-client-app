@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentGroupFeedBinding;
@@ -61,6 +62,8 @@ public class GroupFeedFragment extends Fragment implements View.OnClickListener 
                     postAdapter.setPostList(itemGroupViewModel.getGroupFeed());
                     fragmentGroupFeedBinding.groupFeedPostRV.setAdapter(postAdapter);
 
+                } else {
+                    Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT);
                 }
             }
         });
@@ -94,9 +97,9 @@ public class GroupFeedFragment extends Fragment implements View.OnClickListener 
             case R.id.joinGroupBt: {
                 if (fragmentGroupFeedBinding.joinGroupBt.getText().equals("BEITRETEN")) {
                     fragmentGroupFeedBinding.joinGroupBt.setText("BEIGETRETEN");
-                    itemGroupViewModel.getCurrentUser().getValue().getJoinedGroups().add(group);
+                    itemGroupViewModel.joinGroup();
                 } else {
-                    itemGroupViewModel.getCurrentUser().getValue().getJoinedGroups().remove(group);
+                    itemGroupViewModel.leaveGroup();
                     fragmentGroupFeedBinding.joinGroupBt.setText("BEITRETEN");
                 }
                 break;

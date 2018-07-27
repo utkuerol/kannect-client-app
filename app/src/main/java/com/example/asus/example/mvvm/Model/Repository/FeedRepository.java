@@ -41,11 +41,16 @@ public class FeedRepository {
         call.enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-                result.setValue(response.body());
+                if (response.isSuccessful()) {
+                    result.setValue(response.body());
+                } else {
+                    result.setValue(null);
+                }
             }
 
             @Override
             public void onFailure(Call<List<Post>> call, Throwable t) {
+                result.setValue(null);
                 t.printStackTrace();
             }
         });
@@ -68,12 +73,17 @@ public class FeedRepository {
         call.enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-                result.setValue(response.body());
+                if (response.isSuccessful()) {
+                    result.setValue(response.body());
+                } else {
+                    result.setValue(null);
+                }
 
             }
 
             @Override
             public void onFailure(Call<List<Post>> call, Throwable t) {
+                result.setValue(null);
                 t.printStackTrace();
             }
         });
@@ -94,11 +104,16 @@ public class FeedRepository {
         call.enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-                result.setValue(response.body());
+                if (response.isSuccessful()) {
+                    result.setValue(response.body());
+                } else {
+                    result.setValue(null);
+                }
             }
 
             @Override
             public void onFailure(Call<List<Post>> call, Throwable t) {
+                result.setValue(null);
                 t.printStackTrace();
             }
         });

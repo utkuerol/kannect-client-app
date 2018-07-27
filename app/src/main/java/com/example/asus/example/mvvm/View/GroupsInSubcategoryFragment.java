@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentGroupsInSubcategoryBinding;
@@ -72,6 +73,8 @@ public class GroupsInSubcategoryFragment extends Fragment implements View.OnClic
                     groupAdapter.setGroupList(groupViewModel.getGroups().getValue());
                     fragmentGroupsInSubcategoryBinding.groupsInSubcategoryGroupRV.setAdapter(groupAdapter);
 
+                } else {
+                    Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT);
                 }
             }
         });

@@ -41,6 +41,8 @@ public class NewGroupPostFragment extends Fragment implements View.OnClickListen
             public void onChanged(@Nullable User user) {
                 if (user != null) {
                     fragmentNewPostBinding.setItemGroupViewModel(itemGroupViewModel);
+                } else {
+                    Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT);
                 }
             }
         });

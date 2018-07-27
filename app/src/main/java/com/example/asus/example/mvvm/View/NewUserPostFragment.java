@@ -40,6 +40,8 @@ public class NewUserPostFragment extends Fragment implements View.OnClickListene
             public void onChanged(@Nullable User user) {
                 if (user != null) {
                     fragmentNewPostBinding.setItemUserViewModel(itemUserViewModel);
+                } else {
+                    Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT);
                 }
             }
         });

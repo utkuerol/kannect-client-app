@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentPersonalFeedBinding;
@@ -68,6 +69,8 @@ public class PersonalFeedFragment extends Fragment implements View.OnClickListen
                     postViewModel.setPostsToPersonalFeed();
                     fragmentPersonalFeedBinding.personalFeedPostRV.setAdapter(postAdapter);
 
+                } else {
+                    Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT);
                 }
             }
         });
@@ -77,6 +80,8 @@ public class PersonalFeedFragment extends Fragment implements View.OnClickListen
             public void onChanged(@Nullable List<Post> posts) {
                 if (posts != null) {
                     postAdapter.setPostList(posts);
+                } else {
+                    Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT);
                 }
             }
         });

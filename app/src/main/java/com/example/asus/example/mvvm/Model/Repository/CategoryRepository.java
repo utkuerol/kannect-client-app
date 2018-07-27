@@ -2,7 +2,6 @@ package com.example.asus.example.mvvm.Model.Repository;
 
 
 import android.arch.lifecycle.MutableLiveData;
-import android.util.Log;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.WebServices.ServiceAPI;
@@ -43,17 +42,22 @@ public class CategoryRepository {
     call.enqueue(new Callback<List<Category>>() {
         @Override
         public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
-            result.setValue(response.body());
+            if (response.isSuccessful()) {
+                result.setValue(response.body());
+            } else {
+                result.setValue(null);
+            }
         }
 
 
         @Override
         public void onFailure(Call<List<Category>> call, Throwable t) {
+            result.setValue(null);
             t.printStackTrace();
         }
     });
 
-    return result;
+        return result;
 
 
     }
