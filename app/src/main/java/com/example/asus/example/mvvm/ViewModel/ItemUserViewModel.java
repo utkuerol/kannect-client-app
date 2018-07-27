@@ -234,10 +234,13 @@ public class ItemUserViewModel extends ViewModel {
     }
 
     public void onCreatePostClick() {
-        try {
-            createPost();
-        } catch (Exception e) {
-            e.printStackTrace();
+
+        if (textValue.get().length() != 0) {
+            try {
+                createPost();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }
