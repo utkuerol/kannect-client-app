@@ -231,42 +231,83 @@ public class User implements Serializable {
         this.participatedEvents = participatedEvents;
     }
 
+    /**
+     * method to get all created posts by the user
+     *
+     * @return list of all post created by the user
+     */
     public List<Post> getCreatedPosts() {
         return createdPosts;
     }
 
+    /**
+     * sets the list of created posts by the user
+     * @param createdPosts new list of created posts
+     */
     public void setCreatedPosts(List<Post> createdPosts) {
         this.createdPosts = createdPosts;
     }
 
+    /**
+     * method to get all groups created by the user
+     * @return list of all groups created by the user
+     */
     public List<Group> getCreatedGroups() {
         return createdGroups;
     }
 
+    /**
+     * sets the list of groups created by the user
+     * @param createdGroups new list of groups created by the user
+     */
     public void setCreatedGroups(List<Group> createdGroups) {
         this.createdGroups = createdGroups;
     }
 
+    /**
+     * method to get all events created by the user
+     * @return list of evens created by the user
+     */
     public List<Event> getCreatedEvents() {
         return createdEvents;
     }
 
+    /**
+     * sets the list of created events by the user
+     * @param createdEvents new list of created events by the user
+     */
     public void setCreatedEvents(List<Event> createdEvents) {
         this.createdEvents = createdEvents;
     }
 
+    /**
+     * method to get all comments created by the user
+     * @return list of comments created by the user
+     */
     public List<Comment> getCreatedComments() {
         return createdComments;
     }
 
+    /**
+     * sets the list of created comments by the user
+     * @param createdComments new list of created comments by the user
+     */
     public void setCreatedComments(List<Comment> createdComments) {
         this.createdComments = createdComments;
     }
 
+    /**
+     * method to get all the posts liked by the user
+     * @return list of all posts which were liked by the user
+     */
     public List<Post> getLikedPosts() {
         return likedPosts;
     }
 
+    /**
+     * sets the list of all the posts liked by the user
+     * @param likedPosts new list of post liked by the user
+     */
     public void setLikedPosts(List<Post> likedPosts) {
         this.likedPosts = likedPosts;
     }

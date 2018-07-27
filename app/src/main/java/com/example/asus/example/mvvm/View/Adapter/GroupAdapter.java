@@ -25,6 +25,11 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupAdapter
     private OnItemClickListenerGroup listener;
 
 
+    /**
+     * sets the on click listener fot the adapter
+     *
+     * @param listener which will be set
+     */
     public void setListener(OnItemClickListenerGroup listener) {
 
         this.listener = listener;
@@ -54,6 +59,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupAdapter
 
     /**
      * Method which binds a ViewHolder to a position in the Recycler View, using the bindUser method.
+     * And sets the onClickListener for the ViewHolder.
      * @param holder ViewHolder which will be shown.
      * @param position of the item in the list.
      */
@@ -98,6 +104,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupAdapter
          * Constructor.
          * Creates an GroupAdapterViewHolder object.
          * @param mItemGroupBinding the Binding object of the new GroupAdapterViewHolder.
+         * @param context context of the application
          */
         public GroupAdapterViewHolder(ItemGroupBinding mItemGroupBinding, Context context) {
             super(mItemGroupBinding.itemGroup);

@@ -24,6 +24,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserAdapterVie
     private OnItemClickListenerUser listener;
 
 
+    /**
+     * sets the item click listener for the adapter.
+     *
+     * @param listener which will be set.
+     */
     public void setListener(OnItemClickListenerUser listener) {
 
         this.listener = listener;
@@ -52,6 +57,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserAdapterVie
 
     /**
      * Method which binds a ViewHolder to a position in the Recycler View, using the bindUser method.
+     * And sets the onClick Listener for the ViewHolder.
      * @param holder ViewHolder which will be shown.
      * @param position of the item in the list.
      */
@@ -98,6 +104,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserAdapterVie
          * Constructor.
          * Creates an UserAdapterViewHolder object.
          * @param itemUserBinding the Binding object of the new UserAdapterViewHolder.
+         * @param context of the Application.
          */
         public UserAdapterViewHolder(ItemUserBinding itemUserBinding, Context context) {
             super(itemUserBinding.itemUser);

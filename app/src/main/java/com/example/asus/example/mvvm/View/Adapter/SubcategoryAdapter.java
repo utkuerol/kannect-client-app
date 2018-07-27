@@ -24,6 +24,11 @@ public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.
     private OnItemClickListenerSubcategory listener;
 
 
+    /**
+     * sets the item click listener for the adapter.
+     *
+     * @param listener which will be set.
+     */
     public void setListener(OnItemClickListenerSubcategory listener) {
 
         this.listener = listener;
@@ -51,6 +56,7 @@ public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.
 
     /**
      * Method which binds a ViewHolder to a position in the Recycler View, using the bindUser method.
+     * And sets the onClickListener for the ViewHolder.
      * @param holder ViewHolder which will be shown.
      * @param position of the item in the list.
      */
@@ -95,6 +101,7 @@ public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.
          * Constructor.
          * Creates a SubcategoryAdapterViewHolder object.
          * @param itemSubcategoryBinding the Binding object of the new SubcategoryAdapterViewHolder.
+         * @param context of the Application.
          */
         public SubcategoryAdapterViewHolder(ItemSubcategoryBinding itemSubcategoryBinding, Context context) {
             super(itemSubcategoryBinding.itemSubcategory);

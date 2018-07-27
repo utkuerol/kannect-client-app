@@ -10,6 +10,12 @@ import retrofit2.Retrofit;
 
 public class NullOnEmptyConverterFactory extends Converter.Factory {
 
+    /**
+     * @param type
+     * @param annotations
+     * @param retrofit
+     * @return
+     */
     @Override
     public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
         final Converter<ResponseBody, ?> delegate = retrofit.nextResponseBodyConverter(this, type, annotations);

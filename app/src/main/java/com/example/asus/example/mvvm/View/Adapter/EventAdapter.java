@@ -33,6 +33,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
         this.eventsList = Collections.emptyList();
     }
 
+    /**
+     * sets the on click listener fot the adapter
+     *
+     * @param listener which will be set
+     */
     public void setListener(OnItemClickListenerEvent listener) {
 
         this.listener = listener;
@@ -54,6 +59,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
 
     /**
      * Method which binds a ViewHolder to a position in the Recycler View, using the bindUser method.
+     * And sets the onClickListener for the ViewHolder.
      * @param holder ViewHolder which will be shown.
      * @param position of the item in the list.
      */
@@ -98,6 +104,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
          * Constructor.
          * Creates an EventAdapterViewHolder object.
          * @param itemEventBinding the Binding object of the new EventAdapterViewHolder.
+         * @param context of the Apllication.
          */
         public EventAdapterViewHolder(ItemEventBinding itemEventBinding, Context context) {
             super(itemEventBinding.itemEvent);
