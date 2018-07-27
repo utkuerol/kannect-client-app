@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">kannect</string>
     <string name="create">Erstellen</string>
+    <string name="join">Beitreten</string>
     <string name="title_activity_binding">BindingActivity</string>
     <string name="title_activity_group_form">GroupForm</string>
     <string name="title_activity_group_view">GroupView</string>

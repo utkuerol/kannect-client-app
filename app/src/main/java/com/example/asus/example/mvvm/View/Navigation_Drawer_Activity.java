@@ -446,7 +446,9 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         SubcategoriesEventFragment subcategoriesEventFragment = new SubcategoriesEventFragment();
         EventsInCategoryFragment eventsInCategoryFragment = new EventsInCategoryFragment();
         eventsInCategoryFragment.setCategory(category);
-        subcategoriesEventFragment.setSubcategory(category);
+        subcategoriesEventFragment.setCategory(category);
+        eventsInCategoryFragment.setCategory(category);
+        subcategoriesEventFragment.setCategory(category);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, subcategoriesEventFragment);
         transaction.add(R.id.content_frame, eventsInCategoryFragment);

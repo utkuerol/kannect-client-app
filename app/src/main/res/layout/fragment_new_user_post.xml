@@ -15,6 +15,7 @@
         android:background="@color/white">
 
         <Button
+            android:onClick="@{()->itemUserViewModel.onCreatePostClick()}"
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,6 +36,6 @@
             android:gravity="center"
             android:hint="@string/typePost"
             android:inputType="textMultiLine"
-            android:text="@{}" />
+            android:text="@={itemUserViewModel.textValue}" />
     </RelativeLayout>
 </layout>

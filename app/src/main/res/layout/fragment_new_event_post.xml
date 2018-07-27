@@ -19,6 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:onClick="@{()->itemEventViewModel.onCreatePostClick()}"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:text="@string/post" />
@@ -33,6 +34,6 @@
             android:gravity="center"
             android:hint="@string/typePost"
             android:inputType="textMultiLine"
-            android:text="@{}" />
+            android:text="@={itemEventViewModel.textValue}" />
     </RelativeLayout>
 </layout>

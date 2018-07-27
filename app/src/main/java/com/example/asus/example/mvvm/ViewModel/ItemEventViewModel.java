@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.BindingAdapter;
+import android.databinding.ObservableField;
 import android.widget.ImageView;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
@@ -32,6 +33,7 @@ public class ItemEventViewModel extends ViewModel {
 
     private MutableLiveData<Event> event = new MutableLiveData<>();
     private MutableLiveData<List<Post>> mEventFeed = new MutableLiveData<>();
+    public final ObservableField<String> textValue = new ObservableField<>("");
     private MutableLiveData<User> currentUser;
     private EventRepository eventRepository;
     private FeedRepository feedRepository;
@@ -206,12 +208,11 @@ public class ItemEventViewModel extends ViewModel {
     /**
      * Creates a post owned by this event.
      *
-     * @param text for the post.
      */
-    public void createPost(String text) {
+    public void createPost() {
         Post post = new Post();
         post.setCreator(currentUser.getValue());
-        post.setText(text);
+        post.setText(textValue.get());
         post.setOwnedBy(event.getValue().getId());
         post.setOwnerEvent(event.getValue());
         post.setDate(new Date());
@@ -224,5 +225,21 @@ public class ItemEventViewModel extends ViewModel {
 
     public void setCurrentUser(MutableLiveData<User> currentUser) {
         this.currentUser = currentUser;
+    }
+
+    public void onCreateEventClick() {
+        try {
+            createPost();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void onCreatePostClick() {
+        try {
+            createPost();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

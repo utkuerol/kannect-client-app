@@ -2,6 +2,7 @@ package com.example.asus.example.mvvm.View;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentMyEventsBinding;
 import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.User;
@@ -22,13 +24,15 @@ import com.example.asus.example.mvvm.ViewModel.EventViewModel;
  */
 public class MyEventsFragment extends Fragment {
 
-
+    private EventViewModel eventViewModel;
+    private FragmentMyEventsBinding fragmentMyEventsBinding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-
+        fragmentMyEventsBinding = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_my_events, parent, false);
         //set viewmodel
-        final EventViewModel eventViewModel = ViewModelProviders.of(this).get(EventViewModel.class);
+        eventViewModel = ViewModelProviders.of(this).get(EventViewModel.class);
         eventViewModel.init(getContext());
 
 
@@ -44,7 +48,7 @@ public class MyEventsFragment extends Fragment {
         eventAdapter.setListener(listener);
 
         //set databinding
-        final FragmentMyEventsBinding fragmentMyEventsBinding = FragmentMyEventsBinding.inflate(inflater, parent, false);
+
         fragmentMyEventsBinding.myEventsEventRV.setAdapter(eventAdapter);
 
 
@@ -65,4 +69,6 @@ public class MyEventsFragment extends Fragment {
 
         return fragmentMyEventsBinding.getRoot();
     }
+
+
 }

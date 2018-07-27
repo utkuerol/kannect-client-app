@@ -2,6 +2,8 @@ package com.example.asus.example.mvvm.View;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.databinding.DataBindingUtil;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,7 +11,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentSubcategoriesEventBinding;
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.Entities.Subcategory;
@@ -21,13 +25,14 @@ import com.example.asus.example.mvvm.ViewModel.ItemCategoryViewModel;
 /**
  * Fragment for the view, to show all the subcategories that exist for a event.
  */
-public class SubcategoriesEventFragment extends Fragment {
-
+public class SubcategoriesEventFragment extends Fragment implements View.OnClickListener {
+    private FragmentSubcategoriesEventBinding fragmentSubcategoriesEventBinding;
     private Category category;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-
+        fragmentSubcategoriesEventBinding = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_subcategories_event, parent, false);
 
         //set viewmodel
         final ItemCategoryViewModel itemCategoryViewModel = ViewModelProviders.of(this).get(ItemCategoryViewModel.class);
@@ -46,7 +51,8 @@ public class SubcategoriesEventFragment extends Fragment {
         subcategoryAdapter.setListener(listener);
 
         //set databinding
-        final FragmentSubcategoriesEventBinding fragmentSubcategoriesEventBinding = FragmentSubcategoriesEventBinding.inflate(inflater, parent, false);
+        ImageView newEventInCategoryButton = (ImageView) fragmentSubcategoriesEventBinding.newEventInCategoryButton;
+        newEventInCategoryButton.setOnClickListener(this);
         fragmentSubcategoriesEventBinding.subcategoriesEventSubcategoryRV.setAdapter(subcategoryAdapter);
 
 
@@ -77,10 +83,18 @@ public class SubcategoriesEventFragment extends Fragment {
     }
 
 
-    public void setSubcategory(Category category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
-
+    @Override
+    public void onClick(View v) {
+        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+        switch (v.getId()) {
+            case R.id.newEventInCategoryButton:
+                // welche Fragment sollte hinzugefügt werden navigation_drawer_activity.launchNewEventInSubategoryFragment();
+                break;
+        }
+    }
 
 }

@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.BindingAdapter;
+import android.databinding.ObservableField;
 import android.widget.ImageView;
 
 import com.example.asus.example.mvvm.Model.Entities.Event;
@@ -32,6 +33,8 @@ public class ItemUserViewModel extends ViewModel {
     private UserRepository userRepository;
     private PostRepository postRepository;
 
+
+    public final ObservableField<String> textValue = new ObservableField<>("");
 
     public void init(User user, Context context) {
         this.chosenUser.setValue(user);
@@ -206,11 +209,11 @@ public class ItemUserViewModel extends ViewModel {
     /**
      * Creates a new post for the current user. This will only be available from the
      * user profile view of the current user.
-     * @param text for the post to be created.
+     *
      */
-    public void createPost(String text) {
+    public void createPost() {
         Post postToCreate = new Post();
-        postToCreate.setText(text);
+        postToCreate.setText(textValue.get());
         postToCreate.setCreator(currentUser.getValue());
         postToCreate.setDate(new Date());
         postToCreate.setOwnerUser(currentUser.getValue());
@@ -228,6 +231,14 @@ public class ItemUserViewModel extends ViewModel {
 
     public void setCurrentUser(MutableLiveData<User> currentUser) {
         this.currentUser = currentUser;
+    }
+
+    public void onCreatePostClick() {
+        try {
+            createPost();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 

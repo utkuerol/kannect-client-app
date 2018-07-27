@@ -64,7 +64,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="4dp"
                 android:layout_marginRight="4dp"
-                android:text="Button"
+                android:text="@string/join"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

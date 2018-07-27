@@ -56,7 +56,6 @@ public class SubscriptionsFragment extends Fragment {
                 }
             }
         });
-
         fragmentSubscriptionsBinding.subscriptionsUserRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         return fragmentSubscriptionsBinding.getRoot();

@@ -2,13 +2,17 @@ package com.example.asus.example.mvvm.View;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentEventFeedBinding;
@@ -25,15 +29,17 @@ import java.util.List;
  * The Activity displayed when accessing an event. It shows informations about the event and all the posts
  * related to it.
  */
-public class EventFeedFragment extends Fragment {
-    private Event event;
 
+public class EventFeedFragment extends Fragment implements View.OnClickListener {
+    private Event event;
+    private FragmentEventFeedBinding fragmentEventFeedBinding;
+    private ItemEventViewModel itemEventViewModel;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
-
-        //set viewmodel
-        final ItemEventViewModel itemEventViewModel = ViewModelProviders.of(this).get(ItemEventViewModel.class);
+        fragmentEventFeedBinding = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_event_feed, parent, false);
+        itemEventViewModel = ViewModelProviders.of(this).get(ItemEventViewModel.class);
         itemEventViewModel.init(event, getContext().getApplicationContext());
 
         //Set adapter
@@ -48,7 +54,6 @@ public class EventFeedFragment extends Fragment {
         postAdapter.setListener(listener);
 
         //Set binding
-        final FragmentEventFeedBinding fragmentEventFeedBinding = FragmentEventFeedBinding.inflate(inflater, parent, false);
         fragmentEventFeedBinding.eventFeedRV.setAdapter(postAdapter);
 
 
@@ -72,13 +77,39 @@ public class EventFeedFragment extends Fragment {
             }
         });
 
+        Button participateBT = (Button) fragmentEventFeedBinding.participateBt;
+        participateBT.setOnClickListener(this);
+
+        ImageView createPostInEventIV = (ImageView) fragmentEventFeedBinding.createPostInEventIV;
+        createPostInEventIV.setOnClickListener(this);
 
         fragmentEventFeedBinding.eventFeedRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        return inflater.inflate(R.layout.fragment_event_feed, parent, false);
+        return fragmentEventFeedBinding.getRoot();
     }
 
+    @Override
+    public void onClick(View v) {
+        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
 
+        switch (v.getId()) {
+            case R.id.participateBt: {
+                if (fragmentEventFeedBinding.participateBt.getText().equals("particpate")) {
+                    fragmentEventFeedBinding.participateBt.setText("participated");
+                    itemEventViewModel.getCurrentUser().getValue().getParticipatedEvents().add(event);
+                } else {
+                    itemEventViewModel.getCurrentUser().getValue().getParticipatedEvents().remove(event);
+                    fragmentEventFeedBinding.participateBt.setText("participate");
+                }
+                break;
+            }
+
+            case R.id.createPostInEventIV: {
+                navigation_drawer_activity.launchNewEventPostFragment(event);
+                break;
+            }
+        }
+    }
     public void setEvent(Event event) {
         this.event = event;
     }

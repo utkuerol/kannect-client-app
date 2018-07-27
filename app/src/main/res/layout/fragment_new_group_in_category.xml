@@ -18,6 +18,7 @@
 
 
         <Button
+            android:onClick="@{()->itemCategoryViewModel.onCreateGroupClick()}"
             android:id="@+id/newGroupInCategoryButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,6 +42,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="40dp"
             android:hint="@string/groupName"
+            android:text="@={itemCategoryViewModel.inputName}"
             app:layout_constraintStart_toStartOf="parent"
             android:inputType="text"
             app:layout_constraintTop_toTopOf="parent" />
@@ -56,6 +58,7 @@
             android:layout_marginTop="88dp"
             android:ems="10"
             android:hint="@string/groupDescription"
+            android:text="@={itemCategoryViewModel.inputDesc}"
             android:inputType="textMultiLine"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -72,6 +75,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="120dp"
             android:hint="@string/groupImageUrl"
+            android:text="@={itemCategoryViewModel.inputImageUrl}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/newGroupInCategoryDescriptionET"

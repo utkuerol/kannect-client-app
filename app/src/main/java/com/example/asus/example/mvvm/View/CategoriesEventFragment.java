@@ -2,6 +2,7 @@ package com.example.asus.example.mvvm.View;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentCategoriesEventBinding;
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.View.Adapter.CategoryAdapter;
@@ -30,6 +32,8 @@ public class CategoriesEventFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
+        fragmentCategoriesEventBinding = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_categories_event, parent, false);
 
         categoryViewModel = ViewModelProviders.of(this).get(CategoryViewModel.class);
         categoryViewModel.init();
@@ -60,7 +64,7 @@ public class CategoriesEventFragment extends Fragment {
             }
         });
 
-        fragmentCategoriesEventBinding = FragmentCategoriesEventBinding.inflate(inflater, parent, false);
+
         fragmentCategoriesEventBinding.categoriesEventCategoryRV.setAdapter(categoryAdapter);
         fragmentCategoriesEventBinding.categoriesEventCategoryRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 

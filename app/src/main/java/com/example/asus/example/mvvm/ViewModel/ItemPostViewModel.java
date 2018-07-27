@@ -202,5 +202,22 @@ public class ItemPostViewModel extends ViewModel {
     public void setCurrentUser(MutableLiveData<User> currentUser) {
         this.currentUser = currentUser;
     }
+
+    public void onLike() {
+        try {
+            like();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void onUnLike() {
+        try {
+            like();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
 

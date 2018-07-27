@@ -5,9 +5,11 @@ import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.BindingAdapter;
+import android.databinding.ObservableField;
 import android.widget.ImageView;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
+import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.Subcategory;
@@ -18,8 +20,10 @@ import com.example.asus.example.mvvm.Model.Repository.PostRepository;
 import com.example.asus.example.mvvm.Model.Repository.UserRepository;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 
 /**
@@ -35,6 +39,12 @@ public class ItemGroupViewModel extends ViewModel {
     private GroupRepository groupRepository;
     private FeedRepository feedRepository;
     private PostRepository postRepository;
+
+
+    public final ObservableField<String> inputName = new ObservableField<>("");
+    public final ObservableField<String> inputDesc = new ObservableField<>("");
+    public final ObservableField<String> inputImageUrl = new ObservableField<>("");
+    public final ObservableField<String> textValue = new ObservableField<>("");
 
 
     public void init(Group chosenGroup, Context context) {
@@ -196,16 +206,26 @@ public class ItemGroupViewModel extends ViewModel {
 
     /**
      * Creates post in the group with the given text.
-     * @param text for the post.
+     *
      */
-    public void createPost(String text) {
+    public void createPost() {
         Post post = new Post();
         post.setDate(new Date());
-        post.setText(text);
+        post.setText(textValue.get());
         post.setCreator(currentUser.getValue());
         post.setOwnedBy(chosenGroup.getValue().getId());
         post.setOwnerGroup(chosenGroup.getValue());
         postRepository.createPost(post);
+    }
+
+    public void createGroup() throws Exception {
+        Group group = new Group();
+        //group.setCategory(chosenCategory.getValue());
+        group.setCreator(currentUser.getValue());
+        group.setDescription(inputDesc.get());
+        group.setName(inputName.get());
+        group.setImageURl(inputImageUrl.get());
+        groupRepository.createGroup(group);
     }
 
     public MutableLiveData<User> getCurrentUser() {
@@ -214,5 +234,21 @@ public class ItemGroupViewModel extends ViewModel {
 
     public void setCurrentUser(MutableLiveData<User> currentUser) {
         this.currentUser = currentUser;
+    }
+
+    public void onCreateGroupClick() {
+        try {
+            createGroup();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void onCreatePostClick() {
+        try {
+            createPost();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

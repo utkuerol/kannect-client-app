@@ -4,6 +4,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.databinding.ObservableField;
 import android.view.View;
 
 import com.example.asus.example.mvvm.Model.Entities.Event;
@@ -31,6 +32,11 @@ public class ItemSubcategoryViewModel extends ViewModel {
     private GroupRepository groupRepository;
     private EventRepository eventRepository;
 
+
+    public final ObservableField<String> inputName = new ObservableField<>("");
+    public final ObservableField<String> inputDesc = new ObservableField<>("");
+    public final ObservableField<String> inputDate = new ObservableField<>("");
+    public final ObservableField<String> inputImageUrl = new ObservableField<>("");
 
     public void init(Subcategory subcategory, Context context) {
         this.subcategory.setValue(subcategory);
@@ -78,15 +84,13 @@ public class ItemSubcategoryViewModel extends ViewModel {
     /**
      * Creates a new group in the chosen subcategory with the user-given parameters.
      *
-     * @param name        of the group to be created.
-     * @param description of the group to be created.
-     * @param imageUrl    of the group to be created.
+     *
      */
-    public void createGroup(String name, String description, String imageUrl) {
+    public void createGroup() {
         Group group = new Group();
-        group.setName(name);
-        group.setImageURl(imageUrl);
-        group.setDescription(description);
+        group.setName(inputName.get());
+        group.setImageURl(inputImageUrl.get());
+        group.setDescription(inputDesc.get());
         group.setCategory(subcategory.getValue().getCategory());
         group.setCreator(currentUser.getValue());
         group.setSubcategory(subcategory.getValue());
@@ -97,23 +101,20 @@ public class ItemSubcategoryViewModel extends ViewModel {
     /**
      * Creates a new event in the chosen subcategory with the user-given parameters.
      *
-     * @param name        of the event to be created.
-     * @param description of the event to be created.
-     * @param imageUrl    of the event to be created.
      */
 
-    public void createEvent(String name, String description, String imageUrl, String givenDate)
+    public void createEvent()
             throws Exception {
 
         Event event = new Event();
-        Date date = new SimpleDateFormat("dd.mm.yyyy").parse(givenDate);
+        Date date = new SimpleDateFormat("dd.mm.yyyy").parse(inputDate.get());
         event.setCategory(subcategory.getValue().getCategory());
         event.setSubcategory(subcategory.getValue());
         event.setCreator(currentUser.getValue());
         event.setDate(date);
-        event.setDescription(description);
-        event.setName(name);
-        event.setImageUrl(imageUrl);
+        event.setDescription(inputDesc.get());
+        event.setName(inputName.get());
+        event.setImageUrl(inputImageUrl.get());
         eventRepository.createEvent(event);
     }
 
@@ -123,5 +124,21 @@ public class ItemSubcategoryViewModel extends ViewModel {
 
     public void setCurrentUser(MutableLiveData<User> currentUser) {
         this.currentUser = currentUser;
+    }
+
+    public void onCreateEventClick() {
+        try {
+            createEvent();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void onCreateGroupClick() {
+        try {
+            createGroup();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

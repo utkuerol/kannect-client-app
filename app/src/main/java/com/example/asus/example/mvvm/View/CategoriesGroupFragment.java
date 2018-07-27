@@ -2,6 +2,7 @@ package com.example.asus.example.mvvm.View;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -25,11 +26,14 @@ import java.util.zip.Inflater;
  * Fragment for the view, to show all categories that exist for a group.
  */
 public class CategoriesGroupFragment extends Fragment {
-
+    private FragmentCategoriesGroupBinding fragmentCategoriesGroupBinding;
     private CategoryViewModel categoryViewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+
+        fragmentCategoriesGroupBinding = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_categories_group, parent, false);
 
 
         //set viewmodel
@@ -49,7 +53,6 @@ public class CategoriesGroupFragment extends Fragment {
         categoryAdapter.setListener(listener);
 
         //Set binding
-        final FragmentCategoriesGroupBinding fragmentCategoriesGroupBinding = FragmentCategoriesGroupBinding.inflate(inflater, parent, false);
         fragmentCategoriesGroupBinding.categoriesGroupCategoryRV.setAdapter(categoryAdapter);
 
 

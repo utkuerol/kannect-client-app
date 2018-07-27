@@ -2,6 +2,7 @@ package com.example.asus.example.mvvm.View;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -38,9 +39,10 @@ public class EventSearchResultsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
-        Toast.makeText(getContext(), "EventSearchREsult", Toast.LENGTH_LONG);
+        fragmentEventSearchResultBinding = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_event_search_result, parent, false);
         //set viewmodel
-        final EventViewModel eventViewModel = ViewModelProviders.of(this).get(EventViewModel.class);
+        eventViewModel = ViewModelProviders.of(this).get(EventViewModel.class);
         eventViewModel.init(getContext());
 
         //set adapter
@@ -54,8 +56,7 @@ public class EventSearchResultsFragment extends Fragment {
         };
         eventAdapter.setListener(listener);
 
-        final FragmentEventSearchResultBinding fragmentEventSearchResultBinding =
-                FragmentEventSearchResultBinding.inflate(inflater, parent, false);
+
         fragmentEventSearchResultBinding.eventSearchResultEventRV.setAdapter(eventAdapter);
 
 
@@ -83,6 +84,6 @@ public class EventSearchResultsFragment extends Fragment {
 
         fragmentEventSearchResultBinding.eventSearchResultEventRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        return inflater.inflate(R.layout.fragment_event_search_result, parent, false);
+        return fragmentEventSearchResultBinding.getRoot();
     }
 }

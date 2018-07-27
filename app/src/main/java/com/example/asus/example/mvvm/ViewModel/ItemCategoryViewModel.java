@@ -96,17 +96,15 @@ public class ItemCategoryViewModel extends ViewModel {
 
     /**
      * Creates a new group in the chosen category.
-     * @param name of the group to be created
-     * @param description of the group to be created
-     * @param imageUrl of the group to be created
+     *
      */
-    public void createGroup(String name, String description, String imageUrl) {
+    public void createGroup() {
         Group group = new Group();
         group.setCategory(chosenCategory.getValue());
         group.setCreator(currentUser.getValue());
-        group.setDescription(description);
-        group.setImageURl(imageUrl);
-        group.setName(name);
+        group.setDescription(inputDesc.get());
+        group.setImageURl(inputImageUrl.get());
+        group.setName(inputName.get());
         groupRepository.createGroup(group);
     }
 
@@ -128,6 +126,15 @@ public class ItemCategoryViewModel extends ViewModel {
     public void onCreateEventClick() {
         try {
             createEvent();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void onCreateGroupClick() {
+        try {
+            createGroup();
         } catch (Exception e) {
             e.printStackTrace();
         }
