@@ -9,7 +9,6 @@ import android.databinding.ObservableField;
 import android.widget.ImageView;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
-import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.Subcategory;
@@ -20,10 +19,8 @@ import com.example.asus.example.mvvm.Model.Repository.PostRepository;
 import com.example.asus.example.mvvm.Model.Repository.UserRepository;
 import com.squareup.picasso.Picasso;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 
 /**

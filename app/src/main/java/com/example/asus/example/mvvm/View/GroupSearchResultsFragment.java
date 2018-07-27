@@ -25,13 +25,29 @@ public class GroupSearchResultsFragment extends Fragment {
 
     private String query;
 
+    /**
+     * sets the search Query, for which all groups that match it will be found.
+     *
+     * @param query which was typed in b the user.
+     */
     public void setQuery(String query) {
         this.query = query;
     }
+
+
+    /**
+     *  Method which will be called when this fragment is created.
+     *  Inflates the View, sets the ViewModel and the Adapter with the right onClickListener for the
+     *  RecyclerView.
+     * @param inflater inflates the layout on the screen
+     * @param parent of this ViewGroup
+     * @param savedInstanceState state of the Application as a Bundle
+     * @return the outermost View in the layout file associated with the Binding.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
-        Toast.makeText(getContext(), "UserSearchREsult", Toast.LENGTH_LONG);
+        Toast.makeText(getContext(), "UserSearchResult", Toast.LENGTH_LONG);
         //set viewmodel
         final GroupViewModel groupViewModel = ViewModelProviders.of(this).get(GroupViewModel.class);
         groupViewModel.init(getContext().getApplicationContext());

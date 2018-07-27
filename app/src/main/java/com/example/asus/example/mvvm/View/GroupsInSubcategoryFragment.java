@@ -31,6 +31,16 @@ public class GroupsInSubcategoryFragment extends Fragment implements View.OnClic
     private Subcategory subcategory;
     private FragmentGroupsInSubcategoryBinding fragmentGroupsInSubcategoryBinding;
 
+    /**
+     * Method which will be called when this fragment is created.
+     * Inflates the View, sets the ViewModel and the Adapter with the right onClickListener for the
+     * RecyclerView.
+     *
+     * @param inflater           inflates the layout on the screen
+     * @param parent             of this ViewGroup
+     * @param savedInstanceState state of the Application as a Bundle
+     * @return the outermost View in the layout file associated with the Binding.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         fragmentGroupsInSubcategoryBinding = DataBindingUtil.inflate(
@@ -74,6 +84,11 @@ public class GroupsInSubcategoryFragment extends Fragment implements View.OnClic
         return fragmentGroupsInSubcategoryBinding.getRoot();
     }
 
+    /**
+     * Method which handles the click on the create createNewGroup icon in the view.
+     * Directs the User to the View for creating a new Group.
+     * @param v the view which was clicked on.
+     */
     @Override
     public void onClick(View v) {
         Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
@@ -85,7 +100,10 @@ public class GroupsInSubcategoryFragment extends Fragment implements View.OnClic
         }
     }
 
-
+    /**
+     * sets the subcategory of which all groups will be shown.
+     * @param subcategory which the user clicked on.
+     */
     public void setSubcategory(Subcategory subcategory) {
         this.subcategory = subcategory;
     }

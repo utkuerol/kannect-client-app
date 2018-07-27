@@ -29,6 +29,16 @@ public class GroupFeedFragment extends Fragment implements View.OnClickListener 
     private FragmentGroupFeedBinding fragmentGroupFeedBinding;
     private ItemGroupViewModel itemGroupViewModel;
 
+    /**
+     * Method which will be called when this fragment is created.
+     * Inflates the View, sets the ViewModel and the Adapter with the right onClickListener for the
+     * RecyclerView.
+     *
+     * @param inflater           inflates the layout on the screen
+     * @param parent             of this ViewGroup
+     * @param savedInstanceState state of the Application as a Bundle
+     * @return the outermost View in the layout file associated with the Binding.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
@@ -68,6 +78,14 @@ public class GroupFeedFragment extends Fragment implements View.OnClickListener 
     }
 
 
+    /**
+     * Method which handles the click on the joinGroupButton and the createPostInGroupIV ImageView
+     * icon.
+     * Directs the User to the view for creating a new Post, if the createPostInGroupIV was clicked
+     * on. If the User clicked on the joinGroupBt, it checks whether or not the user is already part
+     * of the group or not, and handles the according actions.
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
@@ -91,6 +109,10 @@ public class GroupFeedFragment extends Fragment implements View.OnClickListener 
         }
     }
 
+    /**
+     * sets the group of which the feed will be shown.
+     * @param group of which the feed will be shown.
+     */
     public void setGroup(Group group) {
         this.group = group;
     }

@@ -29,6 +29,16 @@ public class EventsInSubcategoryFragment extends Fragment implements View.OnClic
     private Subcategory subcategory;
     FragmentEventsInSubcategoryBinding fragmentEventsInSubcategoryBinding;
 
+    /**
+     * Method which will be called when this fragment is created.
+     * Inflates the View, sets the ViewModel and the Adapter with the right onClickListener for the
+     * RecyclerView.
+     *
+     * @param inflater           inflates the layout on the screen
+     * @param parent             of this ViewGroup
+     * @param savedInstanceState state of the Application as a Bundle
+     * @return the outermost View in the layout file associated with the Binding.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
@@ -78,6 +88,11 @@ public class EventsInSubcategoryFragment extends Fragment implements View.OnClic
         return fragmentEventsInSubcategoryBinding.getRoot();
     }
 
+    /**
+     * Method which handles the click on the createNewEvent icon in the view.
+     * Directs the User to the View for creating a new Event.
+     * @param v the view which the user clicked on.
+     */
     @Override
     public void onClick(View v) {
         Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
@@ -89,6 +104,10 @@ public class EventsInSubcategoryFragment extends Fragment implements View.OnClic
     }
 
 
+    /**
+     * sets the subcategory of which all events will be shown.
+     * @param subcategory which the user clicked on.
+     */
     public void setSubcategory(Subcategory subcategory) {
         this.subcategory = subcategory;
     }

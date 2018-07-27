@@ -42,6 +42,14 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
     GoogleSignInClient mGoogleSignInClient;
     private DrawerLayout mDrawerLayout;
 
+    /**
+     * Called when the Activity is first created.
+     * Sets the ViewModel, initializes the DataBinding, the toolbar and the Navigation Drawer.
+     * Also launches the personal Feed for the logged in User and observes the currentUser, to set
+     * the ViewModel for the NavigationDrawerHeader.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,7 +99,9 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         launchPersonalFeedFragment();
     }
 
-    //method to sign out
+    /**
+     * Method to sign a logged in user out. And redirects him to the Login Screen.
+     */
     private void signOut() {
         mGoogleSignInClient.signOut()
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
@@ -105,6 +115,10 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
                 });
     }
 
+    /**
+     * Handles the Action if the user pressed back, will open/close the NavigationDrawer, depending
+     * if it is open or closed when back was pressed.
+     */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -115,21 +129,27 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         }
     }
 
+    /**
+     * Method to inflate the Menu. And adds items to the action bar.
+     * @param menu which will be inflated.
+     * @return true, so the menu will be shown.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.activity_navigation__drawer_drawer, menu);
         return true;
     }
 
+    /**
+     * Handles Action bar item clicks.
+     * Directs User to the right View.
+     * @param item which was clicked on.
+     * @return true or false, whether or not the the menu processing should be consumed or not.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-         //Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == android.R.id.home) {
             mDrawerLayout.openDrawer(GravityCompat.START);
             return true;
@@ -158,7 +178,12 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
     }
 
 
-
+    /**
+     * Handles NavigationBar item clicks.
+     * Directs User to the right view.
+     * @param item which was clicked on.
+     * @return true or false, whether or not the menu processing should be consumed or not.
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -185,7 +210,10 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
     }
 
 
-
+    /**
+     * removes all current fragments from the screen and replaces them with
+     * the personal Feed Fragment for a user.
+     */
     public void launchPersonalFeedFragment() {
 
         PersonalFeedFragment personalFeedFragment = new PersonalFeedFragment();
@@ -195,6 +223,10 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
+    /**
+     * removes  all current fragments from the screen and launches the user profile fragment for a given user.
+     * @param user of who the profile will be shown.
+     */
     public void launchUserProfileFragment(User user) {
         UserProfileFragment userProfileFragment = new UserProfileFragment();
         userProfileFragment.setUser(user);
@@ -204,6 +236,10 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
+    /**
+     * deletes all current fragments from the screen and replaces them with the fragment regarding
+     * showing personal Profile of the currently logged in user.
+     */
     public void launchPersonalProfileFragment() {
         PersonalProfileFragment personalProfileFragment = new PersonalProfileFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -212,6 +248,10 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
+    /**
+     * deletes all current fragments from the screen and replaces them with the fragments regarding
+     * showing all the categories for a group and all the groups which the user is a member in.
+     */
     public void launchGroupFragments() {
         CategoriesGroupFragment categoriesGroupFragment = new CategoriesGroupFragment();
         MyGroupsFragment myGroupsFragment = new MyGroupsFragment();
@@ -222,6 +262,10 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
+    /**
+     * deletes all current fragments from the screen and replaces them with the fragments regarding
+     * showing all the categories for a eent and all the events which the user is a participant in.
+     */
     public void launchEventFragments() {
         CategoriesEventFragment categoriesEventFragment = new CategoriesEventFragment();
         MyEventsFragment myEventsFragment = new MyEventsFragment();
@@ -233,16 +277,19 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
     }
 
 
+    /**
+     * deletes all current fragments from the screen and replaces them with the fragments regarding
+     * showing all found results for the search query the user typed in.
+     *@param query typed in by the user
+     */
     public void launchSearchResultFragments(String query) {
 
 
         UserSearchResultsFragment userSearchResultsFragment = new UserSearchResultsFragment();
         userSearchResultsFragment.setQuery(query);
 
-
         EventSearchResultsFragment eventSearchResultsFragment = new EventSearchResultsFragment();
         eventSearchResultsFragment.setQuery(query);
-
 
         GroupSearchResultsFragment groupSearchResultsFragment = new GroupSearchResultsFragment();
         groupSearchResultsFragment.setQuery(query);
@@ -275,6 +322,11 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
+    /**
+     * deletes all current fragments from the screen and replaces them with the fragment regarding
+     * showing an event feed by a given event.
+     * @param event of which the feed will be shown.
+     */
     public void launchEventFeedFragment(Event event) {
         EventFeedFragment eventFeedFragment = new EventFeedFragment();
         eventFeedFragment.setEvent(event);
@@ -301,6 +353,11 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
+    /**
+     * deletes all current fragments from the screen and replaces them with the fragment regarding
+     * showing all events in a given subcategory
+     * @param subcategory of which all events will be shown.
+     */
     public void launchEventsInSubcategoryFragment(Subcategory subcategory) {
         EventsInSubcategoryFragment eventsInSubcategoryFragment = new EventsInSubcategoryFragment();
         eventsInSubcategoryFragment.setSubcategory(subcategory);
@@ -310,6 +367,11 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
+    /**
+     * deletes all current fragments from the screen and replaces them with the fragment regarding
+     * showing the feed of a given group.
+     * @param group of which the feed will be shown.
+     */
     public void launchGroupFeedFragment(Group group) {
         GroupFeedFragment groupFeedFragment = new GroupFeedFragment();
         groupFeedFragment.setGroup(group);
@@ -336,6 +398,11 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
+    /**
+     * deletes all current fragments from the screen and replaces them with the fragment regarding
+     * showing all groups in a given subcategory
+     * @param subcategory of which all groups will be shown.
+     */
     public void launchGroupsInSubcategoryFragment(Subcategory subcategory) {
         GroupsInSubcategoryFragment groupsInSubcategoryFragment = new GroupsInSubcategoryFragment();
         groupsInSubcategoryFragment.setSubcategory(subcategory);
@@ -361,6 +428,11 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
+    /**
+     * deletes all current fragments from the screen and replaces them with the fragment regarding
+     * creating a new Event in a Category.
+     * @param category in which the event will be created.
+     */
     public void launchNewEventInCategoryFragment(Category category) {
         NewEventInCategoryFragment newEventInCategoryFragment = new NewEventInCategoryFragment();
         newEventInCategoryFragment.setCategory(category);
@@ -370,6 +442,11 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
+    /**
+     * deletes all current fragments from the screen and replaces them with the fragment regarding
+     * creating a new Event in a Subcategory.
+     * @param subcategory in which the event will be created.
+     */
     public void launchNewEventInSubategoryFragment(Subcategory subcategory) {
         NewEventInSubcategoryFragment newEventInSubategoryFragment = new NewEventInSubcategoryFragment();
         newEventInSubategoryFragment.setSubcategory(subcategory);
@@ -379,6 +456,11 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
+    /**
+     * deletes all current fragments from the screen and replaces them with the fragment regarding
+     * creating a new post in an event.
+     * @param event in which the post will be created.
+     */
     public void launchNewEventPostFragment(Event event) {
         NewEventPostFragment newEventPostFragment = new NewEventPostFragment();
         newEventPostFragment.setEvent(event);
@@ -388,6 +470,11 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
+    /**
+     * deletes all current fragments from the screen and replaces them with the fragment regarding
+     * creating a new Group in a Category.
+     * @param category in which the group will be created.
+     */
     public void launchNewGroupInCategoryFragment(Category category) {
         NewGroupInCategoryFragment newGroupInCategoryFragment = new NewGroupInCategoryFragment();
         newGroupInCategoryFragment.setCategory(category);
@@ -397,6 +484,11 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
+    /**
+     * deletes all current fragments from the screen and replaces them with the fragment regarding
+     * creating a new Group in a Subcategory.
+     * @param subcategory in which the group will be created.
+     */
     public void launchNewGroupInSubcategoryFragment(Subcategory subcategory) {
         NewGroupInSubcategoryFragment newGroupInSubcategoryFragment = new NewGroupInSubcategoryFragment();
         newGroupInSubcategoryFragment.setSubcategory(subcategory);
@@ -406,6 +498,11 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
+    /**
+     * deletes all current fragments from the screen and replaces them with the fragment regarding
+     * creating a new post in a group.
+     * @param group in which the post will be created.
+     */
     public void launchNewGroupPostFragment(Group group) {
         NewGroupPostFragment newGroupPostFragment = new NewGroupPostFragment();
         newGroupPostFragment.setGroup(group);
@@ -415,6 +512,10 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
+    /**
+     * deletes all current fragments from the screen and replaces them with the fragment regarding
+     * creating a new post in the feed of the current user.
+     */
     public void launchNewUserPostFragment() {
         NewUserPostFragment newUserPostFragment = new NewUserPostFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -423,6 +524,10 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
+    /**
+     * deletes all current fragments from the screen and replaces them with the fragment in which
+     * the user can type in a searh query.
+     */
     public void launchSearchInputFragment() {
         Toast.makeText(this, "1", Toast.LENGTH_SHORT);
 
@@ -433,6 +538,11 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
+    /**
+     * deletes all current fragments from the screen and replaces them with the fragment regarding
+     * showing a post.
+     * @param post which will be shown.
+     */
     public void launchShowPostFragment(Post post) {
         ShowPostFragment showPostFragment = new ShowPostFragment();
         showPostFragment.setPost(post);
@@ -442,6 +552,11 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
+    /**
+     * deletes all current fragments from the screen and replaces them with the fragments regarding
+     * showing all subcategories that exist for an event and all events that exist in a category.
+     * @param category of which all subcategories and events that exist for it, will be shown
+     */
     public void launchSubcategoriesEventAndEventsInCategoryFragment(Category category) {
         SubcategoriesEventFragment subcategoriesEventFragment = new SubcategoriesEventFragment();
         EventsInCategoryFragment eventsInCategoryFragment = new EventsInCategoryFragment();
@@ -456,6 +571,11 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
+    /**
+     * deletes all current fragments from the screen and replaces them with the fragments regarding
+     * showing all subcategories that exist for an group and all groups that exist in a category.
+     * @param category of which all subcategories and groups that exist for it, will be shown
+     */
     public void launchSubcategoriesGroupAndGroupsInCategoryFragment(Category category) {
         SubcategoriesGroupFragment subcategoriesGroupFragment = new SubcategoriesGroupFragment();
         GroupsInCategoryFragment groupsInCategoryFragment = new GroupsInCategoryFragment();

@@ -33,22 +33,31 @@ public class ItemEventViewModel extends ViewModel {
 
     private MutableLiveData<Event> event = new MutableLiveData<>();
     private MutableLiveData<List<Post>> mEventFeed = new MutableLiveData<>();
+
+    /**
+     * Text of the Post, the user typed in.
+     */
     public final ObservableField<String> textValue = new ObservableField<>("");
+
+
     private MutableLiveData<User> currentUser;
     private EventRepository eventRepository;
     private FeedRepository feedRepository;
     private PostRepository postRepository;
 
-
-    public void init(Event event, Context context) {
-        this.event.setValue(event);
-        postRepository = new PostRepository();
-        UserRepository userRepository = new UserRepository();
-        feedRepository = new FeedRepository();
-        eventRepository = new EventRepository();
-
-        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
-        currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
+    /**
+     * method to draw a picture on the screen.
+     *
+     * @param view     on which the picture will be drawn upon.
+     * @param imageUrl url of the image that will be drawn.
+     */
+    @BindingAdapter({"imageUrl"})
+    public static void loadImage(ImageView view, String imageUrl) {
+        Picasso.get().load(imageUrl)
+                .placeholder(android.R.drawable.ic_menu_help)
+                .error(android.R.drawable.ic_menu_camera)
+                .resize(50, 50)
+                .into(view);
     }
 
     /**
@@ -136,14 +145,25 @@ public class ItemEventViewModel extends ViewModel {
         return event.getValue().getImageUrl();
     }
 
+    /**
+     * initializes following variables: postRepository, feedRepository, eventRepository. Also
+     * creates an UserRepository object.
+     * Sets the event, which was given.
+     * Retrieves the currently logged in UserId from storage via SharedPreferences and get the
+     * user object which matched the id from the server.
+     *
+     * @param event   which the user clicked on.
+     * @param context of the Application.
+     */
+    public void init(Event event, Context context) {
+        this.event.setValue(event);
+        postRepository = new PostRepository();
+        UserRepository userRepository = new UserRepository();
+        feedRepository = new FeedRepository();
+        eventRepository = new EventRepository();
 
-    @BindingAdapter({"imageUrl"})
-    public static void loadImage(ImageView view, String imageUrl) {
-        Picasso.get().load(imageUrl)
-                .placeholder(android.R.drawable.ic_menu_help)
-                .error(android.R.drawable.ic_menu_camera)
-                .resize(50, 50)
-                .into(view);
+        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
+        currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
     }
 
     /**
@@ -154,6 +174,10 @@ public class ItemEventViewModel extends ViewModel {
         return event.getValue().getParticipants();
     }
 
+    /**
+     * method to get the Number of participants of this event
+     * @return number of participants of this event as a string.
+     */
     public String getNumberOfParticipants() {
         return Integer.toString(getParticipants().size());
     }
@@ -219,6 +243,10 @@ public class ItemEventViewModel extends ViewModel {
         postRepository.createPost(post);
     }
 
+    /**
+     * method to get the currently logged in user.
+     * @return logged in user as a MutableLiveData object.
+     */
     public MutableLiveData<User> getCurrentUser() {
         return currentUser;
     }
@@ -226,6 +254,7 @@ public class ItemEventViewModel extends ViewModel {
     public void setCurrentUser(MutableLiveData<User> currentUser) {
         this.currentUser = currentUser;
     }
+
 
     public void onCreateEventClick() {
         try {
@@ -235,6 +264,10 @@ public class ItemEventViewModel extends ViewModel {
         }
     }
 
+    /**
+     * method which will be called when the user presses the createPost icon.
+     * Creates a Post for the Event.
+     */
     public void onCreatePostClick() {
         try {
             createPost();

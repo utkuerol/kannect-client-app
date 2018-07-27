@@ -10,7 +10,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentCategoriesEventBinding;
@@ -29,6 +28,16 @@ public class CategoriesEventFragment extends Fragment {
     FragmentCategoriesEventBinding fragmentCategoriesEventBinding;
     private CategoryViewModel categoryViewModel;
 
+    /**
+     * Method which will be called when this fragment is created.
+     * Inflates the View, sets the ViewModel and the Adapter with the right onClickListener for the
+     * RecyclerView.
+     *
+     * @param inflater           inflates the layout on the screen
+     * @param parent             of this ViewGroup
+     * @param savedInstanceState state of the Application as a Bundle
+     * @return the outermost View in the layout file associated with the Binding.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
@@ -38,8 +47,6 @@ public class CategoriesEventFragment extends Fragment {
         categoryViewModel = ViewModelProviders.of(this).get(CategoryViewModel.class);
         categoryViewModel.init();
         categoryViewModel.setCategoriesToAllCategories();
-
-
 
 
         //set adapter

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,6 @@ import com.example.asus.example.mvvm.View.Adapter.OnItemClickListenerCategory;
 import com.example.asus.example.mvvm.ViewModel.CategoryViewModel;
 
 import java.util.List;
-import java.util.zip.Inflater;
 
 /**
  * Fragment for the view, to show all categories that exist for a group.
@@ -29,6 +27,16 @@ public class CategoriesGroupFragment extends Fragment {
     private FragmentCategoriesGroupBinding fragmentCategoriesGroupBinding;
     private CategoryViewModel categoryViewModel;
 
+    /**
+     * Method which will be called when this fragment is created.
+     * Inflates the View, sets the ViewModel and the Adapter with the right onClickListener for the
+     * RecyclerView.
+     *
+     * @param inflater           inflates the layout on the screen
+     * @param parent             of this ViewGroup
+     * @param savedInstanceState state of the Application as a Bundle
+     * @return the outermost View in the layout file associated with the Binding.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
@@ -36,7 +44,7 @@ public class CategoriesGroupFragment extends Fragment {
                 inflater, R.layout.fragment_categories_group, parent, false);
 
 
-        //set viewmodel
+        //set ViewModel
         final CategoryViewModel categoryViewModel = ViewModelProviders.of(this).get(CategoryViewModel.class);
         categoryViewModel.init();
 

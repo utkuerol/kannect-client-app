@@ -21,6 +21,9 @@ public class CategoryViewModel extends ViewModel {
     private CategoryRepository categoryRepository;
 
 
+    /**
+     * initializes the categoryRepository variable.
+     */
     public void init() {
         this.categoryRepository = new CategoryRepository();
     }

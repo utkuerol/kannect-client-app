@@ -27,6 +27,16 @@ public class GroupsInCategoryFragment extends Fragment {
     private Category category;
 
 
+    /**
+     * Method which will be called when this fragment is created.
+     * Inflates the View, sets the ViewModel and the Adapter with the right onClickListener for the
+     * RecyclerView.
+     *
+     * @param inflater           inflates the layout on the screen
+     * @param parent             of this ViewGroup
+     * @param savedInstanceState state of the Application as a Bundle
+     * @return the outermost View in the layout file associated with the Binding.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
@@ -70,6 +80,10 @@ public class GroupsInCategoryFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_groups_in_category, parent, false);
     }
 
+    /**
+     * sets the category of which all groups will be shown.
+     * @param category which the user clicked on.
+     */
     public void setCategory(Category category) {
         this.category = category;
     }

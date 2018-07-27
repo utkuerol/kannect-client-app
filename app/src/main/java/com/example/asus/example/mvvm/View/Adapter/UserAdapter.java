@@ -127,4 +127,3 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserAdapterVie
         }
     }
 }
-

@@ -28,6 +28,12 @@ public class GroupViewModel extends ViewModel {
     private GroupRepository groupRepository;
 
 
+    /**
+     * initializes the userRepository variable, the groupRepository variable and
+     * retrieves the currently logged in user via SharedPreferences and the given context.
+     *
+     * @param context of the Application.
+     */
     public void init(Context context) {
         UserRepository userRepository = new UserRepository();
         groupRepository = new GroupRepository();
@@ -35,30 +41,61 @@ public class GroupViewModel extends ViewModel {
         currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
     }
 
+    /**
+     * method to get the list of Groups.
+     * @return list of groups as a MutableLiveData object.
+     */
     public MutableLiveData<List<Group>> getGroups() {
         return groups;
     }
 
+    /**
+     * method to set the list of groups, so that only groups are in it, that match
+     * the given search query.
+     * @param query typed in by the user.
+     */
     public void setGroupsToSearchResults(String query) {
         groups = groupRepository.getGroups(query);
     }
 
+    /**
+     * method to set the list of groups, so that only groups are in it, that are in the given
+     * category.
+     * @param category chosen by the user.
+     */
     public void setGroupsFilteredByCategory(Category category) {
         groups.setValue(category.getGroups());
     }
 
+    /**
+     * method to set the list of groups, so that only groups are in it, that are in the given
+     * subcategory.
+     * @param subcategory chosen by the user.
+     */
     public void setGroupsFilteredBySubcategory(Subcategory subcategory) {
         groups.setValue(subcategory.getGroups());
     }
 
+    /**
+     * method to set the list of groups, so that only groups are in it, that the currently logged
+     * in user is a member in.
+     */
     public void setGroupsToJoinedGroups() {
         groups.setValue(currentUser.getValue().getJoinedGroups());
     }
 
+    /**
+     * method to get the currently logged in user.
+     * @return currently logged in user as a MutableLiveData object.
+     */
     public MutableLiveData<User> getCurrentUser() {
         return currentUser;
     }
 
+    /**
+     * method to set the currently logged in user.
+     * @param currentUser user which will be set as new currently logged in user.
+     */
     public void setCurrentUser(MutableLiveData<User> currentUser) {
         this.currentUser = currentUser;
     }

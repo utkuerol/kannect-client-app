@@ -31,10 +31,28 @@ public class EventSearchResultsFragment extends Fragment {
     private EventViewModel eventViewModel;
     private FragmentEventSearchResultBinding fragmentEventSearchResultBinding;
 
+    /**
+     * method to set the Search Query, the user typed in.
+     *
+     * @param query search query the user typed in.
+     */
     public void setQuery(String query) {
         this.query = query;
     }
 
+    /**
+     *  Method which will be called when this fragment is created.
+     *  Inflates the View, sets the ViewModel and the Adapter with the right onClickListener for the
+     *  RecyclerView.
+     *  Observes the MutableLiveData list of Events in the ViewModel,
+     *  which matched the search Query, found by server.
+     *  Observes the MutableLiveData User object  in the ViewModel of the User who is currently
+     *  logged in.
+     * @param inflater inflates the layout on the screen
+     * @param parent of this ViewGroup
+     * @param savedInstanceState state of the Application as a Bundle
+     * @return the outermost View in the layout file associated with the Binding.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 

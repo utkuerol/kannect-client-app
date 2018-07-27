@@ -27,6 +27,12 @@ public class EventViewModel extends ViewModel {
     private EventRepository eventRepository;
 
 
+    /**
+     * initializes the Event Repository variable and retrieves the
+     * currentUser from storage via SharedPreferences and the given context.
+     *
+     * @param context of the Application.
+     */
     public void init(Context context) {
         eventRepository = new EventRepository();
 
@@ -45,7 +51,7 @@ public class EventViewModel extends ViewModel {
 
     /**
      * Sets the events with all groups of the given category.
-     * @param category to filter
+     * @param category to filter.
      */
     public void setEventsFilteredByCategory(Category category) {
         events.setValue(category.getEvents());
@@ -76,10 +82,18 @@ public class EventViewModel extends ViewModel {
     }
 
 
+    /**
+     * method to get the currently logged in user.
+     * @return logged in User as a MutableLiveData object.
+     */
     public MutableLiveData<User> getCurrentUser() {
         return currentUser;
     }
 
+    /**
+     * sets the currently logged in user.
+     * @param currentUser which will be set.
+     */
     public void setCurrentUser(MutableLiveData<User> currentUser) {
         this.currentUser = currentUser;
     }

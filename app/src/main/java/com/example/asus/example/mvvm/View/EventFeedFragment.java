@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +33,17 @@ public class EventFeedFragment extends Fragment implements View.OnClickListener 
     private Event event;
     private FragmentEventFeedBinding fragmentEventFeedBinding;
     private ItemEventViewModel itemEventViewModel;
+
+    /**
+     * Method which will be called when this fragment is created.
+     * Inflates the View, sets the ViewModel and the Adapter with the right onClickListener for the
+     * RecyclerView.
+     *
+     * @param inflater           inflates the layout on the screen
+     * @param parent             of this ViewGroup
+     * @param savedInstanceState state of the Application as a Bundle
+     * @return the outermost View in the layout file associated with the Binding.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
@@ -88,6 +98,12 @@ public class EventFeedFragment extends Fragment implements View.OnClickListener 
         return fragmentEventFeedBinding.getRoot();
     }
 
+    /**
+     * OnClickListener for the participate Button in the Event Feed. If the Button shows the text
+     * participate and the user clicks it, it will change the text to participated and will initiate
+     * all actions to make the user a participant. Vice Versa when the text shows participated.
+     * @param v the View view which was clicked.
+     */
     @Override
     public void onClick(View v) {
         Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
@@ -110,6 +126,11 @@ public class EventFeedFragment extends Fragment implements View.OnClickListener 
             }
         }
     }
+
+    /**
+     * sets the Event, which will be shown and handled via this Fragment.
+     * @param event which will be shown in the UI.
+     */
     public void setEvent(Event event) {
         this.event = event;
     }
