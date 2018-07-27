@@ -61,25 +61,26 @@ public class PersonalFeedFragment extends Fragment implements View.OnClickListen
 
         postViewModel.init(this.getContext().getApplicationContext());
 
+        final Observer<List<Post>> postsObserver = new Observer<List<Post>>() {
+            @Override
+            public void onChanged(@Nullable List<Post> posts) {
+                if (posts != null) {
+                    postAdapter.setPostList(posts);
+                    fragmentPersonalFeedBinding.personalFeedPostRV.setAdapter(postAdapter);
+                }
+            }
+        };
+
         postViewModel.getCurrentUser().observe(this, new Observer<User>() {
             @Override
             public void onChanged(@Nullable User user) {
                 if (user != null) {
                     postViewModel.setPostsToPersonalFeed();
-                    fragmentPersonalFeedBinding.personalFeedPostRV.setAdapter(postAdapter);
-
+                    postViewModel.getPosts().observe(PersonalFeedFragment.this, postsObserver);
                 }
             }
         });
 
-        postViewModel.getPosts().observe(this, new Observer<List<Post>>() {
-            @Override
-            public void onChanged(@Nullable List<Post> posts) {
-                if (posts != null) {
-                    postAdapter.setPostList(posts);
-                }
-            }
-        });
 
         fragmentPersonalFeedBinding.personalFeedPostRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
         return fragmentPersonalFeedBinding.getRoot();
