@@ -104,8 +104,8 @@ public class ItemPostViewModel extends ViewModel {
      * Gets the number of likes of the post.
      * @return number of likes
      */
-    public int getNumberOfLikes () {
-        return post.getValue().getLikedUsers().size();
+    public String getNumberOfLikes() {
+        return Integer.toString(post.getValue().getLikedUsers().size());
     }
 
     /**

@@ -9,7 +9,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.asus.example.databinding.FragmentUserProfileBinding;
 import com.example.asus.example.mvvm.Model.Entities.Post;
@@ -60,8 +59,6 @@ public class UserProfileFragment extends Fragment {
                 if (posts != null) {
                     postAdapter.setPostList(itemUserViewModel.getUserProfile().getValue());
                     fragmentUserProfileBinding.userProfilePostRV.setAdapter(postAdapter);
-                } else {
-                    Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT);
                 }
             }
         };
@@ -73,8 +70,6 @@ public class UserProfileFragment extends Fragment {
                 if (user != null) {
                     fragmentUserProfileBinding.setItemUserViewModel(itemUserViewModel);
                     itemUserViewModel.getUserProfile().observe(UserProfileFragment.this, postsObserver);
-                } else {
-                    Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT);
                 }
             }
         });
