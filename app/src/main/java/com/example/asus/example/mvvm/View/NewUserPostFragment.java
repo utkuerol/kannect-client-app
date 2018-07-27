@@ -8,6 +8,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.asus.example.databinding.FragmentNewUserPostBinding;
 import com.example.asus.example.mvvm.Model.Entities.User;
@@ -16,9 +19,11 @@ import com.example.asus.example.mvvm.ViewModel.ItemUserViewModel;
 /**
  * activity for adding a new Post
  */
-public class NewUserPostFragment extends Fragment {
+public class NewUserPostFragment extends Fragment implements View.OnClickListener {
 
 
+    private Button button;
+    private EditText description;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
@@ -39,9 +44,19 @@ public class NewUserPostFragment extends Fragment {
             }
         });
 
+        button = fragmentNewPostBinding.button;
+        description = fragmentNewPostBinding.newUserPostET;
         return fragmentNewPostBinding.getRoot();
     }
 
 
-
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == button.getId()) {
+            if (description.getText().toString().length() == 0) {
+                Toast.makeText(this.getContext(), "You can´t create a post without Text!",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }

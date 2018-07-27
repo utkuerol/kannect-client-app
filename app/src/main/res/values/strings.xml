@@ -39,7 +39,7 @@
     <string name="eventDescription">Beschreibung</string>
     <string name="eventImageUrl">Bild Url</string>
     <string name="eventName">Name</string>
-    <string name="eventDate">Datum</string>
+    <string name="eventDate">Datum: dd.mm.yyyy</string>
     <string name="title_activity_login2">Sign in</string>
     <string name="logout">Abmelden</string>
     <string name="typePost">Text eingeben…</string>

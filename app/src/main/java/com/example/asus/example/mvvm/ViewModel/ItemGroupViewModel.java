@@ -215,15 +215,6 @@ public class ItemGroupViewModel extends ViewModel {
         postRepository.createPost(post);
     }
 
-    public void createGroup() throws Exception {
-        Group group = new Group();
-        //group.setCategory(chosenCategory.getValue());
-        group.setCreator(currentUser.getValue());
-        group.setDescription(inputDesc.get());
-        group.setName(inputName.get());
-        group.setImageURl(inputImageUrl.get());
-        groupRepository.createGroup(group);
-    }
 
     public MutableLiveData<User> getCurrentUser() {
         return currentUser;
@@ -233,19 +224,14 @@ public class ItemGroupViewModel extends ViewModel {
         this.currentUser = currentUser;
     }
 
-    public void onCreateGroupClick() {
-        try {
-            createGroup();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public void onCreatePostClick() {
-        try {
-            createPost();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (inputDesc.get().length() != 0) {
+
+            try {
+                createPost();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }
