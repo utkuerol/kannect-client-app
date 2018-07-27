@@ -22,16 +22,15 @@ import java.util.List;
 /**
  * User Profile Activity to show all Posts for this User
  */
-public class UserProfileFragment extends Fragment {
+public class PersonalProfileFragment extends Fragment {
 
-    private User user;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
         //set viewmodel
         final ItemUserViewModel itemUserViewModel = ViewModelProviders.of(this).get(ItemUserViewModel.class);
-        itemUserViewModel.init(user, this.getContext().getApplicationContext());
+        itemUserViewModel.init(this.getContext().getApplicationContext());
 
         //set adapter
         final PostAdapter postAdapter = new PostAdapter();
@@ -68,8 +67,9 @@ public class UserProfileFragment extends Fragment {
             @Override
             public void onChanged(@Nullable User user) {
                 if (user != null) {
+                    itemUserViewModel.setChosenUser(user);
                     fragmentUserProfileBinding.setItemUserViewModel(itemUserViewModel);
-                    itemUserViewModel.getUserProfile().observe(UserProfileFragment.this, postsObserver);
+                    itemUserViewModel.getUserProfile().observe(PersonalProfileFragment.this, postsObserver);
                 }
             }
         });
@@ -81,7 +81,4 @@ public class UserProfileFragment extends Fragment {
     }
 
 
-    public void setUser(User user) {
-        this.user = user;
-    }
 }
