@@ -33,12 +33,34 @@ public class ItemSubcategoryViewModel extends ViewModel {
     private GroupRepository groupRepository;
     private EventRepository eventRepository;
 
-
+    /**
+     * Name of the Event/Group which was typed in by the user.
+     */
     public final ObservableField<String> inputName = new ObservableField<>("");
+
+    /**
+     * Description of the Event/Group, which was typed in by the user.
+     */
     public final ObservableField<String> inputDesc = new ObservableField<>("");
+
+    /**
+     * Date when the Event will take place. Typed in by user.
+     */
     public final ObservableField<String> inputDate = new ObservableField<>("");
+
+    /**
+     * Image Url for the Event/Group, Typed in by User.
+     */
     public final ObservableField<String> inputImageUrl = new ObservableField<>("");
 
+    /**
+     * Initializes all repository Variables. Also sets the subcategory.
+     * Retrieves the currently logged in user from storage via SharedPreferences and the
+     * UserViewModel.
+     *
+     * @param subcategory which will be handled in this class.
+     * @param context     of the Application.
+     */
     public void init(Subcategory subcategory, Context context) {
         this.subcategory.setValue(subcategory);
 
@@ -50,6 +72,10 @@ public class ItemSubcategoryViewModel extends ViewModel {
         currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
     }
 
+    /**
+     * sets the subcategory
+     * @param subcategory which will be set.
+     */
     public void setSubcategory(Subcategory subcategory) {
         this.subcategory.setValue(subcategory);
     }
@@ -75,8 +101,7 @@ public class ItemSubcategoryViewModel extends ViewModel {
 
     /**
      * Gets the name of the subcategory.
-     *
-     * @return
+     * @return name of the Subcategory as a String.
      */
     public String getName() {
         return subcategory.getValue().getName();
@@ -119,14 +144,26 @@ public class ItemSubcategoryViewModel extends ViewModel {
         eventRepository.createEvent(event);
     }
 
+    /**
+     * method to get the currently logged in user.
+     * @return logged in user as a MutableliveData object.
+     */
     public MutableLiveData<User> getCurrentUser() {
         return currentUser;
     }
 
+    /**
+     * sets the currently logged in user.
+     * @param currentUser user which will be set.
+     */
     public void setCurrentUser(MutableLiveData<User> currentUser) {
         this.currentUser = currentUser;
     }
 
+    /**
+     * method which handles the click on the create Event Button.
+     * checks if the user Input is valid.
+     */
     public void onCreateEventClick() {
         if (!checkIfInputIsFalse() && dateIsValidFormat()) {
             try {
@@ -137,6 +174,10 @@ public class ItemSubcategoryViewModel extends ViewModel {
         }
     }
 
+    /**
+     * method which handles the click on the create Group Button.
+     * checks if the user Input is valid.
+     */
     public void onCreateGroupClick() {
 
         if (!checkIfInputIsFalse()) {

@@ -24,6 +24,13 @@ public class UserViewModel extends ViewModel {
     private UserRepository userRepository;
 
 
+    /**
+     * Initializes all repository Variables and MutableLiveDataLists.
+     * Retrieves the currently logged in user from storage via SharedPreferences and the
+     * UserViewModel.
+     *
+     * @param context of the Application.
+     */
     public void init(Context context) {
         users = new MutableLiveData<>();
         currentUser = new MutableLiveData<>();
@@ -68,10 +75,18 @@ public class UserViewModel extends ViewModel {
         users.setValue(currentUser.getValue().getSubscribers());
     }
 
+    /**
+     * method to get the currently logged in user.
+     * @return the currently logged in user as a MutableLiveData object.
+     */
     public MutableLiveData<User> getCurrentUser() {
         return currentUser;
     }
 
+    /**
+     * sets the currently logged in user.
+     * @param currentUser which will be set.
+     */
     public void setCurrentUser(MutableLiveData<User> currentUser) {
         this.currentUser = currentUser;
     }

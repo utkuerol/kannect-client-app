@@ -28,6 +28,12 @@ public class LoginViewModel extends ViewModel {
         return userRepository.findByEmail(account.getEmail());
     }
 
+    /**
+     * creates and sets the currently logged in user with the help of a
+     * GoogleSignIgnAccount.
+     *
+     * @param account with which the user object will be created.
+     */
     public void createAndSetCurrentUser(GoogleSignInAccount account) {
         User u = new User();
         u.setEmail(account.getEmail());
@@ -48,6 +54,10 @@ public class LoginViewModel extends ViewModel {
         return user;
     }
 
+    /**
+     * sets the logged in user.
+     * @param user which will be set.
+     */
     public void setUser(MutableLiveData<User> user) {
         this.user = user;
     }

@@ -38,12 +38,57 @@ public class ItemGroupViewModel extends ViewModel {
     private PostRepository postRepository;
 
 
+
     public final ObservableField<String> inputName = new ObservableField<>("");
+
+    /**
+     * description which was typed in by user.
+     */
     public final ObservableField<String> inputDesc = new ObservableField<>("");
+
+    /**
+     * image url, which was typed in by user.
+     */
     public final ObservableField<String> inputImageUrl = new ObservableField<>("");
+
+    /**
+     * text for the post, which will be created. Was typed in by user.
+     */
     public final ObservableField<String> textValue = new ObservableField<>("");
 
+    /**
+     * loads the image with given imageUrl.
+     *
+     * @param view     in which the image will be loaded.
+     * @param imageUrl Url of the image as String.
+     */
+    @BindingAdapter({"imageUrl"})
+    public static void loadImage(ImageView view, String imageUrl) {
+        Picasso.get().load(imageUrl)
+                .placeholder(android.R.drawable.ic_menu_help)
+                .error(android.R.drawable.ic_menu_camera)
+                .resize(50, 50)
+                .into(view);
+    }
 
+
+    /**
+     * Gets chosenGroup.
+     *
+     * @return observable group.
+     */
+    public MutableLiveData<Group> getChosenGroup() {
+        return chosenGroup;
+    }
+
+    /**
+     * Initializes repository variables, also sets the chosen group which was given as a parameter.
+     * Retrieves the currently logged in user from storage via SharedPreferences and the
+     * userRepository.
+     *
+     * @param chosenGroup
+     * @param context
+     */
     public void init(Group chosenGroup, Context context) {
         this.chosenGroup.setValue(chosenGroup);
         postRepository = new PostRepository();
@@ -53,25 +98,6 @@ public class ItemGroupViewModel extends ViewModel {
 
         SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
         currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
-    }
-
-
-
-    /**
-     * Gets chosenGroup.
-     * @return observable group.
-     */
-    public MutableLiveData<Group> getChosenGroup() {
-        return chosenGroup;
-    }
-
-    @BindingAdapter({"imageUrl"})
-    public static void loadImage(ImageView view, String imageUrl) {
-        Picasso.get().load(imageUrl)
-                .placeholder(android.R.drawable.ic_menu_help)
-                .error(android.R.drawable.ic_menu_camera)
-                .resize(50, 50)
-                .into(view);
     }
 
     /**
@@ -174,6 +200,10 @@ public class ItemGroupViewModel extends ViewModel {
         return chosenGroup.getValue().getMembers().contains(currentUser);
     }
 
+    /**
+     * method to get the Group feed for this group.
+     * @return list of posts which will be shown in the feed.
+     */
     public List<Post> getGroupFeed() {
 
         return feedRepository.getGroupFeed(chosenGroup.getValue()).getValue();
@@ -216,16 +246,28 @@ public class ItemGroupViewModel extends ViewModel {
     }
 
 
+    /**
+     * method to get the currently logged in user.
+     * @return logged in user as a MutableLiveData object.
+     */
     public MutableLiveData<User> getCurrentUser() {
         return currentUser;
     }
 
+    /**
+     * sets the currently logged in user.
+     * @param currentUser user which is logged in.
+     */
     public void setCurrentUser(MutableLiveData<User> currentUser) {
         this.currentUser = currentUser;
     }
 
+    /**
+     * method which handles the click on the Post Button.
+     * checks if the text which was typed in by the user, has atleast one character.
+     */
     public void onCreatePostClick() {
-        if (inputDesc.get().length() != 0) {
+        if (textValue.get().length() != 0) {
 
             try {
                 createPost();

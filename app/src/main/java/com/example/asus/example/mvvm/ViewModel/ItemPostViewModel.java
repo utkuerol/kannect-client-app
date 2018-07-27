@@ -31,16 +31,12 @@ public class ItemPostViewModel extends ViewModel {
     private PostRepository postRepository;
 
 
-    public void init(Post post, Context context) {
-        this.post.setValue(post);
-        postRepository = new PostRepository();
-        UserRepository userRepository = new UserRepository();
-
-        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
-        currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
-    }
-
-
+    /**
+     * loads a given image into a view via an url.
+     *
+     * @param view     in which the image will be loaded
+     * @param imageUrl of the image which will be loaded.
+     */
     @BindingAdapter({"imageUrl"})
     public static void loadImage(ImageView view, String imageUrl) {
         Picasso.get().load(imageUrl)
@@ -48,6 +44,23 @@ public class ItemPostViewModel extends ViewModel {
                 .error(android.R.drawable.ic_menu_camera)
                 .resize(50, 50)
                 .into(view);
+    }
+
+    /**
+     * initializes repository Variables, and sets the value of post to given post.
+     * Retrieves currently logged in user from storage via SharedPreferences and the
+     * UserRepository.
+     *
+     * @param post    which will be handled in this class.
+     * @param context of the Application.
+     */
+    public void init(Post post, Context context) {
+        this.post.setValue(post);
+        postRepository = new PostRepository();
+        UserRepository userRepository = new UserRepository();
+
+        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
+        currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
     }
 
     /**
@@ -132,7 +145,10 @@ public class ItemPostViewModel extends ViewModel {
         return post.getValue().getDate().toString();
     }
 
-
+    /**
+     * method to get the name of the owner of the post. Meaning the entity it belongs to.
+     * @return name of the owner.
+     */
     public String getOwnerName() {
 
         if (post.getValue().getOwnerEvent() != null) {
@@ -203,14 +219,25 @@ public class ItemPostViewModel extends ViewModel {
         postRepository.commentPost(comment);
     }
 
+    /**
+     * method to get the currently logged in user.
+     * @return logged in user as a MutableLiveData object.
+     */
     public MutableLiveData<User> getCurrentUser() {
         return currentUser;
     }
 
+    /**
+     * sets the currently logged in user.
+     * @param currentUser user which us currently logged in.
+     */
     public void setCurrentUser(MutableLiveData<User> currentUser) {
         this.currentUser = currentUser;
     }
 
+    /**
+     * method which handles the actions, when a user likes a post.
+     */
     public void onLike() {
         try {
             like();
@@ -220,6 +247,9 @@ public class ItemPostViewModel extends ViewModel {
     }
 
 
+    /**
+     * method which handles the actions, when a user unlikes a post.
+     */
     public void onUnLike() {
         try {
             like();

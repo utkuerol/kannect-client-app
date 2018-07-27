@@ -19,6 +19,13 @@ public class PostViewModel extends ViewModel {
     private FeedRepository feedRepository;
 
 
+    /**
+     * Initializes all repository variables.
+     * Retrieves currently logged in user from storage via SharedPreferences and the
+     * UserRepository.
+     *
+     * @param context of the Application.
+     */
     public void init(Context context) {
         feedRepository = new FeedRepository();
         UserRepository userRepository = new UserRepository();
@@ -26,18 +33,34 @@ public class PostViewModel extends ViewModel {
         currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
     }
 
+    /**
+     * sets the list of posts, so that only posts are in the list, that belong to the currently
+     * logged in users feed.
+     */
     public void setPostsToPersonalFeed() {
         this.posts = feedRepository.getPersonalFeed(currentUser.getValue());
     }
 
+    /**
+     * method to get the list of posts that will be shown in the users feed.
+     * @return list of posts as a MutableLiveData object.
+     */
     public MutableLiveData<List<Post>> getPosts() {
         return posts;
     }
 
+    /**
+     * method to get the currently logged in user.
+     * @return currently logged in user as a MutableLiveData object.
+     */
     public MutableLiveData<User> getCurrentUser() {
         return currentUser;
     }
 
+    /**
+     * sets the currently logged in user.
+     * @param currentUser which will be set.
+     */
     public void setCurrentUser(MutableLiveData<User> currentUser) {
         this.currentUser = currentUser;
     }

@@ -12,7 +12,11 @@ public class SearchResultsViewModel extends ViewModel {
     private String query;
 
 
-
+    /**
+     * sets the search Query which the user typed in.
+     *
+     * @param query which the user typed in.
+     */
     public void init(String query) {
         this.query = query;
     }

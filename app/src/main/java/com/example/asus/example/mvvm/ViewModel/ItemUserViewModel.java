@@ -34,25 +34,17 @@ public class ItemUserViewModel extends ViewModel {
     private PostRepository postRepository;
 
 
+    /**
+     * Text of the post which will be created. Typed in by user.
+     */
     public final ObservableField<String> textValue = new ObservableField<>("");
 
-    public void init(User user, Context context) {
-        this.chosenUser.setValue(user);
-        userRepository = new UserRepository();
-        postRepository = new PostRepository();
-
-        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
-        currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
-    }
-
-    public void init(Context context) {
-        userRepository = new UserRepository();
-        postRepository = new PostRepository();
-
-        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
-        currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
-    }
-
+    /**
+     * loads a image into a view via an url.
+     *
+     * @param view                in which the image will be loaded.
+     * @param currentUserImageUrl url of the image that will be loaded.
+     */
     @BindingAdapter({"currentUserImageUrl"})
     public static void loadCurrentUserImage(ImageView view, String currentUserImageUrl) {
         Picasso.get().load(currentUserImageUrl)
@@ -62,12 +54,58 @@ public class ItemUserViewModel extends ViewModel {
                 .into(view);
     }
 
-    public String getCurrentUserName() {
-        return currentUser.getValue().getName();
+    /**
+     * loads image into a view via an url.
+     *
+     * @param view     in which the image will be loaded.
+     * @param imageUrl of the image which will be loaded.
+     */
+    @BindingAdapter({"imageUrl"})
+    public static void loadImage(ImageView view, String imageUrl) {
+        Picasso.get().load(imageUrl)
+                .placeholder(android.R.drawable.ic_menu_help)
+                .error(android.R.drawable.ic_menu_camera)
+                .resize(100, 100)
+                .into(view);
     }
 
-    public String getCurrentUserEmail() {
-        return currentUser.getValue().getEmail();
+    /**
+     * Initializes repository variables. Also sets the value of chosen User.
+     * Retrieves currently logged in user from storage via SharedPreference and the
+     * UserRepository.
+     *
+     * @param user    which will be handled in this class,
+     * @param context of the Application.
+     */
+    public void init(User user, Context context) {
+        this.chosenUser.setValue(user);
+        userRepository = new UserRepository();
+        postRepository = new PostRepository();
+
+        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
+        currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
+    }
+
+    /**
+     * Initializes repository variables.
+     * Retrieves currently logged in user from storage via SharedPreference and the
+     * UserRepository.
+     * @param context of the Application.
+     */
+    public void init(Context context) {
+        userRepository = new UserRepository();
+        postRepository = new PostRepository();
+
+        SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
+        currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
+    }
+
+    /**
+     * method to get name of the current User.
+     * @return current User as String.
+     */
+    public String getCurrentUserName() {
+        return currentUser.getValue().getName();
     }
 
     /**
@@ -78,15 +116,19 @@ public class ItemUserViewModel extends ViewModel {
         return chosenUser;
     }
 
-    @BindingAdapter({"imageUrl"})
-    public static void loadImage(ImageView view, String imageUrl) {
-        Picasso.get().load(imageUrl)
-                .placeholder(android.R.drawable.ic_menu_help)
-                .error(android.R.drawable.ic_menu_camera)
-                .resize(100, 100)
-                .into(view);
+    /**
+     * method to get the email of the current user.
+     *
+     * @return email as String.
+     */
+    public String getCurrentUserEmail() {
+        return currentUser.getValue().getEmail();
     }
 
+    /**
+     * method to get the image url of the current user.
+     * @return url of the current user image as String.
+     */
     public String getCurrentUserImageUrl() {
         return currentUser.getValue().getImageUrl();
     }
@@ -221,18 +263,34 @@ public class ItemUserViewModel extends ViewModel {
         postRepository.createPost(postToCreate);
     }
 
+    /**
+     * method to set the chosen user.
+     * @param chosenUser which will be set.
+     */
     public void setChosenUser(MutableLiveData<User> chosenUser) {
         this.chosenUser = chosenUser;
     }
 
+    /**
+     * method to get the current User.
+     * @return current user as a MutableLiveData object.
+     */
     public MutableLiveData<User> getCurrentUser() {
         return currentUser;
     }
 
+    /**
+     * method which sets the currently logged in user.
+     * @param currentUser which will be set.
+     */
     public void setCurrentUser(MutableLiveData<User> currentUser) {
         this.currentUser = currentUser;
     }
 
+    /**
+     * method which handles the action when user clicks on createPost.
+     * checks if the text of the Post has atleast one character.
+     */
     public void onCreatePostClick() {
 
         if (textValue.get().length() != 0) {
