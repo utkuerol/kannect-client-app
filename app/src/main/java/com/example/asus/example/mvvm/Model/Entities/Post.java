@@ -203,5 +203,26 @@ public class Post implements Serializable {
     public void setOwnerEvent(Event ownerEvent) {
         this.ownerEvent = ownerEvent;
     }
+
+    /**
+     * compares two posts by their ids
+     *
+     * @param object post to compare with
+     * @return true if object and this post have the same id, else false
+     */
+    @Override
+    public boolean equals(Object object) {
+        if (object == null) {
+            return false;
+        }
+        if (!Post.class.isAssignableFrom(object.getClass())) {
+            return false;
+        }
+        final Post other = (Post) object;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
 }
 

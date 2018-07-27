@@ -176,4 +176,25 @@ public class Event implements Serializable {
     public void setParticipants(List<User> participants) {
         this.participants = participants;
     }
+
+    /**
+     * compares two Event by their ids
+     *
+     * @param object event to compare with
+     * @return true if object and this Event have the same id, else false
+     */
+    @Override
+    public boolean equals(Object object) {
+        if (object == null) {
+            return false;
+        }
+        if (!Event.class.isAssignableFrom(object.getClass())) {
+            return false;
+        }
+        final Event other = (Event) object;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
 }

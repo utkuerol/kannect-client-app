@@ -11,21 +11,29 @@
         android:background="@color/white">
 
 
+        <TextView
+            android:id="@+id/groupsInSubategoryCreateGroupTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/groupsInSubcategoryCreateGroupIV"
+            android:text="@string/createGroup" />
+
         <ImageView
             android:id="@+id/groupsInSubcategoryCreateGroupIV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/groupsInSubcategoryGroupRV"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginEnd="12dp"
-            android:layout_marginRight="12dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="15dp"
             app:srcCompat="@drawable/ic_baseline_create_24px" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/groupsInSubcategoryGroupRV"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/personalFeedRVHeight"
+            android:layout_height="430dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"

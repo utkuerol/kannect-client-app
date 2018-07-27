@@ -94,7 +94,13 @@ public class UserRepository {
         });
     }
 
-
+    /**
+     * Method to get a User from the Server by his Email.
+     * It uses the ServiceGenerator class to create a service via Retrofit2 with the help of the ServiceAPI.
+     *
+     * @param accountEmail Mail of the User, which will be looked for.
+     * @return found user, as a MutableLiveData object.
+     */
     public MutableLiveData<User> findByEmail(String accountEmail) {
 
         final MutableLiveData<User> result = new MutableLiveData<>();
@@ -118,6 +124,11 @@ public class UserRepository {
         return result;
     }
 
+    /**
+     * Method to create a User in the Server and its database. Sends a User object to the server.
+     * It uses the ServiceGenerator class to create a service via Retrofit2 with the help of the ServiceAPI.
+     * @param user which will be created.
+     */
     public void createUser(User user) {
         ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
         Call<ResponseBody> call = client.createUser(user);
@@ -135,6 +146,12 @@ public class UserRepository {
         });
     }
 
+    /**
+     * Method to find a User by his Id. Sends an id to the server.
+     * It uses the ServiceGenerator class to create a service via Retrofit2 with the help of the ServiceAPI.
+     * @param userID of the user which will be looked for in the server
+     * @return found User as a MutableLiveData object
+     */
     public MutableLiveData<User> getUserByID(int userID) {
         final MutableLiveData<User> result = new MutableLiveData<>();
         ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
@@ -154,6 +171,12 @@ public class UserRepository {
     }
 
 
+    /**
+     * Method to get the Feed for a User. Sends an User object to the server.
+     * It uses the ServiceGenerator class to create a service via Retrofit2 with the help of the ServiceAPI.
+     * @param user which the feed will be generated for.
+     * @return list of posts, for the feed of the user, as a MutableLiveData object.
+     */
     public MutableLiveData<List<Post>> getUserProfile(User user) {
         final MutableLiveData<List<Post>> result = new MutableLiveData<>();
         ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);

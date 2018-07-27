@@ -135,4 +135,25 @@ public class Subcategory implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
+
+    /**
+     * compares two Subcategories by their ids
+     *
+     * @param object subcategory to compare with
+     * @return true if object and this subcategory have the same id, else false
+     */
+    @Override
+    public boolean equals(Object object) {
+        if (object == null) {
+            return false;
+        }
+        if (!Subcategory.class.isAssignableFrom(object.getClass())) {
+            return false;
+        }
+        final Subcategory other = (Subcategory) object;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
 }
