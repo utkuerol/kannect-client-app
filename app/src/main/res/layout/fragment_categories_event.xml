@@ -4,24 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/categoriesEventCategoryRV"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/twoFragmentHeight"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="@dimen/toolbarHeight"
-        tools:listitem="@layout/item_category">
-
-    </android.support.v7.widget.RecyclerView>
+        android:layout_marginTop="@dimen/toolbarHeight">
 
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/categoriesEventCategoryRV"
+            android:layout_width="match_parent"
+            android:layout_height="223dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/toolbarHeight"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:listitem="@layout/item_category">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/categoriesEventIndicatorWhereUserIsTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="36dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/categoriesEvent"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/categoriesEventCategoryRV"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </android.support.constraint.ConstraintLayout>
 
 </layout>

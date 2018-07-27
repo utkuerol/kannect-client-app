@@ -50,6 +50,7 @@ public class NewGroupInCategoryFragment extends Fragment implements View.OnClick
             }
         });
         button = fragmentNewGroupBinding.newGroupInCategoryButton;
+        button.setOnClickListener(this);
         description = fragmentNewGroupBinding.newGroupInCategoryDescriptionET;
         groupName = fragmentNewGroupBinding.newGroupInCategoryNameET;
         imageUrl = fragmentNewGroupBinding.newGroupInCategoryImageUrlET;

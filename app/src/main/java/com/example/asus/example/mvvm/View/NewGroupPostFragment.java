@@ -63,7 +63,7 @@ public class NewGroupPostFragment extends Fragment implements View.OnClickListen
     public void onClick(View view) {
         if (view.getId() == button.getId()) {
             if (description.getText().toString().length() == 0) {
-                Toast.makeText(this.getContext(), "You can´t create a post without Text!",
+                Toast.makeText(this.getContext(), "Du musst ein Text für den Beitrag eingeben!",
                         Toast.LENGTH_SHORT).show();
             } else {
                 Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();

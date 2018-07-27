@@ -15,6 +15,7 @@ import com.example.asus.example.mvvm.Model.Repository.EventRepository;
 import com.example.asus.example.mvvm.Model.Repository.GroupRepository;
 import com.example.asus.example.mvvm.Model.Repository.UserRepository;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -127,18 +128,48 @@ public class ItemSubcategoryViewModel extends ViewModel {
     }
 
     public void onCreateEventClick() {
-        try {
-            createEvent();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (!checkIfInputIsFalse() && dateIsValidFormat()) {
+            try {
+                createEvent();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
     public void onCreateGroupClick() {
-        try {
-            createGroup();
-        } catch (Exception e) {
-            e.printStackTrace();
+
+        if (!checkIfInputIsFalse()) {
+            try {
+                createGroup();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+    }
+
+    private boolean checkIfInputIsFalse() {
+        if (inputDesc.get().length() == 0) {
+            return true;
+        } else if (inputImageUrl.get().length() == 0) {
+            return true;
+        } else if (inputName.get().length() == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean dateIsValidFormat() {
+        Date date = null;
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+            date = sdf.parse(inputDate.get());
+            if (!inputName.get().equals(sdf.format(date))) {
+                date = null;
+            }
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+        return date != null;
     }
 }

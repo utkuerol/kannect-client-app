@@ -47,6 +47,7 @@ public class NewUserPostFragment extends Fragment implements View.OnClickListene
         });
 
         button = fragmentNewPostBinding.button;
+        button.setOnClickListener(this);
         description = fragmentNewPostBinding.newUserPostET;
         return fragmentNewPostBinding.getRoot();
     }

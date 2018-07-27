@@ -47,6 +47,7 @@
     <string name="createPost">Post erstellen</string>
     <string name="createEvent">Veranstaltung erstellen</string>
     <string name="createGroup">Gruppe erstellen</string>
+    <string name="subcategoriesEvent">Unterkategorien</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
@@ -69,6 +70,16 @@
     <string name="google_crash_reporting_api_key" translatable="false">AIzaSyC4Jt9j9CJ3f01iPUOiGmjRnFKOYHl1AuQ</string>
     <string name="google_storage_bucket" translatable="false">kannect-client-app.appspot.com</string>
     <string name="project_id" translatable="false">kannect-client-app</string>
+    <string name="subcategoriesGroup">Unterkategorien</string>
+    <string name="personalFeed">Persönlicher Feed</string>
+    <string name="myGroups">Meine Gruppen</string>
+    <string name="myEvents">Meine Veranstaltungen</string>
+    <string name="groupsInSubcategory">Gruppen</string>
+    <string name="groupsInCategory">Gruppen</string>
+    <string name="eventsInSubcategory">Veranstaltungen</string>
+    <string name="eventsInCategory">Veranstaltungen</string>
+    <string name="categoriesGroup">Kategorien</string>
+    <string name="categoriesEvent">Kategorien</string>
 
 
 </resources>

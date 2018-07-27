@@ -257,6 +257,7 @@ public class ItemEventViewModel extends ViewModel {
 
 
     public void onCreateEventClick() {
+
         try {
             createPost();
         } catch (Exception e) {
@@ -269,10 +270,12 @@ public class ItemEventViewModel extends ViewModel {
      * Creates a Post for the Event.
      */
     public void onCreatePostClick() {
-        try {
-            createPost();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (textValue.get().length() != 0) {
+            try {
+                createPost();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

@@ -12,12 +12,26 @@
 
 
         <TextView
+            android:id="@+id/groupsInSubcategoryIndicatorWhereUserIsTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/groupsInSubategoryCreateGroupTV"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
+            android:text="@string/groupsInSubcategory"
+            android:textSize="16sp" />
+
+        <TextView
             android:id="@+id/groupsInSubategoryCreateGroupTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/groupsInSubcategoryCreateGroupIV"
+            android:layout_marginEnd="23dp"
+            android:layout_marginRight="23dp"
             android:text="@string/createGroup" />
 
         <ImageView
@@ -27,6 +41,8 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
+            android:layout_marginEnd="60dp"
+            android:layout_marginRight="60dp"
             android:layout_marginTop="15dp"
             app:srcCompat="@drawable/ic_baseline_create_24px" />
 
