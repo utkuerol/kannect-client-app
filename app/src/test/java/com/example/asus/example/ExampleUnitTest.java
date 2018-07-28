@@ -23,7 +23,7 @@ public class ExampleUnitTest {
     EventRepository eventRepository = new EventRepository();
 
     @Test
-    public void exampleMockito() {
+    public void exampleMockito() {;
         MutableLiveData<List<Event>> events = new MutableLiveData<>(); //create the method answer mock you want. fill with events of your choice
         Mockito.when(eventRepository.getEvents("asd")).thenReturn(events);
         Assert.assertTrue(eventViewModel.getEvents().getValue().equals(events));

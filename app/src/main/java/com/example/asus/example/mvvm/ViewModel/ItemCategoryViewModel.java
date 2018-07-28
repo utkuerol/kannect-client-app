@@ -199,7 +199,7 @@ public class ItemCategoryViewModel extends ViewModel {
     private boolean isValidFormat() {
         Date date = null;
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
             date = sdf.parse(inputDate.get());
             if (!inputDate.get().equals(sdf.format(date))) {
                 date = null;

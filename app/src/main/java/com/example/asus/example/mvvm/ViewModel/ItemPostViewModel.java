@@ -252,7 +252,7 @@ public class ItemPostViewModel extends ViewModel {
      */
     public void onUnLike() {
         try {
-            like();
+            unlike();
         } catch (Exception e) {
             e.printStackTrace();
         }

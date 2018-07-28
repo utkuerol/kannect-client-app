@@ -4,6 +4,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.Toast;
 
 import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
@@ -17,7 +18,7 @@ public class PostViewModel extends ViewModel {
     private MutableLiveData<List<Post>> posts = new MutableLiveData<>();
     private MutableLiveData<User> currentUser = new MutableLiveData<>();
     private FeedRepository feedRepository;
-
+    private Context context;
 
     /**
      * Initializes all repository variables.
@@ -29,6 +30,7 @@ public class PostViewModel extends ViewModel {
     public void init(Context context) {
         feedRepository = new FeedRepository();
         UserRepository userRepository = new UserRepository();
+        this.context = context;
         SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
         currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
     }
@@ -38,7 +40,7 @@ public class PostViewModel extends ViewModel {
      * logged in users feed.
      */
     public void setPostsToPersonalFeed() {
-        this.posts = feedRepository.getPersonalFeed(currentUser.getValue());
+            this.posts = feedRepository.getPersonalFeed(currentUser.getValue());
     }
 
     /**
