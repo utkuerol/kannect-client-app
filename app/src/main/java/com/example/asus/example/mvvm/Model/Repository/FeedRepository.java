@@ -43,14 +43,11 @@ public class FeedRepository {
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                 if (response.isSuccessful()) {
                     result.setValue(response.body());
-                } else {
-                    result.setValue(null);
                 }
             }
 
             @Override
             public void onFailure(Call<List<Post>> call, Throwable t) {
-                result.setValue(null);
                 t.printStackTrace();
             }
         });
@@ -75,15 +72,12 @@ public class FeedRepository {
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                 if (response.isSuccessful()) {
                     result.setValue(response.body());
-                } else {
-                    result.setValue(null);
                 }
 
             }
 
             @Override
             public void onFailure(Call<List<Post>> call, Throwable t) {
-                result.setValue(null);
                 t.printStackTrace();
             }
         });
@@ -106,14 +100,11 @@ public class FeedRepository {
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                 if (response.isSuccessful()) {
                     result.setValue(response.body());
-                } else {
-                    result.setValue(null);
                 }
             }
 
             @Override
             public void onFailure(Call<List<Post>> call, Throwable t) {
-                result.setValue(null);
                 t.printStackTrace();
             }
         });

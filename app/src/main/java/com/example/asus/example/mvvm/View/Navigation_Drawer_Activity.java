@@ -37,6 +37,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import java.util.List;
+
 public class Navigation_Drawer_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -593,9 +595,9 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
         transaction.commit();
     }
 
-    public void launchSubscriptionsFragment(User user) {
+    public void launchSubscriptionsFragment(List<User> users) {
         SubscriptionsFragment subscriptionsFragment = new SubscriptionsFragment();
-        subscriptionsFragment.setUser(user);
+        subscriptionsFragment.setUsers(users);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, subscriptionsFragment);
         transaction.addToBackStack(null);

@@ -30,6 +30,7 @@
 
     <ImageView
         android:id="@+id/thumbsDown"
+        android:onClick="@{(v) ->itemPostViewModel.onUnLike(v)}"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -46,6 +47,7 @@
         app:srcCompat="@drawable/ic_thumb_down_icon" />
 
     <ImageView
+        android:onClick="@{(v) ->itemPostViewModel.onLike(v)}"
         android:id="@+id/fragmentThumbsUpIV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

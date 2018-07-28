@@ -2,6 +2,7 @@ package com.example.asus.example.mvvm.View;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,20 +12,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentSubscriptionsBinding;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.View.Adapter.OnItemClickListenerUser;
 import com.example.asus.example.mvvm.View.Adapter.UserAdapter;
 import com.example.asus.example.mvvm.ViewModel.UserViewModel;
 
+import java.util.List;
+
 public class SubscriptionsFragment extends Fragment {
 
+    private FragmentSubscriptionsBinding fragmentSubscriptionsBinding;
 
-    private User user;
+    private List<User> users;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-
+        fragmentSubscriptionsBinding = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_subscriptions, parent, false);
         //set viewmodel
         final UserViewModel userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
         userViewModel.init(this.getContext().getApplicationContext());
@@ -41,32 +47,30 @@ public class SubscriptionsFragment extends Fragment {
             }
         };
         userAdapter.setListener(listener);
-
+        userAdapter.setUserList(users);
+        fragmentSubscriptionsBinding.subscriptionsUserRV.setAdapter(userAdapter);
         //set binding
-        final FragmentSubscriptionsBinding fragmentSubscriptionsBinding = FragmentSubscriptionsBinding.inflate(inflater, parent, false);
+
         fragmentSubscriptionsBinding.subscriptionsUserRV.setAdapter(userAdapter);
 
-        userViewModel.getCurrentUser().observe(this, new Observer<User>() {
+        /*userViewModel.getCurrentUser().observe(this, new Observer<User>() {
             @Override
             public void onChanged(@Nullable User user) {
                 if (user != null) {
                     userViewModel.setUsersToSubscriptions();
-                    userAdapter.setUserList(userViewModel.getUsers().getValue());
-                    fragmentSubscriptionsBinding.subscriptionsUserRV.setAdapter(userAdapter);
 
-                } else {
-                    Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT);
+
                 }
             }
-        });
+        });*/
         fragmentSubscriptionsBinding.subscriptionsUserRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         return fragmentSubscriptionsBinding.getRoot();
     }
 
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
 }

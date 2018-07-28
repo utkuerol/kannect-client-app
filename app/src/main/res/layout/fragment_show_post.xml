@@ -33,7 +33,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fragmentPictureOfUserWhoPostedIV"
             app:layout_constraintVertical_bias="0.909"
-            android:onClick="@{()->itemPostViewModel.onLike()}"
+            android:onClick="@{(v)->itemPostViewModel.onLike(v)}"
             app:srcCompat="@drawable/ic_thumb_down_icon" />
 
         <ImageView
@@ -46,7 +46,7 @@
             android:layout_marginTop="44dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:onClick="@{()->itemPostViewModel.onUnLike()}"
+            android:onClick="@{(v)->itemPostViewModel.onUnLike(v)}"
             app:layout_constraintTop_toBottomOf="@+id/fragmentPictureOfUserWhoPostedIV"
             app:srcCompat="@drawable/ic_thumb_ub_icon" />
 

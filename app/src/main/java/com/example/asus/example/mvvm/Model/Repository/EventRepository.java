@@ -44,15 +44,12 @@ public class EventRepository {
             public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
                 if (response.isSuccessful()) {
                     result.setValue(response.body());
-                } else {
-                    result.setValue(null);
                 }
 
             }
 
             @Override
             public void onFailure(Call<List<Event>> call, Throwable t) {
-                result.setValue(null);
                 t.printStackTrace();
             }
         });

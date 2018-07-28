@@ -44,15 +44,13 @@ public class CategoryRepository {
         public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
             if (response.isSuccessful()) {
                 result.setValue(response.body());
-            } else {
-                result.setValue(null);
             }
         }
 
 
         @Override
         public void onFailure(Call<List<Category>> call, Throwable t) {
-            result.setValue(null);
+
             t.printStackTrace();
         }
     });

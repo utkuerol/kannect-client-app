@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.BindingAdapter;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.example.asus.example.mvvm.Model.Entities.Comment;
@@ -238,7 +239,7 @@ public class ItemPostViewModel extends ViewModel {
     /**
      * method which handles the actions, when a user likes a post.
      */
-    public void onLike() {
+    public void onLike(View v) {
         try {
             like();
         } catch (Exception e) {
@@ -250,7 +251,7 @@ public class ItemPostViewModel extends ViewModel {
     /**
      * method which handles the actions, when a user unlikes a post.
      */
-    public void onUnLike() {
+    public void onUnLike(View v) {
         try {
             unlike();
         } catch (Exception e) {

@@ -40,14 +40,11 @@ public class UserRepository {
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if (response.isSuccessful()) {
                     result.setValue(response.body());
-                } else {
-                    result.setValue(null);
                 }
             }
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
-                result.setValue(null);
                 t.printStackTrace();
             }
         });
@@ -117,14 +114,11 @@ public class UserRepository {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
                     result.setValue(response.body());
-                } else {
-                    result.setValue(null);
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                result.setValue(null);
                 t.printStackTrace();
             }
         });
@@ -148,14 +142,11 @@ public class UserRepository {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     result.setValue(true);
-                } else {
-                    result.setValue(false);
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                result.setValue(false);
                 t.printStackTrace();
             }
         });
@@ -178,14 +169,11 @@ public class UserRepository {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
                     result.setValue(response.body());
-                } else {
-                    result.setValue(null);
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                result.setValue(null);
                 t.printStackTrace();
             }
         });
@@ -208,14 +196,11 @@ public class UserRepository {
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                 if (response.isSuccessful()) {
                     result.setValue(response.body());
-                } else {
-                    result.setValue(null);
                 }
             }
 
             @Override
             public void onFailure(Call<List<Post>> call, Throwable t) {
-                result.setValue(null);
                 t.printStackTrace();
             }
         });

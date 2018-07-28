@@ -2,6 +2,7 @@ package com.example.asus.example.mvvm.View;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentUserProfileBinding;
 import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
@@ -25,13 +27,16 @@ import java.util.List;
  * User Profile Activity to show all Posts for this User
  */
 public class PersonalProfileFragment extends Fragment {
-
-
+    private FragmentUserProfileBinding fragmentUserProfileBinding;
+    private ItemUserViewModel itemUserViewModel;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
+        fragmentUserProfileBinding = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_user_profile, parent, false);
+        fragmentUserProfileBinding.userProfileSubscribeButton.setVisibility(View.GONE);
         //set viewmodel
-        final ItemUserViewModel itemUserViewModel = ViewModelProviders.of(this).get(ItemUserViewModel.class);
+        itemUserViewModel = ViewModelProviders.of(this).get(ItemUserViewModel.class);
         itemUserViewModel.init(this.getContext().getApplicationContext());
 
         //set adapter
@@ -49,8 +54,6 @@ public class PersonalProfileFragment extends Fragment {
         postAdapter.setListener(listener);
 
 
-        //set binding
-        final FragmentUserProfileBinding fragmentUserProfileBinding = FragmentUserProfileBinding.inflate(inflater, parent, false);
         fragmentUserProfileBinding.userProfilePostRV.setAdapter(postAdapter);
 
 
