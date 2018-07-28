@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.ObservableField;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.Group;
@@ -14,6 +15,7 @@ import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.Repository.EventRepository;
 import com.example.asus.example.mvvm.Model.Repository.GroupRepository;
 import com.example.asus.example.mvvm.Model.Repository.UserRepository;
+import com.example.asus.example.mvvm.View.Navigation_Drawer_Activity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,6 +34,7 @@ public class ItemSubcategoryViewModel extends ViewModel {
     private MutableLiveData<User> currentUser;
     private GroupRepository groupRepository;
     private EventRepository eventRepository;
+    private Context context;
 
     /**
      * Name of the Event/Group which was typed in by the user.
@@ -63,7 +66,7 @@ public class ItemSubcategoryViewModel extends ViewModel {
      */
     public void init(Subcategory subcategory, Context context) {
         this.subcategory.setValue(subcategory);
-
+        this.context = context;
         groupRepository = new GroupRepository();
         eventRepository = new EventRepository();
 
@@ -112,15 +115,22 @@ public class ItemSubcategoryViewModel extends ViewModel {
      *
      *
      */
-    public void createGroup() {
-        Group group = new Group();
-        group.setName(inputName.get());
-        group.setImageURl(inputImageUrl.get());
-        group.setDescription(inputDesc.get());
-        group.setCategory(subcategory.getValue().getCategory());
-        group.setCreator(currentUser.getValue());
-        group.setSubcategory(subcategory.getValue());
-        groupRepository.createGroup(group);
+    public void createGroup(View view) {
+        if (!checkIfInputIsFalse()) {
+            Group group = new Group();
+            group.setName(inputName.get());
+            group.setImageURl(inputImageUrl.get());
+            group.setDescription(inputDesc.get());
+            group.setCategory(subcategory.getValue().getCategory());
+            group.setCreator(currentUser.getValue());
+            group.setSubcategory(subcategory.getValue());
+            groupRepository.createGroup(group);
+
+            Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) view.getContext();
+            navigation_drawer_activity.launchGroupFeedFragment(group);
+        } else {
+            Toast.makeText(context, "Es müssen alle Felder ausgefüllt sein!", Toast.LENGTH_LONG).show();
+        }
     }
 
 
@@ -129,7 +139,7 @@ public class ItemSubcategoryViewModel extends ViewModel {
      *
      */
 
-    public void createEvent()
+    public void createEvent(View view)
             throws Exception {
 
         Event event = new Event();
@@ -142,6 +152,9 @@ public class ItemSubcategoryViewModel extends ViewModel {
         event.setName(inputName.get());
         event.setImageUrl(inputImageUrl.get());
         eventRepository.createEvent(event);
+
+        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) view.getContext();
+        navigation_drawer_activity.launchEventFeedFragment(event);
     }
 
     /**
@@ -164,30 +177,18 @@ public class ItemSubcategoryViewModel extends ViewModel {
      * method which handles the click on the create Event Button.
      * checks if the user Input is valid.
      */
-    public void onCreateEventClick() {
+    public void onCreateEventClick(View view) {
         if (!checkIfInputIsFalse() && dateIsValidFormat()) {
             try {
-                createEvent();
+                createEvent(view);
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        } else {
+            Toast.makeText(context, "Es müssen alle Felder richtig ausgefüllt sein!", Toast.LENGTH_LONG).show();
         }
     }
 
-    /**
-     * method which handles the click on the create Group Button.
-     * checks if the user Input is valid.
-     */
-    public void onCreateGroupClick() {
-
-        if (!checkIfInputIsFalse()) {
-            try {
-                createGroup();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     private boolean checkIfInputIsFalse() {
         if (inputDesc.get().length() == 0) {

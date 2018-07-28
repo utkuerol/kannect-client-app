@@ -6,7 +6,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.BindingAdapter;
 import android.databinding.ObservableField;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.Entities.Group;
@@ -17,6 +19,7 @@ import com.example.asus.example.mvvm.Model.Repository.FeedRepository;
 import com.example.asus.example.mvvm.Model.Repository.GroupRepository;
 import com.example.asus.example.mvvm.Model.Repository.PostRepository;
 import com.example.asus.example.mvvm.Model.Repository.UserRepository;
+import com.example.asus.example.mvvm.View.Navigation_Drawer_Activity;
 import com.squareup.picasso.Picasso;
 
 import java.util.Date;
@@ -36,6 +39,7 @@ public class ItemGroupViewModel extends ViewModel {
     private GroupRepository groupRepository;
     private FeedRepository feedRepository;
     private PostRepository postRepository;
+    private Context context;
 
 
 
@@ -95,6 +99,7 @@ public class ItemGroupViewModel extends ViewModel {
         UserRepository userRepository = new UserRepository();
         feedRepository = new FeedRepository();
         groupRepository = new GroupRepository();
+        this.context = context;
 
         SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
         currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
@@ -235,14 +240,22 @@ public class ItemGroupViewModel extends ViewModel {
      * Creates post in the group with the given text.
      *
      */
-    public void createPost() {
-        Post post = new Post();
-        post.setDate(new Date());
-        post.setText(textValue.get());
-        post.setCreator(currentUser.getValue());
-        post.setOwnedBy(chosenGroup.getValue().getId());
-        post.setOwnerGroup(chosenGroup.getValue());
-        postRepository.createPost(post);
+    public void createPost(View view) {
+        if (textValue.get().length() != 0) {
+
+
+            Post post = new Post();
+            post.setDate(new Date());
+            post.setText(textValue.get());
+            post.setCreator(currentUser.getValue());
+            post.setOwnedBy(chosenGroup.getValue().getId());
+            post.setOwnerGroup(chosenGroup.getValue());
+            postRepository.createPost(post);
+            Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) view.getContext();
+            navigation_drawer_activity.launchGroupFeedFragment(chosenGroup.getValue());
+        } else {
+            Toast.makeText(context, "Der Beitrag darf keinen leeren Text enthalten!", Toast.LENGTH_LONG).show();
+        }
     }
 
 
@@ -260,20 +273,5 @@ public class ItemGroupViewModel extends ViewModel {
      */
     public void setCurrentUser(MutableLiveData<User> currentUser) {
         this.currentUser = currentUser;
-    }
-
-    /**
-     * method which handles the click on the Post Button.
-     * checks if the text which was typed in by the user, has atleast one character.
-     */
-    public void onCreatePostClick() {
-        if (textValue.get().length() != 0) {
-
-            try {
-                createPost();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
     }
 }

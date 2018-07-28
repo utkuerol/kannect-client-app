@@ -6,7 +6,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.BindingAdapter;
 import android.databinding.ObservableField;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.Entities.Event;
@@ -17,6 +19,7 @@ import com.example.asus.example.mvvm.Model.Repository.EventRepository;
 import com.example.asus.example.mvvm.Model.Repository.FeedRepository;
 import com.example.asus.example.mvvm.Model.Repository.PostRepository;
 import com.example.asus.example.mvvm.Model.Repository.UserRepository;
+import com.example.asus.example.mvvm.View.Navigation_Drawer_Activity;
 import com.squareup.picasso.Picasso;
 
 import java.util.Date;
@@ -33,6 +36,7 @@ public class ItemEventViewModel extends ViewModel {
 
     private MutableLiveData<Event> event = new MutableLiveData<>();
     private MutableLiveData<List<Post>> mEventFeed = new MutableLiveData<>();
+    private Context context;
 
     /**
      * Text of the Post, the user typed in.
@@ -161,6 +165,7 @@ public class ItemEventViewModel extends ViewModel {
         UserRepository userRepository = new UserRepository();
         feedRepository = new FeedRepository();
         eventRepository = new EventRepository();
+        this.context = context;
 
         SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
         currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
@@ -233,14 +238,22 @@ public class ItemEventViewModel extends ViewModel {
      * Creates a post owned by this event.
      *
      */
-    public void createPost() {
-        Post post = new Post();
-        post.setCreator(currentUser.getValue());
-        post.setText(textValue.get());
-        post.setOwnedBy(event.getValue().getId());
-        post.setOwnerEvent(event.getValue());
-        post.setDate(new Date());
-        postRepository.createPost(post);
+    public void createPost(View view) {
+        if (textValue.get().length() != 0) {
+            Post post = new Post();
+            post.setCreator(currentUser.getValue());
+            post.setText(textValue.get());
+            post.setOwnedBy(event.getValue().getId());
+            post.setOwnerEvent(event.getValue());
+            post.setDate(new Date());
+            postRepository.createPost(post);
+
+            Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) view.getContext();
+            navigation_drawer_activity.launchEventFeedFragment(event.getValue());
+        } else {
+            Toast.makeText(context, "Der Beitrag darf keinen leeren Text enthalten!", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     /**
@@ -256,26 +269,6 @@ public class ItemEventViewModel extends ViewModel {
     }
 
 
-    public void onCreateEventClick() {
 
-        try {
-            createPost();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
-    /**
-     * method which will be called when the user presses the createPost icon.
-     * Creates a Post for the Event.
-     */
-    public void onCreatePostClick() {
-        if (textValue.get().length() != 0) {
-            try {
-                createPost();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }

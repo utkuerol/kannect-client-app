@@ -8,6 +8,7 @@ import android.databinding.BindingAdapter;
 import android.databinding.ObservableField;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.asus.example.mvvm.Model.Entities.Event;
 import com.example.asus.example.mvvm.Model.Entities.Group;
@@ -34,6 +35,7 @@ public class ItemUserViewModel extends ViewModel {
     private MutableLiveData<User> currentUser;
     private UserRepository userRepository;
     private PostRepository postRepository;
+    private Context context;
 
 
     /**
@@ -83,9 +85,11 @@ public class ItemUserViewModel extends ViewModel {
         this.chosenUser.setValue(user);
         userRepository = new UserRepository();
         postRepository = new PostRepository();
+        this.context = context;
 
         SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
         currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
+
     }
 
     /**
@@ -97,6 +101,7 @@ public class ItemUserViewModel extends ViewModel {
     public void init(Context context) {
         userRepository = new UserRepository();
         postRepository = new PostRepository();
+        this.context = context;
 
         SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
         currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
@@ -256,16 +261,23 @@ public class ItemUserViewModel extends ViewModel {
      *
      */
     public void createPost(View view) {
-        Post postToCreate = new Post();
-        postToCreate.setText(textValue.get());
-        postToCreate.setCreator(currentUser.getValue());
-        postToCreate.setDate(new Date());
-        postToCreate.setOwnerUser(currentUser.getValue());
-        postToCreate.setOwnedBy(currentUser.getValue().getId());
-        postRepository.createPost(postToCreate);
 
-        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) view.getContext();
-        navigation_drawer_activity.launchPersonalFeedFragment();
+        if (textValue.get().length() != 0) {
+
+            Post postToCreate = new Post();
+            postToCreate.setText(textValue.get());
+            postToCreate.setCreator(currentUser.getValue());
+            postToCreate.setDate(new Date());
+            postToCreate.setOwnerUser(currentUser.getValue());
+            postToCreate.setOwnedBy(currentUser.getValue().getId());
+            postRepository.createPost(postToCreate);
+
+            Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) view.getContext();
+            navigation_drawer_activity.launchPersonalFeedFragment();
+        } else {
+            Toast.makeText(context, "Der Beitrag darf keinen leeren Text enthalten!", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     /**

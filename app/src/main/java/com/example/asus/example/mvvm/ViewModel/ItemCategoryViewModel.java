@@ -5,6 +5,8 @@ import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.ObservableField;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.asus.example.mvvm.Model.Entities.Category;
 import com.example.asus.example.mvvm.Model.Entities.Event;
@@ -14,6 +16,7 @@ import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.Repository.EventRepository;
 import com.example.asus.example.mvvm.Model.Repository.GroupRepository;
 import com.example.asus.example.mvvm.Model.Repository.UserRepository;
+import com.example.asus.example.mvvm.View.Navigation_Drawer_Activity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,7 +33,7 @@ public class ItemCategoryViewModel extends ViewModel {
 
     private MutableLiveData<Category> chosenCategory = new MutableLiveData<>();
     private MutableLiveData<User> currentUser;
-
+    private Context context;
     private GroupRepository groupRepository;
     private EventRepository eventRepository;
 
@@ -69,6 +72,7 @@ public class ItemCategoryViewModel extends ViewModel {
         UserRepository userRepository = new UserRepository();
         groupRepository = new GroupRepository();
         eventRepository = new EventRepository();
+        this.context = context;
 
         SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
         currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
@@ -129,20 +133,28 @@ public class ItemCategoryViewModel extends ViewModel {
      * Creates a new group in the chosen category.
      *
      */
-    public void createGroup() {
-        Group group = new Group();
-        group.setCategory(chosenCategory.getValue());
-        group.setCreator(currentUser.getValue());
-        group.setDescription(inputDesc.get());
-        group.setImageURl(inputImageUrl.get());
-        group.setName(inputName.get());
-        groupRepository.createGroup(group);
+    public void createGroup(View view) {
+        if (!checkIfUserInputFalse()) {
+
+            Group group = new Group();
+            group.setCategory(chosenCategory.getValue());
+            group.setCreator(currentUser.getValue());
+            group.setDescription(inputDesc.get());
+            group.setImageURl(inputImageUrl.get());
+            group.setName(inputName.get());
+            groupRepository.createGroup(group);
+
+            Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) view.getContext();
+            navigation_drawer_activity.launchGroupFeedFragment(group);
+        } else {
+            Toast.makeText(context, "Es müssen alle Felder ausgefüllt sein!", Toast.LENGTH_LONG).show();
+        }
     }
 
     /**
      * Creates a new event in the chosen category.
      */
-    public void createEvent() throws Exception {
+    public void createEvent(View view) throws Exception {
         Event event = new Event();
         Date date = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY).parse(inputDate.get());
         event.setCategory(chosenCategory.getValue());
@@ -152,37 +164,28 @@ public class ItemCategoryViewModel extends ViewModel {
         event.setName(inputName.get());
         event.setImageUrl(inputImageUrl.get());
         eventRepository.createEvent(event);
+
+        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) view.getContext();
+        navigation_drawer_activity.launchEventFeedFragment(event);
     }
 
     /**
      * method which will be called, when the user presses the Button to create an Event.
      */
-    public void onCreateEventClick() {
+    public void onCreateEventClick(View view) {
 
         if (!checkIfUserInputFalse() && isValidFormat()) {
             try {
-                createEvent();
+                createEvent(view);
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        } else {
+            Toast.makeText(context, "Es müssen alle Felder ausgefüllt sein!", Toast.LENGTH_LONG).show();
         }
     }
 
 
-    /**
-     * Method which will be called, when the user presses the Button to create a Group.
-     */
-    public void onCreateGroupClick() {
-
-
-        if (!checkIfUserInputFalse()) {
-            try {
-                createGroup();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     private boolean checkIfUserInputFalse() {
         if (inputName.get().length() == 0) {

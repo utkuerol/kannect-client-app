@@ -8,9 +8,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.asus.example.databinding.FragmentNewGroupInCategoryBinding;
 import com.example.asus.example.mvvm.Model.Entities.Category;
@@ -21,13 +18,10 @@ import com.example.asus.example.mvvm.ViewModel.ItemCategoryViewModel;
  * Activity class for the view regarding creating a new Group in a Category.
  * Uses the ItemCategoryViewModel as its ViewModel.
  */
-public class NewGroupInCategoryFragment extends Fragment implements View.OnClickListener {
+public class NewGroupInCategoryFragment extends Fragment {
 
     private Category chosenCategory;
-    private Button button;
-    private EditText description;
-    private EditText groupName;
-    private EditText imageUrl;
+
 
 
     @Override
@@ -49,11 +43,7 @@ public class NewGroupInCategoryFragment extends Fragment implements View.OnClick
                 }
             }
         });
-        button = fragmentNewGroupBinding.newGroupInCategoryButton;
-        button.setOnClickListener(this);
-        description = fragmentNewGroupBinding.newGroupInCategoryDescriptionET;
-        groupName = fragmentNewGroupBinding.newGroupInCategoryNameET;
-        imageUrl = fragmentNewGroupBinding.newGroupInCategoryImageUrlET;
+
 
 
         return fragmentNewGroupBinding.getRoot();
@@ -64,28 +54,4 @@ public class NewGroupInCategoryFragment extends Fragment implements View.OnClick
         this.chosenCategory = category;
     }
 
-    @Override
-    public void onClick(View view) {
-        if (view.getId() == button.getId()) {
-            if (checkIfUserInputFalse()) {
-                Toast.makeText(this.getContext(), "Alle Felder müssen ausgefüllt sein!",
-                        Toast.LENGTH_SHORT).show();
-            } else {
-                Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
-                navigation_drawer_activity.launchSubcategoriesGroupAndGroupsInCategoryFragment(chosenCategory);
-            }
-        }
-
-    }
-
-    private boolean checkIfUserInputFalse() {
-        if (groupName.getText().toString().length() == 0) {
-            return true;
-        } else if (description.getText().toString().length() == 0) {
-            return true;
-        } else if (imageUrl.getText().toString().length() == 0) {
-            return true;
-        }
-        return false;
-    }
 }

@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:onClick="@{()->itemEventViewModel.onCreatePostClick()}"
+            android:onClick="@{(v)->itemEventViewModel.createPost(v)}"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:text="@string/post" />

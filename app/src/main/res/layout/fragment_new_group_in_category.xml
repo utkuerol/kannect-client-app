@@ -18,7 +18,7 @@
 
 
         <Button
-            android:onClick="@{()->itemCategoryViewModel.onCreateGroupClick()}"
+            android:onClick="@{(v)->itemCategoryViewModel.createGroup(v)}"
             android:id="@+id/newGroupInCategoryButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

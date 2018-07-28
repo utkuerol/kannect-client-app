@@ -27,7 +27,7 @@
             android:layout_marginRight="140dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:onClick="@{()->itemSubcategoryViewModel.onCreateEventClick()}"
+            android:onClick="@{(v)->itemSubcategoryViewModel.onCreateEventClick(v)}"
             android:text="@string/create"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
