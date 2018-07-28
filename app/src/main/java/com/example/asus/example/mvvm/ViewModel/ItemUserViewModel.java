@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.BindingAdapter;
 import android.databinding.ObservableField;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.example.asus.example.mvvm.Model.Entities.Event;
@@ -14,6 +15,7 @@ import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.Repository.PostRepository;
 import com.example.asus.example.mvvm.Model.Repository.UserRepository;
+import com.example.asus.example.mvvm.View.Navigation_Drawer_Activity;
 import com.squareup.picasso.Picasso;
 
 import java.util.Date;
@@ -253,7 +255,7 @@ public class ItemUserViewModel extends ViewModel {
      * user profile view of the current user.
      *
      */
-    public void createPost() {
+    public void createPost(View view) {
         Post postToCreate = new Post();
         postToCreate.setText(textValue.get());
         postToCreate.setCreator(currentUser.getValue());
@@ -261,6 +263,9 @@ public class ItemUserViewModel extends ViewModel {
         postToCreate.setOwnerUser(currentUser.getValue());
         postToCreate.setOwnedBy(currentUser.getValue().getId());
         postRepository.createPost(postToCreate);
+
+        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) view.getContext();
+        navigation_drawer_activity.launchPersonalFeedFragment();
     }
 
     /**
@@ -287,19 +292,6 @@ public class ItemUserViewModel extends ViewModel {
         this.currentUser = currentUser;
     }
 
-    /**
-     * method which handles the action when user clicks on createPost.
-     * checks if the text of the Post has atleast one character.
-     */
-    public void onCreatePostClick() {
 
-        if (textValue.get().length() != 0) {
-            try {
-                createPost();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }
 

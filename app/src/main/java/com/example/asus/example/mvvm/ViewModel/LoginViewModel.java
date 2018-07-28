@@ -34,14 +34,13 @@ public class LoginViewModel extends ViewModel {
      *
      * @param account with which the user object will be created.
      */
-    public void createAndSetCurrentUser(GoogleSignInAccount account) {
+    public MutableLiveData<Boolean> createUser(GoogleSignInAccount account) {
         User u = new User();
         u.setEmail(account.getEmail());
         u.setImageUrl(account.getPhotoUrl() != null ? account.getPhotoUrl().toString() : null);
         u.setName(account.getDisplayName());
 
-        userRepository.createUser(u);
-        getUser().setValue(u);
+        return userRepository.createUser(u);
     }
 
 

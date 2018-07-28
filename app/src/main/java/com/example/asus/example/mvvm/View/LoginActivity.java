@@ -38,6 +38,8 @@ public class LoginActivity extends AppCompatActivity {
     //Sign in button Declaration
     SignInButton signInButton;
 
+    GoogleSignInAccount account;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         //get currently signed in user returns null if there is no logged in user
-        final GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        account = GoogleSignIn.getLastSignedInAccount(this);
 
 
         viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
@@ -68,12 +70,14 @@ public class LoginActivity extends AppCompatActivity {
                     SharedPreferences.Editor prefsEditor;
                     prefsEditor = myPrefs.edit();
                     prefsEditor.putInt("CurrentUserId", user.getId());
+                    Log.d("debug", "user id " + user.getId());
                     prefsEditor.apply();
                 }
             }
         });
 
         updateUI(account);
+
 
     }
 
@@ -118,14 +122,14 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onChanged(@Nullable User user) {
                     if (user == null) {
-                        while (account.getDisplayName() == null) {
-                            try {
-                                wait();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
+                        viewModel.createUser(account).observe(LoginActivity.this, new Observer<Boolean>() {
+                            @Override
+                            public void onChanged(@Nullable Boolean aBoolean) {
+                                if (aBoolean) {
+                                    updateUI(account);
+                                }
                             }
-                        }
-                        viewModel.createAndSetCurrentUser(account);
+                        });
                     } else {
                         viewModel.setUser(viewModel.invoke(account));
                         Log.d("debug", "setting preferences");
@@ -134,12 +138,14 @@ public class LoginActivity extends AppCompatActivity {
                         prefsEditor = myPrefs.edit();
                         prefsEditor.putInt("CurrentUserId", user.getId());
                         prefsEditor.commit();
+                        Intent i = new Intent(getApplicationContext(), Navigation_Drawer_Activity.class);
+                        finish();
+                        startActivity(i);
                     }
                 }
             });
 
-            Intent i = new Intent(getApplicationContext(), Navigation_Drawer_Activity.class);
-            startActivity(i);
+
         } else {
             Toast.makeText(getApplicationContext(), "no Login", Toast.LENGTH_LONG).show();
             signInButton.setOnClickListener(new View.OnClickListener() {

@@ -1,7 +1,6 @@
 package com.example.asus.example.mvvm.Model.Repository;
 
 import android.arch.lifecycle.MutableLiveData;
-import android.util.Log;
 
 import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
@@ -139,21 +138,29 @@ public class UserRepository {
      * It uses the ServiceGenerator class to create a service via Retrofit2 with the help of the ServiceAPI.
      * @param user which will be created.
      */
-    public void createUser(User user) {
+    public MutableLiveData<Boolean> createUser(User user) {
+        final MutableLiveData<Boolean> result = new MutableLiveData<>();
+
         ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
         Call<ResponseBody> call = client.createUser(user);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.d("debug", "onResponse create user");
+                if (response.isSuccessful()) {
+                    result.setValue(true);
+                } else {
+                    result.setValue(false);
+                }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("debug", "onFailure create user:" + t.getMessage());
+                result.setValue(false);
                 t.printStackTrace();
             }
         });
+
+        return result;
     }
 
     /**

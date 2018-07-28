@@ -3,6 +3,7 @@ package com.example.asus.example.mvvm.View;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -81,7 +83,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
                     View headerView = binding.navView.getHeaderView(0);
                     NavHeaderNavigationDrawerBinding headerBinding = NavHeaderNavigationDrawerBinding.bind(headerView);
                     headerBinding.setItemUserViewModel(itemUserViewModel);
-
+                    Log.d("debug", "header user name" + itemUserViewModel.getCurrentUserName());
                 }
             }
         });
@@ -110,6 +112,9 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
                         if (task.isSuccessful()) {
                             Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                             startActivity(i);
+                            SharedPreferences myPrefs = Navigation_Drawer_Activity.this.getSharedPreferences("CurrentUser", 0);
+                            finish();
+                            myPrefs.edit().clear().commit();
                         }
                     }
                 });

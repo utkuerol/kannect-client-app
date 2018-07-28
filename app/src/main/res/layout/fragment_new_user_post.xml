@@ -15,7 +15,7 @@
         android:background="@color/white">
 
         <Button
-            android:onClick="@{()->itemUserViewModel.onCreatePostClick()}"
+            android:onClick="@{(v) ->itemUserViewModel.createPost(v)}"
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
