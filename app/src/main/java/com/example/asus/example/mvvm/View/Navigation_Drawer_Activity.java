@@ -454,11 +454,11 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
      * creating a new Event in a Subcategory.
      * @param subcategory in which the event will be created.
      */
-    public void launchNewEventInSubategoryFragment(Subcategory subcategory) {
-        NewEventInSubcategoryFragment newEventInSubategoryFragment = new NewEventInSubcategoryFragment();
-        newEventInSubategoryFragment.setSubcategory(subcategory);
+    public void launchNewEventInSubcategory(Subcategory subcategory) {
+        NewEventInSubcategoryFragment newEventInSubcategoryFragment = new NewEventInSubcategoryFragment();
+        newEventInSubcategoryFragment.setSubcategory(subcategory);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.content_frame, newEventInSubategoryFragment);
+        transaction.replace(R.id.content_frame, newEventInSubcategoryFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
