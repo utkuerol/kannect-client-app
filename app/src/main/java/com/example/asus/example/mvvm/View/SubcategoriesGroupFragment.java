@@ -63,7 +63,6 @@ public class SubcategoriesGroupFragment extends Fragment implements View.OnClick
             public void onChanged(@Nullable User user) {
                 if (user != null) {
                     subcategoryAdapter.setSubcategoryList(itemCategoryViewModel.getSubcategories());
-                    Log.d("debug", "subcategory count: " + itemCategoryViewModel.getSubcategories().size());
                     fragmentSubcategoriesGroupBinding.subcategoriesGroupSubcategoriesRV.setAdapter(subcategoryAdapter);
                 } else {
                     Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT);

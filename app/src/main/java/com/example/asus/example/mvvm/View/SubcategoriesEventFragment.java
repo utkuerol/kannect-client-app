@@ -95,7 +95,7 @@ public class SubcategoriesEventFragment extends Fragment implements View.OnClick
         Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
         switch (v.getId()) {
             case R.id.newEventInCategoryButton:
-                // welche Fragment sollte hinzugefügt werden navigation_drawer_activity.launchNewEventInSubcategory();
+                navigation_drawer_activity.launchNewEventInCategoryFragment(category);
                 break;
         }
     }

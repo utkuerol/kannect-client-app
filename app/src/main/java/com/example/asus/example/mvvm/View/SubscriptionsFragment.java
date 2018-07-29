@@ -53,16 +53,6 @@ public class SubscriptionsFragment extends Fragment {
 
         fragmentSubscriptionsBinding.subscriptionsUserRV.setAdapter(userAdapter);
 
-        /*userViewModel.getCurrentUser().observe(this, new Observer<User>() {
-            @Override
-            public void onChanged(@Nullable User user) {
-                if (user != null) {
-                    userViewModel.setUsersToSubscriptions();
-
-
-                }
-            }
-        });*/
         fragmentSubscriptionsBinding.subscriptionsUserRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         return fragmentSubscriptionsBinding.getRoot();

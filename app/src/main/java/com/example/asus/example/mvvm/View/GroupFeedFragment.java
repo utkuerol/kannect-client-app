@@ -75,6 +75,10 @@ public class GroupFeedFragment extends Fragment implements View.OnClickListener 
         ImageView createPostInGroupIV = (ImageView) fragmentGroupFeedBinding.createPostInGroupIV;
         createPostInGroupIV.setOnClickListener(this);
 
+
+        ImageView fragmentGroupFeedDeleteIV = (ImageView) fragmentGroupFeedBinding.fragmentGroupFeedDeleteIV;
+        fragmentGroupFeedDeleteIV.setOnClickListener(this);
+
         fragmentGroupFeedBinding.groupFeedPostRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         return fragmentGroupFeedBinding.getRoot();
@@ -104,7 +108,10 @@ public class GroupFeedFragment extends Fragment implements View.OnClickListener 
                 }
                 break;
             }
-
+            case R.id.fragmentGroupFeedDeleteIV: {
+                itemGroupViewModel.deleteGroup();
+                break;
+            }
             case R.id.createPostInGroupIV: {
                 navigation_drawer_activity.launchNewGroupPostFragment(group);
                 break;

@@ -61,7 +61,6 @@ public class PersonalProfileFragment extends Fragment {
             @Override
             public void onChanged(@Nullable List<Post> posts) {
                 if (posts != null) {
-                    Log.d("debug", "posts size: " + posts.size());
                     postAdapter.setPostList(posts);
                     fragmentUserProfileBinding.userProfilePostRV.setAdapter(postAdapter);
                 } else {

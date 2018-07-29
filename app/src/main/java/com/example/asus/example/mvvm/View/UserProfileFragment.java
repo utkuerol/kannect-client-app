@@ -80,7 +80,6 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
                 if (user1 != null) {
                     fragmentUserProfileBinding.setItemUserViewModel(itemUserViewModel);
                     itemUserViewModel.getUserProfile().observe(UserProfileFragment.this, postsObserver);
-                    Log.d("" + itemUserViewModel.getCurrentUser().getValue().getId(), "" + user.getId());
                     if (itemUserViewModel.getCurrentUser().getValue().getId() == user.getId()) {
                         fragmentUserProfileBinding.userProfileSubscribeButton.setVisibility(View.GONE);
                     }
@@ -111,15 +110,12 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
         Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
         switch (view.getId()) {
             case R.id.userSubscriptionsTV:
-                Log.d("zeazeazeazeazea", "errerererereAAAAAAAAAAA");
                 navigation_drawer_activity.launchSubscriptionsFragment(user.getSubscriptions());
                 break;
             case R.id.userSubscribersTV:
-                Log.d("zeazeazeazeazea", "errerererereBBBBBBBBBB");
                 navigation_drawer_activity.launchSubscriptionsFragment(user.getSubscribers());
                 break;
             case R.id.userProfileSubscribeButton:
-                Log.d("zeazeazeazeazea", "errerererereCCCCCCCCC");
                 if (fragmentUserProfileBinding.userProfileSubscribeButton.getText().equals("FOLGEN")) {
                     fragmentUserProfileBinding.userProfileSubscribeButton.setText("NICHT MEHR FOLGEN");
                     itemUserViewModel.subscribeUser();

@@ -85,11 +85,9 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
                     View headerView = binding.navView.getHeaderView(0);
                     NavHeaderNavigationDrawerBinding headerBinding = NavHeaderNavigationDrawerBinding.bind(headerView);
                     headerBinding.setItemUserViewModel(itemUserViewModel);
-                    Log.d("debug", "header user name" + itemUserViewModel.getCurrentUserName());
                 }
             }
         });
-        //DataBindingUtil.inflate(getLayoutInflater(), R.layout.nav_header_navigation__drawer_, binding.navView, false);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
