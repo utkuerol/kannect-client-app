@@ -28,7 +28,7 @@ public class MyGroupsFragment extends Fragment {
      * Method which will be called when this fragment is created.
      * Inflates the View, sets the ViewModel and the Adapter with the right onClickListener for the
      * RecyclerView.
-     *
+     * Observes getCurrentUser to check if there is a value or a null object.
      * @param inflater           inflates the layout on the screen
      * @param parent             of this ViewGroup
      * @param savedInstanceState state of the Application as a Bundle

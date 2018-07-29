@@ -29,6 +29,17 @@ public class ShowPostFragment extends Fragment implements View.OnClickListener {
     private Post post;
 
 
+    /**
+     * Method which will be called when this fragment is created.
+     * Inflates the View, sets the ViewModel and the Adapter with the right onClickListener for the
+     * RecyclerView.
+     * Observes getCurrentUser to check if there is a value or a null object.
+     * Initializes the deleteButton.
+     * @param inflater           inflates the layout on the screen
+     * @param parent             of this ViewGroup
+     * @param savedInstanceState state of the Application as a Bundle
+     * @return the outermost View in the layout file associated with the Binding.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
@@ -61,6 +72,11 @@ public class ShowPostFragment extends Fragment implements View.OnClickListener {
         return fragmentShowPostBinding.getRoot();
     }
 
+    /**
+     * Method which will be called, when a view from this Fragment was clicked on.
+     * In this case the deleteButton.
+     * @param v view which was clicked on.
+     */
     @Override
     public void onClick(View v) {
         Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
@@ -71,6 +87,10 @@ public class ShowPostFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    /**
+     * sets the post which was clicked on by user and is displayed in this Fragment.
+     * @param post that clicked on by user.
+     */
     public void setPost(Post post) {
         this.post = post;
     }

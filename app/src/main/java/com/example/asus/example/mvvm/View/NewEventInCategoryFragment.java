@@ -23,6 +23,16 @@ public class NewEventInCategoryFragment extends Fragment {
 
     private Category chosenCategory;
 
+
+    /**
+     * Method which will be called when this fragment is created.
+     * Inflates the View and sets the ViewModel.
+     * Observes getCurrentUser to check if there is a value or a null object.
+     * @param inflater           inflates the layout on the screen
+     * @param parent             of this ViewGroup
+     * @param savedInstanceState state of the Application as a Bundle
+     * @return the outermost View in the layout file associated with the Binding.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
@@ -47,6 +57,10 @@ public class NewEventInCategoryFragment extends Fragment {
     }
 
 
+    /**
+     * sets the category in which the User wants to create an Event in.
+     * @param category chosen by User.
+     */
     public void setCategory(Category category) {
         this.chosenCategory = category;
     }

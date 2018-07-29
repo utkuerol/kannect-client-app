@@ -27,6 +27,15 @@ public class SubscriptionsFragment extends Fragment {
 
     private List<User> users;
 
+    /**
+     * Method which will be called when this fragment is created.
+     * Inflates the View, sets the ViewModel and the Adapter with the right onClickListener for the
+     * RecyclerView.
+     * @param inflater           inflates the layout on the screen
+     * @param parent             of this ViewGroup
+     * @param savedInstanceState state of the Application as a Bundle
+     * @return the outermost View in the layout file associated with the Binding.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         fragmentSubscriptionsBinding = DataBindingUtil.inflate(
@@ -51,7 +60,6 @@ public class SubscriptionsFragment extends Fragment {
         fragmentSubscriptionsBinding.subscriptionsUserRV.setAdapter(userAdapter);
         //set binding
 
-        fragmentSubscriptionsBinding.subscriptionsUserRV.setAdapter(userAdapter);
 
         fragmentSubscriptionsBinding.subscriptionsUserRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
@@ -59,6 +67,10 @@ public class SubscriptionsFragment extends Fragment {
     }
 
 
+    /**
+     * sets the list of users which the logged in user is subscribed to.
+     * @param users list of user subscriptions.
+     */
     public void setUsers(List<User> users) {
         this.users = users;
     }

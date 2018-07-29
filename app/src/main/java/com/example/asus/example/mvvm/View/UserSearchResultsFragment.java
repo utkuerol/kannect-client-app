@@ -26,6 +26,16 @@ public class UserSearchResultsFragment extends Fragment {
 
     private String query;
 
+    /**
+     * Method which will be called when this fragment is created.
+     * Inflates the View, sets the ViewModel and the Adapter with the right onClickListener for the
+     * RecyclerView.
+     * Observes getCurrentUser to check if there is a value or a null object.
+     * @param inflater           inflates the layout on the screen
+     * @param parent             of this ViewGroup
+     * @param savedInstanceState state of the Application as a Bundle
+     * @return the outermost View in the layout file associated with the Binding.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
@@ -80,6 +90,10 @@ public class UserSearchResultsFragment extends Fragment {
         return fragmentUserSearchResultBinding.getRoot();
     }
 
+    /**
+     * sets the search query. Users that will be displayed matched this search query.
+     * @param query typed in by user.
+     */
     public void setQuery(String query) {
 
         this.query = query;

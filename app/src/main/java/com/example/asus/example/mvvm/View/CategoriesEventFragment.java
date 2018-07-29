@@ -33,7 +33,7 @@ public class CategoriesEventFragment extends Fragment {
      * Method which will be called when this fragment is created.
      * Inflates the View, sets the ViewModel and the Adapter with the right onClickListener for the
      * RecyclerView.
-     *
+     *  Observes getCategories to check if there is value to be displayed.
      * @param inflater           inflates the layout on the screen
      * @param parent             of this ViewGroup
      * @param savedInstanceState state of the Application as a Bundle

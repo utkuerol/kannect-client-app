@@ -21,6 +21,15 @@ public class SearchInputFragment extends Fragment implements View.OnClickListene
         return query;
     }
 
+    /**
+     * Method which will be called when this fragment is created.
+     * Inflates the View.
+     * Sets onClickListener for the userSearchInputButton.
+     * @param inflater           inflates the layout on the screen
+     * @param parent             of this ViewGroup
+     * @param savedInstanceState state of the Application as a Bundle
+     * @return the outermost View in the layout file associated with the Binding.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
@@ -36,6 +45,11 @@ public class SearchInputFragment extends Fragment implements View.OnClickListene
     }
 
 
+    /**
+     * Method which will be called, when user clicks on userSearchInputButton.
+     * Launches the Search ResultFragments with the query, which was typed in by user.
+     * @param v view which was clicked on
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
