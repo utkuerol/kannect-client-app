@@ -2,6 +2,7 @@ package com.example.asus.example.mvvm.View;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -48,7 +49,6 @@ public class GroupSearchResultsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
-        Toast.makeText(getContext(), "UserSearchResult", Toast.LENGTH_LONG);
         //set viewmodel
         final GroupViewModel groupViewModel = ViewModelProviders.of(this).get(GroupViewModel.class);
         groupViewModel.init(getContext().getApplicationContext());
@@ -65,7 +65,7 @@ public class GroupSearchResultsFragment extends Fragment {
         groupAdapter.setListener(listener);
 
         //set binding
-        final FragmentGroupSearchResultBinding fragmentGroupSearchResultBinding = FragmentGroupSearchResultBinding.inflate(inflater, parent, false);
+        final FragmentGroupSearchResultBinding fragmentGroupSearchResultBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_group_search_result, parent, false);
         fragmentGroupSearchResultBinding.groupSearchResultGroupRV.setAdapter(groupAdapter);
 
 
@@ -95,6 +95,6 @@ public class GroupSearchResultsFragment extends Fragment {
 
         fragmentGroupSearchResultBinding.groupSearchResultGroupRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        return inflater.inflate(R.layout.fragment_group_search_result, parent, false);
+        return fragmentGroupSearchResultBinding.getRoot();
     }
 }
