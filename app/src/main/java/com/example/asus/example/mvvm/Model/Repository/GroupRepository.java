@@ -102,7 +102,7 @@ public class GroupRepository {
      */
     public void deleteGroup(Group group) {
         ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
-        Call<Group> call = client.deleteGroup(group);
+        Call<Group> call = client.deleteGroup(group.getId());
         call.enqueue(new Callback<Group>() {
             @Override
             public void onResponse(Call<Group> call, Response<Group> response) {

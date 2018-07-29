@@ -110,7 +110,7 @@ public class EventRepository {
     public void deleteEvent(Event event) {
 
         ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
-        Call<Event> call = client.deleteEvent(event);
+        Call<Event> call = client.deleteEvent(event.getId());
         call.enqueue(new Callback<Event>() {
             @Override
             public void onResponse(Call<Event> call, Response<Event> response) {

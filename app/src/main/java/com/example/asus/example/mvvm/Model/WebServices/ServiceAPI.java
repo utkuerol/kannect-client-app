@@ -41,11 +41,11 @@ public interface ServiceAPI {
 
     /**
      * service to delete a given event
-     * @param event event to be deleted
+     * @param eventId event to be deleted
      * @return void, no response needed
      */
     @DELETE("delete")
-    Call<Event> deleteEvent(@Body Event event);
+    Call<Event> deleteEvent(@Query("eventId") int eventId);
 
 
     /**
@@ -70,7 +70,7 @@ public interface ServiceAPI {
      * @return void, no response needed
      */
     @DELETE("deleteGroup")
-    Call<Group> deleteGroup(@Body Group group);
+    Call<Group> deleteGroup(@Query("groupId") int group);
 
 
     /**
