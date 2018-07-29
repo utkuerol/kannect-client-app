@@ -35,7 +35,7 @@
             app:layout_constraintTop_toBottomOf="@+id/newGroupInSubcategoryImageUrlET" />
 
         <EditText
-            android:text="@={itemSubcategoryViewModel.inputDate}"
+            android:text="@={itemSubcategoryViewModel.inputName}"
             android:id="@+id/newGroupInSubcategoryNameET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

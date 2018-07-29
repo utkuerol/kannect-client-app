@@ -134,7 +134,7 @@ public class ItemCategoryViewModel extends ViewModel {
      *
      */
     public void createGroup(View view) {
-        if (!checkIfUserInputFalse()) {
+        if (!isFalseInput()) {
 
             Group group = new Group();
             group.setCategory(chosenCategory.getValue());
@@ -174,7 +174,7 @@ public class ItemCategoryViewModel extends ViewModel {
      */
     public void onCreateEventClick(View view) {
 
-        if (!checkIfUserInputFalse() && isValidFormat()) {
+        if (!isFalseInput() && isValidFormat()) {
             try {
                 createEvent(view);
             } catch (Exception e) {
@@ -186,13 +186,8 @@ public class ItemCategoryViewModel extends ViewModel {
     }
 
 
-
-    private boolean checkIfUserInputFalse() {
-        if (inputName.get().length() == 0) {
-            return true;
-        } else if (inputDesc.get().length() == 0) {
-            return true;
-        } else return inputImageUrl.get().length() == 0;
+    private boolean isFalseInput() {
+        return (inputDesc.get().length() == 0 || inputName.get().length() == 0);
     }
 
 

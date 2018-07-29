@@ -51,7 +51,26 @@ public class GroupRepository {
         return result;
     }
 
+    public MutableLiveData<Group> getGroupById(int groupId) {
+        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        Call<Group> call = client.getGroupByID(groupId);
+        final MutableLiveData<Group> result = new MutableLiveData<>();
 
+        call.enqueue(new Callback<Group>() {
+            @Override
+            public void onResponse(Call<Group> call, Response<Group> response) {
+                if (response.isSuccessful()) {
+                    result.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Group> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+        return result;
+    }
 
     /**
      * Method to notify Server that a Group was created. This Method transfers a Group object to the server.

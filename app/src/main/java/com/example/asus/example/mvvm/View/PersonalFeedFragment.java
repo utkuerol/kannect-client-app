@@ -14,10 +14,13 @@ import android.widget.ImageView;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentPersonalFeedBinding;
+import com.example.asus.example.mvvm.Model.Entities.Event;
+import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.View.Adapter.OnItemClickListenerPost;
 import com.example.asus.example.mvvm.View.Adapter.PostAdapter;
+import com.example.asus.example.mvvm.ViewModel.ItemPostViewModel;
 import com.example.asus.example.mvvm.ViewModel.PostViewModel;
 
 import java.util.List;
@@ -37,7 +40,7 @@ public class PersonalFeedFragment extends Fragment implements View.OnClickListen
 
         //set viewmodel
         final PostViewModel postViewModel = ViewModelProviders.of(this).get(PostViewModel.class);
-
+        final ItemPostViewModel itemPostViewModel = ViewModelProviders.of(this).get(ItemPostViewModel.class);
 
         //set adapter
         final PostAdapter postAdapter = new PostAdapter();
@@ -65,7 +68,36 @@ public class PersonalFeedFragment extends Fragment implements View.OnClickListen
             @Override
             public void onChanged(@Nullable List<Post> posts) {
                 if (posts != null) {
-                    postAdapter.setPostList(posts);
+                    for (final Post post : posts) {
+                        itemPostViewModel.init(post, PersonalFeedFragment.this.getContext().getApplicationContext());
+                        itemPostViewModel.getOwnerUser().observe(PersonalFeedFragment.this, new Observer<User>() {
+                            @Override
+                            public void onChanged(@Nullable User user) {
+                                if (user != null) {
+                                    post.setOwnerUser(user);
+                                }
+                            }
+                        });
+                        itemPostViewModel.getOwnerEvent().observe(PersonalFeedFragment.this, new Observer<Event>() {
+                            @Override
+                            public void onChanged(@Nullable Event event) {
+                                if (event != null) {
+                                    post.setOwnerEvent(event);
+                                }
+                            }
+                        });
+                        itemPostViewModel.getOwnerGroup().observe(PersonalFeedFragment.this, new Observer<Group>() {
+                            @Override
+                            public void onChanged(@Nullable Group group) {
+                                if (group != null) {
+                                    post.setOwnerGroup(group);
+                                }
+                            }
+                        });
+                        if (posts.get(posts.size() - 1).getId() == post.getId()) {
+                            postAdapter.setPostList(posts);
+                        }
+                    }
                     fragmentPersonalFeedBinding.personalFeedPostRV.setAdapter(postAdapter);
                 }
             }

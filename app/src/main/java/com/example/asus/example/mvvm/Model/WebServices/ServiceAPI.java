@@ -122,7 +122,7 @@ public interface ServiceAPI {
      */
     @Multipart
     @POST("likePost")
-    Call<ResponseBody> likePost(@Part Post post, @Part User user);
+    Call<ResponseBody> likePost(@Part(value = "post") Post post, @Part(value = "user") User user);
 
     /**
      * service to indicate that User unliked a Post
@@ -132,9 +132,10 @@ public interface ServiceAPI {
      */
     @Multipart
     @POST("unlikePost")
-    Call<ResponseBody> unlikePost(@Part Post post, @Part User user);
+    Call<ResponseBody> unlikePost(@Part(value = "post") Post post, @Part(value = "user") User user);
 
-    /**
+    /**    @JsonManagedReference(value = "postuser")
+
      * service to comment a Post
      * @param comment by the user
      * @return void, no response needed
@@ -159,7 +160,7 @@ public interface ServiceAPI {
      */
     @Multipart
     @POST("subscribe")
-    Call<ResponseBody> subscribeUser(@Part User subscriber, @Part User subscribed);
+    Call<ResponseBody> subscribeUser(@Part(value = "subscriber") User subscriber, @Part(value = "subscribed") User subscribed);
 
     /**
      * service to indicate to the server that a user unsubscribed to another user
@@ -169,7 +170,7 @@ public interface ServiceAPI {
      */
     @Multipart
     @POST("unsubscribe")
-    Call<ResponseBody> unsubscribeUser(@Part User subscriber, @Part User subscribed);
+    Call<ResponseBody> unsubscribeUser(@Part(value = "subscriber") User subscriber, @Part(value = "subscribed") User subscribed);
 
     /**
      * service to indicate to the server that a user joint a group
@@ -179,7 +180,7 @@ public interface ServiceAPI {
      */
     @Multipart
     @POST("joinGroup")
-    Call<ResponseBody> joinGroup(@Part User user, @Part Group group);
+    Call<ResponseBody> joinGroup(@Part(value = "user") User user, @Part(value = "group") Group group);
 
     /**
      * service to indicate to the server that a user left a group
@@ -189,7 +190,7 @@ public interface ServiceAPI {
      */
     @Multipart
     @POST("leaveGroup")
-    Call<ResponseBody> leaveGroup(@Part User user, @Part Group group);
+    Call<ResponseBody> leaveGroup(@Part(value = "user") User user, @Part(value = "group") Group group);
 
     /**
      * service to indicate to the server that a user wants to participate in an Event
@@ -199,7 +200,7 @@ public interface ServiceAPI {
      */
     @Multipart
     @POST("participateInEvent")
-    Call<ResponseBody> participateInEvent(@Part User user, @Part Event event);
+    Call<ResponseBody> participateInEvent(@Part(value = "user") User user, @Part(value = "event") Event event);
 
     /**
      * service to indicate to the server that a user wants to leave an Event
@@ -209,7 +210,7 @@ public interface ServiceAPI {
      */
     @Multipart
     @POST("leaveEvent")
-    Call<ResponseBody> leaveEvent(@Part User user, @Part Event event);
+    Call<ResponseBody> leaveEvent(@Part(value = "user") User user, @Part(value = "event") Event event);
 
     /**
      * service to get Categories by given search query
@@ -229,7 +230,7 @@ public interface ServiceAPI {
     Call<User> getUserByMail(@Query("userMail") String userMail);
 
 
-    /*
+    /**
      *service to create a user
      * @param user to be created
      * @return void no response needed
@@ -254,5 +255,12 @@ public interface ServiceAPI {
      */
     @GET("userProfile")
     Call<List<Post>> getUserProfile(@Query("userId") int userID);
+
+
+    @GET("eventById")
+    Call<Event> getEventByID(@Query("eventId") int eventId);
+
+    @GET("groupById")
+    Call<Group> getGroupByID(@Query("groupId") int groupId);
 
 }

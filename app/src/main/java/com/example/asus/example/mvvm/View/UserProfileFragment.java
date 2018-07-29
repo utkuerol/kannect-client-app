@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.asus.example.R;
@@ -21,6 +20,7 @@ import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.View.Adapter.OnItemClickListenerPost;
 import com.example.asus.example.mvvm.View.Adapter.PostAdapter;
+import com.example.asus.example.mvvm.ViewModel.ItemPostViewModel;
 import com.example.asus.example.mvvm.ViewModel.ItemUserViewModel;
 
 import java.util.List;
@@ -33,6 +33,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
     protected User user;
     private FragmentUserProfileBinding fragmentUserProfileBinding;
     private ItemUserViewModel itemUserViewModel;
+    private ItemPostViewModel itemPostViewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -43,6 +44,8 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
         //set viewmodel
         itemUserViewModel = ViewModelProviders.of(this).get(ItemUserViewModel.class);
         itemUserViewModel.init(user, this.getContext().getApplicationContext());
+
+        itemPostViewModel = ViewModelProviders.of(this).get(ItemPostViewModel.class);
 
         //set adapter
         final PostAdapter postAdapter = new PostAdapter();
@@ -59,28 +62,28 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
         postAdapter.setListener(listener);
 
 
+        fragmentUserProfileBinding.userProfilePostRV.setAdapter(postAdapter);
+
+
 
 
         final Observer<List<Post>> postsObserver = new Observer<List<Post>>() {
             @Override
             public void onChanged(@Nullable List<Post> posts) {
                 if (posts != null) {
-                    postAdapter.setPostList(itemUserViewModel.getUserProfile().getValue());
+                    postAdapter.setPostList(posts);
                     fragmentUserProfileBinding.userProfilePostRV.setAdapter(postAdapter);
                 }
             }
         };
 
-
         itemUserViewModel.getCurrentUser().observe(this, new Observer<User>() {
-
 
             @Override
             public void onChanged(@Nullable User user1) {
                 if (user1 != null) {
                     fragmentUserProfileBinding.setItemUserViewModel(itemUserViewModel);
                     itemUserViewModel.getUserProfile().observe(UserProfileFragment.this, postsObserver);
-                    Log.d("" + itemUserViewModel.getCurrentUser().getValue().getId(), "" + user.getId());
                     if (itemUserViewModel.getCurrentUser().getValue().getId() == user.getId()) {
                         fragmentUserProfileBinding.userProfileSubscribeButton.setVisibility(View.GONE);
                     }
@@ -89,8 +92,8 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
             }
         });
 
-
         fragmentUserProfileBinding.userProfilePostRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
         Button b = (Button) fragmentUserProfileBinding.userProfileSubscribeButton;
         b.setOnClickListener(this);
         TextView im1 = (TextView) fragmentUserProfileBinding.userSubscribersTV;

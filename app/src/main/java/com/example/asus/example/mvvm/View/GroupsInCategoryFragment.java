@@ -2,6 +2,7 @@ package com.example.asus.example.mvvm.View;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -59,9 +60,8 @@ public class GroupsInCategoryFragment extends Fragment {
         groupAdapter.setListener(listener);
 
         //set binding
-        final FragmentGroupsInCategoryBinding fragmentGroupsInCategoryBinding = FragmentGroupsInCategoryBinding.inflate(inflater, parent, false);
+        final FragmentGroupsInCategoryBinding fragmentGroupsInCategoryBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_groups_in_category, parent, false);
         fragmentGroupsInCategoryBinding.groupsInCategoryGroupRV.setAdapter(groupAdapter);
-
 
         groupViewModel.getCurrentUser().observe(this, new Observer<User>() {
             @Override
@@ -80,7 +80,7 @@ public class GroupsInCategoryFragment extends Fragment {
 
         fragmentGroupsInCategoryBinding.groupsInCategoryGroupRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        return inflater.inflate(R.layout.fragment_groups_in_category, parent, false);
+        return fragmentGroupsInCategoryBinding.getRoot();
     }
 
     /**

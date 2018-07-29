@@ -9,8 +9,12 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.asus.example.mvvm.Model.Entities.Comment;
+import com.example.asus.example.mvvm.Model.Entities.Event;
+import com.example.asus.example.mvvm.Model.Entities.Group;
 import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
+import com.example.asus.example.mvvm.Model.Repository.EventRepository;
+import com.example.asus.example.mvvm.Model.Repository.GroupRepository;
 import com.example.asus.example.mvvm.Model.Repository.PostRepository;
 import com.example.asus.example.mvvm.Model.Repository.UserRepository;
 import com.squareup.picasso.Picasso;
@@ -30,6 +34,9 @@ public class ItemPostViewModel extends ViewModel {
     private MutableLiveData<Post> post = new MutableLiveData<>();
     private MutableLiveData<User> currentUser;
     private PostRepository postRepository;
+    private UserRepository userRepository;
+    private EventRepository eventRepository;
+    private GroupRepository groupRepository;
 
 
     /**
@@ -58,7 +65,9 @@ public class ItemPostViewModel extends ViewModel {
     public void init(Post post, Context context) {
         this.post.setValue(post);
         postRepository = new PostRepository();
-        UserRepository userRepository = new UserRepository();
+        userRepository = new UserRepository();
+        eventRepository = new EventRepository();
+        groupRepository = new GroupRepository();
 
         SharedPreferences myPrefs = context.getSharedPreferences("CurrentUser", 0);
         currentUser = userRepository.getUserByID(myPrefs.getInt("CurrentUserId", 0));
@@ -257,6 +266,18 @@ public class ItemPostViewModel extends ViewModel {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public MutableLiveData<User> getOwnerUser() {
+        return userRepository.getUserByID(this.post.getValue().getOwnedBy());
+    }
+
+    public MutableLiveData<Event> getOwnerEvent() {
+        return eventRepository.getEventById(this.post.getValue().getOwnedBy());
+    }
+
+    public MutableLiveData<Group> getOwnerGroup() {
+        return groupRepository.getGroupById(this.post.getValue().getOwnedBy());
     }
 }
 

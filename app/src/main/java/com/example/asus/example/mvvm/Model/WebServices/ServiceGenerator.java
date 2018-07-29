@@ -11,13 +11,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ServiceGenerator {
 
     // better to store in Gradle String files
-    private static final String BASE_URL = "http://10.172.24.147:8080/";
+    private static final String BASE_URL = "http://10.0.2.2:8080/";
 
 
     private static Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(new NullOnEmptyConverterFactory())
-            //.addConverterFactory(JacksonConverterFactory.create());
             .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().setDateFormat("yyyy.MM.dd").create()));
 
 

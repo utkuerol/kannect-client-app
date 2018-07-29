@@ -56,6 +56,27 @@ public class EventRepository {
         return result;
     }
 
+    public MutableLiveData<Event> getEventById(int eventId) {
+        ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
+        Call<Event> call = client.getEventByID(eventId);
+        final MutableLiveData<Event> result = new MutableLiveData<>();
+
+        call.enqueue(new Callback<Event>() {
+            @Override
+            public void onResponse(Call<Event> call, Response<Event> response) {
+                if (response.isSuccessful()) {
+                    result.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Event> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+        return result;
+    }
+
 
     /**
      * Method to notify Server that an Event was created. This Method transfers an Event object to the server.

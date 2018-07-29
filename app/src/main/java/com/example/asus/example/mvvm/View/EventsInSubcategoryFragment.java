@@ -43,12 +43,13 @@ public class EventsInSubcategoryFragment extends Fragment implements View.OnClic
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
+        //Set binding
         fragmentEventsInSubcategoryBinding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_events_in_subcategory, parent, false);
+
         //set viewmodel
         final EventViewModel eventViewModel = ViewModelProviders.of(this).get(EventViewModel.class);
         eventViewModel.init(getContext());
-
 
         //set adapter
         final EventAdapter eventAdapter = new EventAdapter();
@@ -61,7 +62,6 @@ public class EventsInSubcategoryFragment extends Fragment implements View.OnClic
         };
         eventAdapter.setListener(listener);
 
-        //Set binding
 
         fragmentEventsInSubcategoryBinding.eventsInSubcategoryEventRV.setAdapter(eventAdapter);
 

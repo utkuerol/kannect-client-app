@@ -116,7 +116,7 @@ public class ItemSubcategoryViewModel extends ViewModel {
      *
      */
     public void createGroup(View view) {
-        if (!checkIfInputIsFalse()) {
+        if (!isFalseInput()) {
             Group group = new Group();
             group.setName(inputName.get());
             group.setImageURl(inputImageUrl.get());
@@ -131,6 +131,7 @@ public class ItemSubcategoryViewModel extends ViewModel {
         } else {
             Toast.makeText(context, "Es müssen alle Felder ausgefüllt sein!", Toast.LENGTH_LONG).show();
         }
+
     }
 
 
@@ -178,7 +179,7 @@ public class ItemSubcategoryViewModel extends ViewModel {
      * checks if the user Input is valid.
      */
     public void onCreateEventClick(View view) {
-        if (!checkIfInputIsFalse() && dateIsValidFormat()) {
+        if (!isFalseInput() && dateIsValidFormat()) {
             try {
                 createEvent(view);
             } catch (Exception e) {
@@ -190,23 +191,17 @@ public class ItemSubcategoryViewModel extends ViewModel {
     }
 
 
-    private boolean checkIfInputIsFalse() {
-        if (inputDesc.get().length() == 0) {
-            return true;
-        } else if (inputImageUrl.get().length() == 0) {
-            return true;
-        } else if (inputName.get().length() == 0) {
-            return true;
-        }
-        return false;
+    private boolean isFalseInput() {
+        return (inputDesc.get().length() == 0 || inputName.get().length() == 0);
     }
+
 
     private boolean dateIsValidFormat() {
         Date date = null;
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
             date = sdf.parse(inputDate.get());
-            if (!inputName.get().equals(sdf.format(date))) {
+            if (!inputDate.get().equals(sdf.format(date))) {
                 date = null;
             }
         } catch (ParseException ex) {
