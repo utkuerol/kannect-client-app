@@ -11,10 +11,12 @@ import retrofit2.Retrofit;
 public class NullOnEmptyConverterFactory extends Converter.Factory {
 
     /**
-     * @param type
-     * @param annotations
-     * @param retrofit
-     * @return
+     * Checks if a server returned an empty Json and converts it to a null object, so that
+     * the gson converter doesn't throw an error.
+     * @param type for the response body converter
+     * @param annotations of the retrofit method.
+     * @param retrofit object to set the next response body converter.
+     * @return a null object.
      */
     @Override
     public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {

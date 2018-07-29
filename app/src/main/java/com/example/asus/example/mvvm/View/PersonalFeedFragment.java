@@ -32,6 +32,16 @@ public class PersonalFeedFragment extends Fragment implements View.OnClickListen
 
     private FragmentPersonalFeedBinding fragmentPersonalFeedBinding;
 
+    /**
+     * Method which will be called when this fragment is created.
+     * Inflates the View, sets the ViewModel and the Adapter with the right onClickListener for the
+     * RecyclerView.
+     * Observes getCurrentUser to check if there is a value or a null object.
+     * @param inflater           inflates the layout on the screen
+     * @param parent             of this ViewGroup
+     * @param savedInstanceState state of the Application as a Bundle
+     * @return the outermost View in the layout file associated with the Binding.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
@@ -118,6 +128,11 @@ public class PersonalFeedFragment extends Fragment implements View.OnClickListen
         return fragmentPersonalFeedBinding.getRoot();
     }
 
+    /**
+     * Method which will be called, when personalFeedCreatePostIV is clicked.
+     * Directs user to the view of creating a new post.
+     * @param v which was clicked on.
+     */
     @Override
     public void onClick(View v) {
         Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();

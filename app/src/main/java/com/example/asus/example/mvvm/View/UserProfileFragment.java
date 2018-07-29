@@ -35,6 +35,18 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
     private ItemUserViewModel itemUserViewModel;
     private ItemPostViewModel itemPostViewModel;
 
+    /**
+     * Method which will be called when this fragment is created.
+     * Inflates the View, sets the ViewModel and the Adapter with the right onClickListener for the
+     * RecyclerView.
+     * Initializes userProfileSubscribeButton and sets a onClickListener for it.
+     * Initializes userSubscriberTV and userSubscriptionsTV
+     * Observes getCurrentUser to check if there is a value or a null object.
+     * @param inflater           inflates the layout on the screen
+     * @param parent             of this ViewGroup
+     * @param savedInstanceState state of the Application as a Bundle
+     * @return the outermost View in the layout file associated with the Binding.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         fragmentUserProfileBinding = DataBindingUtil.inflate(
@@ -105,24 +117,30 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
     }
 
 
+    /**
+     * sets the user which will be displayed in this fragment.
+     * @param user which will be displayed.
+     */
     public void setUser(User user) {
         this.user = user;
     }
 
+    /**
+     * method which will be called if a view in this fragment was clicked.
+     * In this case userSubcriptionsTV, userSubscribersTV and userProfileSubscribeButton.
+     * @param view that was clicked on.
+     */
     @Override
     public void onClick(View view) {
         Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
         switch (view.getId()) {
             case R.id.userSubscriptionsTV:
-                Log.d("zeazeazeazeazea", "errerererereAAAAAAAAAAA");
                 navigation_drawer_activity.launchSubscriptionsFragment(user.getSubscriptions());
                 break;
             case R.id.userSubscribersTV:
-                Log.d("zeazeazeazeazea", "errerererereBBBBBBBBBB");
                 navigation_drawer_activity.launchSubscriptionsFragment(user.getSubscribers());
                 break;
             case R.id.userProfileSubscribeButton:
-                Log.d("zeazeazeazeazea", "errerererereCCCCCCCCC");
                 if (fragmentUserProfileBinding.userProfileSubscribeButton.getText().equals("FOLGEN")) {
                     fragmentUserProfileBinding.userProfileSubscribeButton.setText("NICHT MEHR FOLGEN");
                     itemUserViewModel.subscribeUser();

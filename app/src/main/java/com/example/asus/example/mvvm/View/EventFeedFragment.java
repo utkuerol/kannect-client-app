@@ -39,7 +39,7 @@ public class EventFeedFragment extends Fragment implements View.OnClickListener 
      * Method which will be called when this fragment is created.
      * Inflates the View, sets the ViewModel and the Adapter with the right onClickListener for the
      * RecyclerView.
-     *
+     * Observes getCurrentUser to check if there is a value or a null object.
      * @param inflater           inflates the layout on the screen
      * @param parent             of this ViewGroup
      * @param savedInstanceState state of the Application as a Bundle
@@ -94,6 +94,9 @@ public class EventFeedFragment extends Fragment implements View.OnClickListener 
         ImageView createPostInEventIV = (ImageView) fragmentEventFeedBinding.createPostInEventIV;
         createPostInEventIV.setOnClickListener(this);
 
+        ImageView deleteEvent = (ImageView) fragmentEventFeedBinding.imageView3;
+        deleteEvent.setOnClickListener(this);
+
         fragmentEventFeedBinding.eventFeedRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         return fragmentEventFeedBinding.getRoot();
@@ -120,7 +123,10 @@ public class EventFeedFragment extends Fragment implements View.OnClickListener 
                 }
                 break;
             }
-
+            case R.id.imageView3: {
+                itemEventViewModel.deleteEvent();
+                break;
+            }
             case R.id.createPostInEventIV: {
                 navigation_drawer_activity.launchNewEventPostFragment(event);
                 break;

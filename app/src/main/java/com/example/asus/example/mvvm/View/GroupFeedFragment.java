@@ -34,7 +34,7 @@ public class GroupFeedFragment extends Fragment implements View.OnClickListener 
      * Method which will be called when this fragment is created.
      * Inflates the View, sets the ViewModel and the Adapter with the right onClickListener for the
      * RecyclerView.
-     *
+     * Observes getCurrentUser to check if there is a value or a null object.
      * @param inflater           inflates the layout on the screen
      * @param parent             of this ViewGroup
      * @param savedInstanceState state of the Application as a Bundle
@@ -75,6 +75,10 @@ public class GroupFeedFragment extends Fragment implements View.OnClickListener 
         ImageView createPostInGroupIV = (ImageView) fragmentGroupFeedBinding.createPostInGroupIV;
         createPostInGroupIV.setOnClickListener(this);
 
+
+        ImageView fragmentGroupFeedDeleteIV = (ImageView) fragmentGroupFeedBinding.fragmentGroupFeedDeleteIV;
+        fragmentGroupFeedDeleteIV.setOnClickListener(this);
+
         fragmentGroupFeedBinding.groupFeedPostRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         return fragmentGroupFeedBinding.getRoot();
@@ -104,7 +108,10 @@ public class GroupFeedFragment extends Fragment implements View.OnClickListener 
                 }
                 break;
             }
-
+            case R.id.fragmentGroupFeedDeleteIV: {
+                itemGroupViewModel.deleteGroup();
+                break;
+            }
             case R.id.createPostInGroupIV: {
                 navigation_drawer_activity.launchNewGroupPostFragment(group);
                 break;

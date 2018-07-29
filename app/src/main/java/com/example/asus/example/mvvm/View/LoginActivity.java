@@ -27,19 +27,34 @@ import com.google.android.gms.tasks.Task;
 
 public class LoginActivity extends AppCompatActivity {
 
+    /*
+     * ViewModel for the activity Login
+     */
     LoginViewModel viewModel;
 
 
-    //Google sign in api Client
+    /*
+     *  Google sign in api Client
+     */
     GoogleSignInClient mGoogleSignInClient;
-
-    //Define Request code for Sign In
-    private int RC_SIGN_IN = 6;
-    //Sign in button Declaration
+    /*
+     * Sign in button Declaration
+     */
     SignInButton signInButton;
-
+    /*
+     * Google SignIn Account Declaration
+     */
     GoogleSignInAccount account;
+    /*
+     * Define Request code for Sign In
+     */
+    private int RC_SIGN_IN = 6;
 
+    /*
+     * onCreate create the activity and proceed the process of Loging In , first of all it checks if there is a user logged ,
+     * if not then a View with a Sign In button will be displayed
+     * after a successful Login the user will be redirected to the main Activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,22 +70,22 @@ public class LoginActivity extends AppCompatActivity {
         //get Sign in client
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        //get currently signed in user returns null if there is no logged in user
+        // get currently signed in user
+        // returns null if there is no logged in user
         account = GoogleSignIn.getLastSignedInAccount(this);
 
-
+        // setting the ViewModel
         viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
 
+        // saving the logged user in the shared preferences
         viewModel.getUser().observe(this, new Observer<User>() {
             @Override
             public void onChanged(@Nullable User user) {
                 if (user != null) {
-                    Log.d("debug", "setting preferences");
                     SharedPreferences myPrefs = getSharedPreferences("CurrentUser", 0);
                     SharedPreferences.Editor prefsEditor;
                     prefsEditor = myPrefs.edit();
                     prefsEditor.putInt("CurrentUserId", user.getId());
-                    Log.d("debug", "user id " + user.getId());
                     prefsEditor.apply();
                 }
             }
@@ -103,18 +118,25 @@ public class LoginActivity extends AppCompatActivity {
     //Handle sign in results
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
-            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             // Signed in successfully, show authenticated UI.
             updateUI(account);
         } catch (ApiException e) {
+
             // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
 
             updateUI(null);
         }
     }
 
+    /*
+     *
+     * sends the logged user to the server to test if he is a new user or not
+     * if the logged user is new then a new account will be created
+     * else the user will be redirected to MainActivity (his personalfeed)
+     *
+     */
     private void updateUI(final GoogleSignInAccount account) {
         //Account is not null then user is logged in
         if (account != null) {
@@ -132,7 +154,6 @@ public class LoginActivity extends AppCompatActivity {
                         });
                     } else {
                         viewModel.setUser(viewModel.invoke(account));
-                        Log.d("debug", "setting preferences");
                         SharedPreferences myPrefs = getSharedPreferences("CurrentUser", 0);
                         SharedPreferences.Editor prefsEditor;
                         prefsEditor = myPrefs.edit();

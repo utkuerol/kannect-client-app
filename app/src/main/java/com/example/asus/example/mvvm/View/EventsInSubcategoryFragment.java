@@ -34,7 +34,7 @@ public class EventsInSubcategoryFragment extends Fragment implements View.OnClic
      * Method which will be called when this fragment is created.
      * Inflates the View, sets the ViewModel and the Adapter with the right onClickListener for the
      * RecyclerView.
-     *
+     * Observes getCurrentUser to check if there is a value or a null object.
      * @param inflater           inflates the layout on the screen
      * @param parent             of this ViewGroup
      * @param savedInstanceState state of the Application as a Bundle
@@ -101,7 +101,7 @@ public class EventsInSubcategoryFragment extends Fragment implements View.OnClic
         Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
         switch (v.getId()) {
             case R.id.eventsInSubcategoryCreateEventIV:
-                navigation_drawer_activity.launchNewEventInSubategoryFragment(subcategory);
+                navigation_drawer_activity.launchNewEventInSubcategory(subcategory);
                 break;
         }
     }

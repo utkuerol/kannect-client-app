@@ -23,6 +23,15 @@ public class NewGroupInSubcategoryFragment extends Fragment {
     private Subcategory subcategory;
 
 
+    /**
+     * Method which will be called when this fragment is created.
+     * Inflates the View and sets the ViewModel.
+     * Observes getCurrentUser to check if there is a value or a null object.
+     * @param inflater           inflates the layout on the screen
+     * @param parent             of this ViewGroup
+     * @param savedInstanceState state of the Application as a Bundle
+     * @return the outermost View in the layout file associated with the Binding.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
@@ -47,6 +56,10 @@ public class NewGroupInSubcategoryFragment extends Fragment {
         return fragmentNewGroupBinding.getRoot();
     }
 
+    /**
+     * sets the subcategory in which the User wants to create a Group in.
+     * @param subcategory chosen by User.
+     */
     public void setSubcategory(Subcategory subcategory) {
         this.subcategory = subcategory;
     }

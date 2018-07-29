@@ -90,9 +90,8 @@ public class EventRepository {
         call.enqueue(new Callback<Event>() {
             @Override
             public void onResponse(Call<Event> call, Response<Event> response) {
-                Log.d("debug", "on response create event");
+
                 if (!response.isSuccessful()) {
-                    Log.d("debug", "create event response fail");
                 }
             }
 
