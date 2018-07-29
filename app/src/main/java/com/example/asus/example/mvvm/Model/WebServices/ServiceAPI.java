@@ -111,7 +111,7 @@ public interface ServiceAPI {
      * @return void, no response needed
      */
     @DELETE("deletePost")
-    Call<Post> deletePost(@Body Post post);
+    Call<Post> deletePost(@Query(value = "postId") int postID);
 
 
     /**

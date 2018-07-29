@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,6 +102,7 @@ public class EventsInSubcategoryFragment extends Fragment implements View.OnClic
         Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
         switch (v.getId()) {
             case R.id.eventsInSubcategoryCreateEventIV:
+
                 navigation_drawer_activity.launchNewEventInSubcategory(subcategory);
                 break;
         }

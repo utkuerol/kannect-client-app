@@ -53,7 +53,7 @@ public class PostRepository {
      */
     public void deletePost(Post post) {
         ServiceAPI client = ServiceGenerator.createService(ServiceAPI.class);
-        Call<Post> call = client.deletePost(post);
+        Call<Post> call = client.deletePost(post.getId());
         call.enqueue(new Callback<Post>() {
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {

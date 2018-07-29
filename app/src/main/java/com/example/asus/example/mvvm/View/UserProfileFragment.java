@@ -148,7 +148,6 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
                     fragmentUserProfileBinding.userProfileSubscribeButton.setText("FOLGEN");
                     itemUserViewModel.unsubscribeUser();
                 }
-
         }
     }
 }

@@ -49,6 +49,7 @@ public class GroupSearchResultsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
+
         //set viewmodel
         final GroupViewModel groupViewModel = ViewModelProviders.of(this).get(GroupViewModel.class);
         groupViewModel.init(getContext().getApplicationContext());

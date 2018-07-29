@@ -68,6 +68,7 @@ public class UserRepository {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+
                 t.printStackTrace();
             }
         });

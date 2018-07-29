@@ -97,7 +97,6 @@ public class GroupsInSubcategoryFragment extends Fragment implements View.OnClic
         Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
         switch (v.getId()) {
             case R.id.groupsInSubcategoryCreateGroupIV:
-                Log.d("rrrrrrrrrr", "rrrrrrrrrrrrrr");
                 navigation_drawer_activity.launchNewGroupInSubcategoryFragment(subcategory);
                 break;
         }

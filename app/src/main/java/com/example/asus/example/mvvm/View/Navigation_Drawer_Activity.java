@@ -247,6 +247,7 @@ public class Navigation_Drawer_Activity extends AppCompatActivity
      */
     public void launchPersonalProfileFragment() {
         PersonalProfileFragment personalProfileFragment = new PersonalProfileFragment();
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, personalProfileFragment);
         transaction.addToBackStack(null);

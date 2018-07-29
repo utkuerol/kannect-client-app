@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * User Profile Activity to show all Posts for this User
  */
-public class PersonalProfileFragment extends Fragment {
+public class PersonalProfileFragment extends Fragment implements View.OnClickListener {
     private FragmentUserProfileBinding fragmentUserProfileBinding;
     private ItemUserViewModel itemUserViewModel;
 
@@ -40,6 +40,8 @@ public class PersonalProfileFragment extends Fragment {
      * @param savedInstanceState state of the Application as a Bundle
      * @return the outermost View in the layout file associated with the Binding.
      */
+    private User user;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
@@ -52,6 +54,9 @@ public class PersonalProfileFragment extends Fragment {
 
         //set adapter
         final PostAdapter postAdapter = new PostAdapter();
+
+        user = itemUserViewModel.getCurrentUser().getValue();
+
 
         OnItemClickListenerPost listener = new OnItemClickListenerPost() {
             @Override
@@ -98,5 +103,27 @@ public class PersonalProfileFragment extends Fragment {
 
     }
 
+
+    @Override
+    public void onClick(View view) {
+        Navigation_Drawer_Activity navigation_drawer_activity = (Navigation_Drawer_Activity) getActivity();
+        switch (view.getId()) {
+            case R.id.userSubscriptionsTV:
+                navigation_drawer_activity.launchSubscriptionsFragment(user.getSubscriptions());
+                break;
+            case R.id.userSubscribersTV:
+                navigation_drawer_activity.launchSubscriptionsFragment(user.getSubscribers());
+                break;
+            case R.id.userProfileSubscribeButton:
+                if (fragmentUserProfileBinding.userProfileSubscribeButton.getText().equals("FOLGEN")) {
+                    fragmentUserProfileBinding.userProfileSubscribeButton.setText("NICHT MEHR FOLGEN");
+                    itemUserViewModel.subscribeUser();
+                } else {
+                    fragmentUserProfileBinding.userProfileSubscribeButton.setText("FOLGEN");
+                    itemUserViewModel.unsubscribeUser();
+                }
+
+        }
+    }
 
 }
