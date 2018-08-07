@@ -7,13 +7,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentEventFeedBinding;
@@ -116,7 +114,7 @@ public class EventFeedFragment extends Fragment implements View.OnClickListener 
         switch (v.getId()) {
             case R.id.participateBt: {
 
-                if (fragmentEventFeedBinding.participateBt.getText().equals("participate")) {
+                if (fragmentEventFeedBinding.participateBt.getText().equals("particpate")) {
                     fragmentEventFeedBinding.participateBt.setText("participated");
                     itemEventViewModel.participateEvent();
                 } else {
