@@ -10,6 +10,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.asus.example.R;
@@ -18,6 +20,7 @@ import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.View.Adapter.OnItemClickListenerPost;
 import com.example.asus.example.mvvm.View.Adapter.PostAdapter;
+import com.example.asus.example.mvvm.ViewModel.ItemPostViewModel;
 import com.example.asus.example.mvvm.ViewModel.ItemUserViewModel;
 
 import java.util.List;
@@ -47,16 +50,15 @@ public class PersonalProfileFragment extends Fragment implements View.OnClickLis
 
         fragmentUserProfileBinding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_user_profile, parent, false);
-        fragmentUserProfileBinding.userProfileSubscribeButton.setVisibility(View.GONE);
+
         //set viewmodel
         itemUserViewModel = ViewModelProviders.of(this).get(ItemUserViewModel.class);
-        itemUserViewModel.init(this.getContext().getApplicationContext());
+        itemUserViewModel.init(user, this.getContext().getApplicationContext());
+
+
 
         //set adapter
         final PostAdapter postAdapter = new PostAdapter();
-
-        user = itemUserViewModel.getCurrentUser().getValue();
-
 
         OnItemClickListenerPost listener = new OnItemClickListenerPost() {
             @Override
@@ -79,26 +81,32 @@ public class PersonalProfileFragment extends Fragment implements View.OnClickLis
                 if (posts != null) {
                     postAdapter.setPostList(posts);
                     fragmentUserProfileBinding.userProfilePostRV.setAdapter(postAdapter);
-                } else {
-                    Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT);
                 }
             }
         };
 
-
         itemUserViewModel.getCurrentUser().observe(this, new Observer<User>() {
+
             @Override
-            public void onChanged(@Nullable User user) {
-                if (user != null) {
-                    itemUserViewModel.setChosenUser(user);
+            public void onChanged(@Nullable User user1) {
+                if (user1 != null) {
                     fragmentUserProfileBinding.setItemUserViewModel(itemUserViewModel);
                     itemUserViewModel.getUserProfile().observe(PersonalProfileFragment.this, postsObserver);
+                    if (itemUserViewModel.getCurrentUser().getValue().getId() == user.getId()) {
+                        fragmentUserProfileBinding.userProfileSubscribeButton.setVisibility(View.GONE);
+                    }
                 }
+
             }
         });
 
         fragmentUserProfileBinding.userProfilePostRV.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
+
+        TextView im1 = (TextView) fragmentUserProfileBinding.userSubscribersTV;
+        im1.setOnClickListener(this);
+        TextView im2 = (TextView) fragmentUserProfileBinding.userSubscriptionsTV;
+        im2.setOnClickListener(this);
         return fragmentUserProfileBinding.getRoot();
 
     }
@@ -114,14 +122,7 @@ public class PersonalProfileFragment extends Fragment implements View.OnClickLis
             case R.id.userSubscribersTV:
                 navigation_drawer_activity.launchSubscriptionsFragment(user.getSubscribers());
                 break;
-            case R.id.userProfileSubscribeButton:
-                if (fragmentUserProfileBinding.userProfileSubscribeButton.getText().equals("FOLGEN")) {
-                    fragmentUserProfileBinding.userProfileSubscribeButton.setText("NICHT MEHR FOLGEN");
-                    itemUserViewModel.subscribeUser();
-                } else {
-                    fragmentUserProfileBinding.userProfileSubscribeButton.setText("FOLGEN");
-                    itemUserViewModel.unsubscribeUser();
-                }
+
 
         }
     }

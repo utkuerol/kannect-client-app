@@ -116,7 +116,7 @@ public class EventFeedFragment extends Fragment implements View.OnClickListener 
         switch (v.getId()) {
             case R.id.participateBt: {
 
-                if (fragmentEventFeedBinding.participateBt.getText().equals("particpate")) {
+                if (fragmentEventFeedBinding.participateBt.getText().equals("participate")) {
                     fragmentEventFeedBinding.participateBt.setText("participated");
                     itemEventViewModel.participateEvent();
                 } else {
