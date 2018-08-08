@@ -18,6 +18,8 @@ import com.example.asus.example.mvvm.View.Adapter.GroupAdapter;
 import com.example.asus.example.mvvm.View.Adapter.OnItemClickListenerGroup;
 import com.example.asus.example.mvvm.ViewModel.GroupViewModel;
 
+import java.util.List;
+
 /**
  * Fragment for the view, to show all groups in which the user is a member of.
  */
@@ -65,8 +67,16 @@ public class MyGroupsFragment extends Fragment {
             public void onChanged(@Nullable User user) {
                 if (user != null) {
                     groupViewModel.setGroupsToJoinedGroups();
-                    groupAdapter.setGroupList(groupViewModel.getGroups().getValue());
-                    fragmentMyGroupsBinding.myGroupsGroupRV.setAdapter(groupAdapter);
+                    groupViewModel.getGroups().observe(MyGroupsFragment.this, new Observer<List<Group>>() {
+                        @Override
+                        public void onChanged(@Nullable List<Group> groups) {
+                            if (groups != null) {
+                                groupAdapter.setGroupList(groups);
+                                fragmentMyGroupsBinding.myGroupsGroupRV.setAdapter(groupAdapter);
+                            }
+                        }
+                    });
+
 
                 } else {
                     Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT);

@@ -209,9 +209,9 @@ public class ItemGroupViewModel extends ViewModel {
      * method to get the Group feed for this group.
      * @return list of posts which will be shown in the feed.
      */
-    public List<Post> getGroupFeed() {
+    public MutableLiveData<List<Post>> getGroupFeed() {
 
-        return feedRepository.getGroupFeed(chosenGroup.getValue()).getValue();
+        return feedRepository.getGroupFeed(chosenGroup.getValue());
     }
 
     /**

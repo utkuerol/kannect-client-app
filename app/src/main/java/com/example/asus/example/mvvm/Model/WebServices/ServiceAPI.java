@@ -107,7 +107,7 @@ public interface ServiceAPI {
 
     /**
      * service to delete an existing Post
-     * @param post post to be deleted
+     * @param postID post to be deleted
      * @return void, no response needed
      */
     @DELETE("deletePost")
@@ -159,7 +159,7 @@ public interface ServiceAPI {
      * @return void, no response needed
      */
     @Multipart
-    @POST("subscribe")
+    @POST("subscribeUser")
     Call<ResponseBody> subscribeUser(@Part(value = "subscriber") User subscriber, @Part(value = "subscribed") User subscribed);
 
     /**
@@ -169,7 +169,7 @@ public interface ServiceAPI {
      * @return void, no response needed
      */
     @Multipart
-    @POST("unsubscribe")
+    @POST("unsubscribeUser")
     Call<ResponseBody> unsubscribeUser(@Part(value = "subscriber") User subscriber, @Part(value = "subscribed") User subscribed);
 
     /**

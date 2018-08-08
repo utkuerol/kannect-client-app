@@ -20,6 +20,8 @@ import com.example.asus.example.mvvm.View.Adapter.EventAdapter;
 import com.example.asus.example.mvvm.View.Adapter.OnItemClickListenerEvent;
 import com.example.asus.example.mvvm.ViewModel.EventViewModel;
 
+import java.util.List;
+
 /**
  * Fragment for the view, to show all events in which the user is a member of.
  */
@@ -62,14 +64,22 @@ public class MyEventsFragment extends Fragment {
 
         fragmentMyEventsBinding.myEventsEventRV.setAdapter(eventAdapter);
 
+        final Observer<List<Event>> eventsObserver = new Observer<List<Event>>() {
+            @Override
+            public void onChanged(@Nullable List<Event> events) {
+                if (events != null) {
+                    eventAdapter.setEventList(events);
+                    fragmentMyEventsBinding.myEventsEventRV.setAdapter(eventAdapter);
+                }
+            }
+        };
 
         eventViewModel.getCurrentUser().observe(this, new Observer<User>() {
             @Override
             public void onChanged(@Nullable User user) {
                 if (user != null) {
                     eventViewModel.setEventsToParticipatingEvents();
-                    eventAdapter.setEventList(eventViewModel.getEvents().getValue());
-                    fragmentMyEventsBinding.myEventsEventRV.setAdapter(eventAdapter);
+                    eventViewModel.getEvents().observe(MyEventsFragment.this, eventsObserver);
 
                 } else {
                     Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT);

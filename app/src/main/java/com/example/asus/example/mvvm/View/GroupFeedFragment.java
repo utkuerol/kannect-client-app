@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +17,12 @@ import android.widget.Toast;
 import com.example.asus.example.R;
 import com.example.asus.example.databinding.FragmentGroupFeedBinding;
 import com.example.asus.example.mvvm.Model.Entities.Group;
+import com.example.asus.example.mvvm.Model.Entities.Post;
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.View.Adapter.PostAdapter;
 import com.example.asus.example.mvvm.ViewModel.ItemGroupViewModel;
+
+import java.util.List;
 
 /**
  * Activity displaying informations about the group and its posts
@@ -55,12 +57,21 @@ public class GroupFeedFragment extends Fragment implements View.OnClickListener 
 
         fragmentGroupFeedBinding.groupFeedPostRV.setAdapter(postAdapter);
 
+        final Observer<List<Post>> postsObserver = new Observer<List<Post>>() {
+            @Override
+            public void onChanged(@Nullable List<Post> posts) {
+                if (posts != null) {
+                    postAdapter.setPostList(posts);
+                    fragmentGroupFeedBinding.groupFeedPostRV.setAdapter(postAdapter);
+                }
+            }
+        };
 
         itemGroupViewModel.getCurrentUser().observe(this, new Observer<User>() {
             @Override
             public void onChanged(@Nullable User user) {
                 if (user != null) {
-                    postAdapter.setPostList(itemGroupViewModel.getGroupFeed());
+                    itemGroupViewModel.getGroupFeed().observe(GroupFeedFragment.this, postsObserver);
                     fragmentGroupFeedBinding.groupFeedPostRV.setAdapter(postAdapter);
 
                 } else {

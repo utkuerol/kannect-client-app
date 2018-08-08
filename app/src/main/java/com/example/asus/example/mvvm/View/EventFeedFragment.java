@@ -71,9 +71,8 @@ public class EventFeedFragment extends Fragment implements View.OnClickListener 
             @Override
             public void onChanged(@Nullable List<Post> posts) {
                 if (posts != null) {
-                    postAdapter.setPostList(itemEventViewModel.getEventFeed().getValue());
+                    postAdapter.setPostList(posts);
                     fragmentEventFeedBinding.eventFeedRV.setAdapter(postAdapter);
-
                 }
             }
         };
@@ -114,7 +113,7 @@ public class EventFeedFragment extends Fragment implements View.OnClickListener 
         switch (v.getId()) {
             case R.id.participateBt: {
 
-                if (fragmentEventFeedBinding.participateBt.getText().equals("particpate")) {
+                if (fragmentEventFeedBinding.participateBt.getText().equals("participate")) {
                     fragmentEventFeedBinding.participateBt.setText("participated");
                     itemEventViewModel.participateEvent();
                 } else {
