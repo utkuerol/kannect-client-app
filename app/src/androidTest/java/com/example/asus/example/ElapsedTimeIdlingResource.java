@@ -1,4 +1,4 @@
-package com.example.android.testing.integration;
+package com.example.asus.example;
 
 import android.support.test.espresso.IdlingResource;
 
