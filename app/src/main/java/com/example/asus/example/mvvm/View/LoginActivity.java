@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -45,6 +44,9 @@ public class LoginActivity extends AppCompatActivity {
      * Google SignIn Account Declaration
      */
     GoogleSignInAccount account;
+
+    User user = new User();
+
     /*
      * Define Request code for Sign In
      */
@@ -73,6 +75,11 @@ public class LoginActivity extends AppCompatActivity {
         // get currently signed in user
         // returns null if there is no logged in user
         account = GoogleSignIn.getLastSignedInAccount(this);
+        if (account != null) {
+            user.setEmail(account.getEmail());
+            user.setName(account.getDisplayName());
+            user.setImageUrl(account.getPhotoUrl() != null ? account.getPhotoUrl().toString() : null);
+        }
 
         // setting the ViewModel
         viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
@@ -91,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        updateUI(account);
+        updateUI(user);
 
 
     }
@@ -120,13 +127,15 @@ public class LoginActivity extends AppCompatActivity {
         try {
 
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            user.setEmail(account.getEmail());
+            user.setName(account.getDisplayName());
+            user.setImageUrl(account.getPhotoUrl() != null ? account.getPhotoUrl().toString() : null);
             // Signed in successfully, show authenticated UI.
-            updateUI(account);
+            updateUI(user);
         } catch (ApiException e) {
 
             // The ApiException status code indicates the detailed failure reason.
 
-            updateUI(null);
         }
     }
 
@@ -137,23 +146,23 @@ public class LoginActivity extends AppCompatActivity {
      * else the user will be redirected to MainActivity (his personalfeed)
      *
      */
-    private void updateUI(final GoogleSignInAccount account) {
+    private void updateUI(final User user) {
         //Account is not null then user is logged in
-        if (account != null) {
-            viewModel.invoke(account).observe(this, new Observer<User>() {
+        if (user.getEmail() != null) {
+            viewModel.invoke(user).observe(this, new Observer<User>() {
                 @Override
-                public void onChanged(@Nullable User user) {
+                public void onChanged(@Nullable final User user) {
                     if (user == null) {
-                        viewModel.createUser(account).observe(LoginActivity.this, new Observer<Boolean>() {
+                        viewModel.createUser(LoginActivity.this.user).observe(LoginActivity.this, new Observer<Boolean>() {
                             @Override
                             public void onChanged(@Nullable Boolean aBoolean) {
                                 if (aBoolean) {
-                                    updateUI(account);
+                                    updateUI(user);
                                 }
                             }
                         });
                     } else {
-                        viewModel.setUser(viewModel.invoke(account));
+                        viewModel.setUser(viewModel.invoke(user));
                         SharedPreferences myPrefs = getSharedPreferences("CurrentUser", 0);
                         SharedPreferences.Editor prefsEditor;
                         prefsEditor = myPrefs.edit();
@@ -165,7 +174,6 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
             });
-
 
         } else {
             Toast.makeText(getApplicationContext(), "no Login", Toast.LENGTH_LONG).show();
@@ -191,4 +199,6 @@ public class LoginActivity extends AppCompatActivity {
             handleSignInResult(task);
         }
     }
+
+
 }

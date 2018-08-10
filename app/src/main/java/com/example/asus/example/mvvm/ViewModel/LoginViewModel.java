@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModel;
 
 import com.example.asus.example.mvvm.Model.Entities.User;
 import com.example.asus.example.mvvm.Model.Repository.UserRepository;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 /**
  * ViewModel class for login, that is responsible for preparing and managing the data for Views
@@ -22,25 +21,21 @@ public class LoginViewModel extends ViewModel {
     /**
      * Invokes the chains of events, leading to user login.
      *
-     * @param account google sign in account.
+     * @param user google sign in account.
      */
-    public MutableLiveData<User> invoke(GoogleSignInAccount account) {
-        return userRepository.findByEmail(account.getEmail());
+    public MutableLiveData<User> invoke(User user) {
+        return userRepository.findByEmail(user.getEmail());
     }
 
     /**
      * creates and sets the currently logged in user with the help of a
      * GoogleSignIgnAccount.
      *
-     * @param account with which the user object will be created.
+     * @param user with which the user object will be created.
      */
-    public MutableLiveData<Boolean> createUser(GoogleSignInAccount account) {
-        User u = new User();
-        u.setEmail(account.getEmail());
-        u.setImageUrl(account.getPhotoUrl() != null ? account.getPhotoUrl().toString() : null);
-        u.setName(account.getDisplayName());
+    public MutableLiveData<Boolean> createUser(User user) {
 
-        return userRepository.createUser(u);
+        return userRepository.createUser(user);
     }
 
 
