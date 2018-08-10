@@ -80,6 +80,8 @@
     <string name="eventsInCategory">Veranstaltungen</string>
     <string name="categoriesGroup">Kategorien</string>
     <string name="categoriesEvent">Kategorien</string>
+    <string name="hello">Hello World !</string>
+    <string name="numberOfLike">16</string>
 
 
 </resources>

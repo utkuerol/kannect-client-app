@@ -124,6 +124,7 @@ public class EventFeedFragment extends Fragment implements View.OnClickListener 
             }
             case R.id.imageView3: {
 
+
                 itemEventViewModel.deleteEvent();
                 break;
             }
