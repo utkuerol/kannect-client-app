@@ -1,6 +1,8 @@
 package com.example.android.testing.integration;
 
 import android.content.Context;
+import android.support.test.espresso.contrib.DrawerActions;
+import android.support.test.espresso.contrib.NavigationViewActions;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.espresso.matcher.ViewMatchers;
@@ -20,6 +22,7 @@ import org.mockito.MockitoAnnotations;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.contrib.DrawerMatchers.isOpen;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
@@ -54,7 +57,11 @@ public class FeedIntegrationTest {
             5- assert Anzahl of Likes = 16 nach Click von Bob +
          */
 
-        onView(withId(R.id.nav_feed)).perform(click());
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+        onView(withId(R.id.drawer_layout)).check(matches(isOpen()));
+
+        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_feed));
+
         onView(ViewMatchers.withId(R.id.personalFeedPostRV))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
