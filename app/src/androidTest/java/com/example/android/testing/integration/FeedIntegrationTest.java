@@ -1,12 +1,16 @@
 package com.example.android.testing.integration;
 
 import android.content.Context;
+import android.support.test.espresso.IdlingPolicies;
+import android.support.test.espresso.IdlingRegistry;
+import android.support.test.espresso.IdlingResource;
 import android.support.test.espresso.contrib.DrawerActions;
 import android.support.test.espresso.contrib.NavigationViewActions;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.runner.AndroidJUnit4;
+import android.text.format.DateUtils;
 
 import com.example.asus.example.R;
 import com.example.asus.example.mvvm.View.Navigation_Drawer_Activity;
@@ -18,6 +22,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import java.util.concurrent.TimeUnit;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -62,8 +68,23 @@ public class FeedIntegrationTest {
 
         onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_feed));
 
+        long waitingTime = DateUtils.SECOND_IN_MILLIS * 75;
+
+        // Make sure Espresso does not time out
+        IdlingPolicies.setMasterPolicyTimeout(waitingTime * 2, TimeUnit.MILLISECONDS);
+        IdlingPolicies.setIdlingResourceTimeout(waitingTime * 2, TimeUnit.MILLISECONDS);
+
+        // Now we wait
+        IdlingResource idlingResource = new ElapsedTimeIdlingResource(waitingTime);
+        IdlingRegistry.getInstance().register(idlingResource);
+
         onView(ViewMatchers.withId(R.id.personalFeedPostRV))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+
+
+        // Now we wait
+        idlingResource = new ElapsedTimeIdlingResource(waitingTime);
+        IdlingRegistry.getInstance().register(idlingResource);
 
         // Match the text in an item below the fold and check that it's displayed.
         String itemElementText = mIntentsRule.getActivity().getResources().getString(
@@ -75,12 +96,16 @@ public class FeedIntegrationTest {
 
         onView(withId(R.id.fragmentThumbsUpIV)).perform(click());
 
+        // Now we wait
+        idlingResource = new ElapsedTimeIdlingResource(waitingTime);
+        IdlingRegistry.getInstance().register(idlingResource);
+
         String numberOfLike = mIntentsRule.getActivity().getResources().getString(
                 R.string.numberOfLike);
 
         onView(withText(numberOfLike)).check(matches(withId(R.id.numberOfLikesTV))); // muss geändert werden : Florian
 
-
+        IdlingRegistry.getInstance().unregister(idlingResource);
     }
 
 
